@@ -1,0 +1,58 @@
+.stepwizard-row {
+  display: table-row;
+}
+
+@media screen and (max-width:799px) {
+  .stepwizard {
+      display: table;
+      width: 350px;
+      position: relative;
+  }
+
+  .stepwizard-row:before {
+      top: 14px;
+      bottom: 0;
+      position: absolute;
+      content: " ";
+      width: 350px;
+      height: 1px;
+      background-color: #ccc;
+      z-index: 0;
+  
+  }    
+}
+
+@media screen and (min-width:800px) {
+  .stepwizard {
+      display: table;
+      width: 550px;
+      position: relative;
+  }
+
+  .stepwizard-row:before {
+      top: 14px;
+      bottom: 0;
+      position: absolute;
+      content: " ";
+      width: 550px;
+      height: 1px;
+      background-color: #ccc;
+      z-index: 0;
+  
+  }    
+}
+
+.stepwizard-step button[disabled] {
+  opacity: 1 !important;
+  filter: alpha(opacity=100) !important;
+}
+
+.setup-content {
+  margin-top: 20px;
+}
+
+.stepwizard-step {
+  display: table-cell;
+  text-align: center;
+  position: relative;
+}
