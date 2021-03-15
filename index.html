@@ -3,128 +3,112 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
-    <!--meta name="viewport" content="width=420, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <link rel="icon" type="image/png" href="images/logo.png">
     <title>SurfLog</title>
 
-    <!-- Bootstrap stylesheets -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <!-- Bootstrap stylesheets
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    -->
 
     <!-- Local stylesheet -->
-    <link rel="stylesheet" type="text/css" href="css/animate.css">
-    <link rel="stylesheet" type="text/css" href="css/surflog.css">
-    <link rel="stylesheet" type="text/css" href="css/wizard.css">
-    <link rel="stylesheet" type="text/css" href="css/simplePagination.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/surflog.css">
+    <link rel="stylesheet" href="css/panel.css">
+    <link rel="stylesheet" href="css/reports.css">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/simplePagination.css">
 
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-
-    <!-- jQuery UI -->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-    <!-- Bootstrap -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- jQuery   -->   
     
-    <!-- Other scripts -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-    <!-- Local Javascript files -->
-    <script type="text/javascript" src="js/lib/moment.loc.min.js"></script>
-    <script type="text/javascript" src="js/lib/bootstrap-notify.min.js"></script>
-    <script type="text/javascript" src="js/lib/bootstrap-confirmation.min.js"></script>
-    <script type="text/javascript" src="js/lib/jquery.simplePagination.js" ></script>
-    <script type="text/javascript" src="js/classes/form.js"></script>
-    <script type="text/javascript" src="js/classes/chart.js"></script>
-    <script type="text/javascript" src="js/config/charts.js"></script>
-    <script type="text/javascript" src="js/config/domains.js"></script>
-    <script type="text/javascript" src="js/config/schemaReports.js"></script>
-    <script type="text/javascript" src="js/config/scoremodel.js"></script>
-    <script type="text/javascript" src="js/config/spots.js"></script>
-    <script type="text/javascript" src="js/utils/datetime.js"></script>
-    <script type="text/javascript" src="js/utils/html.js"></script>
-    <script type="text/javascript" src="js/utils/htmlForms.js"></script>
-    <script type="text/javascript" src="js/utils/utils.js"></script>
-    <script type="text/javascript" src="js/utils/notifications.js"></script>
-    <script type="text/javascript" src="js/global.js"></script>
-    <script type="text/javascript" src="js/config/lookups.js"></script>
-    <script type="text/javascript" src="js/init.js"></script>
-    <script type="text/javascript" src="js/api.js"></script>
-    <script type="text/javascript" src="js/forms.js"></script>
-    <script type="text/javascript" src="js/browse.js"></script>
-    <script type="text/javascript" src="js/compare.js"></script>
-    <script type="text/javascript" src="js/forecast.js"></script>
-    <script type="text/javascript" src="js/score.js"></script>
-    <script type="text/javascript" src="js/stats.js"></script>
-    <script type="text/javascript" src="js/reports.js"></script>
-    <script type="text/javascript" src="js/filter.js"></script>
-    <script type="text/javascript" src="js/tide.js"></script>
-    <script type="text/javascript" src="js/eventHandlers.js"></script>
-    <script type="text/javascript" src="js/lib/fb.js"></script>
+    <!-- Bootstrap 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>  
+  -->
+
   </head>
   <body>
-    <!-- NAVBAR -->
-    <div class="navbar container-fluid">
-      <ul class="nav navbar-nav navbar-left">
-        <li><a class="navbar-brand" href="#">SurfLog</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bookmark"></span><b class="caret"></b></a>
-          <ul class="dropdown-menu">  
-            <li><a  href="https://magicseaweed.com/Saltstein-Surf-Report/556/">Magic Seaweed</a></li>
-            <li><a  href="https://www.kartverket.no/sehavniva/sehavniva-lokasjonside/?cityid=23014&city=Nevlunghavn">Tidevann</a></li>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">SurfLog</a>
+        </div>
+    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-bookmark"></span>
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="https://magicseaweed.com/Saltstein-Surf-Report/556/">Magic Seaweed</a></li>
+                <li><a href="https://www.kartverket.no/sehavniva/sehavniva-lokasjonside/?cityid=23014&city=Nevlunghavn">Tidevann</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-plus"></span>
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#" data-toggle="modal" data-target="#modal-report-observation">Observasjon</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#modal-report-session">Session</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                Saltstein 
+                <span class="caret"></span>
+              </a>
+              <ul id="navbar-spots-list" class="dropdown-menu">
+                <li><a href="#" active>Saltstein</a></li>
+                <li><a href="#">Esso</a></li>
+                <li><a href="#">Øya</a></li>
+              </ul>
+            </li>
           </ul>
-        </li>
-        <li class="divider-vertical nav-text"></li>
-        <li class="dropdown">
-          <a id="spotmenu" href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-map-marker"></span><b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <div id="spotlist"></div>
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <input type="date" id="application-date" class="form-control">
+            </div>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <img id="navbar-profile-img" href="#" data-toggle="popover" 
+                   data-placement="left" tabindex="50" 
+                   data-content="<div id='fb-username'></div><button id='btn-userreport' class='btn-primary' onClick='getUserStats()'>Statistikk</button>" 
+                   src="images/placeholder.png" class="img-circle" alt="Facebook user">
+            </li>
           </ul>
-        </li>                    
-        <li class="divider-vertical nav-text"></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span><b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a  href="#" data-toggle="modal" data-target="#modal-report-session">Session</a></li>
-            <li><a  href="#" data-toggle="modal" data-target="#modal-report-observation">Observasjon</a></li>
-          </ul>
-        </li>
-      </ul>
-      <span>
-        <input type="hidden" id="datepicker" class="pull-right"/>
-      </span>
-      <select id="ddown-nav-spots">
-        <option selected>Saltstein</option>
-        <option>Esso</option>
-        <option>Øya</option>
-      </select>
-      <span class="nav navbar-nav navbar-right">
-        <img id="img-profile" href="#" data-toggle="popover" 
-            data-placement="left" tabindex="50" 
-            data-content="<div id='fb-username'></div><button id='btn-userreport' class='btn-primary' onClick='getUserStats()'>Statistikk</button>" 
-            src="images/placeholder.png" class="img-circle" alt="Facebook user">
-      </span>
-    </div>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
    
     <!-- Forecast and observation graphs -->
     <div class="row">
         <div class="col-sm-12">
-          <div class="panel panel-square-light">
+          <div class="panel light">
             <div class="panel-heading">
               <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
-              <div class="btn-group pull-right">
-                <button type="button" class="btn btn-square-dark" onClick="changeInterpret('Chart','')">GRAF</button>
-                <button type="button" class="btn btn-square-dark" onClick="changeInterpret('Table','')">TABELL</button>
-              </div>
-              <span class="h4-text-dark">Varsler og observasjoner</span>
+              <span class="panel-h light">Varsler og observasjoner</span>
             </div>
-            <div class="panel-body-fluid">
-              <div id="interpretcontainer" class="scrollcontainer"></div>
-              <div id="interpretcontainer2" class="scrollcontainer"></div>
+            <div class="panel-body">
+              <div id="forecasts-graphs-live" class="scrollcontainer"></div>
+              <div id="forecasts-graphs-historic" class="scrollcontainer"></div>
           </div>
         </div>
       </div>
@@ -133,88 +117,87 @@
     <!-- Forecast map images from DMI -->
     <div class="row">
       <div class="col-sm-12">
-          <div class="panel panel-square-light">
+          <div class="panel light">
             <div class="panel-heading">
-              <span class="h4-text-dark">DMI </span>
-              <span id="time-dmi-today" class="h4-text-dark" data-forecasttime="">varsler </span>
+              <span class="panel-h light">DMI </span>
+              <span id="time-dmi-live" class="panel-h light" data-forecasttime="">varsler </span>
               <span id="score"></span>
               <span id="twin"></span>
               <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
               <span class="glyphicon glyphicon-refresh i-tool pull-right" onClick="updateTwin()"></span>
               <span class="pull-right" id="twin"></span>
             </div>
-            <div class="panel-body-fluid">
+            <div class="panel-body">
               <!-- Waveheight and period-->
-              <div class="col-sm-4">
-                <div class="panel panel-square-dark">
+              <div class="col-sm-4 panel-dmi-forecast">
+                <div class="panel dark">
                   <div class="panel-heading">
                     <div class="btn-group pull-right">
-                      <button type="button" class="btn btn-square-light" onClick="changeForecast('wave','waveheight')">HØYDE</button>
-                      <button type="button" class="btn btn-square-light" onClick="changeForecast('wave','waveperiod')">PERIODE</button>
+                      <button type="button" class="panel-btn dark" onClick="changeForecast('wave','waveheight')">HØYDE</button>
+                      <button type="button" class="panel-btn dark" onClick="changeForecast('wave','waveperiod')">PERIODE</button>
                     </div>
-                    <span id="waves" class="h4-text-light">Bølger</span>  
+                    <span class="panel-h dark">Bølger</span>  
                   </div> 
-                  <div class="panel-body-fluid">
-                    <div id="container-dmi-today-wave" class="container-dmi" data-forecasttype="waveheight" data-forecastprovider="DMI">
-                      <img id="img-dmi-today-wave" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hs.idf.1.png" />
-                      <button class="buttonprev" class="button" onClick="browseDMIForecast('previous','img-dmi-today')">
+                  <div class="panel-body">
+                    <div id="dmi-wave-live" data-forecasttype="waveheight" data-forecastprovider="DMI">
+                      <img id="img-dmi-wave-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hs.idf.1.png" />
+                      <button class="panel-btn-nav prev" class="button" onClick="browseDMIForecast('previous','img-dmi-today')">
                         <span class="glyphicon glyphicon-chevron-left"></span>
                       </button>
-                      <button class="buttonnext" class="button" onClick="browseDMIForecast('next','img-dmi-today')">
+                      <button class="panel-btn-nav next" class="button" onClick="browseDMIForecast('next','img-dmi-today')">
                         <span class="glyphicon glyphicon-chevron-right"></span>
                       </button> 
                     </div>
                   </div>
-                  <div id="dmi-surflog-wave"></div>
+                  <div id="dmi-wave-historic"></div>
                 </div> 
               </div>
               <!-- Swellheight and period-->
-              <div class="col-sm-4">
-                  <div class="panel panel-square-dark">
+              <div class="col-sm-4 panel-dmi-forecast">
+                  <div class="panel dark">
                     <div class="panel-heading">
                       <div class="btn-group pull-right">
-                        <button type="button" class="btn btn-square-light" onClick="changeForecast('swell','swellheight')">HØYDE</button>
-                        <button type="button" class="btn btn-square-light" onClick="changeForecast('swell','swellperiod')">PERIODE</button>
+                        <button type="button" class="panel-btn dark" onClick="changeForecast('swell','swellheight')">HØYDE</button>
+                        <button type="button" class="panel-btn dark" onClick="changeForecast('swell','swellperiod')">PERIODE</button>
                       </div>  
-                      <span id="swell" class="h4-text-light">Dønning</span>
+                      <span class="panel-h dark">Dønning</span>
                     </div> 
-                    <div class="panel-body-fluid">
-                      <div id="container-dmi-today-swell" class="container-dmi" data-forecasttype="swellheight" data-forecastprovider="DMI">
-                        <img id="img-dmi-today-swell" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hsw.idf.1.png" />
-                        <button class="buttonprev" class="button" onClick="browseDMIForecast('previous','img-dmi-today')">
+                    <div class="panel-body">
+                      <div id="dmi-swell-live" data-forecasttype="swellheight" data-forecastprovider="DMI">
+                        <img id="img-dmi-swell-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hsw.idf.1.png" />
+                        <button class="panel-btn-nav prev" class="button" onClick="browseDMIForecast('previous','img-dmi-today')">
                           <span class="glyphicon glyphicon-chevron-left"></span>
                         </button>
-                        <button class="buttonnext" class="button" onClick="browseDMIForecast('next','img-dmi-today')">
+                        <button class="panel-btn-nav next" class="button" onClick="browseDMIForecast('next','img-dmi-today')">
                           <span class="glyphicon glyphicon-chevron-right"></span>
                         </button> 
                       </div>
                     </div>
-                    <div id="dmi-surflog-swell"></div>
+                    <div id="dmi-swell-historic"></div>
                   </div> 
                 </div>
                 <!-- Wind-->
-                <div class="col-sm-4">
-                  <div class="panel panel-square-dark">
+                <div class="col-sm-4 panel-dmi-forecast">
+                  <div class="panel dark">
                     <div class="panel-heading">
-                      <span id="wind" class="h4-text-light">Vind</span>  
+                      <span class="panel-h dark">Vind</span>  
                     </div> 
-                    <div class="panel-body-fluid">
-                      <div id="container-dmi-today-wind" class="container-dmi" data-forecasttype="wind" data-forecastprovider="DMI">
-                          <img id="img-dmi-today-wind" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/win.idf.1.png" />
-                          <button class="buttonprev" class="button" onClick="browseDMIForecast('previous','img-dmi-today')">
+                    <div class="panel-body">
+                      <div id="dmi-wind-live" data-forecasttype="wind" data-forecastprovider="DMI">
+                          <img id="img-dmi-wind-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/win.idf.1.png" />
+                          <button class="panel-btn-nav prev" class="button" onClick="browseDMIForecast('previous','img-dmi-today')">
                               <span class="glyphicon glyphicon-chevron-left"></span>
                           </button>
-                          <button class="buttonnext" class="button" onClick="browseDMIForecast('next','img-dmi-today')">
+                          <button class="panel-btn-nav next" class="button" onClick="browseDMIForecast('next','img-dmi-today')">
                             <span class="glyphicon glyphicon-chevron-right"></span>
                           </button> 
                       </div>
                     </div>
-                    <div id="dmi-surflog-wind"></div>
+                    <div id="dmi-wind-historic"></div>
                   </div> 
                 </div>
             </div>
-            <div class="panel-footer panel-square-dark">
-              <div id="surflogforecast"></div>
+            <div class="panel-footer dark">
             </div>
           </div>
         </div>
@@ -223,44 +206,44 @@
     <!-- Forecast map images from MSW -->
     <div class="row">
       <div class="col-sm-12">
-        <div class="panel panel-square-light">
+        <div class="panel light">
           <div class="panel-heading">
-            <span class="h4-text-dark">Magicseaweed</span>
+            <span class="panel-h light">Magicseaweed</span>
             <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
-            <span id="mswlink" class="pull-right"></span>
+            <span id="link-msw" class="pull-right"></span>
           </div>
-          <div class="panel-body-fluid">
+          <div class="panel-body">
             <!-- Swell-->
             <div class="col-sm-4">
-              <div class="panel panel-square-dark">
+              <div class="panel dark">
                 <div class="panel-heading">
-                  <span class="h4-text-light">Dønning </span>
-                  <span id="time-msw-today-swellheight" class="h4-text-light time-msw-today" data-forecasttime=""></span>  
+                  <span class="panel-h dark">Dønning </span>
+                  <span id="time-msw-swellheight-live" class="h4-text-light time-msw-live" data-forecasttime=""></span>  
                 </div> 
-                <div id="msw-today-swellheight"></div>
-                <div id="msw-history-swellheight"></div>
+                <div id="msw-swellheight-live"></div>
+                <div id="msw-swellheight-historic"></div>
               </div> 
             </div>
             <!-- Period-->
             <div class="col-sm-4">
-              <div class="panel panel-square-dark">
+              <div class="panel dark">
                 <div class="panel-heading">
-                  <span class="h4-text-light">Periode </span>  
-                  <span id="time-msw-today-swellperiod" class="h4-text-light time-msw-today" data-forecasttime=""></span>
+                  <span class="panel-h dark">Periode </span>  
+                  <span id="time-msw-swellperiod-live" class="h4-text-light time-msw-live" data-forecasttime=""></span>
                 </div> 
-                <div id="msw-today-swellperiod"></div>
-                <div id="msw-history-swellperiod"></div>
+                <div id="msw-swellperiod-live"></div>
+                <div id="msw-swellperiod-historic"></div>
               </div> 
             </div>
               <!-- Wind-->
               <div class="col-sm-4">
-                <div class="panel panel-square-dark">
+                <div class="panel dark">
                   <div class="panel-heading">
-                    <span class="h4-text-light">Vind </span>
-                    <span id="time-msw-today-wind" class="h4-text-light time-msw-today" data-forecasttime=""></span>  
+                    <span class="panel-h dark">Vind </span>
+                    <span id="time-msw-wind-live" class="h4-text-light time-msw-live" data-forecasttime=""></span>  
                   </div> 
-                  <div id="msw-today-wind"></div>
-                  <div id="msw-history-wind"></div>
+                  <div id="msw-wind-live"></div>
+                  <div id="msw-wind-historic"></div>
                 </div> 
               </div>
           </div>
@@ -268,40 +251,39 @@
       </div>
     </div>
 
-
     <!-- Forecast graph images from YR -->
     <div class="row">
       <div class="col-sm-12">
-        <div class="panel panel-square-light">
+        <div class="panel light">
           <div class="panel-heading">
-            <span class="h4-text-dark">Yr</span>
+            <span class="panel-h light">Yr</span>
             <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
           </div>
-          <div class="panel-body-fluid">
+          <div class="panel-body">
             <div class="col-sm-6">
-              <div class="panel panel-square-dark">
+              <div class="panel dark">
                 <div class="panel-heading">
-                  <span class="h4-text-light">Skagerak</span>
+                  <span class="panel-h dark">Skagerak</span>
                 </div> 
-                <div class="panel-body-fluid">
-                  <div id="container-yr-today-skagerak" class="scrollcontainer" data-forecasttype="Skagerak" data-forecastprovider="YR">
-                    <img id="img-yr-today-skagerak" class="img-yr" src="https://www.yr.no/sted/Hav/58,26417_9,59732/marinogram.png" />
+                <div class="panel-body">
+                  <div id="yr-skagerak-live" class="scrollcontainer" data-forecasttype="Skagerak" data-forecastprovider="YR">
+                    <img id="img-yr-skagerak-live" class="fullwidth" src="https://www.yr.no/sted/Hav/58,26417_9,59732/marinogram.png" />
                   </div>
                 </div>
-                <div id="yr-surflog-skagerak"></div>
+                <div id="yr-skagerak-historic"></div>
               </div>
             </div>
             <div class="col-sm-6">
-                <div class="panel panel-square-dark">
+                <div class="panel dark">
                   <div class="panel-heading">
-                    <span class="h4-text-light">Saltstein</span>
+                    <span class="panel-h dark">Saltstein</span>
                   </div> 
-                  <div class="panel-body-fluid">
-                    <div id="container-yr-today-saltstein" class="scrollcontainer" data-forecasttype="Saltstein" data-forecastprovider="YR">
-                        <img id="img-yr-today-saltstein" class="img-yr" src="https://www.yr.no/sted/Hav/58,89305_9,87906/marinogram.png" />
+                  <div class="panel-body">
+                    <div id="yr-saltstein-live" class="scrollcontainer" data-forecasttype="Saltstein" data-forecastprovider="YR">
+                        <img id="img-yr-saltstein-live" class="fullwidth" src="https://www.yr.no/sted/Hav/58,89305_9,87906/marinogram.png" />
                     </div>
                   </div>
-                  <div id="yr-surflog-saltstein"></div>
+                  <div id="yr-saltstein-historic"></div>
                 </div>
               </div>
           </div>
@@ -312,19 +294,18 @@
     <!-- Saltstein webcam -->
     <div class="row">
       <div class="col-sm-12">
-        <div class="panel panel-square-light">
+        <div class="panel light">
           <div class="panel-heading">
-            <span class="h4-text-dark">Webkamera</span>
+            <span class="panel-h light">Webkamera</span>
             <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
             <span class="glyphicon glyphicon-refresh i-tool pull-right" onClick="refreshWebCam()"></span>
             <span class="glyphicon glyphicon-floppy-save i-tool pull-right" onClick="saveWebCam()"></span>
           </div>
-          <div class="panel-body-fluid">
-            <div id="webcamcontainer">
-              <!-- img id="img-webcam" src="http://oddane.dyndns.org:50005/cgi-bin/snapshot.cgi" /-->
-              <img id="img-webcam" src="" />
+          <div class="panel-body">
+            <div id="div-webcam">
+              <img id="img-webcam-live" class="fullwidth">
             </div>
-            <div id="img-webcam-surflog"></div>
+            <div id="img-webcam-historic"></div>
           </div>
         </div>
       </div>
@@ -333,54 +314,54 @@
     <!-- Reports header -->
     <div class="row">
       <div class="col-sm-12">
-        <div class="panel panel-square-light">
+        <div class="panel light">
           <div class="panel-heading">
-            <span class="h4-text-dark">Rapporter</span>
+            <span class="panel-h light">Rapporter</span>
             <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
             <span class="glyphicon glyphicon-filter i-tool pull-right" data-toggle="modal" data-target="#modal-reports-filter"></span>
           </div>
-          <div class="panel-body-fluid">
+          <div class="panel-body">
             <div class="col-sm-6">
-              <div id="report">
-                <h4 style="margin:20px">Velg en rapport fra listen</h4>
+              <div id="report-container">
+                <span class="report-title">Velg en rapport fra listen</span>
               </div>
             </div>
             <div class="col-sm-6"> 
-              <div id="reportlist">
-                <img src="images/loader.gif" style="width:50px;height:50px;text-align:center">
-              </div>
-              <ul class='pagination' id="pagination"></ul>
+              <div id="report-list-container"></div>
+              <nav aria-label="Page navigation">
+                <ul id="report-list-pagination" class='pagination'></ul>
+              </nav>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Modal windows -->  
-    <span id="s-modal-login"></span>
-    <span id="s-modal-images"></span>
-    <span id="s-modal-spot"></span>
-    <span id="s-modal-user"></span>
-    <span id="s-modal-session"></span>
-    <span id="s-modal-note"></span>
-    <span id="s-modal-tides"></span>
-    <div id="s-modal-filter"></div>
-
+    <!-- Modal containers -->
+    <div id="sl-modal-login"></div>
+    <div id="sl-modal-session"></div>
+    <div id="sl-modal-observation"></div>
+    <div id="sl-modal-filter"></div>
+    
     <!-- Footer -->
     <footer class="container-fluid text-center my-footer">
       <div class="panel panel-default my-footer">
-        <div class="panel-body my-footer">
+        <div class="panel-footer">
           <div class="glyphicon glyphicon-globe"></div>
-          <form>
-            <span id="scoreReportValue"></span>
-            <button id="scoreReportCopy" href="javascript:void(0)" onClick="copyToClipboard('scoreReport')">Copy report to clipboard</button>
-            <input type="hidden" id="scoreReport" class="pull-right"/>
-          </form>
           <div id="sun"></div>
           <div id="tidetable"></div>
-          <a  href="#" onClick="showTidalGraph()">Se tidevannsgraf</a>
         </div>
       </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="js/lib/moment.loc.min.js"></script>
+    <!--script src="js/lib/bootstrap-notify.min.js"></script>
+    <script src="js/lib/bootstrap-confirmation.min.js"></script-->
+    <script src="js/lib/simplePagination.js" ></script>
+    <script type="module" src="main.js"></script>
   </body>
 </html>

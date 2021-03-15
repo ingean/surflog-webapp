@@ -1,0 +1,154 @@
+:root {
+  --primary-txt-color: #212121;
+  --secondary-txt-color: #424242;
+  --primary-color-light: #E0E0E0;
+  --primary-color-dark: #757575;
+  --secondary-color-light: #EEEEEE;
+  --secondary-color-dark: #212121;
+}
+
+/* Reports list */
+.list-group-item {
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  padding: 10px;
+  align-items: center;
+}
+
+.report-list-img {
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+}
+
+.report-list-img-small {
+  width: 12px;
+  height: 12px;
+  margin: 5px;
+}
+
+.report-list-title {
+  font-size: small;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.report-list-date {
+  font-size: small;
+  margin-left: 10px;
+}
+
+.report-details {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+}
+
+.report-detail {
+  margin: 1px;
+}
+
+.report-detail-label {
+  margin: 1px;
+  flex: 0 0 45px;
+  font-size: xx-small;
+  font-weight: normal;
+}
+
+.report-score {
+  margin-left: auto;
+  flex: 0 0 65px;
+}
+
+/* REPORT */
+
+.report-header,
+.report-footer {
+  display: flex;
+  flex-direction: row;
+}
+
+.report-header {
+  padding: 10px;
+  background-color: var(--primary-color-dark);
+}
+
+.report-header-title {
+  color: var(--primary-color-light);
+  font-size: medium;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.report-header-details {
+  color: var(--primary-color-light);
+  font-size: x-small;
+  margin-left: 10px;
+}
+
+.report-body {
+  padding: 10px;
+  min-height: 400px;
+  background-color: var(--primary-color-light);
+}
+
+#carousel-session {
+  min-height: 380px;
+}
+
+.report-session-control {
+  min-height: 380px;
+}
+
+.report-session-indicators {
+  visibility: hidden;
+}
+
+.report-session-control {
+  opacity: 0;
+}
+
+.report-page-title {
+  font-weight: bold;
+  color: var(--primary-txt-color);
+}
+
+#report-wetsuit-img {
+  float: left;
+  opacity: 0.2;
+}
+
+#report-hood-txt {
+  top: 25px;
+}
+
+#report-suit-txt {
+  top: 70px;
+}
+
+#report-gloves-txt {
+  top: 113px;
+}
+
+#report-boots-txt {
+  top: 155px;
+}
+
+#report-board-txt {
+  float: left;
+  height: 200px;
+}
+
+.report-footer {
+  align-items: center;
+  padding: 10px;
+  background-color: var(--secondary-color-light);
+}
+
+
+
+
+
+
+

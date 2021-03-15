@@ -1,0 +1,26 @@
+.carousel-inner {
+  margin-bottom:50px;
+}
+
+.carousel-item {
+  padding: 15px;
+}
+
+.carousel-item-session {
+  height: 270px;
+}
+
+.carousel-indicators {
+  bottom:-20px;
+}
+
+.carousel-indicators li {
+  background-color: gray;
+}
+
+.carousel-indicators .active {
+  background-color: #0000ff;
+}
+.carousel-control-invisible {
+  background: none !important;
+}

@@ -1,9 +1,4 @@
-
-/* SET SQUARE CORNERS */
-* {
-    border-radius: 0;
-  }
-
+/* Reduce pointer flickering when hovering over Google charts */
 svg > g > g:last-child { pointer-events: none }
 
 body {
@@ -17,144 +12,17 @@ body {
   padding: 10px 20px 10px 20px;   
 }
 
+.align-left { /* Align a element to left in a flex container */
+  margin-left: auto;
+}
+
 /* NAVIGATION BAR */
 .navbar {
-    background-color: dodgerblue;
-    z-index: 2;
-}
-
-#ddown-nav-spots {
-  position: absolute;
-  top: 15px;
-  margin-left: 10px;
-  vertical-align: middle;
-  background: dodgerblue;
-  color: white;
-  border: none;
-  outline: none;
-}
-
-
-
-.affix {
-    top: 0;
-    width: 100%;
-}
-
-.navbar-brand {
-    color: white;
-}
-
-b.caret {
-    color: white;
-}
-
-a.dropdown-toggle {
-    color: white;
-}
-
-.navbar-collapse.collapse {
-    display: block!important;
-}
-  
-.navbar-nav>li, .navbar-nav {
-    color: white;
-    float: left !important;
-}
-  
-.navbar-nav.navbar-right:last-child {
-    margin-right: -15px !important;
-}
-  
-.navbar-right {
-    float: right!important;
+    border-radius: 0;
 }
 
 .collapsable {
     cursor: pointer;   
-}
-
-/* PANELS */
-
-.panel-square-light {
-    border-radius: 0;
-    background-color: lightgray;
-}
-
-.panel-square-dark {
-    border-radius: 0;
-    background-color: darkgrey;
-}
-
-.h4-text-light {
-    font-size: 20px;
-    color: lightgray;
-    font-weight: bold;
-    vertical-align: bottom;
-    text-align: bottom;
-}
-
-.h4-text-dark {
-    font-size: 20px;
-    color: darkgrey;
-    font-weight: bold;
-    vertical-align: bottom;
-    text-align: bottom;
-}
-
-.panel-body-fluid {
-    background-color: lightgray;
-    padding: 0px, 0px, 0px, 0px;
-    margin: 0px, 0px, 0px, 0px;
-    position: relative;
-    /* overflow:hidden; */
-    width:100%;
-}
-
-.no-overflow {
-  overflow:hidden;
-}
-
-.panel-footer {
-    background:lightgray;
-    color: darkgray;
-    border-radius: 0;
-}
-
-.btn-square-light {
-    border-radius: 0;
-    background-color: lightgray;
-    color: darkgrey !important;
-    font-size: 14px;
-}
-
-.btn-square-light:hover {
-  background-color:whitesmoke;
-}
-
-.btn-square-light:focus {
-  background-color:whitesmoke;
-  outline: none;
-}
-
-.btn-square-dark {
-    border-radius: 0;
-    background-color: darkgrey;
-    color: lightgray !important;
-    font-size: 14px;
-}
-
-.btn-square-dark:hover {
-    background-color: gray;
-}
-
-.btn-square-dark:focus{
-  background-color:gray;
-  outline: none;
-}
-
-.btn:active {
-  border-style: none;
 }
 
 .i-tool {
@@ -179,13 +47,7 @@ a.dropdown-toggle {
   color: gray;
 }
 
-/* HEADER */
-#img-logo {
-    height:40px;
-    width:40px;
-}
-
-#img-profile {
+#navbar-profile-img {
     position: absolute;
     right: 10px;
     top: 5px;
@@ -194,7 +56,6 @@ a.dropdown-toggle {
     width: 40px;
 }
 
-
 /* FORECAST CONTAINERS */
 .container-dmi {
   overflow: hidden;
@@ -202,336 +63,13 @@ a.dropdown-toggle {
 
 .img-dmi {
   position:relative;
-  left: -145px;
+  left: -135px;
   clip-path: inset(0% 15% 0% 15%);
   -webkit-clip-path: inset(0% 15% 0% 15%);
 }
 
-.img-msw,
-.img-yr {
+.fullwidth {
   width:100%;
-}
-
-@media screen and (max-width:799px) { /*Small devices */  
-    .scrollcontainer,
-    .container-yr {
-        overflow-x: scroll;
-    }
-}
-
-/* IMAGE NAVIGATION */
-.buttonprev {
-    position:absolute;
-    top:0px;
-    left:0px;
-    width:70px;
-    height:550px;
-    background:linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,0.6));
-    border:0 none;
-}
-
-.buttonprev:focus {
-    outline:0;
-}
-
-.buttonnext {
-    position:absolute;
-    top:0px;
-    right:0px;
-    width:70px;
-    height:550px;
-    background:linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.6));
-    border:0 none;
-}
-
-.buttonnext:focus {
-    outline:0;
-}
-
-#mswbuttonprev {
-    height:375px;    
-}
-
-#mswbuttonnext {   
-    height:375px;
-}
-
-.table-condensed{
-    font-size: 10px;
-}
-
-#img-webcam {
-    width: 100%;
-}
-
-/* OBSERVATION IMAGES */
-.img-obs {
-    width: 100%;
-}
-
-#img-report-user {
-    object-fit: cover;
-    height: 60px;
-    width: 60px;
-    float: left;
-    margin: 0px,25px,0px,0px;
-}
-
-#surferpicturesmall {
-    object-fit: cover;
-    height: 30px;
-    width: 30px;
-    float: left;
-    margin: 0px,0px,0px,0px;
-}
-
-/* REPORTS LIST */
-#img-list-user {
-  position: absolute;
-  left: 8px;
-  top: 8px;
-  height: 20px;
-  width: 20px;
-  opacity: 0.7;
-}
-
-.title-list-reports {
-  margin-left: 30px;
-}
-
-.i-report-attr {
-  margin-left: 10px;
-}
-
-
-.reporttitle {
-  text-indent: 10px;
-}
-
-.reportsubtitle {
-  margin-left: 10px;
-}
-
-.label-score {
-  font-size: small;
-  width: 70px;
-}
-
-.label-report {
-  font-size: xx-small;
-  min-width: 55px;
-  display: inline-block;
-  margin-right: 2px;
-}
-
-.labels-report {
-  float: right;
-  margin-right:  15px;
-}
-
-#datepicker {
-  font-size: 100%;
-  width: 100px; 
-  background-color:transparent !important;
-  border:none !important;
-  z-index: 200;
-}
-
-.ui-datepicker-trigger {
-  padding-top: 10px;
-  padding-left: 10px;
-}
-
-
-#img-wetsuit {
-  float: left;
-  opacity: 0.2;
-}
-
-#txt-hood {
-  position: absolute;
-  top: 25px;
-  left: 127px;
-  text-align: center;
-}
-
-#txt-suit {
-  position: absolute;
-  top: 70px;
-  left: 127px;
-  text-align: center;
-}
-
-#txt-gloves {
-  position: absolute;
-  top: 113px;
-  left: 127px;
-  text-align: center;
-}
-
-#txt-boots {
-  position: absolute;
-  top: 155px;
-  left: 127px;
-  text-align: center;
-}
-
-#img-board {
-  float: left;
-  height: 200px;
-}
-
-.carousel-inner {
-  margin-bottom:50px;
-}
-
-.carousel-item {
-  padding: 15px;
-}
-
-.carousel-item-session {
-  height: 270px;
-}
-
-.carousel-indicators {
-  bottom:-20px;
-}
-
-.carousel-indicators li {
-  background-color: gray;
-}
-
-.carousel-indicators .active {
-  background-color: #0000ff;
-}
-.carousel-control-invisible {
-  background: none !important;
-}
-
-.glyphicon-thumbs-up, .glyphicon-thumbs-down {
-  float: right;
-}
-
-
-/* SPOT STATISTICS */
-#goodsurf {
-  position: relative;
-  color: green;
-  font-size: 80px;
-}
-
-#averagesurf {
-  position: relative;
-  color: orange;
-  font-size: 80px;
-}
-
-#tidestatimage {
-  position: absolute;
-  top: 40px;
-  left: 120px;
-}
-
-#tidestat {
-  position: absolute;
-  top: 37px;
-  left: 140px;
-}
-
-#durationavg {
-  position: absolute;
-  top: 60px;
-  left: 120px;
-}
-#durationstat {
-  position: absolute;
-  top: 60px;
-  left: 145px;
-}
-#sessioncount {
-  position: absolute;
-  top: 100px;
-  left: 20px;
-  font-size: 20px;
-  color: lightgray;
-}
-
-#scorechart {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-}
-
-/* Wizard form */
-#radioBtn .notActive{
-  color: #3276b1;
-  background-color: #fff;
-  background: none;
-}
-
-.btn-circle {
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 15px;
-}
-
-.table-forecast {
-  width: 100%;
-  overflow-x: hidden;
-  margin: 0px;
-  overflow-y: visible;
-  padding: 0;
-}
-
-.table-frost {
-  table-layout: fixed;
-  width: 1920px;
-}
-
-.td-header {
-  width: 48px;
-}
-
-.td-val {
-  width: 76px;
-  text-align: center;
-  font-weight: bold;
-}
-
-.td-null {
-  background: rgba(125,125,125,0.2);
-}
-.td-flat {
-  background: rgba(250,0,0,0.2);
-}
-.td-min {
-  background: rgba(250,183,0,0.2);
-}
-.td-std {
-  background: rgba(0,83,250,0.2);
-}
-.td-avg {
-  background: rgba(0,250,0,0.2);
-}
-.td-max {
-  background: rgba(46,89,4,0.2);
-}
-
-.td-disabled {
-  opacity: 0.3;
-}
-
-.td-time {
-  background-color: white;
-  font-weight: bold;
-  color: silver;
-  text-align: center;
-  border: thin solid darkgray;
-  width: 80px;
 }
 
 .my-footer {
@@ -541,8 +79,20 @@ a.dropdown-toggle {
   border: 0;
 }
 
-#img-fc-loader {
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loader-img {
   width: 50px;
   height: 50px;
-  text-align: center;
+}
+
+@media screen and (max-width:799px) { /*Small devices */  
+  .scrollcontainer,
+  .container-yr {
+      overflow-x: scroll;
+  }
 }

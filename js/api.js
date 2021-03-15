@@ -24,46 +24,32 @@ async function getForecasts(startTime = null, endTime = null, elementId = '', ty
     'Klarte ikke hente varsel-statistikk for spotter i Oslofjorden',
     'Failed to get forecast statistics all spots')})
   
-  
   gFCNow.dmi = await $.get(`${urlAPI}forecasts/dmi${query}`).catch(error => {showError(error, 
     'Klarte ikke hente tolkede dmi varsler',
     'Failed to get DMI data from surflog')})
     
-  createChartsDMI(gFCNow.dmi, spot, elementId);
-
   gFCNow.smhi = await $.get(`${urlAPI}forecasts/smhi${query}`).catch(error => {showError(error, 
     'Klarte ikke hente smhi observasjoner og varsler',
     'Failed to get SMHI data from surflog/smhi')})
     
-  createChart(gFCNow.smhi, 'smhi', 'waveheight', spot, elementId);
-  
-
-  gFCNow.yr = await $.get(urlAPI + 'forecasts/yr').catch(error => {showError(error, 
+  gFCNow.yr = $.get(urlAPI + 'forecasts/yr').catch(error => {showError(error, 
     'Klarte ikke hente yr varsler',
     'Failed to get Yr data')})
     
-  createChart(gFCNow.yr, 'yr', 'waveheight', spot, elementId);
-
-  gFCNow.frost = await $.get(`${urlAPI}forecasts/frost${query}`).catch(error => {showError(error, 
+  gFCNow.frost = $.get(`${urlAPI}forecasts/frost${query}`).catch(error => {showError(error, 
     'Klarte ikke hente Frost vindobservasjoner',
     'Failed to get Frost data')})
 
-  gFCNow.kv = await $.get(`${urlAPI}forecasts/kv${query}`).catch(error => {showError(error, 
+  gFCNow.kv = $.get(`${urlAPI}forecasts/kv${query}`).catch(error => {showError(error, 
     'Klarte ikke hente Kystvær vindobservasjoner',
     'Failed to get Kystverket wind data')})
     
-  //createChart(gFCNow.frost, 'frost', 'wind', spot, elementId);
-  createTable(gFCNow.frost, gFCNow.kv, '', elementId);
+  await gFCStats
+  createChartsDMI(await gFCNow.dmi, spot, elementId);
+  createChart(await gFCNow.smhi, 'smhi', 'waveheight', spot, elementId);
+  createChart(await gFCNow.yr, 'yr', 'waveheight', spot, elementId);
+  createTable(await gFCNow.frost, await gFCNow.kv, '', elementId);
 
-/* 
-
-  gFCNow.bw = await $.get(`${urlAPI}forecasts/bw${query}`).catch(error => {showError(error, 
-    'Klarte ikke hente Barentswatch-varsler',
-    'Failed to get BW-data from surflog/barentswatch')})
-    
-  createChart(gFCNow.bw, 'bw', 'waveheight', spot, elementId); 
-  
-  */
 
   $('#img-fc-loader').remove();
 }

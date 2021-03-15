@@ -1,0 +1,58 @@
+.table-forecast {
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0px;
+  overflow-y: visible;
+  padding: 0;
+}
+
+.table-condensed{
+  font-size: 10px;
+}
+
+.table-frost {
+  table-layout: fixed;
+  width: 1920px;
+}
+
+.td-header {
+  width: 48px;
+}
+
+.td-val {
+  width: 76px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.td-null {
+  background: rgba(125,125,125,0.2);
+}
+.td-flat {
+  background: rgba(250,0,0,0.2);
+}
+.td-min {
+  background: rgba(250,183,0,0.2);
+}
+.td-std {
+  background: rgba(0,83,250,0.2);
+}
+.td-avg {
+  background: rgba(0,250,0,0.2);
+}
+.td-max {
+  background: rgba(46,89,4,0.2);
+}
+
+.td-disabled {
+  opacity: 0.3;
+}
+
+.td-time {
+  background-color: white;
+  font-weight: bold;
+  color: silver;
+  text-align: center;
+  border: thin solid darkgray;
+  width: 80px;
+}

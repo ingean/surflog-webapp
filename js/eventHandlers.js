@@ -33,8 +33,24 @@ $(function() {
       buttonImageOnly: true,
       buttonText: "Velg dato",
       onSelect: function(dateText, inst) {
-      dateSelected($(this).datepicker('getDate'));
-  }}) 
+        dateSelected($(this).datepicker('getDate'));
+      }  
+  }) 
+
+  $('#pagination').pagination({
+    items: 0,
+    itemsOnPage: 10,
+    displayedPages: 3,
+    cssStyle: '',
+    prevText: '<span aria-hidden="true">&laquo;</span>',
+    nextText: '<span aria-hidden="true">&raquo;</span>',
+    onInit: function () {
+      getReports(0);
+    },
+    onPageClick: function (page, evg) {
+      getReports(page);
+    }
+  });
 
   //Set click event for dropdowns
   $(document).on('click','li a', function(){

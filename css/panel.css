@@ -1,0 +1,89 @@
+:root {
+  --primary-color-light: #E0E0E0;
+  --primary-color-dark: #757575;
+  --secondary-color-light: #EEEEEE;
+  --secondary-color-dark: #212121;
+}
+
+.dark {
+  color: var(--primary-color-light);
+  background: var(--primary-color-dark);
+}
+
+.light {
+  color: var(--primary-color-dark);
+  background: var(--primary-color-light);
+}
+
+.panel {
+  border-radius: 0;
+}
+
+.panel-h {
+  font-size: 20px;
+  font-weight: bold;
+  vertical-align: bottom;
+  text-align: bottom;
+}
+
+.panel-body {
+  color: var(--primary-color-dark);
+  background-color: var(--primary-color-light);
+  border-radius: 0;
+  padding: 0px;
+  margin: 0px;
+  width:100%;
+}
+
+.panel-footer {
+  color: var(--primary-color-dark);
+  background:var(--primary-color-light);
+  border-radius: 0;
+}
+
+.panel-btn {
+  border-radius: 0;
+  font-size: 14px;
+}
+
+.panel-btn:hover {
+  background-color: var(--secondary-color-light);
+}
+  
+.panel-btn:focus {
+  outline: none;
+}
+
+.panel-btn:active {
+  border-style: none;
+}
+
+.panel-btn-nav {
+  position:absolute;
+  top:50px;
+  width:70px;
+  height:675px;
+  border:0 none;
+}
+
+.panel-btn-nav:focus {
+  outline: 0;
+} 
+
+.panel-btn-nav.next {
+  right:16px;
+  background:linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.6));
+}
+
+.panel-btn-nav.prev {
+  left:16px;
+  background:linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,0.6));
+}
+
+.panel-btn-nav-msw {
+  height:375px;    
+}
+
+.panel-dmi-forecast {
+  width: 662px;
+}
