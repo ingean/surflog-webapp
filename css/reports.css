@@ -5,6 +5,7 @@
   --primary-color-dark: #757575;
   --secondary-color-light: #EEEEEE;
   --secondary-color-dark: #212121;
+  --color-tool-highlight: rgba(90, 189, 249, 1);
 }
 
 /* Reports list */
@@ -49,11 +50,23 @@
   margin: 1px;
 }
 
-.report-detail-label {
+.report-conditions {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .report-conditions {
+    display: none;
+  }
+}
+
+.report-condition {
   margin: 1px;
-  flex: 0 0 45px;
   font-size: xx-small;
   font-weight: normal;
+  min-width: 50px;
 }
 
 .report-score {
@@ -67,6 +80,7 @@
 .report-footer {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .report-header {
@@ -89,7 +103,7 @@
 
 .report-body {
   padding: 10px;
-  min-height: 400px;
+  min-height: 440px;
   background-color: var(--primary-color-light);
 }
 
@@ -141,10 +155,36 @@
 }
 
 .report-footer {
-  align-items: center;
+  align-items: flex-end;
   padding: 10px;
   background-color: var(--secondary-color-light);
 }
+
+.report-tools {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.report-tool {
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-end;
+  color: var(--primary-txt-color);
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.report-tool:hover {
+  cursor: pointer;
+  color: var(--color-tool-highlight);
+}
+
+.report-tools a {
+  color: var(--primary-txt-color);
+}
+
 
 
 

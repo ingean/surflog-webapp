@@ -8,28 +8,20 @@
     <link rel="icon" type="image/png" href="images/logo.png">
     <title>SurfLog</title>
 
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
-    <!-- Bootstrap stylesheets
+    <!-- Bootstrap stylesheets  -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    -->
+   
 
     <!-- Local stylesheet -->
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/surflog.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/forms.css">
     <link rel="stylesheet" href="css/panel.css">
     <link rel="stylesheet" href="css/reports.css">
     <link rel="stylesheet" href="css/table.css">
     <link rel="stylesheet" href="css/simplePagination.css">
-
-    <!-- jQuery   -->   
-    
-
-    <!-- Bootstrap 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>  
-  -->
 
   </head>
   <body>
@@ -133,8 +125,8 @@
                 <div class="panel dark">
                   <div class="panel-heading">
                     <div class="btn-group pull-right">
-                      <button type="button" class="panel-btn dark" onClick="changeForecast('wave','waveheight')">HØYDE</button>
-                      <button type="button" class="panel-btn dark" onClick="changeForecast('wave','waveperiod')">PERIODE</button>
+                      <button type="button" class="btn btn-default active">Høyde</button>
+                      <button type="button" class="btn btn-default">Periode</button>
                     </div>
                     <span class="panel-h dark">Bølger</span>  
                   </div> 
@@ -157,8 +149,8 @@
                   <div class="panel dark">
                     <div class="panel-heading">
                       <div class="btn-group pull-right">
-                        <button type="button" class="panel-btn dark" onClick="changeForecast('swell','swellheight')">HØYDE</button>
-                        <button type="button" class="panel-btn dark" onClick="changeForecast('swell','swellperiod')">PERIODE</button>
+                        <button type="button" class="btn btn-default active">Høyde</button>
+                        <button type="button" class="btn btn-default">Periode</button>
                       </div>  
                       <span class="panel-h dark">Dønning</span>
                     </div> 
@@ -341,6 +333,7 @@
     <div id="sl-modal-login"></div>
     <div id="sl-modal-session"></div>
     <div id="sl-modal-observation"></div>
+    <div id="sl-modal-images"></div>
     <div id="sl-modal-filter"></div>
     
     <!-- Footer -->
@@ -356,11 +349,11 @@
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>  
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="js/lib/moment.loc.min.js"></script>
-    <!--script src="js/lib/bootstrap-notify.min.js"></script>
-    <script src="js/lib/bootstrap-confirmation.min.js"></script-->
+    <script src="js/lib/bootstrap-notify.min.js"></script>
+    <script src="js/lib/bootstrap-confirmation.min.js"></script>
     <script src="js/lib/simplePagination.js" ></script>
     <script type="module" src="main.js"></script>
   </body>

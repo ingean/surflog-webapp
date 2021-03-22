@@ -1,5 +1,5 @@
 import { getRange } from './utilities.js';
-import { dateInputInitialize } from './html/dateInput.js';
+import { dateInputInitialize } from '../html/dateInput.js';
 
 export function initDateTime() {
   dateInputInitialize();

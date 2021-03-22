@@ -1,12 +1,12 @@
-import { el } from '../utils/html/elements.js';
-import { carousel } from '../utils/html/carousel.js';
-import { reportHeader, reportText, reportPage, reportFooter } from './showReport.js';
+import { el } from '../html/elements.js';
+import { carousel } from '../html/carousel.js';
+import { reportHeader, reportText, reportPage, reportFooter } from './reportView.js';
 import { settings } from '../settings.js';
 import { getForecastTime } from '../utils/time.js';
 
 export var twin = '';
 
-export function showSession(report) {
+export function updateSessionView(report) {
   document.getElementById('report-container').replaceChildren(
     el('div', {class: "report", "data-reportid": report.id}, [
       reportHeader(report), 
@@ -23,7 +23,7 @@ export function showSession(report) {
       })),
       reportFooter(report)
     ])
-  );  
+  );
 }
 
 function sessionWeather(report) {

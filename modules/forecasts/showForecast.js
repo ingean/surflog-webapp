@@ -1,4 +1,4 @@
-import { el } from '../utils/html/elements.js';
+import { el } from '../html/elements.js';
 
 function navEl(direction) {
   return (

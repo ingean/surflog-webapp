@@ -1,6 +1,6 @@
-import { notify } from '../logger.js';
-import { getReport } from '../../reports/getReports.js';
-import { getForecasts } from '../../forecasts/getForecasts.js';
+import { notify } from '../utils/logger.js';
+import { getReport, getImages } from '../reports/getReports.js';
+import { getForecasts } from '../forecasts/getForecasts.js';
 
 const elementId = 'application-date';
 
@@ -14,6 +14,7 @@ export function dateChanged(datestring, id){
   let date = moment(datestring).toDate();
   if (moment(date).isSameOrBefore(new Date(), 'day')){
     getReport(date, id);
+    getImages(date);
       if (!moment(date).isSame(new Date(), 'day')){
         //getForecasts(date);
       }

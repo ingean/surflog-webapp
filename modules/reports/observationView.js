@@ -1,7 +1,7 @@
-import { el }  from '../utils/html/elements.js';
-import { reportHeader, reportText, reportFooter } from './showReport.js';
+import { el }  from '../html/elements.js';
+import { reportHeader, reportText, reportFooter } from './reportView.js';
 
-export function showObservation(report) {
+export function updateObservationView(report) {
   document.getElementById('report-container').replaceChildren(
     el('div', {class: "report", "data-reportid": report.id}, [
       reportHeader(report), 
@@ -9,5 +9,5 @@ export function showObservation(report) {
         reportText('Beskrivelse', report.descr)),
       reportFooter(report)
     ])
-  );  
+  );
 }

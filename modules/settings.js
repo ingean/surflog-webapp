@@ -1,9 +1,11 @@
 import { log } from './utils/logger.js';
 import { urlAPI } from './config/datasources.js';
-import { formsOptions } from './config/forms.js';
-import { createForms } from './utils/html/forms.js';
+import { formsOptions } from './config/formsOptions.js';
+import { createForms } from './html/form.js';
 
 export var settings = [];
+
+export let user;
 
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
@@ -50,6 +52,10 @@ export async function getSettings(userId) {
   });
   settings = await response.json();
   return settings;
+}
+
+export function setUser(loggedInUser) {
+  user = loggedInUser;
 }
 
 

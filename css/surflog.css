@@ -90,6 +90,10 @@ body {
   height: 50px;
 }
 
+.webcam-img {
+  width: 100%;
+}
+
 @media screen and (max-width:799px) { /*Small devices */  
   .scrollcontainer,
   .container-yr {

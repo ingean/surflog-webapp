@@ -26,6 +26,4 @@ window.fbAsyncInit = () => {
   });
 };
 
-function deleteReport() {
-  alert('Shit works!')
-}
+

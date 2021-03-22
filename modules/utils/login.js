@@ -1,6 +1,7 @@
-import { modal } from './html/modal.js';
-import { el } from './html/elements.js';
+import { modal } from '../html/modal.js';
+import { el } from '../html/elements.js';
 import { startSurfLog } from '../startup.js';
+import { setUser } from '../settings.js';
 
 export function statusChangeCallback(response) {
   if (response.status === 'connected') {
@@ -12,7 +13,8 @@ export function statusChangeCallback(response) {
 
 function startApp() {
   FB.api('/me', (user) => {
-    console.log(`Successful login for: ${user.name}`); 
+    console.log(`Successful login for: ${user.name}`);
+    setUser(user); // Save user for later use
     $('#modal-login').modal('hide');
       
     FB.api(`/${user.id}/picture?redirect=false`, 'GET', {}, (picture) => {

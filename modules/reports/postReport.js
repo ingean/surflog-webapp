@@ -1,56 +1,51 @@
 import { log, notify } from '../utils/logger.js';
+import { user } from '../settings.js';
+import { post } from '../utils/api.js';
+import { getReports } from './getReports.js';
 
-function reportTime(formData) {
-  let date = document.getElementById('datepicker').datepicker('getDate');
-  let reportTime = moment(date).format('YYYY-MM-DD');
-  return `${reportTime} ${formData.get('reporttime')}`;
+function resetForm(form) {
+  let modalId = form.id.replace('form', 'modal');
+  form.reset();
+    $(`#${modalId}`).modal('hide');
+    getReports();
 }
 
-function clearForm() {
+function formatTide(data) {
+  let tide = data.get('tide');
+  let diff = data.get('tidediff');
+  let type = data.get('tidetype');
   
+  (diff === '0') ? diff = '' : diff = ` ${diff}`;
+  data.set('tide', `${tide}${diff} (${type})`);
+  data.delete('tidediff');
+  data.delete('tidetype');
+  return data;
 }
 
-async function postFiles(formData, date) {
-  let url = `${urlAPI}images/${moment(date).format('YYYY-MM-DD')}`;
-  let files = formData.get('files');
+function getFormData(form) {
+  let data = new FormData(form); // Gets only form inputs with name attributes!!
+  let date = document.querySelector('#application-date').value;
+  let reportTime = moment(date).format(`YYYY-MM-DD ${data.get('reporttime')}`);
 
-  if (files) {
-    let response = await fetch(url, {
-      body: files, 
-      method: 'POST'
-    }).catch(e => {
-      log(e, 'Klarte ikke å laste opp bilder');
-    }) 
+  data.set('reporttime', reportTime);
+  data.append('userid', user.id);
+  data.append('surfer', user.name);
+  data.append('hasimages', 0); // Updated serverside if upload is successful
 
-    if (response) {
-      notify('Bilder lastet opp', 'success', 'picture');
-      clearForm();
-    }
-    return 1
-  } else {
-    return 0;
+  if (data.get('score')) { // Report is a surf session not an observation
+    data.set('type', 'Session');
+    data.set('issurfable', 1)
+    data = formatTide(data); // Concat tide, tidediff and tidetype
   }
+  return data;
 }
 
 export async function postReport(form) {
-  let formData = new FormData(form);
-  let reportTime = moment(date).format('YYYY-MM-DD');
-  reportTime += " " + formData.get("reporttime");
+  let data = getFormData(form);
+  let res = await post('reports', data);
 
-  formData.set('reporttime', reportTime(formData));
-  formData.append('userid', user.id);
-  formData.append('surfer', user.name);
-  formData.append('hasImages', postFiles(formData));
-  formData.delete('files');
-
-  let response = await fetch(`${urlAPI}reports`, {
-    body: formData,
-    method: 'POST'
-  }).catch(e => {
-    log(e, 'Klarte ikke å lagre rapporten, sjekk skjema og prøv igjen');
-  })
-  
-  if (response) {
-    notify('Rapporten er lagret', 'success', 'cloud-upload');
-  }
+  if (res) {
+    notify(r.message, 'success', 'cloud-upload');
+    resetForm(form);
+  } 
 }

@@ -1,0 +1,125 @@
+import { reportScore, conditionsDetails } from './reportsList.js';
+import { updateSessionView } from './sessionView.js';
+import { updateObservationView } from './observationView.js';
+import { el } from '../html/elements.js';
+import { mswIds } from '../config/lookups.js';
+import { urlMSW } from '../config/datasources.js';
+
+function tide(report) {
+  if(report.type === 'Session') {
+    let t = report.tide;
+    let beforeAfter = (t.includes('-')) ? "før" : "etter";
+    let hours = t.match(/\d+/); //Find number in str
+    let highLow = t.substr(0,t.indexOf(' ')).toLowerCase(); //Find tide
+    if(hours) {
+      return `(${hours}t ${beforeAfter} ${highLow})`;
+    } else {
+      return `(${highLow[0].toUpperCase()}${highLow.slice(1)})`;
+    }
+  }
+  return '';
+}
+
+function headerDetails(report) {
+  if (report.type === "Session") {
+    return `${report.duration}t fra kl ${moment(report.reporttime).format('HH:mm')} ${tide(report)}`;
+  }
+  return `kl ${moment(report.reporttime).format('HH:mm')}`;
+}
+
+function footerToolbar(report) {
+  return el('div', 'report-tools', [
+    imagesButton(report),
+    mswLink(report),
+    deleteButton()
+  ])
+}
+
+function imagesButton(report) {
+  if (report.hasimages === 1) {
+    return el('div', {
+      "id": "img-report-tool-images", 
+      "class": "glyphicon glyphicon-picture report-tool",
+      "data-toggle": "modal",
+      "data-target": "#modal-report-images"
+    })
+  } else {
+   return ''; 
+  }
+}
+
+function mswLink(report) {
+  let mswId = mswIds[report.spot];
+  let spot = mswId.name ?? report.spot.replace(' ', '-');
+  let start = moment(report.reporttime).subtract(3, 'days').format('YYYY-MM-DD');
+  let end = moment(report.reporttime).add(3, 'days').format('YYYY-MM-DD');
+  let url = `${urlMSW}${spot}-Surf-Report/${mswId.id}/Historic/?start=${start}&end=${end}`;
+  return  el('div', 'report-footer-tool', 
+    el('a', { href: url, target: '_blank', class: 'report-tool'}, 
+      el ('div', 'glyphicon glyphicon-calendar')))
+}
+
+function deleteButton() {
+  return el('div', {
+    "id":"btn-deleteReport",
+    "class": "glyphicon glyphicon-trash report-tool",
+    "data-toggle": "confirmation",
+    "data-on-confirm": "deleteReport",
+    "data-btn-ok-label": "Ja",
+    "data-btn-ok-icon": "glyphicon glyphicon-trash",
+    "data-btn-ok-class": "btn-danger",
+    "data-btn-cancel-label": "Nei", 
+    "data-btn-cancel-icon": "glyphicon glyphicon-ban-circle",
+    "data-btn-cancel-class": "btn-success",
+    "data-title": "Slett rapport", 
+    "data-content": "Er du sikker?"
+  });
+}
+
+export function reportHeader(report) {
+  let profilePicture = document.getElementById('navbar-profile-img').getAttribute('src');
+  
+  return (
+    el('div', 'report-header', [
+      el('img', { 
+        src: profilePicture,
+        class: "report-header-img img-circle"}
+      ), 
+      el('div', 'report-header-text', [
+        el('div', 'report-header-title', [report.spot, ' ', moment(report.reporttime).calendar()]),
+        el('div', 'report-header-details', headerDetails(report))
+      ]),
+      reportScore(report)
+    ]) 
+  )
+}  
+
+export function reportFooter(report) {
+  let content = [
+    footerToolbar(report)
+  ]
+  
+  if (report.type === 'Observasjon') {
+    content.unshift(el('div', 'report-footer-detail', report.source));
+  } else {
+    content.unshift(conditionsDetails(report));
+  }
+  return el('div', 'report-footer', content);
+}
+
+export function reportText(title, text) {
+  return reportPage(title, 
+    el('p', {class: "report-page-text"}, text));
+}
+
+export function reportPage(title, content) {
+  
+  return el('div', {class: "report-page"}, [
+          el('div', 'report-page-title', title),
+          el('div', 'report-page-body', content)
+        ])
+}
+
+export function updateReportView(report) {
+  (report.type === 'Session') ? updateSessionView(report) : updateObservationView(report);
+}

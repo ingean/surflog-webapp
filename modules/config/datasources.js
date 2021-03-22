@@ -1,4 +1,6 @@
 export const urlAPI = 'https://high-plating-184911.appspot.com/';
+export const urlImages = 'http://storage.googleapis.com/observations/';
+export const urlMSW = 'https://magicseaweed.com/';
 
 export const forecastSources = { 
   surflog: {
