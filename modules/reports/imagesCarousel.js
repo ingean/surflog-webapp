@@ -40,13 +40,13 @@ export function updateImageCarousels(imageUrls) {
     items: images[1]
   })
   
-  document.querySelector('#sl-modal-images')
-  .appendChild(modal({
+  document.querySelector('#root-modal-report-images')
+  .replaceChildren(modal({
     id: `modal-report-images`,
     title: `Bilder fra dagen`,
     body: reportCarousel,
   }));
 
   document.querySelector('#img-webcam-historic')
-  .appendChild(webCarousel); 
+  .replaceChildren(webCarousel); 
 }

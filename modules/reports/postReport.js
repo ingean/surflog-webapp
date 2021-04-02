@@ -45,7 +45,7 @@ export async function postReport(form) {
   let res = await post('reports', data);
 
   if (res) {
-    notify(r.message, 'success', 'cloud-upload');
+    notify(res.message, 'success', 'cloud-upload');
     resetForm(form);
   } 
 }

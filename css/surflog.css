@@ -62,10 +62,17 @@ body {
 }
 
 .img-dmi {
-  position:relative;
-  left: -135px;
+  /*position:relative;
+  left: -135px; */
   clip-path: inset(0% 15% 0% 15%);
   -webkit-clip-path: inset(0% 15% 0% 15%);
+}
+
+@media (max-width: 1200px) {
+  .img-dmi {
+    position:relative;
+    left: -135px;
+  }
 }
 
 .fullwidth {

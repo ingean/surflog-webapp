@@ -4,10 +4,15 @@ import { getForecasts } from '../forecasts/getForecasts.js';
 
 const elementId = 'application-date';
 
+function onDateChanged(event) {
+  let date = event.currentTarget.value;
+  dateChanged(date);
+}
+
 export function dateInputInitialize() {
-  setDateInput(new Date());
   document.getElementById(elementId)
-  .addEventListener('change', dateChanged);
+  .addEventListener('change', onDateChanged);
+  setDateInput(new Date());
 }
 
 export function dateChanged(datestring, id){
@@ -29,4 +34,8 @@ export function dateChanged(datestring, id){
 export function setDateInput(date) {
   let dateInput = document.getElementById(elementId);
   dateInput.value = moment(date).format('YYYY-MM-DD');
+  
+  let evt = document.createEvent("HTMLEvents");
+  evt.initEvent("change", false, true);
+  dateInput.dispatchEvent(evt);
 }

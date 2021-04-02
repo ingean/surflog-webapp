@@ -16,16 +16,21 @@ async function deleteReport() { //Delete report from database
   let res = await del(`reports/${id}`);
   
   if (res) {
-    notify('Rapporten er slettet', 'success', 'trash');
+    notify(res.message, 'success', 'trash');
     emptyReportView();
   }
 }
 
+export function addDeleteReportsEventHandlers() {
+  //Enable confirmation
+  $(document).on('click','#btn-deleteReport', () => {
+    $('#btn-deleteReport').confirmation('show');
+  });
+  window.deleteReport = deleteReport; //Make confirmation click event globally available
+}
+
+/*
 export function addDeleteReportEventHandler() {
   let confirmBtn = document.querySelector('.btn-deletReport-confirm');
   confirmBtn.addEventListener('click', deleteReport);
-}
-
-export function makeDeleteReportGlobal() {
-  window.deleteReport = deleteReport;
-}
+}*/

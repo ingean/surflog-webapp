@@ -1,5 +1,5 @@
 import { log } from './utils/logger.js';
-import { urlAPI } from './config/datasources.js';
+import { get } from './utils/api.js';
 import { formsOptions } from './config/formsOptions.js';
 import { createForms } from './html/form.js';
 
@@ -30,28 +30,20 @@ function domain(list, defaultValue) {
 
 
 export async function getPlacesCreateForms() {
-  let response = await fetch(`${urlAPI}places/spots`).catch(e => {
-    log(e, 'Klarte ikke hente oversikt over land, områder og surfesteder');
-  })
-
-  let places = await response.json();
+  let places = await get(`places/spots`);
 
   let countries = getUnique(places, 'country');
   let locations  = getUnique(places, 'location');
   let spots = getUnique(places, 'spot');
 
-  formsOptions[0].domain = domain(countries, 'Norge');
-  formsOptions[1].domain = domain(locations, 'Oslofjorden');
-  formsOptions[2].domain = domain(spots, 'Saltstein');
-  createForms(['session', 'observation', 'filter']);
+  formsOptions[1].domain = domain(countries, 'Norge');
+  formsOptions[2].domain = domain(locations, 'Oslofjorden');
+  formsOptions[3].domain = domain(spots, 'Saltstein');
+  createForms();
 }
 
-export async function getSettings(userId) {
-  let response = await fetch(`${urlAPI}settings/${userId}`).catch(e => {
-    log(e, `Kunne ikke hente brukerinstillinger for bruker-ID: ${userId}`);
-  });
-  settings = await response.json();
-  return settings;
+export function getSettings(userId) {
+  return get(`settings/${userId}`);
 }
 
 export function setUser(loggedInUser) {

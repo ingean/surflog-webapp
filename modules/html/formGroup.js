@@ -1,4 +1,14 @@
+import { formsOptions } from '../config/formsOptions.js';
 import { el, elFromHTML } from './elements.js';
+
+
+function addAllToDomain(options) {
+  if (!options.domain) return;
+  options.domain.forEach(item => (item.caption === 'Alle' ? item.default = true : item.default = false));
+  let allItem = {caption: 'Alle', default: true}
+  options.domain.find(item => item.caption === 'Alle') ? null : options.domain.push(allItem);
+}
+
 
 function formLabel(inputId, caption) {
   return el('label', {for: inputId, class: 'control-label text-left'}, caption);
@@ -9,23 +19,31 @@ function formGroupSelect(options) {
     el('div', 'form-group',
       [
         formLabel(options.id, options.caption),
-        el('div', 'input-group pull-right', domainList(options)),
+        el('div', 'input-group pull-right', formSelectInput(options)),
       ]
     )
   )
 }
 
-function domainList(options) {
+export function formSelectInput(options) {
   if (options.type === 'btn') {
     return [
       el('div', 'btn-group', domainItems(options)),
       formHiddenInput(options)
     ]
   } else if (options.type === 'select') {
-    return el('select', {id: options.id, name: options.id, class: 'form-input'}, domainItems(options))
+    return el('select', {id: options.id, name: options.name, class: 'form-input'}, domainItems(options))
   } else {
     return [
-      el('input', {id: options.id, name: options.id, list: options.id + '_list'}),
+      el('span', 'input-group-btn', 
+        el('button', {class: 'btn btn-default btn-clear-datalist', type: 'button'}, 
+          el('span', 'glyphicon glyphicon-trash'))),
+      el('input', {
+        id: options.id, 
+        name: options.name, 
+        list: options.id + '_list',
+        class: 'custom-select', 
+        value: defaultValue(options)}),
       el('datalist', {id: options.id + '_list'}, domainItems(options))
     ]
   }
@@ -33,6 +51,8 @@ function domainList(options) {
 
 function domainItems(options) {
   let items = [];
+  if (options.formName === 'filter') addAllToDomain(options);
+  
   for (let item of options.domain) {
     if (options.type === 'btn') {
       items.push(el('a', {
@@ -51,7 +71,7 @@ function formHiddenInput(options) {
   return el('input', {
     type: 'hidden', 
     id: options.id,
-    name: options.id,
+    name: options.name,
     value: defaultValue(options)});
 }
 
@@ -71,15 +91,23 @@ function isActive(item, type) {
 
 function formInput(options) {
   if (options.type === 'textarea') {
-    return el('textarea', {id: options.id, name: options.id, class: 'form-control'})
+    return el('textarea', {id: options.id, name: options.name, class: 'form-control'})
   } else {
     return el('input', {
       type: options.type, 
       id: options.id,
-      name: options.id,
+      name: options.name,
       class: 'form-control', 
       value: defaultValue(options)},'')
   } 
+}
+
+export function updateLocationDropdown(value) {
+  let options = formsOptions.find(item => item.name === value);
+  let newPlaceList = formGroup(options);
+  let parent = document.querySelector('#form-report-filter');
+  let oldPlaceList = parent.children[1];
+  parent.replaceChild(newPlaceList, oldPlaceList);
 }
 
 export function formGroup(options) {

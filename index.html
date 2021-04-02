@@ -61,18 +61,8 @@
                 <li><a href="#" data-toggle="modal" data-target="#modal-report-session">Session</a></li>
               </ul>
             </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                Saltstein 
-                <span class="caret"></span>
-              </a>
-              <ul id="navbar-spots-list" class="dropdown-menu">
-                <li><a href="#" active>Saltstein</a></li>
-                <li><a href="#">Esso</a></li>
-                <li><a href="#">Øya</a></li>
-              </ul>
-            </li>
           </ul>
+          <form id="navbar-spots-list" class="navbar-form navbar-left"></form>
           <form class="navbar-form navbar-left">
             <div class="form-group">
               <input type="date" id="application-date" class="form-control">
@@ -92,15 +82,58 @@
    
     <!-- Forecast and observation graphs -->
     <div class="row">
-        <div class="col-sm-12">
-          <div class="panel light">
-            <div class="panel-heading">
-              <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
-              <span class="panel-h light">Varsler og observasjoner</span>
+      <div class="col-sm-12">
+        <div class="panel light">
+          <div class="panel-heading">
+            <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
+            <span class="panel-h light">Varsler og observasjoner</span>
+          </div>
+          <div class="panel-body">
+            <ul class="nav nav-tabs flex-panel">
+              <li class="panel-tab active">
+                <a href="#tab-forecast-yr-now" data-toggle="tab">Yr akkurat nå</a>
+              </li>
+              <li class="panel-tab">
+                <a href="#tab-forecast-dmi" data-toggle="tab">DMI</a>
+              </li>
+              <li class="panel-tab">
+                <a href="#tab-forecast-yr" data-toggle="tab">Yr</a>
+              </li>
+              <li class="panel-tab">
+                <a href="#tab-forecast-frost" data-toggle="tab">Vindobservasjoner</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div id="tab-forecast-yr-now" class="tab-pane fade active in">
+                <div class="tab-toolbar flex-panel">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default active">Graf</button>
+                    <button type="button" class="btn btn-default">Tabell</button>
+                  </div>
+                </div>
+                <div class="tab-header flex-panel">
+                  YR, akkurat nå
+                </div>
+                <div class="tab-body flex-panel">
+                  <div id="forecast-yr-now"></div>
+                </div>
+                <div class="tab-footer flex-panel"></div>
+              </div>
+              <div id="tab-forecast-dmi" class="tab-pane fade">
+                DMI
+                <div id="forecast-dmi-current"></div>
+                <div id="forecast-dmi-historic"></div>
+              </div>
+              <div id="tab-forecast-yr" class="tab-pane fade">
+                YR, varsler
+                <div id="forecast-yr-current"></div>
+              </div>
+              <div id="tab-forecast-frost" class="tab-pane fade">
+                Vindobservasjoner
+                <div id="forecast-frost-current"></div>
+                <div id="forecast-frost-historic"></div>
+              </div>
             </div>
-            <div class="panel-body">
-              <div id="forecasts-graphs-live" class="scrollcontainer"></div>
-              <div id="forecasts-graphs-historic" class="scrollcontainer"></div>
           </div>
         </div>
       </div>
@@ -113,13 +146,13 @@
             <div class="panel-heading">
               <span class="panel-h light">DMI </span>
               <span id="time-dmi-live" class="panel-h light" data-forecasttime="">varsler </span>
-              <span id="score"></span>
+              <span id="currentscore"></span>
               <span id="twin"></span>
               <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
               <span class="glyphicon glyphicon-refresh i-tool pull-right" onClick="updateTwin()"></span>
               <span class="pull-right" id="twin"></span>
             </div>
-            <div class="panel-body">
+            <div class="panel-body flex-panel">
               <!-- Waveheight and period-->
               <div class="col-sm-4 panel-dmi-forecast">
                 <div class="panel dark">
@@ -130,7 +163,7 @@
                     </div>
                     <span class="panel-h dark">Bølger</span>  
                   </div> 
-                  <div class="panel-body">
+                  <div class="panel-body flex-panel">
                     <div id="dmi-wave-live" data-forecasttype="waveheight" data-forecastprovider="DMI">
                       <img id="img-dmi-wave-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hs.idf.1.png" />
                       <button class="panel-btn-nav prev" class="button" onClick="browseDMIForecast('previous','img-dmi-today')">
@@ -154,7 +187,7 @@
                       </div>  
                       <span class="panel-h dark">Dønning</span>
                     </div> 
-                    <div class="panel-body">
+                    <div class="panel-body flex-panel">
                       <div id="dmi-swell-live" data-forecasttype="swellheight" data-forecastprovider="DMI">
                         <img id="img-dmi-swell-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hsw.idf.1.png" />
                         <button class="panel-btn-nav prev" class="button" onClick="browseDMIForecast('previous','img-dmi-today')">
@@ -174,7 +207,7 @@
                     <div class="panel-heading">
                       <span class="panel-h dark">Vind</span>  
                     </div> 
-                    <div class="panel-body">
+                    <div class="panel-body flex-panel">
                       <div id="dmi-wind-live" data-forecasttype="wind" data-forecastprovider="DMI">
                           <img id="img-dmi-wind-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/win.idf.1.png" />
                           <button class="panel-btn-nav prev" class="button" onClick="browseDMIForecast('previous','img-dmi-today')">
@@ -204,7 +237,7 @@
             <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
             <span id="link-msw" class="pull-right"></span>
           </div>
-          <div class="panel-body">
+          <div class="panel-body flex-panel">
             <!-- Swell-->
             <div class="col-sm-4">
               <div class="panel dark">
@@ -251,7 +284,7 @@
             <span class="panel-h light">Yr</span>
             <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
           </div>
-          <div class="panel-body">
+          <div class="panel-body flex-panel">
             <div class="col-sm-6">
               <div class="panel dark">
                 <div class="panel-heading">
@@ -310,7 +343,7 @@
           <div class="panel-heading">
             <span class="panel-h light">Rapporter</span>
             <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
-            <span class="glyphicon glyphicon-filter i-tool pull-right" data-toggle="modal" data-target="#modal-reports-filter"></span>
+            <span class="glyphicon glyphicon-filter i-tool pull-right" data-toggle="modal" data-target="#modal-report-filter"></span>
           </div>
           <div class="panel-body">
             <div class="col-sm-6">
@@ -330,11 +363,11 @@
     </div>
 
     <!-- Modal containers -->
-    <div id="sl-modal-login"></div>
-    <div id="sl-modal-session"></div>
-    <div id="sl-modal-observation"></div>
-    <div id="sl-modal-images"></div>
-    <div id="sl-modal-filter"></div>
+    <div id="root-modal-login"></div>
+    <div id="root-modal-report-session"></div>
+    <div id="root-modal-report-observation"></div>
+    <div id="root-modal-report-images"></div>
+    <div id="root-modal-report-filter"></div>
     
     <!-- Footer -->
     <footer class="container-fluid text-center my-footer">

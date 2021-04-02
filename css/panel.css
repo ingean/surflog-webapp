@@ -19,6 +19,18 @@
   border-radius: 0;
 }
 
+.flex-panel {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+@media (max-width: 1200px) {
+  .flex-panel {
+    flex-direction: column;
+  }
+}
+
 .panel-h {
   font-size: 20px;
   font-weight: bold;
@@ -86,4 +98,10 @@
 
 .panel-dmi-forecast {
   width: 662px;
+}
+
+/* Tabs in panel tab styling */
+.nav-tabs>li.panel-tab.active>a {
+  border-bottom: 2px solid var(--primary-color-dark);
+  background-color: var(--primary-color-light);
 }

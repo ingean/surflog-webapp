@@ -2,7 +2,7 @@ import { reportScore, conditionsDetails } from './reportsList.js';
 import { updateSessionView } from './sessionView.js';
 import { updateObservationView } from './observationView.js';
 import { el } from '../html/elements.js';
-import { mswIds } from '../config/lookups.js';
+import { spotIds } from '../config/lookups.js';
 import { urlMSW } from '../config/datasources.js';
 
 function tide(report) {
@@ -49,7 +49,7 @@ function imagesButton(report) {
 }
 
 function mswLink(report) {
-  let mswId = mswIds[report.spot];
+  let mswId = spotIds[report.spot].msw;
   let spot = mswId.name ?? report.spot.replace(' ', '-');
   let start = moment(report.reporttime).subtract(3, 'days').format('YYYY-MM-DD');
   let end = moment(report.reporttime).add(3, 'days').format('YYYY-MM-DD');

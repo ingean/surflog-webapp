@@ -9,6 +9,12 @@ const scores = [
   {value: 5, caption: 'Episk', rating: 5}
 ];
 
+const locType = [
+  {caption: 'Land', value: 'country'},
+  {caption: 'Område', value: 'location'},
+  {caption: 'Spot', value: 'spot', default: true}
+];
+
 const crowds = [
   {caption: 'Lite', rating: 5},
   {caption: 'Normalt', rating: 3, default: true},
@@ -20,6 +26,14 @@ const tides = [
   {caption: 'Lavvann'},
   {caption: 'Ukjent', default: true}
 ];
+
+const tidesFilter = [
+  {caption: 'Høyvann'},
+  {caption: 'Lavvann'},
+  {caption: 'Mellom', default: true}
+];
+
+
 
 const tideDiffs = [
   {caption: '-3t'},
@@ -149,47 +163,42 @@ function forms(session, observation, filter) {
   }
 }
 
-export const tabNames = {
-  1: 'Lokasjon',
-  2: 'Forhold',
-  3: 'Vurdering',
-  4: 'Utstyr',
-  5: 'Vær',
-  6: 'Bilder',
-}
+export const tabNames = ['Lokasjon', 'Forhold', 'Vurdering', 'Utstyr', 'Vær','Bilder']
 
 export var formsOptions = [
-  {type: 'datalist', id: 'country', tab: 1, caption: 'Land', forms: forms(true, true, false)},
-  {type: 'datalist', id: 'location', tab: 1, caption: 'Sted', forms: forms(true, true, false)},
-  {type: 'datalist', id: 'spot', tab: 1, caption: 'Spot', forms: forms(true, true, false)},
-  {type: 'btn', id: 'crowds', tab: 1, caption: 'Crowds', domain: crowds, forms: forms(true, false, true)},
-  {type: 'time', id: 'reporttime', tab: 1, caption: 'Starttid', forms: forms(true, true, false)},
-  {type: 'number', id: 'duration', tab: 1, caption: 'Varighet', forms: forms(true, false, false)},
-  {type: 'btn', id: 'source', tab: 1, caption: 'Kilde', domain: sources, forms: forms(false, true, true)},
-  {type: 'btn', id: 'tide', tab: 1, caption: 'Tidevann', domain: tides, forms: forms(true, false, true)},
-  {type: 'btn', id: 'tidediff', tab: 1, caption: 'Differanse', domain: tideDiffs, forms: forms(true, false, true)},
-  {type: 'btn', id: 'tidetype', tab: 1, caption: 'Type', domain: tideTypes, forms: forms(true, false, true)},
-  {type: 'btn', id: 'winddir', tab: 2, caption: 'Vindretning', domain: winddir, forms: forms(true, false, true)},
-  {type: 'btn', id: 'windspeed', tab: 2, caption: 'Vindstyrke', domain: windspeed, forms: forms(true, false, true)},
-  {type: 'btn', id: 'waveheight', tab: 2, caption: 'Bølgehøyde', domain: waveheight, forms: forms(true, false, true)},
-  {type: 'btn', id: 'waveperiod', tab: 2, caption: 'Bølgeperiode', domain: waveperiod, forms: forms(true, false, true)},
-  {type: 'select', id: 'wavedir', tab: 2, caption: 'Bølgeretning', domain: wavedir, forms: forms(true, false, true)},
-  {type: 'btn', id: 'score', tab: 3, caption: 'Score', domain: scores, forms: forms(true, false, true)},
-  {type: 'textarea', id: 'descr', tab: 3, caption: 'Beskrivelse', forms: forms(true, true, false)},
-  {type: 'textarea', id: 'forecast', tab: 3, caption: 'Kommentar', forms: forms(true, false, false)},
-  {type: 'select', id: 'board', tab: 4, caption: 'Brett', domain: boards, forms: forms(true, false, false)},
-  {type: 'select', id: 'suit', tab: 4, caption: 'Drakt', domain: suits, forms: forms(true, false, false)},
-  {type: 'select', id: 'gloves', tab: 4, caption: 'Hansker', domain: gloves, forms: forms(true, false, false)},
-  {type: 'select', id: 'boots', tab: 4, caption: 'Booties', domain: boots, forms: forms(true, false, false)},
-  {type: 'btn', id: 'hood', tab: 4, caption: 'Hette', domain: yesNo, forms: forms(true, false, false)},
-  {type: 'number', id: 'airtemp', tab: 5, caption: 'Lufttemperatur', forms: forms(true, false, false)},
-  {type: 'number', id: 'watertemp', tab: 5, caption: 'Vanntemperatur', forms: forms(true, false, false)},
-  {type: 'textarea', id: 'temp', tab: 5, caption: 'Beskrivelse', forms: forms(true, false, false)},
-  {type: 'btn', id: 'issurfable', tab: 1, caption: 'Surfbart', domain: yesNo, forms: forms(false, true, true)},
-  {type: 'btn', id: 'iscold', tab: 5, caption: 'Kald', domain: yesNo, forms: forms(true, false, true)},
-  {type: 'btn', id: 'type', tab: 1, caption: 'Type', domain: types, forms: forms(false, true, false)},
-  {type: 'file', id: 'files', tab: 6, caption: 'Bilder', forms: forms(true, true, false)},
-  {type: 'btn', id: 'isreference', tab: 6, caption: 'Referanse', domain: yesNo, forms: forms(true, true, true)}
+  {name: 'loctype', type: 'btn', tab: 1, caption: 'Type sted', domain: locType, forms: forms(false, false, true)},
+  {name: 'country', type: 'datalist', tab: 1, caption: 'Land', forms: forms(true, true, false)},
+  {name: 'location', type: 'datalist', tab: 1, caption: 'Område', forms: forms(true, true, false)},
+  {name: 'spot', type: 'datalist', tab: 1, caption: 'Spot', forms: forms(true, true, true)},
+  {name: 'crowds', type: 'btn', tab: 1, caption: 'Crowds', domain: crowds, forms: forms(true, false, true)},
+  {name: 'reporttime', type: 'time', tab: 1, caption: 'Starttid', forms: forms(true, true, false)},
+  {name: 'duration', type: 'number', tab: 1, caption: 'Varighet', forms: forms(true, false, false)},
+  {name: 'source', type: 'btn', tab: 1, caption: 'Kilde', domain: sources, forms: forms(false, true, true)},
+  {name: 'tidesFilter', type: 'btn', tab: 1, caption: 'Tidevann', domain: tidesFilter, forms: forms(false, false, true)},
+  {name: 'tide', type: 'btn', tab: 1, caption: 'Tidevann', domain: tides, forms: forms(true, false, false)},
+  {name: 'tidediff', type: 'btn', tab: 1, caption: 'Differanse', domain: tideDiffs, forms: forms(true, false, false)},
+  {name: 'tidetype', type: 'btn', tab: 1, caption: 'Type', domain: tideTypes, forms: forms(true, false, false)},
+  {name: 'winddir', type: 'btn', tab: 2, caption: 'Vindretning', domain: winddir, forms: forms(true, false, true)},
+  {name: 'windspeed', type: 'btn', tab: 2, caption: 'Vindstyrke', domain: windspeed, forms: forms(true, false, true)},
+  {name: 'waveheight', type: 'btn', tab: 2, caption: 'Bølgehøyde', domain: waveheight, forms: forms(true, false, true)},
+  {name: 'waveperiod', type: 'btn', tab: 2, caption: 'Bølgeperiode', domain: waveperiod, forms: forms(true, false, true)},
+  {name: 'wavedir', type: 'select', tab: 2, caption: 'Bølgeretning', domain: wavedir, forms: forms(true, false, true)},
+  {name: 'score', type: 'btn', tab: 3, caption: 'Score', domain: scores, forms: forms(true, false, true)},
+  {name: 'descr', type: 'textarea', tab: 3, caption: 'Beskrivelse', forms: forms(true, true, false)},
+  {name: 'forecast', type: 'textarea', tab: 3, caption: 'Kommentar', forms: forms(true, false, false)},
+  {name: 'board', type: 'select', tab: 4, caption: 'Brett', domain: boards, forms: forms(true, false, false)},
+  {name: 'suit', type: 'select', tab: 4, caption: 'Drakt', domain: suits, forms: forms(true, false, false)},
+  {name: 'gloves', type: 'select', tab: 4, caption: 'Hansker', domain: gloves, forms: forms(true, false, false)},
+  {name: 'boots', type: 'select', tab: 4, caption: 'Booties', domain: boots, forms: forms(true, false, false)},
+  {name: 'hood', type: 'btn', tab: 4, caption: 'Hette', domain: yesNo, forms: forms(true, false, false)},
+  {name: 'airtemp', type: 'number', tab: 5, caption: 'Lufttemperatur', forms: forms(true, false, false)},
+  {name: 'watertemp', type: 'number', tab: 5, caption: 'Vanntemperatur', forms: forms(true, false, false)},
+  {name: 'temp', type: 'textarea', tab: 5, caption: 'Beskrivelse', forms: forms(true, false, false)},
+  {name: 'issurfable', type: 'btn', tab: 1, caption: 'Surfbart', domain: yesNo, forms: forms(false, true, true)},
+  {name: 'iscold', type: 'btn', tab: 5, caption: 'Kald', domain: yesNo, forms: forms(true, false, true)},
+  {name: 'type', type: 'btn', tab: 1, caption: 'Type', domain: types, forms: forms(false, true, false)},
+  {name: 'files', type: 'file', tab: 6, caption: 'Bilder', forms: forms(true, true, false)},
+  {name: 'isreference', type: 'btn', tab: 6, caption: 'Referanse', domain: yesNo, forms: forms(true, true, true)}
 ];
 
 export function getRating(param, value, key = 'caption', returnClass = true) {

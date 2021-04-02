@@ -4,6 +4,7 @@ import { dateChanged } from '../html/dateInput.js';
 import { getRating } from '../config/formsOptions.js';
 import { imgSrc } from '../utils/utilities.js';
 import { getReports } from './getReports.js';
+import { get } from '../utils/api.js';
 
 function reportIcon(report) {
   let str = (report.type === 'Session') ? report.type : report.source;
@@ -13,9 +14,14 @@ function reportIcon(report) {
 
 function reportDetails(report) {
   let rd = el('div', {class: 'report-details'});
-  if (report.hasimages === 1) { rd.appendChild(icon('picture','report-detail')) };
-  if (report.crowds === "Mye") { rd.appendChild(icon('user','report-detail')) };
-  if (report.isreference === 1) { rd.appendChild(icon('star','report-detail')) };
+  if (report.hasimages === 1) rd.appendChild(icon('picture','report-detail'));
+  if (report.crowds === "Mye") rd.appendChild(icon('user','report-detail'));
+  if (report.isreference === 1) rd.appendChild(icon('star','report-detail'));
+  if (report.board) {
+    if (report.board.toLowerCase().includes('longboard')) {
+      rd.appendChild(icon('exclamation-sign', 'report-detail'));
+    }
+  }
   return rd;
 }
 
@@ -85,6 +91,39 @@ export function updateReportsListPagination(totItems, limit, query = '') {
         getReports(page, query);
     }
   })
+}
+
+function deleteFormData(data, keys) {
+  for (let key of keys) {
+    if (data.has(key)) data.delete(key);
+  }
+}
+
+
+export async function filterReportsList(form) {
+  let data = new FormData(form);
+  if (data.get('loctype') === 'Alle') {
+    deleteFormData(data, ['country', 'location', 'spot']);
+  }
+  data.delete('loctype');
+
+  let query = formToQuery(data);
+  let reports = await get(`reports?page=1&${query}`, true)
+  if (reports.data) {
+    updateReportsListPagination(reports.count, 10, query);
+    updateReportList(reports.data);
+  } 
+}
+
+function formToQuery(data) {
+  let query = '';
+  for (let entry of data.entries()) {
+    if (entry[1] !== 'Alle') {
+      query += `&${entry[0]}=${entry[1]}`;
+    }
+  }
+
+  return query.substring(1); //Remove first & from query
 }
 
 
