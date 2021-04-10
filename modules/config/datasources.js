@@ -1,6 +1,9 @@
 export const urlAPI = 'https://high-plating-184911.appspot.com/';
+export const urlYr = 'https://www.yr.no/api/v0/locations/';
 export const urlImages = 'http://storage.googleapis.com/observations/';
 export const urlMSW = 'https://magicseaweed.com/';
+export const urlMSWForecasts = 'https://charts-s3.msw.ms/archive/';
+export const urlSunTimes = 'https://api.sunrise-sunset.org/json';
 
 export const forecastSources = { 
   surflog: {

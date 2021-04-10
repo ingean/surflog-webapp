@@ -1,3 +1,4 @@
+
 /* Reduce pointer flickering when hovering over Google charts */
 svg > g > g:last-child { pointer-events: none }
 
@@ -106,4 +107,12 @@ body {
   .container-yr {
       overflow-x: scroll;
   }
+}
+
+.y-scrollable {
+  overflow-y: scroll;
+}
+
+.x-scrollable {
+  overflow-x: scroll;
 }

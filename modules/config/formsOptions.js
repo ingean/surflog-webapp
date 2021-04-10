@@ -1,4 +1,4 @@
-import { getClass } from "./lookups.js";
+import { ratingClasses } from "./forecastFormat.js";
 
 const scores = [
   {value: 0, caption: 'Flatt', rating: 0},
@@ -32,8 +32,6 @@ const tidesFilter = [
   {caption: 'Lavvann'},
   {caption: 'Mellom', default: true}
 ];
-
-
 
 const tideDiffs = [
   {caption: '-3t'},
@@ -205,5 +203,5 @@ export function getRating(param, value, key = 'caption', returnClass = true) {
   let domain = domains[param];
   let domainItem = domain.find(v => v[key] === value);
     
-  return returnClass ? getClass(domainItem.rating) : domainItem.caption;  
+  return returnClass ? ratingClasses[domainItem.rating].labelclass : domainItem.caption;  
 }

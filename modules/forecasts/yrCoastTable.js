@@ -1,35 +1,17 @@
-import { el, arrow } from '../html/elements.js';
-import { yrImgs } from '../config/lookups.js';
+import { el, arrow, weatherImg, tempTd } from '../html/elements.js';
+import { updateForecastTable } from './forecastTable.js';
+import { getYrCoast } from '../utils/api.js';
 
 
 const headers = ['Tid', 'Vær', 'Temp', 'Bølger', 'Vind (byge)', 'Strøm', 'Vanntemp'];
 
 
-function weatherImg(symbolCode) {
-  let dividerPos = symbolCode.indexOf('_')
-  let firstPart = (dividerPos > -1) ? symbolCode.substring(0, dividerPos) : symbolCode;
-  let prefix = yrImgs[firstPart];
-  let suffix = (dividerPos > -1 ) ? symbolCode.substr(dividerPos + 1, 1) : '';
-  let src = `${prefix}${suffix}.svg`;
-
-  return el('img', {src: `images/yr/${src}`, class: 'img-weather'})
-}
-
-function forecastHeaders() {
-  return el('thead', 'forecast-table-header', 
-    el('tr', '', headers.map(h => el('th', 'th-flex', h))))
-}
-
-function forecastRows(forecast) {
-  let rows = forecast.intervals.map(f => { 
+function yrCoastForecastToRow(f) {
     return (
     el('tr', '', [
       el('td', 'td-flex', moment(f.start).format('HH')),
       el('td', 'td-flex', weatherImg(f.symbolCode.next1Hour)),
-      el('td', 'td-flex', [ //Air temp
-        el('span', 'td-value', Math.round(f.temperature.value)),
-        el('span', 'td-unit-temp', '°')
-      ]),
+      tempTd(f.temperature.value),
       el('td', 'td-flex', [ //Wave height and direction
         el('span', 'td-value', f.sea.wave.height),
         el('span', 'td-arrow', arrow(f.sea.wave.direction))
@@ -43,21 +25,20 @@ function forecastRows(forecast) {
         el('span', 'td-value', f.sea.current.speed),
         el('span', 'td-arrow', arrow(f.sea.current.direction))
       ]),
-      el('td', 'td-flex', [ //Water temp
-        el('span', 'td-value', Math.round(f.sea.temperature.value)),
-        el('span', 'td-unit-temp', '°')
-      ])
+      tempTd(f.sea.temperature.value),
     ])
-  )})
-
-  return el('tbody', '', rows);
+  )
 }
 
-export function updateYrCoastTable(forecast) {
-  let table = el('table', 'forecast-table', [
-    forecastHeaders(),
-    forecastRows(forecast)
-  ])
-  document.querySelector('#forecast-yr-now')
-  .replaceChildren(table);
+function updateYrCoastTable(forecast) {
+  updateForecastTable(forecast.intervals, getYrCoastTime, yrCoastForecastToRow, 'yrCoast', headers);
+}
+
+function getYrCoastTime(forecast) {
+  return forecast.start;
+}
+
+export async function getYrCoastForecast(yrId) {
+  let forecast = await getYrCoast(yrId);
+  updateYrCoastTable(forecast);
 }

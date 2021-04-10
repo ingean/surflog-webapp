@@ -4,18 +4,18 @@ import { dateInputInitialize } from '../html/dateInput.js';
 export function initDateTime() {
   dateInputInitialize();
   let dmiForecastStart = toLocal(dmiStartTime()); 
-  setForecastTime(dmiForecastStart, '#time-dmi-live');
+  setForecastTime(dmiForecastStart, '.time-dmi');
   
   var mswForecastStart = moment(moment().format('YYYY-MM-DD 00:00:00')).toDate();
-  setForecastTime(mswForecastStart, '.time-msw-live');
+  setForecastTime(mswForecastStart, '.time-msw');
 }
 
 export function toLocal(utcDate) {
-  return new Date(Date.UTC(utcDate.getFullYear(),utcDate.getMonth(),utcDate.getDate(),utcDate.getHours(),utcDate.getMinutes(),utcDate.getSeconds()));
+  return moment(utcDate).utc(true).tz('Europe/Stockholm').toDate();
 }
 
-export function toUTC(tzDate) {
-  return new Date(tzDate.getUTCFullYear(),tzDate.getUTCMonth(),tzDate.getUTCDate(),tzDate.getUTCHours(),tzDate.getUTCMinutes(),tzDate.getUTCSeconds());
+export function toUTC(localDate, timeZone = 'Europe/Stockholm') {
+  return moment.tz(localDate, timeZone).utc();
 }
 
 export function getForecastTime(elementId) {
@@ -31,18 +31,8 @@ export function setForecastTime(date, query) {
 }
 
 export function dmiStartTime(){ //Estimates the start time for forecast coming live from DMI
-  let date = new Date();
-  date = new Date(date.getTime()-7*3600*1000);
-
-  let ranges = [
-    {min: 0, max: 6, hour: 0},
-    {min: 6, max: 12, hour: 6},
-    {min: 12, max: 18, hour: 12},
-    {min: 18, max: 24, hour: 18},
-  ];
-
-  date.setHours = getRange(ranges, date.getHours, 'hour');  
-  date.setMinutes(0);
-  date.setSeconds(0);
-  return date;
+  let date = moment().subtract(7, 'hours');
+  let hr = moment(date).hour();
+  hr = (hr < 6) ? '00' : (hr < 12 ) ? '06' : (hr < 18) ? '12' : '18';
+  return moment(date).format(`YYYY-MM-DDT${hr}:00:00`);
 }

@@ -16,11 +16,13 @@
     <!-- Local stylesheet -->
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/surflog.css">
+    <link rel="stylesheet" href="css/rating.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/forms.css">
     <link rel="stylesheet" href="css/panel.css">
     <link rel="stylesheet" href="css/reports.css">
     <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/stationCard.css">
     <link rel="stylesheet" href="css/simplePagination.css">
 
   </head>
@@ -97,6 +99,9 @@
                 <a href="#tab-forecast-dmi" data-toggle="tab">DMI</a>
               </li>
               <li class="panel-tab">
+                <a href="#tab-forecast-smhi" data-toggle="tab">SMHI</a>
+              </li>
+              <li class="panel-tab">
                 <a href="#tab-forecast-yr" data-toggle="tab">Yr</a>
               </li>
               <li class="panel-tab">
@@ -107,31 +112,84 @@
               <div id="tab-forecast-yr-now" class="tab-pane fade active in">
                 <div class="tab-toolbar flex-panel">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-default active">Graf</button>
-                    <button type="button" class="btn btn-default">Tabell</button>
+                    <button type="button" class="btn btn-default active">Tabell</button>
+                    <button type="button" class="btn btn-default">Graf</button>
                   </div>
                 </div>
-                <div class="tab-header flex-panel">
-                  YR, akkurat nå
-                </div>
+                <div class="tab-header flex-panel"></div>
                 <div class="tab-body flex-panel">
-                  <div id="forecast-yr-now"></div>
+                  <div class="flex-col">
+                    <div id="root-station-card-yrCoast"></div>
+                    <div id="root-forecast-table-yrCoast"></div>
+                  </div>
                 </div>
                 <div class="tab-footer flex-panel"></div>
               </div>
               <div id="tab-forecast-dmi" class="tab-pane fade">
-                DMI
-                <div id="forecast-dmi-current"></div>
-                <div id="forecast-dmi-historic"></div>
+                <div class="tab-toolbar flex-panel">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default active">Tabell</button>
+                    <button type="button" class="btn btn-default">Graf</button>
+                  </div>
+                </div>
+                <div class="tab-header flex-panel"></div>
+                <div class="tab-body flex-panel">
+                  <div class="flex-col">
+                    <div id="root-station-card-dmi"></div>
+                    <div id="root-forecast-table-dmi"></div>
+                    <div id="root-forecast-table-dmi-historic"></div>
+                  </div>
+                </div>
+                <div class="tab-footer flex-panel"></div>
+              </div>
+              <div id="tab-forecast-smhi" class="tab-pane fade">
+                <div class="tab-toolbar flex-panel">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default active">Tabell</button>
+                    <button type="button" class="btn btn-default">Graf</button>
+                  </div>
+                </div>
+                <div class="tab-header flex-panel"></div>
+                <div class="tab-body flex-panel">
+                  <div class="flex-col">
+                    <div id="root-station-card-smhi"></div>
+                    <div id="root-forecast-table-smhi"></div>
+                    <div id="root-forecast-table-smhi-historic"></div>
+                  </div>
+                </div>
+                <div class="tab-footer flex-panel"></div>
               </div>
               <div id="tab-forecast-yr" class="tab-pane fade">
-                YR, varsler
-                <div id="forecast-yr-current"></div>
+                <div class="tab-toolbar flex-panel">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default active">Tabell</button>
+                    <button type="button" class="btn btn-default">Graf</button>
+                  </div>
+                </div>
+                <div class="tab-header flex-panel"></div>
+                <div class="tab-body flex-panel">
+                  <div class="flex-col">
+                    <div id="root-station-card-yr"></div>
+                    <div id="root-forecast-table-yr"></div>
+                  </div>
+                </div>
+                <div class="tab-footer flex-panel"></div>
               </div>
               <div id="tab-forecast-frost" class="tab-pane fade">
-                Vindobservasjoner
-                <div id="forecast-frost-current"></div>
-                <div id="forecast-frost-historic"></div>
+                <div class="tab-toolbar flex-panel">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default active">Tabell</button>
+                    <button type="button" class="btn btn-default">Graf</button>
+                  </div>
+                </div>
+                <div class="tab-header flex-panel"></div>
+                <div class="tab-body flex-panel">
+                  <div class="flex-col">
+                    <div id="root-station-card-windObs"></div>
+                    <div id="root-forecast-table-windObs"></div>
+                  </div>
+                </div>
+                <div class="tab-footer flex-panel"></div>
               </div>
             </div>
           </div>
@@ -161,7 +219,8 @@
                       <button type="button" class="btn btn-default active">Høyde</button>
                       <button type="button" class="btn btn-default">Periode</button>
                     </div>
-                    <span class="panel-h dark">Bølger</span>  
+                    <span class="panel-h dark">Bølger</span>
+                    <span class="panel-h dark time-dmi"></span>  
                   </div> 
                   <div class="panel-body flex-panel">
                     <div id="dmi-wave-live" data-forecasttype="waveheight" data-forecastprovider="DMI">
@@ -173,8 +232,11 @@
                         <span class="glyphicon glyphicon-chevron-right"></span>
                       </button> 
                     </div>
+                    <div id="dmi-wave-historic"></div>
                   </div>
-                  <div id="dmi-wave-historic"></div>
+                  <div class="panel-footer">
+                    <span id="forecast-dmi-wave-stats" class="panel-h dark"></span>   
+                  </div>
                 </div> 
               </div>
               <!-- Swellheight and period-->
@@ -186,6 +248,7 @@
                         <button type="button" class="btn btn-default">Periode</button>
                       </div>  
                       <span class="panel-h dark">Dønning</span>
+                      <span class="panel-h dark time-dmi"></span> 
                     </div> 
                     <div class="panel-body flex-panel">
                       <div id="dmi-swell-live" data-forecasttype="swellheight" data-forecastprovider="DMI">
@@ -197,15 +260,19 @@
                           <span class="glyphicon glyphicon-chevron-right"></span>
                         </button> 
                       </div>
+                      <div id="dmi-swell-historic"></div>
                     </div>
-                    <div id="dmi-swell-historic"></div>
+                    <div class="panel-footer">
+                      <span id="forecast-dmi-swell-stats" class="panel-h dark"></span>   
+                    </div>
                   </div> 
                 </div>
                 <!-- Wind-->
                 <div class="col-sm-4 panel-dmi-forecast">
                   <div class="panel dark">
                     <div class="panel-heading">
-                      <span class="panel-h dark">Vind</span>  
+                      <span class="panel-h dark">Vind</span>
+                      <span class="panel-h dark time-dmi"></span>   
                     </div> 
                     <div class="panel-body flex-panel">
                       <div id="dmi-wind-live" data-forecasttype="wind" data-forecastprovider="DMI">
@@ -217,8 +284,11 @@
                             <span class="glyphicon glyphicon-chevron-right"></span>
                           </button> 
                       </div>
+                      <div id="dmi-wind-historic"></div>
                     </div>
-                    <div id="dmi-wind-historic"></div>
+                    <div class="panel-footer">
+                      <span id="forecast-dmi-wind-stats" class="panel-h dark"></span>   
+                    </div> 
                   </div> 
                 </div>
             </div>
@@ -243,10 +313,10 @@
               <div class="panel dark">
                 <div class="panel-heading">
                   <span class="panel-h dark">Dønning </span>
-                  <span id="time-msw-swellheight-live" class="h4-text-light time-msw-live" data-forecasttime=""></span>  
+                  <span id="time-msw-swellheight-live" class="h4-text-light time-msw" data-forecasttime=""></span>  
                 </div> 
-                <div id="msw-swellheight-live"></div>
-                <div id="msw-swellheight-historic"></div>
+                <div id="root-msw-wave"></div>
+                <div id="root-msw-wave-historic"></div>
               </div> 
             </div>
             <!-- Period-->
@@ -254,10 +324,10 @@
               <div class="panel dark">
                 <div class="panel-heading">
                   <span class="panel-h dark">Periode </span>  
-                  <span id="time-msw-swellperiod-live" class="h4-text-light time-msw-live" data-forecasttime=""></span>
+                  <span id="time-msw-swellperiod-live" class="h4-text-light time-msw" data-forecasttime=""></span>
                 </div> 
-                <div id="msw-swellperiod-live"></div>
-                <div id="msw-swellperiod-historic"></div>
+                <div id="root-msw-period"></div>
+                <div id="root-msw-period-historic"></div>
               </div> 
             </div>
               <!-- Wind-->
@@ -265,10 +335,10 @@
                 <div class="panel dark">
                   <div class="panel-heading">
                     <span class="panel-h dark">Vind </span>
-                    <span id="time-msw-wind-live" class="h4-text-light time-msw-live" data-forecasttime=""></span>  
+                    <span id="time-msw-wind-live" class="h4-text-light time-msw" data-forecasttime=""></span>  
                   </div> 
-                  <div id="msw-wind-live"></div>
-                  <div id="msw-wind-historic"></div>
+                  <div id="root-msw-wind"></div>
+                  <div id="root-msw-wind-historic"></div>
                 </div> 
               </div>
           </div>
@@ -385,6 +455,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>  
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="js/lib/moment.loc.min.js"></script>
+    <script src="js/lib/moment.tz.min.js"></script>
     <script src="js/lib/bootstrap-notify.min.js"></script>
     <script src="js/lib/bootstrap-confirmation.min.js"></script>
     <script src="js/lib/simplePagination.js" ></script>

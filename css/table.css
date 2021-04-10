@@ -3,6 +3,17 @@
   --secondary-txt-color: #56616C;
 }
 
+.forecast-table-heading {
+  margin-top: 50px;
+  font-size: x-large;
+  font-weight: bolder;
+}
+
+tr {
+  border-top: 1px solid var(--secondary-txt-color);
+  border-bottom: 1px solid var(--secondary-txt-color);
+}
+
 .th-flex, 
 .td-flex {
   color: var(--primary-txt-color);
@@ -15,17 +26,24 @@
   color: var(--secondary-txt-color);
 }
 
-.td-value {
+td {
   color: var(--primary-txt-color);
   font-size: 15px;
 }
 
 .td-secondary-value {
-  font-size: 15px;
   color: var(--secondary-txt-color);
 }
 
 .img-weather {
   height: 32px;
   width: 32px;
+}
+
+.temp-freeze {
+  color: #006EDB;
+}
+
+.temp-warm {
+  color: #C60000;
 }

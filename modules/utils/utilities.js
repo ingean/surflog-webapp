@@ -20,3 +20,8 @@ export function imgSrc(value, category) {
   let filename = filenameify(value);
   return category ? `images/${category}/${filename}.png` : `images/${filename}.png`;
 }
+
+export function round(value, precision) {
+  let multiplier = Math.pow(10, precision || 0);
+  return Math.round(value * multiplier) / multiplier;
+}

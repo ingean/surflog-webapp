@@ -4,8 +4,8 @@ import { formsOptions } from './config/formsOptions.js';
 import { createForms } from './html/form.js';
 
 export var settings = [];
-
-export let user;
+export var statistics = {};
+export var user;
 
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
@@ -42,12 +42,16 @@ export async function getPlacesCreateForms() {
   createForms();
 }
 
-export function getSettings(userId) {
-  return get(`settings/${userId}`);
+export async function getSettings(userId) {
+  settings = await get(`settings/${userId}`);
 }
 
 export function setUser(loggedInUser) {
   user = loggedInUser;
+}
+
+export async function getStatistics(type = 'forecasts') {
+  statistics = await get(`statistics/${type}`);
 }
 
 

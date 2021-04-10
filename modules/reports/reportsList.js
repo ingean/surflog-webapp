@@ -1,4 +1,3 @@
-import { log, notify, Loader } from '../utils/logger.js';
 import { el, label, icon } from '../html/elements.js';
 import { dateChanged } from '../html/dateInput.js';
 import { getRating } from '../config/formsOptions.js';

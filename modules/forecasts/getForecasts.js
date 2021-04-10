@@ -1,7 +1,5 @@
 import { log, Loader } from '../utils/logger.js';
 import { get } from '../utils/api.js';
-import { spotIds } from '../config/lookups.js';
-import { updateYrCoastTable } from './yrCoastTable.js';
 
 const fcSources = ['dmi', 'smhi', 'yr', 'frost', 'kv'];
 
@@ -55,12 +53,4 @@ export async function getForecasts(startTime, endTime) {
   createChart(await forecasts[type].yr, 'yr', 'waveheight', spot, elementId);
   createTable(await forecasts[type].frost, await forecasts[type].kv, '', elementId);
   
-}
-
-export async function getYrCoastal() {
-  let spot = document.querySelector('#navbar-spot').value;
-  let yrId = spotIds[spot].yr.id;
-  
-  let forecast = await get(`https://www.yr.no/api/v0/locations/${yrId}/forecast/coast`);
-  updateYrCoastTable(forecast);
 }

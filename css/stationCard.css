@@ -1,0 +1,69 @@
+:root {
+  --primary-color-bg: white;
+  --primary-txt-color: #21292B;
+  --secondary-txt-color: #56616C;
+}
+
+.station-card.flex-row {
+  margin-top: 20px;
+  background-color: var(--primary-color-bg);
+  height: 160px;
+}
+
+.station-card.flex-col {
+  min-width: 100px;
+  margin-left: 50px;
+}
+
+.station-card-spotName {
+  font-size: xx-large;
+  font-weight: bolder;
+  margin: 50px 50px 0 0
+}
+
+.station-card-stationName {
+  font-size: large;
+  font-weight: bold;
+  margin: 5px 50px 0 0;
+}
+
+.station-card-sunIcon {
+ vertical-align: middle;
+}
+
+.station-card-sunTime {
+  height: 40px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.station-card-tide-table {
+  margin-left: 150;
+}
+
+.station-card-cell {
+  text-align: center;
+  width: 50px;  
+}
+
+.txt-stats-type,
+.station-card-tideHeading {
+  color: var(--secondary-txt-color);
+  font-size: x-small;   
+}
+
+.station-card-tideTitle {
+  text-align: center;
+  width: 200px;
+  color: var(--secondary-txt-color);
+  font-size: x-small;  
+}
+
+.station-card-stats-table {
+  width: 600px;
+}
+
+.station-card-cell-stats {
+  width: 150px;
+  color: var(--primary-txt-color);
+}

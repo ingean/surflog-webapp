@@ -62,23 +62,6 @@ function createFormModal(options) {
   parent.appendChild(modal(options))
 }
 
-function createSpotList() {
-  let options = formsOptions.find(item => item.name === 'spot');
-  options.formName = 'navbar'
-  options.id = `${options.formName}-${options.name}`;
-  let spots = el('div', 'input-group', formSelectInput(options));
-  document.querySelector('#navbar-spots-list')
-  .replaceChildren(spots);
-
-  document.querySelectorAll('.btn-clear-datalist')
-  .forEach(e => e.addEventListener('click', clearInput))
-}
-
-function clearInput(e) {
-  let input = e.target.parentElement.parentElement.nextElementSibling;
-  input.value = '';
-}
-
 function form(formName, content) {
   return el('form', {
     id: `form-report-${formName}`,
@@ -154,5 +137,4 @@ function onLocationTypeChange(value) {
 
 export function createForms() {
   createFormModals();
-  createSpotList();
 }

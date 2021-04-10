@@ -1,70 +1,55 @@
 import { el } from '../html/elements.js';
-
-
-function timestepsInFirstDay(forecast) {
-  let firstTimeStep = forecast?.[0].localtime;
-  let firstHour = moment(firstTimeStep).format('HH');
-  return 24 - Number(firstHour);
+ 
+const dateFormat = {
+  lastDay : '[I går]',
+  sameDay : '[I dag]',
+  nextDay : '[I morgen]',
+  lastWeek : '[Forrige] dddd',
+  nextWeek : 'dddd',
+  sameElse : 'L'
 }
 
-export function forecastTable(fc, fc2,  stations = '', suffix = '') {
-  let table = [];
-  let colspan = timestepsInFirstDay(fc);
 
-  for (i = 0; i < (stations.length * 2) + 2; i++) { table.push([]); }
- 
-  for (var i = 0; i < 24; i++) {
-    let wsr = 0;
-    let wdr = 1;
-  
-    for(var j = 0; j < stations.length; j++) {      
-      
-      let ws = null;
-      let wd = null;
+function splitForecastPrDay(forecast, getForecastTime) {
+  let day = 0;
+  let days = [];
 
-      if (j === 2) {
-        ws = fc2[i]['stations'][stations[j]].wind;
-        wd = fc2[i]['stations'][stations[j]].winddir;
-      } else { 
-        ws = fc[i]['stations'][stations[j]].wind;
-        wd = fc[i]['stations'][stations[j]].winddir;
-      }
-      
-      if (i === 0) {
-        table[wsr].push(
-          '<td class="td-header" rowspan="2">' +
-          //fc[i]['stations'][stations[j]].name.substring(0,3) +
-          names[j].substring(0,3) + 
-          '</td>'
-        );
-      }
-
-      table[wsr].push(formatWindObs(ws,wd,stations[j],true));
-      table[wdr].push(formatWindDir(wd,ws,stations[j],true));
-      wsr += 2;
-      wdr += 2;
-    }
-
-    if (i === 0) {
-      table[10].push('<td class="td-header" rowspan="2">Tid</td>');
-    }
+  for (let i = 0; i < forecast.length; i++) {
+    if (moment(getForecastTime(forecast[i])).format('HH') === '00' && i !== 0) day++;
+    if (typeof days[day] === 'undefined') days[day] = [];
+    days[day].push(forecast[i]) 
+  }
+  return days;
+}
 
 
-    table[10].push(formatHours(fc[i].localtime));                        
-    table[11].push(formatWeekDay(fc[i].localtime, i, colspan));
+function forecastHeaders(headers) {
+  return el('thead', 'forecast-table-header', 
+    el('tr', '', headers.map(header => el('th', 'th-flex', header))))
+}
+
+function forecastRows(forecast, forecastToRow) {
+  let rows = forecast.map(f => forecastToRow(f))
+  return el('tbody', '', rows);
+}
+
+export function updateForecastTable(forecast, getForecastTime, forecastToRow, tableName, headers) {
+  let forecastByDays = splitForecastPrDay(forecast, getForecastTime);
+  let tables = [];
+
+  for (let fc of forecastByDays) {
+    tables.push(
+      el('div', 'forecast-table-body', [
+        el('div', 'forecast-table-heading', moment(getForecastTime(fc[0])).calendar(null, dateFormat)),
+        el('table', `forecast-table-${tableName}`, [
+          forecastHeaders(headers),
+          forecastRows(fc, forecastToRow)
+        ])
+      ])
+    )
   }
 
-  var html = '<div class="table-forecast"><table class="table-frost">';
-
-  for (var i = 0; i < table.length; i++) {
-    html += '<tr>';
-    for (var j = 0; j < table[0].length; j++) {
-      html += table[i][j];
-    }
-    html += '</tr>';
-  }
-  
-  html += '</table></div>';
- 
-  $('#' + insertHTMLElem('windtab', 'frost', suffix)).html(html);
+  let container = el('div', 'forecast-tables', tables);
+  document.querySelector(`#root-forecast-table-${tableName}`)
+  .replaceChildren(container);
 }
