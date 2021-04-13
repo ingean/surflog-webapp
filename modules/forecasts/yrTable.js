@@ -1,5 +1,5 @@
 import { el, arrow } from '../html/elements.js';
-import { updateForecastTable } from './forecastTable.js';
+import { updateForecastTable, display } from './forecastTable.js';
 import { get } from '../utils/api.js';
 
 
@@ -14,8 +14,8 @@ function getHeaders(forecast) {
 
 function stationCell(f) {
   return (
-    el('td', 'td-flex', [ //Wave height and direction
-      el('span', 'td-value', f.waveheight),
+    el('td', 'td-l', [ //Wave height and direction
+      el('span', 'td-value', display(f, 'waveheight')),
       el('span', 'td-arrow', arrow(f.wavedir))
     ])
   )
@@ -23,7 +23,7 @@ function stationCell(f) {
 
 function yrForecastToRow(f) {
   let cells = [
-    el('td', 'td-flex', moment(f.localtime).format('HH'))
+    el('td', 'td-l', moment(f.localtime).format('HH'))
   ];
 
   for (let key of Object.keys(f.stations)) {
@@ -31,7 +31,7 @@ function yrForecastToRow(f) {
   }
   
   return (
-    el('tr', '', cells)
+    el('tr', 'forecast-table-row', cells)
   )
 }
 

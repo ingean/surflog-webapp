@@ -1,4 +1,6 @@
 import { el } from '../html/elements.js';
+import { units } from '../config/lookups.js';
+import { round } from '../utils/utilities.js';
  
 const dateFormat = {
   lastDay : '[I går]',
@@ -25,12 +27,25 @@ function splitForecastPrDay(forecast, getForecastTime) {
 
 function forecastHeaders(headers) {
   return el('thead', 'forecast-table-header', 
-    el('tr', '', headers.map(header => el('th', 'th-flex', header))))
+    el('tr', '', headers.map(header => el('th', 'td-l', header))))
 }
 
 function forecastRows(forecast, forecastToRow) {
   let rows = forecast.map(f => forecastToRow(f))
   return el('tbody', '', rows);
+}
+
+
+export function display(f, param, secondary = false) {
+  let u = units[param];
+  let v = round(f[param], u.precision);
+  let p1 = '', p2 = '', p3 = '';
+  if (secondary) {
+    p1 = ' ';
+    p2 = '(';
+    p3 = ')';
+  }
+  return (f[param]) ? `${p1}${p2}${v} ${u.unit}${p3}` : null;
 }
 
 export function updateForecastTable(forecast, getForecastTime, forecastToRow, tableName, headers) {

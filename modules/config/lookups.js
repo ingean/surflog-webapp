@@ -1,11 +1,15 @@
-export const forecastUnits = {
-  waveheight: 'm',
-  waveperiod: 's',
-  swellheight: 'm',
-  swellperiod: 's',
-  wind: 'm/s',
-  waveheightforecast: 'm',
-  waveheightmax: 'm'
+export const units = {
+  waveheight: {unit: 'm', precision: 1},
+  height: {unit: 'm', precision: 1},
+  waveperiod: {unit: 's', precision: 0},
+  swellheight: {unit: 'm', precision: 1},
+  swellperiod: {unit: 's', precision: 0},
+  wind: {unit: 'm/s', precision: 0},
+  windspeed: {unit: 'm/s', precision: 0},
+  speed: {unit: 'm/s', precision: 0},
+  gust: {unit: 'm/s', precision: 0},
+  waveheightforecast: {unit: 'm', precision: 1},
+  waveheightmax: {unit: 'm', precision: 1}
 };
 
 export const spotIds = {
@@ -71,7 +75,7 @@ export const yrImgs = {
   fair: '02',
   partlycloudy: '03',
   cloudy: '04',
-  lightrainshower: '40',
+  lightrainshowers: '40',
   rainshowers: '05',
   heavyrainshowers: '41',
   lightrainshowersandthunder: '24',

@@ -1,24 +1,24 @@
 import { el, scoreLabel } from '../html/elements.js';
-import { updateForecastTable } from './forecastTable.js';
+import { updateForecastTable, display } from './forecastTable.js';
 import { get, queryTimespan } from '../utils/api.js';
 import { round } from '../utils/utilities.js';
 import { formatForecastValue, formatWindValue, getScoreCategory } from '../config/forecastFormat.js';
 
 const headers = ['Tid', 'Bølgehøyde', 'Bølgeperiode', 'Dønning', 'Dønning, periode', 'Wind', 'Score', 'Surfbart'];
 
-function format(value, param) {
-  if (param === 'wind') return formatWindValue(value);
-  return formatForecastValue('dmi', param, value);
+function format(f, param) {
+  if (param === 'wind') return formatWindValue(f[param]);
+  return formatForecastValue('dmi', param, f[param]);
 }
 
-function paramCell(forecast, param, unit = 'm', precision = 1) {
-  let v1 = forecast.stations['Saltstein'][param]
-  let v2 = forecast.stations['Skagerak'][param]
+function paramCell(forecast, param) {
+  let f1 = forecast.stations['Saltstein']
+  let f2 = forecast.stations['Skagerak']
   
   return (
-    el('td', 'td-flex', [
-      el('span', `td-value ${format(v1, param)}`, `${round(v1, precision)} ${unit}`),
-      el('span', 'td-secondary-value', ` (${round(v2, precision)} ${unit})`)
+    el('td', 'td-l', [
+      el('span', `td-value ${format(f1, param)}`, display(f1, param)),
+      el('span', 'td-secondary-value', display(f2, param, true))
     ])
   )
 }
@@ -30,7 +30,7 @@ function paramScore(forecast, param) {
   let score = (param === 'score') ? scoreLabel(v1) : (v1 === 1) ? 'Ja' : 'Nei';
   
   return (
-    el('td', 'td-flex', [
+    el('td', 'td-l', [
       el('span', 'td-value', score),
       el('span', 'td-secondary-value', ` (${round(v2, 1)})`)
     ])
@@ -42,13 +42,13 @@ function dmiForecastToRow(forecast) {
   let score = getScoreCategory('dmi', forecast);
   let cls = (score > 4) ? `bg-muted-${score}` : '';
   return (
-    el('tr', cls, [
-      el('td', 'td-flex', moment(forecast.localtime).format('HH')),
+    el('tr', `forecast-table-row ${cls}`, [
+      el('td', 'td-l', moment(forecast.localtime).format('HH')),
       paramCell(forecast, 'waveheight'),
-      paramCell(forecast, 'waveperiod', 's', 0),
+      paramCell(forecast, 'waveperiod'),
       paramCell(forecast, 'swellheight'),
-      paramCell(forecast, 'swellperiod', 's', 0),
-      paramCell(forecast, 'wind', 'm/s', 0),
+      paramCell(forecast, 'swellperiod'),
+      paramCell(forecast, 'wind'),
       paramScore(forecast, 'score'),
       paramScore(forecast, 'surfable')
     ])

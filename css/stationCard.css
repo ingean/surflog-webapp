@@ -37,33 +37,8 @@
   padding-bottom: 10px;
 }
 
-.station-card-tide-table {
-  margin-left: 150;
+.station-card-table {
+  margin: 20px 0 0 150;
 }
 
-.station-card-cell {
-  text-align: center;
-  width: 50px;  
-}
 
-.txt-stats-type,
-.station-card-tideHeading {
-  color: var(--secondary-txt-color);
-  font-size: x-small;   
-}
-
-.station-card-tideTitle {
-  text-align: center;
-  width: 200px;
-  color: var(--secondary-txt-color);
-  font-size: x-small;  
-}
-
-.station-card-stats-table {
-  width: 600px;
-}
-
-.station-card-cell-stats {
-  width: 150px;
-  color: var(--primary-txt-color);
-}

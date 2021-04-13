@@ -9,7 +9,7 @@
   font-weight: bolder;
 }
 
-tr {
+.forecast-table-row {
   border-top: 1px solid var(--secondary-txt-color);
   border-bottom: 1px solid var(--secondary-txt-color);
 }
@@ -26,9 +26,14 @@ tr {
   color: var(--secondary-txt-color);
 }
 
+th {
+  text-align: center;
+}
+
 td {
   color: var(--primary-txt-color);
   font-size: 15px;
+  text-align: center;
 }
 
 .td-secondary-value {
@@ -46,4 +51,54 @@ td {
 
 .temp-warm {
   color: #C60000;
+}
+
+.td-l {
+  color: var(--primary-txt-color);
+  height: 40px;
+  width: 140px;
+  font-size: 15px;
+}
+
+.td-m {
+  color: var(--primary-txt-color);
+  padding: 1px;
+  min-width: 100px;
+  font-size: 15px;
+}
+
+.td-s {
+  color: var(--primary-txt-color);
+  min-width: 50px;
+  font-size: 15px;
+}
+
+.td-left {
+  text-align: left;
+}
+
+.txt-table {
+  color: var(--primary-txt-color);
+}
+
+.txt-table-2 {
+  color: var(--secondary-txt-color);
+}
+
+/*
+.td-text-l {
+  font-size: 18px;
+}
+
+.td-text-m {
+  font-size: 15px;
+}
+
+.td-text-s {
+  font-size: 12px;
+}*/
+
+.th {
+  color: var(--secondary-txt-color);
+  font-weight: bold;
 }

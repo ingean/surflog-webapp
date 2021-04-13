@@ -1,5 +1,5 @@
 import { el, arrow } from '../html/elements.js';
-import { updateForecastTable } from './forecastTable.js';
+import { updateForecastTable, display } from './forecastTable.js';
 import { get, queryTimespan } from '../utils/api.js';
 import { formatWindValue } from '../config/forecastFormat.js';
 
@@ -17,8 +17,8 @@ function format(f) {
 
 function stationCell(f) {
   return (
-    el('td', 'td-flex', [
-      el('span', `td-value ${format(f)}`, f.wind),
+    el('td', 'td-l', [
+      el('span', `td-value ${format(f)}`, display(f, 'wind')),
       el('span', 'td-arrow', arrow(f.winddir))
     ])
   )
@@ -26,7 +26,7 @@ function stationCell(f) {
 
 function windObsToRow(f) {
   let cells = [
-    el('td', 'td-flex', moment(f.localtime).format('HH'))
+    el('td', 'td-l', moment(f.localtime).format('HH'))
   ];
 
   for (let key of Object.keys(f.stations)) {
@@ -34,7 +34,7 @@ function windObsToRow(f) {
   }
   
   return (
-    el('tr', '', cells)
+    el('tr', 'forecast-table-row', cells)
   )
 }
 

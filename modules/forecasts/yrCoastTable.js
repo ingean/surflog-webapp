@@ -1,5 +1,5 @@
 import { el, arrow, weatherImg, tempTd } from '../html/elements.js';
-import { updateForecastTable } from './forecastTable.js';
+import { updateForecastTable, display } from './forecastTable.js';
 import { getYrCoast } from '../utils/api.js';
 
 
@@ -8,21 +8,21 @@ const headers = ['Tid', 'Vær', 'Temp', 'Bølger', 'Vind (byge)', 'Strøm', 'Van
 
 function yrCoastForecastToRow(f) {
     return (
-    el('tr', '', [
-      el('td', 'td-flex', moment(f.start).format('HH')),
-      el('td', 'td-flex', weatherImg(f.symbolCode.next1Hour)),
+    el('tr', 'forecast-table-row', [
+      el('td', 'td-l', moment(f.start).format('HH')),
+      el('td', 'td-l', weatherImg(f.symbolCode.next1Hour)),
       tempTd(f.temperature.value),
-      el('td', 'td-flex', [ //Wave height and direction
-        el('span', 'td-value', f.sea.wave.height),
+      el('td', 'td-l', [ //Wave height and direction
+        el('span', 'td-value', display(f.sea.wave, 'height')),
         el('span', 'td-arrow', arrow(f.sea.wave.direction))
       ]),
-      el('td', 'td-flex', [ //Wind speed and direction
-        el('span', 'td-value', f.wind.speed),
-        el('span', 'td-secondary-value', ` (${f.wind.gust})`),
+      el('td', 'td-l', [ //Wind speed and direction
+        el('span', 'td-value', display(f.wind, 'speed')),
+        el('span', 'td-secondary-value', display(f.wind, 'gust', true)),
         el('span', 'td-arrow', arrow(f.wind.direction))
       ]),
-      el('td', 'td-flex', [ //Current speed and direction
-        el('span', 'td-value', f.sea.current.speed),
+      el('td', 'td-l', [ //Current speed and direction
+        el('span', 'td-value', display(f.sea.current, 'speed')),
         el('span', 'td-arrow', arrow(f.sea.current.direction))
       ]),
       tempTd(f.sea.temperature.value),

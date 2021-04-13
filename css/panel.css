@@ -115,3 +115,7 @@
   border-bottom: 2px solid var(--primary-color-dark);
   background-color: var(--primary-color-light);
 }
+
+.tab-toolbar {
+  margin-top: 20px;
+}

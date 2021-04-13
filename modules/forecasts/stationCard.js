@@ -9,29 +9,26 @@ function formatTime(timeString) {
 }
 
 function tideHeaders(headers) {
-  let divs = []
+  let th = [];
   headers.forEach(h => {
-    divs.push(el('div', 'station-card-cell station-card-tideHeading', h))
+    th.push(el('th', 'td-s', h))
   })
-  return el('div', 'flex-row', divs);
+  return el('thead', '', el('tr', '', th));
 }
 
 
-function tideFlexTab(tide) {
-  let table = [
-    el('div', 'flex-row station-card-tideTitle', 'Tidevann'),
-    tideHeaders(['Type', 'Tid', 'Høyde'])
-  ];
+function tideRows(tide) {
+  let rows = [];
   tide.forEach(t => {
-    table.push( 
-      el('div', 'flex-row', [
-        el('div', 'station-card-cell station-card-tideIcon', tideIcon(t.type)),
-        el('div', 'station-card-cell station-card-tideText', moment(t.time).format('HH:mm')),
-        el('div', 'station-card-cell station-card-tideText', t.value)
+    rows.push( 
+      el('tr', '', [
+        el('td', 'td-s', tideIcon(t.type)),
+        el('td', 'td-s', moment(t.time).format('HH:mm')),
+        el('td', 'td-s', t.value)
       ])
     )
   })
-  return table;
+  return el('tbody', '', rows);
 }
 
 function updateCard(spotName, location, tide, sun) {
@@ -41,17 +38,22 @@ function updateCard(spotName, location, tide, sun) {
         el('div', 'station-card-spotName', spotName),
         el('div', 'station-card-stationName', location.name)
       ]),
-      el('div', 'station-card flex-col',[
+      el('div', 'station-card flex-col', [
         el('div', 'station-card-sunIcon', el('img', {src: 'images/yr/01m.svg', style: 'transform: rotate(180deg);'})),
         el('div', 'station-card-sunTime', formatTime(sun.civil_twilight_begin)),
         el('div', 'station-card-sunTime', formatTime(sun.sunrise))
       ]),
-      el('div', 'station-card flex-col',[
+      el('div', 'station-card flex-col', [
         el('div', 'station-card-sunIcon', el('img', {src: 'images/yr/01m.svg'})),
         el('div', 'station-card-sunTime', formatTime(sun.sunset)),
         el('div', 'station-card-sunTime', formatTime(sun.civil_twilight_end))
       ]),
-      el('div', 'station-card station-card-tide-table flex-col', tideFlexTab(tide))
+      el('div', 'station-card flex-col', 
+        el('table', 'station-card station-card-table', [
+          tideHeaders(['Type', 'Tid', 'Høyde']),
+          tideRows(tide)
+        ])
+      )
     ]);
       
   document.querySelector('#root-station-card-yrCoast')
