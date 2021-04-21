@@ -2,7 +2,7 @@ import { el } from '../html/elements.js';
 import { carousel } from '../html/carousel.js';
 import { reportHeader, reportText, reportPage, reportFooter } from './reportView.js';
 import { settings } from '../settings.js';
-import { getForecastTime } from '../utils/time.js';
+import { getDMITime } from '../forecasts/dmiImages.js';
 
 export var twin = '';
 
@@ -63,7 +63,7 @@ function sessionCompare(report) {
     return [
       el('div', "txt-report-title", "Sammenlikning"),
       el('p', "txt-report",
-        `${moment(getForecastTime('time-dmi-today')).calendar()} er
+        `${moment(getDMITime()).calendar()} er
         det sannsynligvis ${twin.wavesize} bølger og ${twin.windspeed}
         vind enn denne økta.`),
       el('div', "report-subtitle", "Detaljer"),

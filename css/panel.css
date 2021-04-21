@@ -86,6 +86,8 @@
   width:70px;
   height:675px;
   border:0 none;
+  cursor: pointer;
+  z-index: 100;
 }
 
 .panel-btn-nav:focus {

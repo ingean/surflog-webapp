@@ -3,7 +3,7 @@ import { formsOptions } from '../config/formsOptions.js';
 import { el } from '../html/elements.js';
 import { formSelectInput } from '../html/formGroup.js';
 import { updateStationCard } from '../forecasts/stationCard.js';
-import { updateStatsCard } from '../forecasts/statisticsCard.js';
+import { updateStatsCard } from '../forecasts/dmiStatsCard.js';
 import { getYrCoastForecast } from '../forecasts/yrCoastTable.js'; 
 
 function clearInput(e) {
@@ -24,10 +24,10 @@ function createSpotList() {
 }
 
 
-function onSpotChanged(e) {
+async function onSpotChanged(e) {
   let spot = e.target.value;
   let yrId = spotIds[spot].yr.id;
-  updateStationCard(spot);
+  await updateStationCard(spot);
   updateStatsCard('dmi', spot);
   getYrCoastForecast(yrId);
 }

@@ -2,6 +2,7 @@ import { el, arrow } from '../html/elements.js';
 import { updateForecastTable, display } from './forecastTable.js';
 import { get } from '../utils/api.js';
 import { formatForecastValue } from '../config/forecastFormat.js';
+import { isDayTime } from '../utils/time.js';
 
 
 const headers = ['Tid', 'Bølger', 'Periode', 'Bølgevarsel'];
@@ -14,9 +15,10 @@ function format(f, param) {
 
 function smhiForecastToRow(forecast) {
   let f = forecast.stations['Väderöerna']
+  let emphasis = (isDayTime(forecast.localtime)) ? 'emphasis-row' : '';
   
   return (
-    el('tr', 'forecast-table-row', [
+    el('tr', `forecast-table-row ${emphasis}`, [
       el('td', 'td-l', moment(forecast.localtime).format('HH')),
       el('td', 'td-l', [
         el('span', `td-value ${format(f, 'waveheight')}`, display(f, 'waveheight')),

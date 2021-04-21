@@ -9,7 +9,8 @@ export const units = {
   speed: {unit: 'm/s', precision: 0},
   gust: {unit: 'm/s', precision: 0},
   waveheightforecast: {unit: 'm', precision: 1},
-  waveheightmax: {unit: 'm', precision: 1}
+  waveheightmax: {unit: 'm', precision: 1},
+  currentSpeed: {unit: 'cm/s', precision: 0},
 };
 
 export const spotIds = {

@@ -1,4 +1,4 @@
-import { el, label, icon } from '../html/elements.js';
+import { el, scoreLabel, icon } from '../html/elements.js';
 import { dateChanged } from '../html/dateInput.js';
 import { getRating } from '../config/formsOptions.js';
 import { imgSrc } from '../utils/utilities.js';
@@ -27,31 +27,24 @@ function reportDetails(report) {
 export function reportScore(report) {
   if (report.type === 'Observasjon' || report.type === 'Observation'){
     if (report.source ==="Bomtur") {
-      return label('danger', report.source, 'report-score');      
+      return el('span', `label bg-1 report-score`, report.source);     
     } else {
       let d = (report.issurfable === 1) ? 'up' : 'down';
       return icon(`thumbs-${d}`, 'report-score');
     } 
   } else {
-    return label(
-      getRating('score', report.score, 'value'), 
-      getRating('score', report.score, 'value', false), 
-      'report-score');  
+    return scoreLabel(report.score, 'report-score');
   }
 }
 
 export function conditionsDetails(report) {
-  if (report.type === 'Session') {
-    return el('div', {class: 'report-conditions'}, [
-      label(getRating('waveheight', report.waveheight), report.waveheight, 'report-condition'),
-      label(getRating('waveperiod', report.waveperiod), report.waveperiod, 'report-condition'),
-      label('default', report.wavedir, 'report-condition'),
-      label(getRating('windspeed', report.windspeed), report.windspeed, 'report-condition'),
-      label(getRating('winddir', report.winddir), report.winddir, 'report-condition'),
-    ]);
-  } else {
-    return '';
-  }
+  if (report.type !== 'Session') return '';
+  let params = ['waveheight', 'waveperiod', 'wavedir', 'windspeed', 'winddir'];
+  return el('div', 'report-conditions', params.map(param => {
+    let value = report[param];
+    let rating = getRating(param, value);
+    return el('span', `label bg-${rating} report-condition`, value);
+  }))
 }
 
 export function updateReportList(reports) {

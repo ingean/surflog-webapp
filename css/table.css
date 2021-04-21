@@ -102,3 +102,7 @@ td {
   color: var(--secondary-txt-color);
   font-weight: bold;
 }
+
+.emphasis-row {
+  background-color: white;
+}

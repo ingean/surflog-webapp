@@ -201,9 +201,6 @@
           <div class="panel light">
             <div class="panel-heading">
               <span class="panel-h light">DMI </span>
-              <span id="time-dmi-live" class="panel-h light" data-forecasttime="">varsler </span>
-              <span id="currentscore"></span>
-              <span id="twin"></span>
               <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
               <span class="glyphicon glyphicon-refresh i-tool pull-right" onClick="updateTwin()"></span>
               <span class="pull-right" id="twin"></span>
@@ -213,20 +210,21 @@
               <div class="col-sm-4 panel-dmi-forecast">
                 <div class="panel dark">
                   <div class="panel-heading">
+                    <span class="panel-h dark">Bølger</span>
+                    <span class="panel-h dark time-dmi"></span>  
+                    <span class="score-dmi"></span>
                     <div class="btn-group pull-right">
                       <button type="button" class="btn btn-default active">Høyde</button>
                       <button type="button" class="btn btn-default">Periode</button>
                     </div>
-                    <span class="panel-h dark">Bølger</span>
-                    <span class="panel-h dark time-dmi"></span>  
                   </div> 
                   <div class="panel-body flex-panel">
                     <div id="dmi-wave-live" data-forecasttype="waveheight" data-forecastprovider="DMI">
                       <img id="img-dmi-wave-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hs.idf.1.png" />
-                      <button class="panel-btn-nav prev" class="button" onClick="browseDMIForecast('previous','img-dmi-today')">
+                      <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
                         <span class="glyphicon glyphicon-chevron-left"></span>
                       </button>
-                      <button class="panel-btn-nav next" class="button" onClick="browseDMIForecast('next','img-dmi-today')">
+                      <button class="panel-btn-nav forecast-nav-dmi next" type="button">
                         <span class="glyphicon glyphicon-chevron-right"></span>
                       </button> 
                     </div>
@@ -241,20 +239,21 @@
               <div class="col-sm-4 panel-dmi-forecast">
                   <div class="panel dark">
                     <div class="panel-heading">
+                      <span class="panel-h dark">Dønning</span>
+                      <span class="panel-h dark time-dmi"></span>
+                      <span class="score-dmi"></span> 
                       <div class="btn-group pull-right">
                         <button type="button" class="btn btn-default active">Høyde</button>
                         <button type="button" class="btn btn-default">Periode</button>
                       </div>  
-                      <span class="panel-h dark">Dønning</span>
-                      <span class="panel-h dark time-dmi"></span> 
                     </div> 
                     <div class="panel-body flex-panel">
                       <div id="dmi-swell-live" data-forecasttype="swellheight" data-forecastprovider="DMI">
                         <img id="img-dmi-swell-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hsw.idf.1.png" />
-                        <button class="panel-btn-nav prev" class="button" onClick="browseDMIForecast('previous','img-dmi-today')">
+                        <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
                           <span class="glyphicon glyphicon-chevron-left"></span>
                         </button>
-                        <button class="panel-btn-nav next" class="button" onClick="browseDMIForecast('next','img-dmi-today')">
+                        <button class="panel-btn-nav forecast-nav-dmi next" type="button">
                           <span class="glyphicon glyphicon-chevron-right"></span>
                         </button> 
                       </div>
@@ -270,15 +269,16 @@
                   <div class="panel dark">
                     <div class="panel-heading">
                       <span class="panel-h dark">Vind</span>
-                      <span class="panel-h dark time-dmi"></span>   
+                      <span class="panel-h dark time-dmi"></span>
+                      <span class="score-dmi"></span>   
                     </div> 
                     <div class="panel-body flex-panel">
                       <div id="dmi-wind-live" data-forecasttype="wind" data-forecastprovider="DMI">
                           <img id="img-dmi-wind-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/win.idf.1.png" />
-                          <button class="panel-btn-nav prev" class="button" onClick="browseDMIForecast('previous','img-dmi-today')">
+                          <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
                               <span class="glyphicon glyphicon-chevron-left"></span>
                           </button>
-                          <button class="panel-btn-nav next" class="button" onClick="browseDMIForecast('next','img-dmi-today')">
+                          <button class="panel-btn-nav forecast-nav-dmi next" type="button">
                             <span class="glyphicon glyphicon-chevron-right"></span>
                           </button> 
                       </div>
@@ -391,8 +391,9 @@
           <div class="panel-heading">
             <span class="panel-h light">Webkamera</span>
             <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
-            <span class="glyphicon glyphicon-refresh i-tool pull-right" onClick="refreshWebCam()"></span>
-            <span class="glyphicon glyphicon-floppy-save i-tool pull-right" onClick="saveWebCam()"></span>
+            <span id="webcam-btn-refresh" class="glyphicon glyphicon-refresh i-tool pull-right"></span>
+            <span id="webcam-btn-play" class="glyphicon glyphicon-play i-tool pull-right"></span>
+            <span id="webcam-btn-save" class="glyphicon glyphicon-floppy-save i-tool pull-right"></span>
           </div>
           <div class="panel-body">
             <div id="div-webcam">

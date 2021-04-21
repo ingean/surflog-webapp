@@ -1,5 +1,3 @@
-import { ratingClasses } from "./forecastFormat.js";
-
 const scores = [
   {value: 0, caption: 'Flatt', rating: 0},
   {value: 1, caption: 'Despo', rating: 1},
@@ -79,14 +77,14 @@ const waveperiod = [
 ];
 
 const wavedir = [
-  {caption: 'Sør'},
-  {caption: 'Sørvest', default: true},
-  {caption: 'Vest'},
-  {caption: 'Nordvest'},
-  {caption: 'Nord'},
-  {caption: 'Nordøst'},
-  {caption: 'Øst'},
-  {caption: 'Sørøst'}
+  {caption: 'Sør', rating: 0},
+  {caption: 'Sørvest', rating: 0, default: true},
+  {caption: 'Vest', rating: 0},
+  {caption: 'Nordvest', rating: 0},
+  {caption: 'Nord', rating: 0},
+  {caption: 'Nordøst', rating: 0},
+  {caption: 'Øst', rating: 0},
+  {caption: 'Sørøst', rating: 0}
 ];
 
 const boards = [
@@ -149,6 +147,7 @@ const domains = {
   score: scores,
   waveheight: waveheight,
   waveperiod: waveperiod,
+  wavedir: wavedir,
   winddir: winddir,
   windspeed: windspeed
 }
@@ -199,9 +198,13 @@ export var formsOptions = [
   {name: 'isreference', type: 'btn', tab: 6, caption: 'Referanse', domain: yesNo, forms: forms(true, true, true)}
 ];
 
-export function getRating(param, value, key = 'caption', returnClass = true) {
+export function getRating(param, value, key = 'caption', returnKey = 'rating') {
   let domain = domains[param];
   let domainItem = domain.find(v => v[key] === value);
     
-  return returnClass ? ratingClasses[domainItem.rating].labelclass : domainItem.caption;  
+  return domainItem[returnKey];
+}
+
+export function getScoreCaption(score) {
+  return scores[score].caption;
 }

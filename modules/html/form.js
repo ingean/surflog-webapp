@@ -1,7 +1,8 @@
 import { el } from './elements.js';
 import { modal } from './modal.js';
+import { get } from '../utils/api.js';
 import { formsOptions , tabNames} from '../config/formsOptions.js'; 
-import { formGroup, updateLocationDropdown, formSelectInput } from './formGroup.js';
+import { formGroup, updateLocationDropdown } from './formGroup.js';
 import { postReport} from '../reports/postReport.js';
 import { filterReportsList } from '../reports/reportsList.js';
 
@@ -135,6 +136,38 @@ function onLocationTypeChange(value) {
   }
 }
 
-export function createForms() {
+
+function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index;
+}
+
+function getUnique(objArray, key) {
+  let list = objArray.map(a => a[key]);
+  return list.filter(onlyUnique);
+}
+
+function domain(list, defaultValue) {
+  let domain = [];
+  for (let item of list) {
+    let d = {caption: item};
+    if (item === defaultValue) {
+      d['default'] = true;
+    }
+    domain.push(d)
+  }
+  return domain;
+}
+
+
+export async function createForms() {
+  let places = await get(`places/spots`);
+
+  let countries = getUnique(places, 'country');
+  let locations  = getUnique(places, 'location');
+  let spots = getUnique(places, 'spot');
+
+  formsOptions[1].domain = domain(countries, 'Norge');
+  formsOptions[2].domain = domain(locations, 'Oslofjorden');
+  formsOptions[3].domain = domain(spots, 'Saltstein');
   createFormModals();
 }

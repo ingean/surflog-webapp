@@ -1,14 +1,16 @@
 import { el, arrow, weatherImg, tempTd } from '../html/elements.js';
 import { updateForecastTable, display } from './forecastTable.js';
 import { getYrCoast } from '../utils/api.js';
+import { isDayTime } from '../utils/time.js';
 
 
 const headers = ['Tid', 'Vær', 'Temp', 'Bølger', 'Vind (byge)', 'Strøm', 'Vanntemp'];
 
 
 function yrCoastForecastToRow(f) {
-    return (
-    el('tr', 'forecast-table-row', [
+  let emphasis = (isDayTime(f.start)) ? 'emphasis-row' : '';
+  return (
+    el('tr', `forecast-table-row ${emphasis}`, [
       el('td', 'td-l', moment(f.start).format('HH')),
       el('td', 'td-l', weatherImg(f.symbolCode.next1Hour)),
       tempTd(f.temperature.value),
@@ -22,7 +24,7 @@ function yrCoastForecastToRow(f) {
         el('span', 'td-arrow', arrow(f.wind.direction))
       ]),
       el('td', 'td-l', [ //Current speed and direction
-        el('span', 'td-value', display(f.sea.current, 'speed')),
+        el('span', 'td-value', display(f.sea.current, 'speed', false, 'currentSpeed')),
         el('span', 'td-arrow', arrow(f.sea.current.direction))
       ]),
       tempTd(f.sea.temperature.value),

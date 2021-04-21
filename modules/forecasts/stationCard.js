@@ -2,11 +2,7 @@ import { Loader } from '../utils/logger.js';
 import { getYrTides, getYrLocation, getSunTimes } from '../utils/api.js';
 import { spotIds } from '../config/lookups.js';
 import { el, tideIcon } from '../html/elements.js';
-
-
-function formatTime(timeString) {
-  return moment(timeString, 'hh:mm:ss a').utc(true).tz("Europe/Stockholm").format('HH:mm')
-}
+import { setSunTimes } from '../settings.js';
 
 function tideHeaders(headers) {
   let th = [];
@@ -40,13 +36,13 @@ function updateCard(spotName, location, tide, sun) {
       ]),
       el('div', 'station-card flex-col', [
         el('div', 'station-card-sunIcon', el('img', {src: 'images/yr/01m.svg', style: 'transform: rotate(180deg);'})),
-        el('div', 'station-card-sunTime', formatTime(sun.civil_twilight_begin)),
-        el('div', 'station-card-sunTime', formatTime(sun.sunrise))
+        el('div', 'station-card-sunTime', sun.firstLight),
+        el('div', 'station-card-sunTime', sun.sunrise)
       ]),
       el('div', 'station-card flex-col', [
         el('div', 'station-card-sunIcon', el('img', {src: 'images/yr/01m.svg'})),
-        el('div', 'station-card-sunTime', formatTime(sun.sunset)),
-        el('div', 'station-card-sunTime', formatTime(sun.civil_twilight_end))
+        el('div', 'station-card-sunTime', sun.sunset),
+        el('div', 'station-card-sunTime', sun.lastLight)
       ]),
       el('div', 'station-card flex-col', 
         el('table', 'station-card station-card-table', [
@@ -66,6 +62,7 @@ export async function updateStationCard(spot) {
   let location = await getYrLocation(yrId)
   let tide = await getYrTides(yrId);
   let sun = await getSunTimes(location.position.lat, location.position.lon);
+  sun = setSunTimes(sun.results);
 
-  updateCard(spot, location, tide['_embedded'].tides, sun.results);
+  updateCard(spot, location, tide['_embedded'].tides, sun);
 }

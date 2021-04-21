@@ -3,6 +3,7 @@ import { updateForecastTable, display } from './forecastTable.js';
 import { get, queryTimespan } from '../utils/api.js';
 import { round } from '../utils/utilities.js';
 import { formatForecastValue, formatWindValue, getScoreCategory } from '../config/forecastFormat.js';
+import { isDayTime } from '../utils/time.js';
 
 const headers = ['Tid', 'Bølgehøyde', 'Bølgeperiode', 'Dønning', 'Dønning, periode', 'Wind', 'Score', 'Surfbart'];
 
@@ -41,8 +42,9 @@ function paramScore(forecast, param) {
 function dmiForecastToRow(forecast) {
   let score = getScoreCategory('dmi', forecast);
   let cls = (score > 4) ? `bg-muted-${score}` : '';
+  let emphasis = (isDayTime(forecast.localtime)) ? 'emphasis-row' : '';
   return (
-    el('tr', `forecast-table-row ${cls}`, [
+    el('tr', `forecast-table-row ${cls} ${emphasis}`, [
       el('td', 'td-l', moment(forecast.localtime).format('HH')),
       paramCell(forecast, 'waveheight'),
       paramCell(forecast, 'waveperiod'),
@@ -63,8 +65,10 @@ function getDMITime(forecast) {
   return forecast.localtime;
 }
 
+export var dmiForecast = [];
+
 export async function getDMIForecast(start, end) {
   let query = queryTimespan(start, end);
-  let forecast = await get(`forecasts/dmi${query}`);
-  updateDMITable(forecast);
+  dmiForecast = await get(`forecasts/dmi${query}`);
+  updateDMITable(dmiForecast);
 }

@@ -1,6 +1,5 @@
 import { notify } from '../utils/logger.js';
 import { getReport, getImages } from '../reports/getReports.js';
-import { getForecasts } from '../forecasts/getForecasts.js';
 
 const elementId = 'application-date';
 
@@ -9,7 +8,7 @@ function onDateChanged(event) {
   dateChanged(date);
 }
 
-export function dateInputInitialize() {
+export function initDateInput() {
   document.getElementById(elementId)
   .addEventListener('change', onDateChanged);
   setDateInput(new Date());

@@ -1,5 +1,5 @@
 import { yrImgs } from '../config/lookups.js';
-import { ratingClasses } from '../config/forecastFormat.js';
+import { getRating, getScoreCaption } from '../config/formsOptions.js';
 
 function appendChildren(el, children) {
   if (typeof children === 'string' || typeof children === 'number') {
@@ -41,14 +41,15 @@ export function elFromHTML(html) {
     return template.content.firstChild;
 }
 
-export function label(category, text, classes = '') {
-    return el('span', {class: `label label-${category} ${classes}`}, text);
+export function label(category, caption, classes = '') {
+    return el('span', `label label-${category} ${classes}`, caption);
 }
 
-export function scoreLabel(score) {
-  let rc = ratingClasses[score];
-  return label(`label bg-${score}`, rc.score);
+export function scoreLabel(score, classes = '') {
+  let caption = getScoreCaption(score);
+  return el('span', `label bg-${score} ${classes}`, caption);
 }
+
   
 export function icon(iconName, classes = '') {
     return el('span', {class: `glyphicon glyphicon-${iconName} ${classes}`});

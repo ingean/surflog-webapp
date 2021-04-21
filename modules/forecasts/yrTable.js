@@ -1,6 +1,7 @@
 import { el, arrow } from '../html/elements.js';
 import { updateForecastTable, display } from './forecastTable.js';
 import { get } from '../utils/api.js';
+import { isDayTime } from '../utils/time.js';
 
 
 
@@ -30,8 +31,9 @@ function yrForecastToRow(f) {
     cells.push(stationCell(f.stations[key]));
   }
   
+  let emphasis = (isDayTime(f.localtime)) ? 'emphasis-row' : '';
   return (
-    el('tr', 'forecast-table-row', cells)
+    el('tr', `forecast-table-row ${emphasis}`, cells)
   )
 }
 

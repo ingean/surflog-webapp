@@ -36,8 +36,9 @@ function forecastRows(forecast, forecastToRow) {
 }
 
 
-export function display(f, param, secondary = false) {
-  let u = units[param];
+export function display(f, param, secondary = false, lookupAlias) {
+  let lu = lookupAlias || param;
+  let u = units[lu];
   let v = round(f[param], u.precision);
   let p1 = '', p2 = '', p3 = '';
   if (secondary) {
