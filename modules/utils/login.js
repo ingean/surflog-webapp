@@ -26,11 +26,12 @@ function startApp() {
 
 function launchLogin() {
   let body = document.getElementById('root-modal-login');
+  let loginBtn = el('button', {id: "btn-fb-login", class: "fa fa-facebook"}, 'Logg inn med Facebook');
   let modalBody = el('div', "modal-login-body", [
     el('img', {src: "images/logo.png"}),
     el('span', 'text-modal-title', "Velkommen til Surflog"),
     el('p', 'modal-text', 'Logg på med din Facebook-bruker for å benytte SurfLog'),
-    el('button', {id: "btn-fb-login", class: "fa fa-facebook"}, 'Logg inn med Facebook')
+    loginBtn
   ]);
   
   body.appendChild(modal(
@@ -41,8 +42,6 @@ function launchLogin() {
     }
   ));
 
-  let loginBtn = document.getElementById('btn-fb-login');
   loginBtn.addEventListener('click', FB.login(response => statusChangeCallback(response)));
-
   $('#modal-login').modal('show');
 }
