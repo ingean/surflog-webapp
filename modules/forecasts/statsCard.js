@@ -1,26 +1,17 @@
 import { el } from '../html/elements.js';
-import { selectedSpot } from '../html/spotInput.js';
 import { statistics } from '../settings.js';
 import { round } from '../utils/utilities.js';
 import { units } from '../config/lookups.js';
 
 const cCls = 'td-m';
+const headers = ['min', 'avg - std', 'avg', 'avg + std', 'max', 'std'];
+const statParam = ['min', 'avg', 'max', 'std'];
 
-const params = [
-  {id: 'waveheight', caption: 'Bølgehøyde'}, 
-  {id: 'waveperiod', caption: 'Bølgeperiode'}, 
-  {id: 'swellheight', caption: 'Dønning'}, 
-  {id: 'swellperiod', caption: 'Dønning, periode'}, 
-  {id: 'wind', caption: 'Vind'}]
-
-const headers = ['min', 'avg - std', 'avg', 'avg + std', 'max', 'std']
-const statParam = ['min', 'avg', 'max', 'std']
-
-function makeRow(stats, param) {
-  return el('tr', '', makeStatsCell(stats, param));
+function tableRow(stats, param) {
+  return el('tr', '', tableCells(stats, param));
 }
 
-function statsHeaders() {
+function tableHead() {
   let th = headers.map(s => el('th', 'th', el('span', 'td-text-h td-text-m', s)))
   th.unshift(el('th', 'th td-left', 'Parameter'))
   return el('thead', '', el('tr', '', th));
@@ -45,7 +36,7 @@ function cell(v1, v2, param) {
   ]);
 }
 
-function makeStatsCell(stats, param) {
+function tableCells(stats, param) {
   let v = getValues(stats, param);
   return [
     el('td', 'td-m td-left', param.caption),
@@ -59,13 +50,13 @@ function makeStatsCell(stats, param) {
 }
 
 
-function statsRows(stats) {
+function tableBody(stats, params) {
   let rows = [];
-  params.forEach(param => rows.push(makeRow(stats, param)))
+  params.forEach(param => rows.push(tableRow(stats, param)))
   return el('tbody', '', rows)
 }
 
-function updateCard(spot, statistics, forecast, createHeaders, createRows) {
+export function updateCard(spot, forecast, params) {
   let stats = statistics[spot][forecast][0];
   let card = 
     el('div', 'station-card flex-row', [
@@ -74,8 +65,8 @@ function updateCard(spot, statistics, forecast, createHeaders, createRows) {
         el('div', 'station-card-stationName', `Statistikk for ${forecast.toUpperCase()}`)
       ]),   
       el('table', 'station-card-table', [
-        createHeaders(stats),
-        createRows(stats)
+        tableHead(),
+        tableBody(stats, params)
       ])
     ]);
       

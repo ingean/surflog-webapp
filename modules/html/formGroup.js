@@ -97,7 +97,8 @@ function formInput(options) {
       type: options.type, 
       id: options.id,
       name: options.name,
-      class: 'form-control', 
+      class: 'form-control',
+      ...((options.type === 'file') && {multiple: true}),
       value: defaultValue(options)},'')
   } 
 }

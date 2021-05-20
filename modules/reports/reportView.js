@@ -49,6 +49,7 @@ function imagesButton(report) {
 }
 
 function mswLink(report) {
+  if (!spotIds[report.spot]) return '';
   let mswId = spotIds[report.spot].msw;
   let spot = mswId.name ?? report.spot.replace(' ', '-');
   let start = moment(report.reporttime).subtract(3, 'days').format('YYYY-MM-DD');

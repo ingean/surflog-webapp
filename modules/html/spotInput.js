@@ -3,7 +3,8 @@ import { formsOptions } from '../config/formsOptions.js';
 import { el } from '../html/elements.js';
 import { formSelectInput } from '../html/formGroup.js';
 import { updateStationCard } from '../forecasts/stationCard.js';
-import { updateStatsCard } from '../forecasts/dmiStatsCard.js';
+import { updateDMICard } from '../forecasts/dmiStatsCard.js';
+import { updateSMHICard } from '../forecasts/smhiStatsCard.js';
 import { getYrCoastForecast } from '../forecasts/yrCoastTable.js'; 
 
 function clearInput(e) {
@@ -28,7 +29,8 @@ async function onSpotChanged(e) {
   let spot = e.target.value;
   let yrId = spotIds[spot].yr.id;
   await updateStationCard(spot);
-  updateStatsCard('dmi', spot);
+  updateDMICard(spot);
+  updateSMHICard(spot);
   getYrCoastForecast(yrId);
 }
 

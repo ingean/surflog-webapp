@@ -10,6 +10,7 @@ export const units = {
   gust: {unit: 'm/s', precision: 0},
   waveheightforecast: {unit: 'm', precision: 1},
   waveheightmax: {unit: 'm', precision: 1},
+  wavedir: {unit: '', precision: 0},
   currentSpeed: {unit: 'cm/s', precision: 0},
 };
 
@@ -31,6 +32,7 @@ export const spotIds = {
   'Reve Havn': {msw: {id: 1885}, yr: {id: '1-15649'}},
   'Kvassheim': {msw: {id: 1892}, yr: {id: '1-8454'}},
   'Sele': {msw: {id: 554}, yr: {id: '1-15564'}},
+  'Bore': {msw: {id: 1886}, yr: {id: '1-15564'}},
   'Trestles, uppers': {msw: {id: 291, name: 'Trestles'}},
   'Carlsbad': {msw: {id: 292}},
   'Cotton': {msw: {id: 291, name: 'Trestles'}},
