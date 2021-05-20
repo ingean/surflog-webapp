@@ -59,16 +59,16 @@ body {
 }
 
 .img-dmi {
-  clip-path: inset(0% 15% 5% 15%);
-  -webkit-clip-path: inset(0% 15% 5% 15%);
+  clip-path: inset(0% 17% 5% 19%);
+  -webkit-clip-path: inset(0% 17% 5% 19%);
   overflow:hidden;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1910px) {
   .img-dmi {
     position:relative;
-    left: -95px;
-    width: 624px;
+    left: -17%;
+    width: 136%;
   }
 }
 
