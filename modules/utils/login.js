@@ -25,7 +25,7 @@ function startApp() {
 };
 
 function launchLogin() {
-  let body = document.getElementById('sl-modal-login');
+  let body = document.getElementById('root-modal-login');
   let modalBody = el('div', "modal-login-body", [
     el('img', {src: "images/logo.png"}),
     el('span', 'text-modal-title', "Velkommen til Surflog"),
