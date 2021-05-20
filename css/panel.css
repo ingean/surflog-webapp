@@ -31,9 +31,11 @@
   flex-direction: column;
 }
 
-.panel {
+.panel-sq {
   border-radius: 0;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .flex-panel {
@@ -42,11 +44,6 @@
   justify-content: center;
 }
 
-@media (max-width: 1200px) {
-  .flex-panel {
-    flex-direction: column;
-  }
-}
 
 .panel-h {
   font-size: 20px;

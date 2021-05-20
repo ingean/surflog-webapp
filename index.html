@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/forms.css">
     <link rel="stylesheet" href="css/panel.css">
-    <link rel="stylesheet" href="css/containers.css">
     <link rel="stylesheet" href="css/reports.css">
     <link rel="stylesheet" href="css/table.css">
     <link rel="stylesheet" href="css/stationCard.css">
@@ -87,7 +86,7 @@
       <!-- Forecast tables and graphs-->
       <div class="row">
         <div class="col-sm-12">
-          <div class="panel light">
+          <div class="panel-sq light">
             <div class="panel-heading">
               <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
               <span class="panel-h light">Varsler og observasjoner</span>
@@ -193,17 +192,17 @@
       <!-- DMI forecast images -->
       <div class="row">
         <div class="col-sm-12">
-            <div class="panel light">
+            <div class="panel-sq light">
               <div class="panel-heading">
                 <span class="panel-h light">DMI </span>
                 <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
                 <span class="glyphicon glyphicon-refresh i-tool pull-right" onClick="updateTwin()"></span>
                 <span class="pull-right" id="twin"></span>
               </div>
-              <div class="panel-body flex-panel">
+              <div class="panel-body">
                 <!-- Waveheight and period-->
                 <div class="col-sm-4">
-                  <div class="panel dark">
+                  <div class="panel-sq dark">
                     <div class="panel-heading">
                       <span class="panel-h dark">Bølger</span>
                       <span class="panel-h dark time-dmi"></span>  
@@ -213,7 +212,7 @@
                         <button type="button" class="btn btn-default">Periode</button>
                       </div>
                     </div> 
-                    <div class="panel-body flex-panel">
+                    <div class="panel-body">
                       <div id="dmi-wave-live" data-forecasttype="waveheight" data-forecastprovider="DMI">
                         <img id="img-dmi-wave-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hs.idf.1.png" />
                         <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
@@ -232,7 +231,7 @@
                 </div>
                 <!-- Swellheight and period-->
                 <div class="col-sm-4">
-                    <div class="panel dark">
+                    <div class="panel-sq dark">
                       <div class="panel-heading">
                         <span class="panel-h dark">Dønning</span>
                         <span class="panel-h dark time-dmi"></span>
@@ -242,7 +241,7 @@
                           <button type="button" class="btn btn-default">Periode</button>
                         </div>  
                       </div> 
-                      <div class="panel-body flex-panel">
+                      <div class="panel-body">
                         <div id="dmi-swell-live" data-forecasttype="swellheight" data-forecastprovider="DMI">
                           <img id="img-dmi-swell-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hsw.idf.1.png" />
                           <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
@@ -261,13 +260,13 @@
                   </div>
                   <!-- Wind-->
                   <div class="col-sm-4">
-                    <div class="panel dark">
+                    <div class="panel-sq dark">
                       <div class="panel-heading">
                         <span class="panel-h dark">Vind</span>
                         <span class="panel-h dark time-dmi"></span>
                         <span class="score-dmi"></span>   
                       </div> 
-                      <div class="panel-body flex-panel">
+                      <div class="panel-body">
                         <div id="dmi-wind-live" data-forecasttype="wind" data-forecastprovider="DMI">
                             <img id="img-dmi-wind-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/win.idf.1.png" />
                             <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
@@ -292,16 +291,16 @@
       <!-- MSW forecast images -->
       <div class="row">
         <div class="col-sm-12">
-          <div class="panel light">
+          <div class="panel-sq light">
             <div class="panel-heading">
               <span class="panel-h light">Magicseaweed</span>
               <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
               <span id="link-msw" class="pull-right"></span>
             </div>
-            <div class="panel-body flex-panel">
+            <div class="panel-body">
               <!-- Swell-->
               <div class="col-sm-4">
-                <div class="panel dark">
+                <div class="panel-sq dark">
                   <div class="panel-heading">
                     <span class="panel-h dark">Dønning </span>
                     <span id="time-msw-swellheight-live" class="h4-text-light time-msw" data-forecasttime=""></span>  
@@ -312,7 +311,7 @@
               </div>
               <!-- Period-->
               <div class="col-sm-4">
-                <div class="panel dark">
+                <div class="panel-sq dark">
                   <div class="panel-heading">
                     <span class="panel-h dark">Periode </span>  
                     <span id="time-msw-swellperiod-live" class="h4-text-light time-msw" data-forecasttime=""></span>
@@ -323,7 +322,7 @@
               </div>
                 <!-- Wind-->
                 <div class="col-sm-4">
-                  <div class="panel dark">
+                  <div class="panel-sq dark">
                     <div class="panel-heading">
                       <span class="panel-h dark">Vind </span>
                       <span id="time-msw-wind-live" class="h4-text-light time-msw" data-forecasttime=""></span>  
@@ -340,14 +339,14 @@
       <!-- YR forecast images -->
       <div class="row">
         <div class="col-sm-12">
-          <div class="panel light">
+          <div class="panel-sq light">
             <div class="panel-heading">
               <span class="panel-h light">Yr</span>
               <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
             </div>
-            <div class="panel-body flex-panel">
+            <div class="panel-body">
               <div class="col-sm-6">
-                <div class="panel dark">
+                <div class="panel-sq dark">
                   <div class="panel-heading">
                     <span class="panel-h dark">Skagerak</span>
                   </div> 
@@ -360,7 +359,7 @@
                 </div>
               </div>
               <div class="col-sm-6">
-                  <div class="panel dark">
+                  <div class="panel-sq dark">
                     <div class="panel-heading">
                       <span class="panel-h dark">Saltstein</span>
                     </div> 
@@ -380,7 +379,7 @@
       <!-- Saltstein webcam -->
       <div class="row">
         <div class="col-sm-12">
-          <div class="panel light">
+          <div class="panel-sq light">
             <div class="panel-heading">
               <span class="panel-h light">Webkamera</span>
               <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
@@ -401,7 +400,7 @@
       <!-- Reports -->
       <div class="row">
         <div class="col-sm-12">
-          <div class="panel light">
+          <div class="panel-sq light">
             <div class="panel-heading">
               <span class="panel-h light">Rapporter</span>
               <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
@@ -427,7 +426,7 @@
   
     <!-- Footer -->
     <footer class="container-fluid text-center my-footer">
-      <div class="panel panel-default my-footer">
+      <div class="panel-sq panel-default my-footer">
         <div class="panel-footer">
           <div class="glyphicon glyphicon-globe"></div>
           <div id="sun"></div>
