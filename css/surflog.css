@@ -2,6 +2,7 @@
 /* Reduce pointer flickering when hovering over Google charts */
 svg > g > g:last-child { pointer-events: none }
 
+html,
 body {
     background-color: lightgray;
     width:100%;
@@ -57,34 +58,22 @@ body {
     width: 40px;
 }
 
-/* FORECAST CONTAINERS */
-.container-dmi {
-  overflow: hidden;
-}
-
 .img-dmi {
-  /*position:relative;
-  left: -135px; */
-  clip-path: inset(0% 15% 0% 15%);
-  -webkit-clip-path: inset(0% 15% 0% 15%);
+  clip-path: inset(0% 15% 5% 15%);
+  -webkit-clip-path: inset(0% 15% 5% 15%);
+  overflow:hidden;
 }
 
 @media (max-width: 1200px) {
   .img-dmi {
     position:relative;
-    left: -135px;
+    left: -90px;
+    width: 100%;
   }
 }
 
 .fullwidth {
   width:100%;
-}
-
-.my-footer {
-  padding: 20px,0px,0px,0px;
-  background-color: darkgray;
-  color: lightgrey;
-  border: 0;
 }
 
 .loader-container {
@@ -102,7 +91,8 @@ body {
   width: 100%;
 }
 
-@media screen and (max-width:799px) { /*Small devices */  
+/*
+@media screen and (max-width:799px) { 
   .scrollcontainer,
   .container-yr {
       overflow-x: scroll;
@@ -115,4 +105,4 @@ body {
 
 .x-scrollable {
   overflow-x: scroll;
-}
+}*/

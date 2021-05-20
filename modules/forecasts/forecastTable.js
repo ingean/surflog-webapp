@@ -56,7 +56,7 @@ export function updateForecastTable(forecast, getForecastTime, forecastToRow, ta
   for (let fc of forecastByDays) {
     tables.push(
       el('div', 'forecast-table-body', [
-        el('div', 'forecast-table-heading', moment(getForecastTime(fc[0])).calendar(null, dateFormat)),
+        el('div', 'forecast-table-heading table-responsive', moment(getForecastTime(fc[0])).calendar(null, dateFormat)),
         el('table', `forecast-table-${tableName}`, [
           forecastHeaders(headers),
           forecastRows(fc, forecastToRow)
