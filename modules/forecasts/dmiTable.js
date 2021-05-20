@@ -5,7 +5,7 @@ import { round } from '../utils/utilities.js';
 import { formatForecastValue, formatWindValue, getScoreCategory } from '../config/forecastFormat.js';
 import { isDayTime } from '../utils/time.js';
 
-const headers = ['Tid', 'Bølgehøyde', 'Bølgeperiode', 'Dønning', 'Dønning, periode', 'Wind', 'Score', 'Surfbart'];
+const headers = ['Tid', 'Bølgehøyde', 'Bølgeperiode', 'Dønning', 'Dønning, periode', 'Wind', 'Score'];
 
 function format(f, param) {
   if (param === 'wind') return formatWindValue(f[param]);
@@ -51,8 +51,7 @@ function dmiForecastToRow(forecast) {
       paramCell(forecast, 'swellheight'),
       paramCell(forecast, 'swellperiod'),
       paramCell(forecast, 'wind'),
-      paramScore(forecast, 'score'),
-      paramScore(forecast, 'surfable')
+      paramScore(forecast, 'score')
     ])
   )
 }
