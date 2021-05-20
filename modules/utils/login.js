@@ -26,7 +26,8 @@ function startApp() {
 
 function launchLogin() {
   let body = document.getElementById('root-modal-login');
-  let loginBtn = el('button', {id: "btn-fb-login", class: "fa fa-facebook"}, 'Logg inn med Facebook');
+  //let loginBtn = el('button', {id: "btn-fb-login", class: "fa fa-facebook"}, 'Logg inn med Facebook');
+  let loginBtn = loginBtn();
   let modalBody = el('div', "modal-login-body", [
     el('img', {src: "images/logo.png"}),
     el('span', 'text-modal-title', "Velkommen til Surflog"),
@@ -42,6 +43,18 @@ function launchLogin() {
     }
   ));
 
-  loginBtn.addEventListener('click', FB.login(response => statusChangeCallback(response)));
+  //loginBtn.addEventListener('click', FB.login(response => statusChangeCallback(response)));
   $('#modal-login').modal('show');
+}
+
+function loginBtn() {
+  return el('div', {
+    "class": "fb-login-button",
+    "data-width":"",
+    "data-size": "large",
+    "data-button-type": "continue_with",
+    "data-layout": "default",
+    "data-auto-logout-link": "false",
+    "data-use-continue-as": "false"
+  })
 }
