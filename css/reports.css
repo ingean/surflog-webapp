@@ -1,13 +1,3 @@
-:root {
-  --primary-txt-color: #212121;
-  --secondary-txt-color: #424242;
-  --primary-color-light: #E0E0E0;
-  --primary-color-dark: #757575;
-  --secondary-color-light: #EEEEEE;
-  --secondary-color-dark: #212121;
-  --color-tool-highlight: rgba(90, 189, 249, 1);
-}
-
 /* Reports list */
 .list-group-item {
   display: flex;
@@ -79,6 +69,7 @@
 
 .report-header,
 .report-footer {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

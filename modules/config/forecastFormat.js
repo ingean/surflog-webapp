@@ -82,7 +82,7 @@ export function getWindspeedCategory(speed, local = true) {
 
 function getParamClass(forecast, param, value) {
   let s = getStats(forecast, param);
-  return (value > (s.avg + s.std)) ? 5: (value > s.avg) ? 4 : (value > (s.avg - s.std) ? 3 : (value > s.min) ? 2 : 0);
+  return (value >= (s.avg + s.std)) ? 5: (value >= s.avg) ? 4 : (value >= (s.avg - s.std) ? 3 : (value >= s.min) ? 2 : 0);
 }
 
 function getParamPoints(forecast, param, value) {
@@ -95,7 +95,7 @@ function getStats(forecast, param) {
 
   let spot = selectedSpot();
   let avg = statistics[spot][forecast][0][`avg(${param})`];
-  let std = statistics[spot][forecast][`std(${param})`];
+  let std = statistics[spot][forecast][0][`std(${param})`];
   let min = statistics[spot][forecast][0][`std(${param})`];
   return {min, avg, std};
 }
@@ -107,7 +107,7 @@ function getWindPoints(wind) {
 
 export function formatForecastValue(forecast, param, value) {
   let score = getParamClass(forecast, param, value);
-  return (score > 3) ? `txt-${score}` : '';
+  return (score > 2) ? `txt-${score}` : '';
 }
 
 function windFetch(value) {

@@ -1,4 +1,4 @@
-import { el, scoreLabel } from '../html/elements.js';
+import { el, scoreLabel, hrsTd } from '../html/elements.js';
 import { updateForecastTable, display } from './forecastTable.js';
 import { get, queryTimespan } from '../utils/api.js';
 import { round } from '../utils/utilities.js';
@@ -17,9 +17,9 @@ function paramCell(forecast, param) {
   let f2 = forecast.stations['Skagerak']
   
   return (
-    el('td', 'td-l', [
+    el('td', '', [
       el('span', `td-value ${format(f1, param)}`, display(f1, param)),
-      el('span', 'td-secondary-value', display(f2, param, true))
+      el('span', 'td-secondary-value hidden-xs', display(f2, param, true))
     ])
   )
 }
@@ -31,9 +31,9 @@ function paramScore(forecast, param) {
   let score = (param === 'score') ? scoreLabel(v1) : (v1 === 1) ? 'Ja' : 'Nei';
   
   return (
-    el('td', 'td-l', [
+    el('td', '', [
       el('span', 'td-value', score),
-      el('span', 'td-secondary-value', ` (${round(v2, 1)})`)
+      el('span', 'td-secondary-value hidden-xs', ` (${round(v2, 1)})`)
     ])
   )
 }
@@ -45,7 +45,7 @@ function dmiForecastToRow(forecast) {
   let emphasis = (isDayTime(forecast.localtime)) ? 'emphasis-row' : '';
   return (
     el('tr', `forecast-table-row ${cls} ${emphasis}`, [
-      el('td', 'td-s', moment(forecast.localtime).format('HH')),
+      hrsTd(forecast.localtime),
       paramCell(forecast, 'waveheight'),
       paramCell(forecast, 'waveperiod'),
       paramCell(forecast, 'swellheight'),

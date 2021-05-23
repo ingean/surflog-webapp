@@ -1,4 +1,4 @@
-import { el, arrow } from '../html/elements.js';
+import { el, arrow, hrsTd } from '../html/elements.js';
 import { updateForecastTable, display } from './forecastTable.js';
 import { get } from '../utils/api.js';
 import { formatForecastValue } from '../config/forecastFormat.js';
@@ -19,15 +19,15 @@ function smhiForecastToRow(forecast) {
   
   return (
     el('tr', `forecast-table-row ${emphasis}`, [
-      el('td', 'td-s', moment(forecast.localtime).format('HH')),
-      el('td', 'td-l', [
+      hrsTd(forecast.localtime),
+      el('td', '', [
         el('span', `td-value ${format(f, 'waveheight')}`, display(f, 'waveheight')),
         el('span', 'td-secondary-value', display(f, 'waveheightmax', true)),
         el('span', 'td-arrow', arrow(f.wavedir))
       ]),
-      el('td', 'td-s', 
+      el('td', '', 
         el('span', `td-value ${format(f, 'waveperiod')}`, display(f, 'waveperiod'))),
-      el('td', 'td-s', 
+      el('td', '', 
         el('span', `td-value ${format(f, 'waveheightforecast')}`, display(f, 'waveheightforecast'))
     )])
   )

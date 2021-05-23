@@ -1,8 +1,3 @@
-:root {
-  --form-bg-color: white;
-  --form-color: rgb(50, 118, 177);
-}
-
 .btn-group .notActive {
   background-color: var(--form-bg-color);
   background-image: none;
@@ -12,11 +7,6 @@
 .tab-content {
   margin-top: 2rem;
 }
-
-/*
-.btn-clear-datalist {
-  height: 26px;
-}*/
 
 input.custom-select {
   height: 34px;

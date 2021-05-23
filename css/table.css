@@ -1,6 +1,5 @@
-:root {
-  --primary-txt-color: #21292B;
-  --secondary-txt-color: #56616C;
+table {
+  width: 100%;
 }
 
 .forecast-table-heading {
@@ -13,6 +12,7 @@
 .forecast-table-row {
   border-top: 1px solid var(--secondary-txt-color);
   border-bottom: 1px solid var(--secondary-txt-color);
+  height: 40px;
 }
 
 .th-flex, 
@@ -100,28 +100,22 @@ td {
   table {
     width: 100vw;
   }
+
+  td {
+    font-size: auto;
+  }
   
   .th-flex {
     font-size: 10px; 
   }
 
-  .td-flex {
-    width: 12vw;
-    font-size: 8px; 
-  }
-
-  .td-l {
-    width: 12vw;
-    font-size: 10px; 
-  }
-
-  .td-m {
-    width: 8vw;
-    font-size: 8px; 
-  }
-
-  .td-s {
+  .td-fixed {
     width: 5vw;
-    font-size: 12px; 
   }
+}
+
+@media screen and (min-width:800px) { 
+  .forecast-tables {
+    min-width: 800px;
+ }
 }

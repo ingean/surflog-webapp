@@ -110,13 +110,18 @@ export function tempTd(temperature) {
   let cls = (temperature < 0) ? 'temp-freeze' : 'temp-warm';
   
   return (
-    el('td', 'td-s', 
+    el('td', '', 
       el ('div', cls, [ 
         el('span', 'td-value', String(Math.round(temperature))),
         el('span', 'td-unit-temp', '°')
       ])
     )
   )
+}
+
+export function hrsTd(date) {
+  return el('td', 'td-fixed', 
+          el('strong', '', moment(date).format('HH')));
 }
 
 

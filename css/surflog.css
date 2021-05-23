@@ -4,9 +4,10 @@ svg > g > g:last-child { pointer-events: none }
 
 html,
 body {
-    background-color: lightgray;
+    background-color: var(--app-bg-color);
     width:100%;
     height:100%;
+    overflow-x: hidden;
 }
 
 .padded {
@@ -64,7 +65,7 @@ body {
   width: 136%;
   clip-path: inset(0% 17% 5% 19%);
   -webkit-clip-path: inset(0% 17% 5% 19%);
-  overflow:hidden;
+  overflow: hidden;
 }
 
 .fullwidth {

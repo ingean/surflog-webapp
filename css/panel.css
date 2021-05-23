@@ -1,10 +1,3 @@
-:root {
-  --primary-color-light: #E0E0E0;
-  --primary-color-dark: #757575;
-  --secondary-color-light: #EEEEEE;
-  --secondary-color-dark: #212121;
-}
-
 .dark {
   color: var(--primary-color-light);
   background: var(--primary-color-dark);

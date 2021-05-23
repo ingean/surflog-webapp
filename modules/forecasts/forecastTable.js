@@ -27,7 +27,7 @@ function splitForecastPrDay(forecast, getForecastTime) {
 
 function forecastHeaders(headers) {
   return el('thead', 'forecast-table-header', 
-    el('tr', '', headers.map(header => el('th', 'td-l', header))))
+    el('tr', '', headers.map(header => el('th', (header === 'Strøm') ? 'hidden-xs' : '', header))))
 }
 
 function forecastRows(forecast, forecastToRow) {

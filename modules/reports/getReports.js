@@ -33,7 +33,7 @@ export async function getReports(page = 1, query = '') {
   let reports = await get(url, true);
 
   if (reports) {
-    updateReportsListPagination(reports.count, 10, query);
+    if (page === 1) updateReportsListPagination(reports.count, 10, query);
     updateReportList(reports.data)
   }
 }

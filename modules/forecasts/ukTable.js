@@ -1,4 +1,4 @@
-import { el, arrow, tempTd } from '../html/elements.js';
+import { el, arrow, tempTd, hrsTd } from '../html/elements.js';
 import {getDirFromTxt} from '../config/forecastFormat.js';
 import { updateForecastTable, display } from './forecastTable.js';
 import { getUKCoast } from '../utils/api.js';
@@ -13,7 +13,7 @@ function ukForecastToRow(f) {
   let v = f.stations[0];
   return (
     el('tr', `forecast-table-row ${emphasis}`, [
-      el('td', 'td-s', moment(f.time).format('HH')),
+      hrsTd(f.time),
       tempTd(v.temp),
       el('td', 'td-s', display(v, 'pressure')),
       el('td', 'td-l', [ //Wind speed and direction

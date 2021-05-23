@@ -1,4 +1,4 @@
-import { el, arrow, weatherImg, tempTd } from '../html/elements.js';
+import { el, arrow, weatherImg, tempTd, hrsTd } from '../html/elements.js';
 import { updateForecastTable, display } from './forecastTable.js';
 import { getYrCoast } from '../utils/api.js';
 import { isDayTime } from '../utils/time.js';
@@ -11,19 +11,19 @@ function yrCoastForecastToRow(f) {
   let emphasis = (isDayTime(f.start)) ? 'emphasis-row' : '';
   return (
     el('tr', `forecast-table-row ${emphasis}`, [
-      el('td', 'td-s', moment(f.start).format('HH')),
-      el('td', 'td-s', weatherImg(f.symbolCode.next1Hour)),
+      hrsTd(f.start),
+      el('td', '', weatherImg(f.symbolCode.next1Hour)),
       tempTd(f.temperature.value),
-      el('td', 'td-l', [ //Wave height and direction
+      el('td', '', [ //Wave height and direction
         el('span', 'td-value', display(f.sea.wave, 'height')),
         el('span', 'td-arrow', arrow(f.sea.wave.direction))
       ]),
-      el('td', 'td-l', [ //Wind speed and direction
+      el('td', '', [ //Wind speed and direction
         el('span', 'td-value', display(f.wind, 'speed')),
         el('span', 'td-secondary-value', display(f.wind, 'gust', true)),
         el('span', 'td-arrow', arrow(f.wind.direction))
       ]),
-      el('td', 'td-l', [ //Current speed and direction
+      el('td', 'hidden-xs', [ //Current speed and direction
         el('span', 'td-value', display(f.sea.current, 'speed', false, 'currentSpeed')),
         el('span', 'td-arrow', arrow(f.sea.current.direction))
       ]),

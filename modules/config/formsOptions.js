@@ -202,7 +202,7 @@ export function getRating(param, value, key = 'caption', returnKey = 'rating') {
   let domain = domains[param];
   let domainItem = domain.find(v => v[key] === value);
     
-  return domainItem[returnKey];
+  return (domainItem) ? domainItem[returnKey] : 0;
 }
 
 export function getScoreCaption(score) {
