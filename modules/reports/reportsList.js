@@ -40,7 +40,7 @@ export function reportScore(report) {
 export function conditionsDetails(report) {
   if (report.type !== 'Session') return '';
   let params = ['waveheight', 'waveperiod', 'wavedir', 'windspeed', 'winddir'];
-  return el('div', 'report-conditions', params.map(param => {
+  return el('div', 'report-conditions hidden-xs hidden-sm', params.map(param => {
     let value = report[param];
     let rating = getRating(param, value);
     return el('span', `label bg-${rating} report-condition`, value);

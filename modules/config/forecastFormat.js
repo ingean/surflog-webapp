@@ -3,23 +3,23 @@ import { statistics } from '../settings.js';
 import { scoring } from './scoreModel.js';
 
 const direction = [
-  {low: 348.75, high: 360, short: "n", caption: "nord"}, 
-  {low: 0, high: 11.25, short: "n", caption: "nord"},
-  {low: 11.25, high: 33.75, short: "nnø", caption: "nord-nordøst"},
-  {low: 33.75, high: 56.25, short: "nø", caption: "nordøst"},
-  {low: 56.25, high: 78.75, short: "ønø", caption: "øst-nordøst"},
-  {low: 78.75, high: 101.25, short: "ø", caption: "øst"},
-  {low: 101.25, high: 123.75, short: "øsø", caption: "øst-sørøst"},
-  {low: 123.75, high: 146.25, short: "sø", caption: "sørøst"},
-  {low: 146.25, high: 168.75, short: "ssø", caption: "sør-sørøst"},
-  {low: 168.75, high: 191.25, short: "s", caption: "sør"},
-  {low: 191.25, high: 213.75, short: "ssv", caption: "sør-sørvest"},
-  {low: 213.75, high: 236.25, short: "sv", caption: "sørvest"},
-  {low: 236.25, high: 258.75, short: "vsv", caption: "vest-sørvest"},
-  {low: 258.75, high: 281.25, short: "v", caption: "vest"},
-  {low: 281.25, high: 303.75, short: "vnv", caption: "vest-nordvest"},
-  {low: 303.75, high: 326.25, short: "nv", caption: "nordvest"},
-  {low: 326.25, high: 348.75, short: "nnv", caption: "nord-nordvest"}
+  {low: 348.75, mid:0, high: 360, short: "N", caption: "nord"}, 
+  {low: 0, mid: 0, high: 11.25, short: "N", caption: "nord"},
+  {low: 11.25, mid: 22.5, high: 33.75, short: "NNE", caption: "nord-nordøst"},
+  {low: 33.75, mid: 45, high: 56.25, short: "NE", caption: "nordøst"},
+  {low: 56.25, mid: 67.5, high: 78.75, short: "ENE", caption: "øst-nordøst"},
+  {low: 78.75, mid: 90, high: 101.25, short: "E", caption: "øst"},
+  {low: 101.25, mid: 112.5, high: 123.75, short: "ESE", caption: "øst-sørøst"},
+  {low: 123.75, mid: 135, high: 146.25, short: "SE", caption: "sørøst"},
+  {low: 146.25, mid: 157.5, high: 168.75, short: "SSE", caption: "sør-sørøst"},
+  {low: 168.75, mid: 180, high: 191.25, short: "S", caption: "sør"},
+  {low: 191.25, mid: 202.5, high: 213.75, short: "SSW", caption: "sør-sørvest"},
+  {low: 213.75, mid: 225, high: 236.25, short: "SW", caption: "sørvest"},
+  {low: 236.25, mid: 247.5, high: 258.75, short: "WSW", caption: "vest-sørvest"},
+  {low: 258.75, mid: 270, high: 281.25, short: "W", caption: "vest"},
+  {low: 281.25, mid: 292.5, high: 303.75, short: "WNW", caption: "vest-nordvest"},
+  {low: 303.75, mid: 315, high: 326.25, short: "NW", caption: "nordvest"},
+  {low: 326.25, mid: 337.5, high: 348.75, short: "NNW", caption: "nord-nordvest"}
 ];
 
 const windspeed = [
@@ -64,6 +64,10 @@ export function getCurrentCategory(speed) {
 
 export function getDirInfo(dir) {
   return direction.find(d => dir > d.low && dir <= d.high); 
+}
+
+export function getDirFromTxt(dirTxt) {
+  return direction.find(d => d.short === dirTxt);
 }
 
 export function getWindspeedInfo(speed) {

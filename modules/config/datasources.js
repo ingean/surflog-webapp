@@ -38,5 +38,10 @@ export const forecastSources = {
     suffix: "/marinogram.png",
     saltstein: "58,89305_9,87906",
     skagerak: "58,26417_9,59732"
+  },
+  uk: {
+    url: "http://datapoint.metoffice.gov.uk/public/data/val/wxmarineobs/all/json/",
+    apiKey: "5ae6dfd7-726f-4873-ba73-1651ff663a8e",
+    locations: [{id:'162304', name: 'Sandettie'},{id: '162170', name: 'F3'}]
   }
 };

@@ -1,5 +1,5 @@
 import { log, notify } from './logger.js';
-import { urlAPI, urlYr, urlSunTimes } from '../config/datasources.js';
+import { urlAPI, urlYr, urlSunTimes, forecastSources } from '../config/datasources.js';
 
 function makeUrl(url) {
   return (url.includes('http') ? url : `${urlAPI}${url}`)
@@ -70,4 +70,15 @@ export async function getYrTides(yrId) {
 
 export async function getYrCoast(yrId) {
   return get(`${urlYr}${yrId}/forecast/coast`);
+}
+
+export async function getUKCoast() {
+  let requests = [];
+  let baseUrl = forecastSources.uk.url;
+  let key = forecastSources.uk.apiKey;
+  let locations = forecastSources.uk.locations;
+  locations.forEach(l => {
+    requests.push(get(`${baseUrl}${l.id}?res=3hourly&key=${key}`));
+  })
+  return Promise.all(requests);
 }

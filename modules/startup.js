@@ -12,6 +12,7 @@ import { getSMHIForecast } from './forecasts/smhiTable.js';
 import { getDMIForecast } from './forecasts/dmiTable.js';
 import { initDMIImages } from './forecasts/dmiImages.js';   
 import { initMSWImages } from './forecasts/mswImages.js';
+import { getUKForecast } from './forecasts/ukTable.js';
 
 
 
@@ -37,4 +38,5 @@ export async function startSurfLog(userId) {
   getYrForecast();
   getSMHIForecast();
   getDMIForecast();
+  getUKForecast();
 }

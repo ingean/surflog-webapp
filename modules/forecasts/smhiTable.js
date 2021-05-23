@@ -19,15 +19,15 @@ function smhiForecastToRow(forecast) {
   
   return (
     el('tr', `forecast-table-row ${emphasis}`, [
-      el('td', 'td-l', moment(forecast.localtime).format('HH')),
+      el('td', 'td-s', moment(forecast.localtime).format('HH')),
       el('td', 'td-l', [
         el('span', `td-value ${format(f, 'waveheight')}`, display(f, 'waveheight')),
         el('span', 'td-secondary-value', display(f, 'waveheightmax', true)),
         el('span', 'td-arrow', arrow(f.wavedir))
       ]),
-      el('td', 'td-l', 
+      el('td', 'td-s', 
         el('span', `td-value ${format(f, 'waveperiod')}`, display(f, 'waveperiod'))),
-      el('td', 'td-l', 
+      el('td', 'td-s', 
         el('span', `td-value ${format(f, 'waveheightforecast')}`, display(f, 'waveheightforecast'))
     )])
   )

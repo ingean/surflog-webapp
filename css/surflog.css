@@ -86,18 +86,30 @@ body {
   width: 100%;
 }
 
-/*
-@media screen and (max-width:799px) { 
-  .scrollcontainer,
-  .container-yr {
-      overflow-x: scroll;
+/* Phone and pad */
+@media screen and (max-width:1200px) { 
+  .container-fluid {
+    padding: 0;
   }
 }
 
-.y-scrollable {
-  overflow-y: scroll;
+/* Phone portrait only */
+@media screen and (max-width:414px) {  
+  .col-fullwidth-xs {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-tabs.flex-panel {
+    flex-direction: column;
+  }
+    
+  .panel-btn-nav.prev {
+    left: 0px !important;
+  }
+
+  .panel-btn-nav.next {
+    right: 0px !important;
+  }
 }
 
-.x-scrollable {
-  overflow-x: scroll;
-}*/

@@ -12,6 +12,7 @@ export const units = {
   waveheightmax: {unit: 'm', precision: 1},
   wavedir: {unit: '', precision: 0},
   currentSpeed: {unit: 'cm/s', precision: 0},
+  pressure: {unit: 'hpa', precision: 0},
 };
 
 export const spotIds = {

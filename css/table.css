@@ -5,6 +5,7 @@
 
 .forecast-table-heading {
   margin-top: 50px;
+  padding-left: 10px;
   font-size: x-large;
   font-weight: bolder;
 }
@@ -85,19 +86,6 @@ td {
   color: var(--secondary-txt-color);
 }
 
-/*
-.td-text-l {
-  font-size: 18px;
-}
-
-.td-text-m {
-  font-size: 15px;
-}
-
-.td-text-s {
-  font-size: 12px;
-}*/
-
 .th {
   color: var(--secondary-txt-color);
   font-weight: bold;
@@ -105,4 +93,35 @@ td {
 
 .emphasis-row {
   background-color: white;
+}
+
+/* Styling for small screens*/
+@media screen and (max-width:799px) { 
+  table {
+    width: 100vw;
+  }
+  
+  .th-flex {
+    font-size: 10px; 
+  }
+
+  .td-flex {
+    width: 12vw;
+    font-size: 8px; 
+  }
+
+  .td-l {
+    width: 12vw;
+    font-size: 10px; 
+  }
+
+  .td-m {
+    width: 8vw;
+    font-size: 8px; 
+  }
+
+  .td-s {
+    width: 5vw;
+    font-size: 12px; 
+  }
 }

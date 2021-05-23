@@ -86,7 +86,7 @@
       <!-- Forecast tables and graphs-->
       <div class="row">
         <div class="col-sm-12">
-          <div class="panel-sq light">
+          <div class="panel light">
             <div class="panel-heading">
               <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
               <span class="panel-h light">Varsler og observasjoner</span>
@@ -107,6 +107,9 @@
                 </li>
                 <li class="panel-tab">
                   <a href="#tab-forecast-frost" data-toggle="tab">Vindobservasjoner</a>
+                </li>
+                <li class="panel-tab">
+                  <a href="#tab-forecast-northsea" data-toggle="tab">Nordsjøen</a>
                 </li>
               </ul>
               <div class="tab-content">
@@ -183,6 +186,21 @@
                     </div>  
                   </div>
                 </div>
+                <div id="tab-forecast-northsea" class="tab-pane fade">
+                  <div class="tab-body flex-panel">
+                    <div class="flex-col">
+                      <div id="root-station-card-northsea" class="hidden-xs"></div>
+                      <div class="tab-toolbar flex-panel">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-default active">Tabell</button>
+                          <button type="button" class="btn btn-default">Graf</button>
+                        </div>
+                      </div>
+                      <div id="root-forecast-table-northsea"></div>
+                      <div id="root-forecast-table-northsea-historic"></div>
+                    </div>  
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -192,7 +210,7 @@
       <!-- DMI forecast images -->
       <div class="row">
         <div class="col-sm-12">
-            <div class="panel-sq light">
+            <div class="panel light">
               <div class="panel-heading">
                 <span class="panel-h light">DMI </span>
                 <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
@@ -201,13 +219,13 @@
               </div>
               <div class="panel-body">
                 <!-- Waveheight and period-->
-                <div class="col-sm-4">
-                  <div class="panel-sq dark">
+                <div class="col-sm-4 col-fullwidth-xs">
+                  <div class="panel dark">
                     <div class="panel-heading">
                       <span class="panel-h dark">Bølger</span>
-                      <span class="panel-h dark time-dmi"></span>  
+                      <span class="time-dmi panel-h4 dark"></span>  
                       <span class="score-dmi"></span>
-                      <div class="btn-group pull-right">
+                      <div class="btn-group btn-group-sm pull-right">
                         <button type="button" class="btn btn-default active">Høyde</button>
                         <button type="button" class="btn btn-default">Periode</button>
                       </div>
@@ -230,13 +248,13 @@
                   </div> 
                 </div>
                 <!-- Swellheight and period-->
-                <div class="col-sm-4">
-                    <div class="panel-sq dark">
+                <div class="col-sm-4 col-fullwidth-xs">
+                    <div class="panel dark">
                       <div class="panel-heading">
                         <span class="panel-h dark">Dønning</span>
-                        <span class="panel-h dark time-dmi"></span>
+                        <span class="time-dmi panel-h4 dark"></span>
                         <span class="score-dmi"></span> 
-                        <div class="btn-group pull-right">
+                        <div class="btn-group btn-group-sm pull-right">
                           <button type="button" class="btn btn-default active">Høyde</button>
                           <button type="button" class="btn btn-default">Periode</button>
                         </div>  
@@ -259,11 +277,11 @@
                     </div> 
                   </div>
                   <!-- Wind-->
-                  <div class="col-sm-4">
-                    <div class="panel-sq dark">
+                  <div class="col-sm-4 col-fullwidth-xs">
+                    <div class="panel dark">
                       <div class="panel-heading">
                         <span class="panel-h dark">Vind</span>
-                        <span class="panel-h dark time-dmi"></span>
+                        <span class="time-dmi panel-h4 dark"></span>
                         <span class="score-dmi"></span>   
                       </div> 
                       <div class="panel-body">
@@ -291,7 +309,7 @@
       <!-- MSW forecast images -->
       <div class="row">
         <div class="col-sm-12">
-          <div class="panel-sq light">
+          <div class="panel light">
             <div class="panel-heading">
               <span class="panel-h light">Magicseaweed</span>
               <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
@@ -299,33 +317,33 @@
             </div>
             <div class="panel-body">
               <!-- Swell-->
-              <div class="col-sm-4">
-                <div class="panel-sq dark">
+              <div class="col-sm-4 col-fullwidth-xs">
+                <div class="panel dark">
                   <div class="panel-heading">
                     <span class="panel-h dark">Dønning </span>
-                    <span id="time-msw-swellheight-live" class="h4-text-light time-msw" data-forecasttime=""></span>  
+                    <span id="time-msw-swellheight-live" class="time-msw panel-h4 dark" data-forecasttime=""></span>  
                   </div> 
                   <div id="root-msw-wave"></div>
                   <div id="root-msw-wave-historic"></div>
                 </div> 
               </div>
               <!-- Period-->
-              <div class="col-sm-4">
-                <div class="panel-sq dark">
+              <div class="col-sm-4 col-fullwidth-xs">
+                <div class="panel dark">
                   <div class="panel-heading">
                     <span class="panel-h dark">Periode </span>  
-                    <span id="time-msw-swellperiod-live" class="h4-text-light time-msw" data-forecasttime=""></span>
+                    <span id="time-msw-swellperiod-live" class="time-msw panel-h4 dark" data-forecasttime=""></span>
                   </div> 
                   <div id="root-msw-period"></div>
                   <div id="root-msw-period-historic"></div>
                 </div> 
               </div>
                 <!-- Wind-->
-                <div class="col-sm-4">
-                  <div class="panel-sq dark">
+                <div class="col-sm-4 col-fullwidth-xs">
+                  <div class="panel dark">
                     <div class="panel-heading">
                       <span class="panel-h dark">Vind </span>
-                      <span id="time-msw-wind-live" class="h4-text-light time-msw" data-forecasttime=""></span>  
+                      <span id="time-msw-wind-live" class="time-msw panel-h4 dark" data-forecasttime=""></span>  
                     </div> 
                     <div id="root-msw-wind"></div>
                     <div id="root-msw-wind-historic"></div>
@@ -339,14 +357,14 @@
       <!-- YR forecast images -->
       <div class="row">
         <div class="col-sm-12">
-          <div class="panel-sq light">
+          <div class="panel light">
             <div class="panel-heading">
               <span class="panel-h light">Yr</span>
               <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
             </div>
             <div class="panel-body">
-              <div class="col-sm-6">
-                <div class="panel-sq dark">
+              <div class="col-sm-6 col-fullwidth-xs">
+                <div class="panel dark">
                   <div class="panel-heading">
                     <span class="panel-h dark">Skagerak</span>
                   </div> 
@@ -358,8 +376,8 @@
                   <div id="yr-skagerak-historic"></div>
                 </div>
               </div>
-              <div class="col-sm-6">
-                  <div class="panel-sq dark">
+              <div class="col-sm-6 col-fullwidth-xs">
+                  <div class="panel dark">
                     <div class="panel-heading">
                       <span class="panel-h dark">Saltstein</span>
                     </div> 
@@ -379,7 +397,7 @@
       <!-- Saltstein webcam -->
       <div class="row">
         <div class="col-sm-12">
-          <div class="panel-sq light">
+          <div class="panel light">
             <div class="panel-heading">
               <span class="panel-h light">Webkamera</span>
               <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
@@ -400,14 +418,14 @@
       <!-- Reports -->
       <div class="row">
         <div class="col-sm-12">
-          <div class="panel-sq light">
+          <div class="panel light">
             <div class="panel-heading">
               <span class="panel-h light">Rapporter</span>
               <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
               <span class="glyphicon glyphicon-filter i-tool pull-right" data-toggle="modal" data-target="#modal-report-filter"></span>
             </div>
             <div class="panel-body">
-              <div class="col-sm-6">
+              <div class="col-sm-6 col-fullwidth-xs">
                 <div id="report-container">
                   <span class="report-title">Velg en rapport fra listen</span>
                 </div>
@@ -426,7 +444,7 @@
   
     <!-- Footer -->
     <footer class="container-fluid text-center my-footer">
-      <div class="panel-sq panel-default my-footer">
+      <div class="panel panel-default my-footer">
         <div class="panel-footer">
           <div class="glyphicon glyphicon-globe"></div>
           <div id="sun"></div>

@@ -26,7 +26,7 @@ function stationCell(f) {
 
 function windObsToRow(f) {
   let cells = [
-    el('td', 'td-l', moment(f.localtime).format('HH'))
+    el('td', 'td-s', moment(f.localtime).format('HH'))
   ];
 
   for (let key of Object.keys(f.stations)) {

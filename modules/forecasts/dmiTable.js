@@ -45,7 +45,7 @@ function dmiForecastToRow(forecast) {
   let emphasis = (isDayTime(forecast.localtime)) ? 'emphasis-row' : '';
   return (
     el('tr', `forecast-table-row ${cls} ${emphasis}`, [
-      el('td', 'td-l', moment(forecast.localtime).format('HH')),
+      el('td', 'td-s', moment(forecast.localtime).format('HH')),
       paramCell(forecast, 'waveheight'),
       paramCell(forecast, 'waveperiod'),
       paramCell(forecast, 'swellheight'),

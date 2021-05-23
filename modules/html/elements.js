@@ -110,7 +110,7 @@ export function tempTd(temperature) {
   let cls = (temperature < 0) ? 'temp-freeze' : 'temp-warm';
   
   return (
-    el('td', 'td-flex', 
+    el('td', 'td-s', 
       el ('div', cls, [ 
         el('span', 'td-value', String(Math.round(temperature))),
         el('span', 'td-unit-temp', '°')

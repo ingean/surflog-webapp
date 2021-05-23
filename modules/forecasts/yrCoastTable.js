@@ -11,8 +11,8 @@ function yrCoastForecastToRow(f) {
   let emphasis = (isDayTime(f.start)) ? 'emphasis-row' : '';
   return (
     el('tr', `forecast-table-row ${emphasis}`, [
-      el('td', 'td-l', moment(f.start).format('HH')),
-      el('td', 'td-l', weatherImg(f.symbolCode.next1Hour)),
+      el('td', 'td-s', moment(f.start).format('HH')),
+      el('td', 'td-s', weatherImg(f.symbolCode.next1Hour)),
       tempTd(f.temperature.value),
       el('td', 'td-l', [ //Wave height and direction
         el('span', 'td-value', display(f.sea.wave, 'height')),
