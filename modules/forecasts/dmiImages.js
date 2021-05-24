@@ -52,16 +52,16 @@ function dmiStartTime(){ //Estimates the start time for forecast coming live fro
   return moment(date).format(`YYYY-MM-DDT${hr}:00:00`);
 }
 
-export function setDMITime(date) {
-  document.querySelectorAll('.time-dmi')
+export function setDMITime(date, cls = '.time-dmi') {
+  document.querySelectorAll(cls)
   .forEach(el => {
     el.textContent = moment(date).calendar(null, {sameElse: 'DD.MM.YYYY HH:mm'});
     el.dataset.forecastTime = moment(date).format('YYYY-MM-DDTHH:mm');
   })
 }
 
-export function getDMITime() {
-  let el = document.querySelector('.time-dmi')
+export function getDMITime(cls = '.time-dmi') {
+  let el = document.querySelector(cls)
   return moment(el.dataset.forecastTime).toDate();
 }
 

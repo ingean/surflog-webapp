@@ -22,7 +22,7 @@ function setMSWImgs(){
     let type = (fc === 'wind') ? 'gfs' : 'wave';
     let subtype = (fc === 'wind') ? '4' : (fc === 'wave') ? '24' : '25';
     let url = `${urlMSWForecasts}${type}/${date}/940/7-${unixTime}-${subtype}.gif`;
-    document.querySelector(`#root-msw-${fc}`).replaceChildren(imgBrowser(`msw-${fc}`, url, ''));
+    document.querySelector(`#msw-${fc}`).replaceChildren(...imgBrowser(`img-msw-${fc}`, url, ''));
   })
 }
 

@@ -13,6 +13,7 @@ import { getDMIForecast } from './forecasts/dmiTable.js';
 import { initDMIImages } from './forecasts/dmiImages.js';   
 import { initMSWImages } from './forecasts/mswImages.js';
 import { getUKForecast } from './forecasts/ukTable.js';
+import { initTwin } from './reports/compareReports.js';
 
 
 
@@ -21,6 +22,7 @@ export async function startSurfLog(userId) {
   initWebcam(); //Lazy load and add eventhandlers to webcam tools
   initDMIImages(); //Add click events for img nav btns and set time
   initMSWImages();
+  initTwin();
   
   //Settings
   await getSettings(userId); //Get settings, statistics and sun up/down

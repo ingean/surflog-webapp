@@ -12,12 +12,14 @@ function navBtn(navDir = 'prev') {
                   el('span', `glyphicon glyphicon-chevron-${dir}`))
   
   navBtn.addEventListener('click', e => {onImgBrowse(e, navDir)})
+  return navBtn;
 }
 
 export function imgBrowser(id, src, classes) {
-  return el('div', {id: id}, [
-    el('img', {id: `img-${id}`, src: src, class: classes}),
-    navBtn('prev'),
-    navBtn('next')
-  ]);
+  let html = [el('img', {id: id, src: src, class: classes})];
+  if (!id.includes('yr')) {
+    html.push(navBtn('prev'));
+    html.push(navBtn('next'));
+  } 
+  return html;
 }

@@ -70,6 +70,11 @@
               <input type="date" id="application-date" class="form-control">
             </div>
           </form>
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <button type="button" id="report-twin-btn" class="form-control"><span class="glyphicon glyphicon-duplicate"></span></button>
+            </div>
+          </form>
           <ul class="nav navbar-nav navbar-right">
             <li>
               <img id="navbar-profile-img" href="#" data-toggle="popover" 
@@ -221,7 +226,7 @@
               <div class="panel-body">
                 <!-- Waveheight and period-->
                 <div class="col-lg-4 col-fullwidth-xs">
-                  <div class="panel dark">
+                  <div id="dmi-waveheight-panel" class="panel dark">
                     <div class="panel-heading">
                       <span class="panel-h dark">Bølger</span>
                       <span class="time-dmi panel-h4 dark"></span>  
@@ -232,25 +237,26 @@
                       </div>
                     </div> 
                     <div class="panel-body">
-                      <div id="dmi-wave-live" data-forecasttype="waveheight" data-forecastprovider="DMI">
-                        <img id="img-dmi-wave-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hs.idf.1.png" />
-                        <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
-                          <span class="glyphicon glyphicon-chevron-left"></span>
-                        </button>
-                        <button class="panel-btn-nav forecast-nav-dmi next" type="button">
-                          <span class="glyphicon glyphicon-chevron-right"></span>
-                        </button> 
+                      <div class="container-relative">
+                        <div id="dmi-wave-live" data-forecasttype="waveheight" data-forecastprovider="DMI">
+                          <img id="img-dmi-wave-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hs.idf.1.png" />
+                          <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                          </button>
+                          <button class="panel-btn-nav forecast-nav-dmi next" type="button">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                          </button> 
+                        </div>
                       </div>
-                      <div id="dmi-wave-historic"></div>
-                    </div>
-                    <div class="panel-footer">
-                      <span id="forecast-dmi-wave-stats" class="panel-h dark"></span>   
+                      <div class="container-relative">
+                        <div id="dmi-waveheight-historic"></div>
+                      </div>
                     </div>
                   </div> 
                 </div>
                 <!-- Swellheight and period-->
                 <div class="col-lg-4 col-fullwidth-xs">
-                    <div class="panel dark">
+                    <div id="dmi-swellheight-panel" class="panel dark">
                       <div class="panel-heading">
                         <span class="panel-h dark">Dønning</span>
                         <span class="time-dmi panel-h4 dark"></span>
@@ -261,45 +267,47 @@
                         </div>  
                       </div> 
                       <div class="panel-body">
-                        <div id="dmi-swell-live" data-forecasttype="swellheight" data-forecastprovider="DMI">
-                          <img id="img-dmi-swell-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hsw.idf.1.png" />
-                          <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                          </button>
-                          <button class="panel-btn-nav forecast-nav-dmi next" type="button">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                          </button> 
+                        <div class="container-relative">
+                          <div id="dmi-swell-live" data-forecasttype="swellheight" data-forecastprovider="DMI">
+                            <img id="img-dmi-swell-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hsw.idf.1.png" />
+                            <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
+                              <span class="glyphicon glyphicon-chevron-left"></span>
+                            </button>
+                            <button class="panel-btn-nav forecast-nav-dmi next" type="button">
+                              <span class="glyphicon glyphicon-chevron-right"></span>
+                            </button> 
+                          </div>
                         </div>
-                        <div id="dmi-swell-historic"></div>
-                      </div>
-                      <div class="panel-footer">
-                        <span id="forecast-dmi-swell-stats" class="panel-h dark"></span>   
+                        <div class="container-relative">
+                          <div id="dmi-swellheight-historic"></div>
+                        </div>
                       </div>
                     </div> 
                   </div>
                   <!-- Wind-->
                   <div class="col-lg-4 col-fullwidth-xs">
-                    <div class="panel dark">
+                    <div id="dmi-wind-panel" class="panel dark">
                       <div class="panel-heading">
                         <span class="panel-h dark">Vind</span>
                         <span class="time-dmi panel-h4 dark"></span>
                         <span class="score-dmi"></span>   
                       </div> 
                       <div class="panel-body">
-                        <div id="dmi-wind-live" data-forecasttype="wind" data-forecastprovider="DMI">
-                            <img id="img-dmi-wind-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/win.idf.1.png" />
-                            <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                            </button>
-                            <button class="panel-btn-nav forecast-nav-dmi next" type="button">
-                              <span class="glyphicon glyphicon-chevron-right"></span>
-                            </button> 
+                        <div class="container-relative">
+                          <div id="dmi-wind-live" data-forecasttype="wind" data-forecastprovider="DMI">
+                              <img id="img-dmi-wind-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/win.idf.1.png" />
+                              <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
+                                  <span class="glyphicon glyphicon-chevron-left"></span>
+                              </button>
+                              <button class="panel-btn-nav forecast-nav-dmi next" type="button">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                              </button> 
+                          </div>
                         </div>
-                        <div id="dmi-wind-historic"></div>
+                        <div class="container-relative">
+                          <div id="dmi-wind-historic"></div>
+                        </div>
                       </div>
-                      <div class="panel-footer">
-                        <span id="forecast-dmi-wind-stats" class="panel-h dark"></span>   
-                      </div> 
                     </div> 
                   </div>
               </div>
@@ -323,9 +331,15 @@
                   <div class="panel-heading">
                     <span class="panel-h dark">Dønning </span>
                     <span id="time-msw-swellheight-live" class="time-msw panel-h4 dark" data-forecasttime=""></span>  
-                  </div> 
-                  <div id="root-msw-wave"></div>
-                  <div id="root-msw-wave-historic"></div>
+                  </div>
+                  <div class="panel-body">
+                    <div class="container-relative">
+                      <div id="msw-swell-live" data-forecasttype="swellheight" data-forecastprovider="msw"></div>
+                    </div> 
+                    <div class="container-relative">
+                      <div id="msw-swell-historic"></div>
+                    </div>
+                  </div>
                 </div> 
               </div>
               <!-- Period-->
@@ -334,9 +348,15 @@
                   <div class="panel-heading">
                     <span class="panel-h dark">Periode </span>  
                     <span id="time-msw-swellperiod-live" class="time-msw panel-h4 dark" data-forecasttime=""></span>
-                  </div> 
-                  <div id="root-msw-period"></div>
-                  <div id="root-msw-period-historic"></div>
+                  </div>
+                  <span class="panel-body">
+                    <div class="container-relative">
+                      <div id="msw-period-live" data-forecasttype="swellperiod" data-forecastprovider="msw"></div>
+                    </div> 
+                    <div class="container-relative">
+                      <div id="msw-period-historic"></div>
+                    </div>
+                  </span>
                 </div> 
               </div>
                 <!-- Wind-->
@@ -345,9 +365,15 @@
                     <div class="panel-heading">
                       <span class="panel-h dark">Vind </span>
                       <span id="time-msw-wind-live" class="time-msw panel-h4 dark" data-forecasttime=""></span>  
+                    </div>
+                    <div class="panel-body">
+                      <div class="container-relative">
+                        <div id="msw-wind-live" data-forecasttype="wind" data-forecastprovider="msw"></div>
+                      </div>
+                      <div class="container-relative">
+                        <div id="msw-wind-historic"></div>
+                      </div>
                     </div> 
-                    <div id="root-msw-wind"></div>
-                    <div id="root-msw-wind-historic"></div>
                   </div> 
                 </div>
             </div>
@@ -365,26 +391,26 @@
             </div>
             <div class="panel-body">
               <div class="col-md-6 col-fullwidth-xs">
-                <div class="panel dark">
+                <div id="yr-skagerak-panel" class="panel dark">
                   <div class="panel-heading">
                     <span class="panel-h dark">Skagerak</span>
                   </div> 
                   <div class="panel-body">
                     <div id="yr-skagerak-live" class="scrollcontainer" data-forecasttype="Skagerak" data-forecastprovider="YR">
-                      <img id="img-yr-skagerak-live" class="fullwidth" src="https://www.yr.no/sted/Hav/58,26417_9,59732/marinogram.png" />
+                      <img id="img-yr-skagerak-live" class="img-yr" src="https://www.yr.no/sted/Hav/58,26417_9,59732/marinogram.png" />
                     </div>
                   </div>
                   <div id="yr-skagerak-historic"></div>
                 </div>
               </div>
               <div class="col-md-6 col-fullwidth-xs">
-                  <div class="panel dark">
+                  <div id="yr-saltstein-panel" class="panel dark">
                     <div class="panel-heading">
                       <span class="panel-h dark">Saltstein</span>
                     </div> 
                     <div class="panel-body">
                       <div id="yr-saltstein-live" class="scrollcontainer" data-forecasttype="Saltstein" data-forecastprovider="YR">
-                          <img id="img-yr-saltstein-live" class="fullwidth" src="https://www.yr.no/sted/Hav/58,89305_9,87906/marinogram.png" />
+                          <img id="img-yr-saltstein-live" class="img-yr" src="https://www.yr.no/sted/Hav/58,89305_9,87906/marinogram.png" />
                       </div>
                     </div>
                     <div id="yr-saltstein-historic"></div>

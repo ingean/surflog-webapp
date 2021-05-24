@@ -1,5 +1,7 @@
 import { log, notify } from './logger.js';
 import { urlAPI, urlYr, urlSunTimes, forecastSources } from '../config/datasources.js';
+import { selectedSpot } from '../html/spotInput.js';
+import { getDMITime } from '../forecasts/dmiImages.js';
 
 function makeUrl(url) {
   return (url.includes('http') ? url : `${urlAPI}${url}`)
@@ -81,4 +83,14 @@ export async function getUKCoast() {
     requests.push(get(`${baseUrl}${l.id}?res=3hourly&key=${key}`));
   })
   return Promise.all(requests);
+}
+
+export function getTwin() {
+  let time = moment(getDMITime()).format('YYYY-MM-DDTHH:mm:ss');
+  return get(`${urlAPI}forecasts/dmi/${time}/twin?spot=${selectedSpot()}`);
+}
+
+export function getComparison(date) {
+  let time = moment(getDMITime()).format('YYYY-MM-DDTHH:mm:ss');
+  return get(`${urlAPI}forecasts/dmi/${time}/compare?timestamp=${moment(date).format('YYYY-MM-DDTHH:00:00')}`);
 }

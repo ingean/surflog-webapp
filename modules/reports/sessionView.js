@@ -2,11 +2,10 @@ import { el } from '../html/elements.js';
 import { carousel } from '../html/carousel.js';
 import { reportHeader, reportText, reportPage, reportFooter } from './reportView.js';
 import { settings } from '../settings.js';
-import { getDMITime } from '../forecasts/dmiImages.js';
+import { units } from '../config/lookups.js';
+import { comparisonReport } from './compareReports.js';
 
-export var twin = '';
-
-export function updateSessionView(report) {
+export async function updateSessionView(report) {
   document.getElementById('report-container').replaceChildren(
     el('div', {class: "report", "data-reportid": report.id}, [
       reportHeader(report), 
@@ -18,7 +17,7 @@ export function updateSessionView(report) {
             reportText('Kommentar', report.forecast),
             reportPage('Værforhold', sessionWeather(report)),
             reportPage('Brett', sessionBoard(report)),
-            reportPage('Tvillinginfo', sessionCompare(twin))
+            reportPage('Sammenlikning', await sessionCompare(report))
           ]
       })),
       reportFooter(report)
@@ -58,24 +57,32 @@ function sessionBoard(report) {
   }
 }
 
-function sessionCompare(report) { 
-  if (twin && report.reporttime === twin.reporttime) {  
-    return [
+async function sessionCompare(report) {
+  let compare = await comparisonReport(report.reporttime);
+  if (compare) {
+    let params = ['waveheight', 'waveperiod', 'swellheight', 'swellperiod', 'wind', 'swind'];
+    let elements = [
       el('div', "txt-report-title", "Sammenlikning"),
       el('p', "txt-report",
-        `${moment(getDMITime()).calendar()} er
-        det sannsynligvis ${twin.wavesize} bølger og ${twin.windspeed}
-        vind enn denne økta.`),
+        `For denne økta var det varslet ${compare.wavesize} bølger og ${compare.windspeed} vind enn ${moment(compare.forecasttime).calendar()}.`),
       el('div', "report-subtitle", "Detaljer"),
-      el('div', "report-twin-txt", `Bølgehøyde: ${twin.waveheight}m`),
-      el('div', "report-twin-txt", `Bølgeperiode: ${twin.waveperiod}s`),
-      el('div', "report-twin-txt", `Dønning: ${twin.swellheight}m`),
-      el('div', "report-twin-txt", `Periode: ${twin.swellperiod}s`),
-      el('div', "report-twin-txt", `Lokal vind: ${twin.wind}m/s`),
-      el('div', "report-twin-txt", `Vind: ${twin.swind}m/s`)
-    ]
+    ];
+
+    for (let param of params) {
+      let txt = format(compare, param);
+      if (txt) elements.push(el('div', 'report-twin-txt', txt)) 
+    }
+    return elements;
   } else {
     el('div', {id: 'report-twin-info'},
-      el('div', 'report-text', 'Her vises kun info hvis rapporten er tvilling til valgt tidspunkt'));
+      el('div', 'report-text', 'Klarte ikke å sammenlikne varsel for denne rapporten med valgt tidspunkt (tidspunkt satt for DMI-bilder)'));
   }
+}
+
+function format(comparisonReport, param) {
+  let value = comparisonReport[param].diff;
+  if (value === 0) return;
+  
+  let s = (value > 0) ? 'up' : 'down';
+  return `${units[param].caption} var ${value}${units[param].unit} ${units[param][s]}.`
 }

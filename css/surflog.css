@@ -68,6 +68,10 @@ body {
   overflow: hidden;
 }
 
+.img-yr {
+  width: 100%;
+}
+
 .fullwidth {
   width:100%;
 }

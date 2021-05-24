@@ -1,5 +1,6 @@
 import { notify } from '../utils/logger.js';
 import { getReport, getImages } from '../reports/getReports.js';
+import { updateHistoricImages } from '../forecasts/historicImages.js';
 
 const elementId = 'application-date';
 
@@ -14,20 +15,17 @@ export function initDateInput() {
   setDateInput(new Date());
 }
 
-export function dateChanged(datestring, id){
+export async function dateChanged(datestring, id){
   let date = moment(datestring).toDate();
   if (moment(date).isSameOrBefore(new Date(), 'day')){
-    getReport(date, id);
+    let report = await getReport(date, id);
     getImages(date);
       if (!moment(date).isSame(new Date(), 'day')){
-        //getForecasts(date);
+        updateHistoricImages(report, date);
       }
   } else { // Selected date is in the future
       notify('Det finnes ikke varsler for denne datoen');
   }
-
-  //getSunriseSet(date);
-  //getTides(date,'tab');   
 }
 
 export function setDateInput(date) {

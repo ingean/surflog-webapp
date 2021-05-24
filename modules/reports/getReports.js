@@ -21,10 +21,15 @@ export async function getTwin(date, spot = 'Saltstein', source = 'dmi') {
 
 export async function getReport(date, id) {
   let load = new Loader('report-container');
-  let url = (id) ? `reports/${id}` : `reports?reporttime=${moment(date).format('YYYY-MM-DD')}`;
+  let url = (id) ? `reports/${id}` : `reports?datestring=${moment(date).format('YYYY-MM-DD')}`;
   let reports = await get(url)
 
-  reports ? updateReportView(reports[0]) : load.stop();  
+  if (reports) {
+    updateReportView(reports[0])
+    return reports[0];
+  } else {
+    load.stop();
+  }   
 }
 
 export async function getReports(page = 1, query = '') {
