@@ -4,16 +4,16 @@ import { initSpotList } from './html/spotInput.js';
 import { getSettings} from './settings.js';
 import { createForms } from './html/form.js';
 import { initWebcam } from './html/webcam.js';
-import { addDeleteReportsEventHandlers } from './reports/deleteReport.js';
-import { getReports } from './reports/getReports.js';
-import { getWindObs } from './forecasts/windObsTable.js';
-import { getYrForecast } from './forecasts/yrTable.js';
-import { getSMHIForecast } from './forecasts/smhiTable.js';
-import { getDMIForecast } from './forecasts/dmiTable.js';
-import { initDMIImages } from './forecasts/dmiImages.js';   
-import { initMSWImages } from './forecasts/mswImages.js';
-import { getUKForecast } from './forecasts/ukTable.js';
-import { initTwin } from './reports/compareReports.js';
+import { addDeleteReportsEventHandlers } from './reports/delete.js';
+import { getReports } from './reports/read.js';
+import { getWindObs } from './forecasts/tables/windObs.js';
+import { getYrForecast } from './forecasts/tables/yr.js';
+import { getSMHIForecast } from './forecasts/tables/smhi.js';
+import { getDMIForecast } from './forecasts/tables/dmi.js';
+import { initDMIImages } from './forecasts/images/dmi.js';   
+import { initMSWImages } from './forecasts/images/msw.js';
+import { getUKForecast } from './forecasts/tables/uk.js';
+import { initTwin } from './reports/compare.js';
 
 
 

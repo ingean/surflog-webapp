@@ -1,7 +1,7 @@
-import { el, arrow } from '../html/elements.js';
-import { updateForecastTable, display } from './forecastTable.js';
-import { get } from '../utils/api.js';
-import { isDayTime } from '../utils/time.js';
+import { el, arrow } from '../../html/elements.js';
+import { updateForecastTable, display } from './forecast.js';
+import { get } from '../../utils/api.js';
+import { isDayTime } from '../../utils/time.js';
 
 
 

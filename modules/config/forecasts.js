@@ -2,6 +2,26 @@ import { selectedSpot } from '../html/spotInput.js';
 import { statistics } from '../settings.js';
 import { scoring } from './scoreModel.js';
 
+export const params = {
+  waveheight: {caption: 'Bølgehøyde', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
+  height: {caption: 'Bølgehøyde', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
+  waveperiod: {caption: 'Bølgeperiode', unit: 's', precision: 0, up: 'lengre', down: 'kortere'},
+  swellheight: {caption: 'Dønning', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
+  swellperiod: {caption: 'Dønning, periode', unit: 's', precision: 0, up: 'lengre', down: 'kortere'},
+  wind: {caption: 'Vind', unit: 'm/s', precision: 0, up: 'mer', down: 'mindre'},
+  swind: {caption: 'Vind, Skagerak', unit: 'm/s', precision: 0, up: 'mer', down: 'mindre'},
+  windspeed: {caption: 'Vind', unit: 'm/s', precision: 0, up: 'mer', down: 'mindre'},
+  speed: {caption: 'Vind', unit: 'm/s', precision: 0, up: 'mer', down: 'mindre'},
+  gust: {caption: 'Vindkast', unit: 'm/s', precision: 0, up: 'mer', down: 'mindre'},
+  waveheightforecast: {caption: 'Bølgehøyde, varsel', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
+  waveheightmax: {caption: 'Bølgehøyde, maks', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
+  wavedir: {caption: 'Bølgeretning', unit: '', precision: 0},
+  currentSpeed: {caption: 'Strøm', unit: 'cm/s', precision: 0, up: 'sterkere', down: 'svakere'},
+  pressure: {caption: 'Lufttrykk', unit: 'hpa', precision: 0, up: 'høyere', down: 'lavere'},
+  skagerak: {caption: 'Skagerak'},
+  saltstein: {caption: 'Saltstein'}
+};
+
 const direction = [
   {low: 348.75, mid:0, high: 360, short: "N", caption: "nord"}, 
   {low: 0, mid: 0, high: 11.25, short: "N", caption: "nord"},
@@ -143,4 +163,48 @@ export function getScoreCategory(forecast, fc) {
   let s = getTotalPoints(forecast, fc);
   
   return (s > 46) ? 5 : (s > 35) ? 4 : (s > 30) ? 3 : (s > 26) ? 2 : (s > 17) ? 1 : 0;
+}
+
+export const weatherIcons = {
+  clearsky: '01',
+  fair: '02',
+  partlycloudy: '03',
+  cloudy: '04',
+  lightrainshowers: '40',
+  rainshowers: '05',
+  heavyrainshowers: '41',
+  lightrainshowersandthunder: '24',
+  rainshowersandthunder: '06',
+  heavyrainshowersandthunder: '25',
+  lightsleetshowers: '42',
+  sleetshowers: '07',
+  heavysleetshowers: '43',
+  lightsleetshowersandthunder: '26',
+  sleetshowersandthunder: '20',
+  heavysleetshowersandthunder: '27',
+  lightsnowshowers: '44',
+  snowshowers: '08',
+  heavysnowshowers: '45',
+  lightsnowshowersandthunder: '28',
+  snowshowersandthunder: '21',
+  heavysnowshowersandthunder: '29',
+  lightrain: '46',
+  rain: '09',
+  heavyrain: '10',
+  lightrainandthunder: '30',
+  rainandthunder: '22',
+  heavyrainandthunder: '11',
+  lightsleet: '47',
+  sleet: '12',
+  heavysleet: '48',
+  lightsleetandthunder: '31',
+  sleetandthunder: '23',
+  heavysleetandthunder: '32',
+  lightsnow: '49',
+  snow: '13',
+  heavysnow: '50',
+  lightsnowandthunder: '33',
+  snowandthunder: '14',
+  heavysnowandthunder: '34',
+  fog: '15'
 }

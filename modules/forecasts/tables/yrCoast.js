@@ -1,7 +1,7 @@
-import { el, arrow, weatherImg, tempTd, hrsTd } from '../html/elements.js';
-import { updateForecastTable, display } from './forecastTable.js';
-import { getYrCoast } from '../utils/api.js';
-import { isDayTime } from '../utils/time.js';
+import { el, arrow, weatherImg, tempTd, hrsTd } from '../../html/elements.js';
+import { updateForecastTable, display } from './forecast.js';
+import { getYrCoast } from '../../utils/api.js';
+import { isDayTime } from '../../utils/time.js';
 
 
 const headers = ['Tid', 'Vær', 'Temp', 'Bølger', 'Vind (byge)', 'Strøm', 'Vanntemp'];

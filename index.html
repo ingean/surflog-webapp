@@ -231,15 +231,15 @@
                       <span class="panel-h dark">Bølger</span>
                       <span class="time-dmi panel-h4 dark"></span>  
                       <span class="score-dmi"></span>
-                      <div class="btn-group btn-group-sm pull-right">
-                        <button type="button" class="btn btn-default active">Høyde</button>
-                        <button type="button" class="btn btn-default">Periode</button>
+                      <div class="btn-group btn-group-sm pull-right param-switch-dmi">
+                        <button id="switch-dmi-wave-height" type="button" class="btn btn-default active">Høyde</button>
+                        <button id="switch-dmi-wave-period" type="button" class="btn btn-default">Periode</button>
                       </div>
                     </div> 
                     <div class="panel-body">
                       <div class="container-relative">
-                        <div id="dmi-wave-live" data-forecasttype="waveheight" data-forecastprovider="DMI">
-                          <img id="img-dmi-wave-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hs.idf.1.png" />
+                        <div id="dmi-waveheight-live">
+                          <img id="img-dmi-waveheight-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hs.idf.1.png" />
                           <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
                             <span class="glyphicon glyphicon-chevron-left"></span>
                           </button>
@@ -261,15 +261,15 @@
                         <span class="panel-h dark">Dønning</span>
                         <span class="time-dmi panel-h4 dark"></span>
                         <span class="score-dmi"></span> 
-                        <div class="btn-group btn-group-sm pull-right">
-                          <button type="button" class="btn btn-default active">Høyde</button>
-                          <button type="button" class="btn btn-default">Periode</button>
+                        <div class="btn-group btn-group-sm pull-right param-switch-dmi">
+                          <button id="switch-dmi-swell-height" type="button" class="btn btn-default active">Høyde</button>
+                          <button id="switch-dmi-swell-period" type="button" class="btn btn-default">Periode</button>
                         </div>  
                       </div> 
                       <div class="panel-body">
                         <div class="container-relative">
-                          <div id="dmi-swell-live" data-forecasttype="swellheight" data-forecastprovider="DMI">
-                            <img id="img-dmi-swell-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hsw.idf.1.png" />
+                          <div id="dmi-swellheight-live">
+                            <img id="img-dmi-swellheight-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/hsw.idf.1.png" />
                             <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
                               <span class="glyphicon glyphicon-chevron-left"></span>
                             </button>
@@ -294,7 +294,7 @@
                       </div> 
                       <div class="panel-body">
                         <div class="container-relative">
-                          <div id="dmi-wind-live" data-forecasttype="wind" data-forecastprovider="DMI">
+                          <div id="dmi-wind-live">
                               <img id="img-dmi-wind-live" class="img-dmi" src="http://ocean.dmi.dk/anim/plots/win.idf.1.png" />
                               <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
                                   <span class="glyphicon glyphicon-chevron-left"></span>
@@ -334,7 +334,7 @@
                   </div>
                   <div class="panel-body">
                     <div class="container-relative">
-                      <div id="msw-swell-live" data-forecasttype="swellheight" data-forecastprovider="msw"></div>
+                      <div id="msw-swell-live"></div>
                     </div> 
                     <div class="container-relative">
                       <div id="msw-swell-historic"></div>
@@ -351,7 +351,7 @@
                   </div>
                   <span class="panel-body">
                     <div class="container-relative">
-                      <div id="msw-period-live" data-forecasttype="swellperiod" data-forecastprovider="msw"></div>
+                      <div id="msw-period-live"></div>
                     </div> 
                     <div class="container-relative">
                       <div id="msw-period-historic"></div>
@@ -368,7 +368,7 @@
                     </div>
                     <div class="panel-body">
                       <div class="container-relative">
-                        <div id="msw-wind-live" data-forecasttype="wind" data-forecastprovider="msw"></div>
+                        <div id="msw-wind-live"></div>
                       </div>
                       <div class="container-relative">
                         <div id="msw-wind-historic"></div>
@@ -396,7 +396,7 @@
                     <span class="panel-h dark">Skagerak</span>
                   </div> 
                   <div class="panel-body">
-                    <div id="yr-skagerak-live" class="scrollcontainer" data-forecasttype="Skagerak" data-forecastprovider="YR">
+                    <div id="yr-skagerak-live">
                       <img id="img-yr-skagerak-live" class="img-yr" src="https://www.yr.no/sted/Hav/58,26417_9,59732/marinogram.png" />
                     </div>
                   </div>
@@ -409,7 +409,7 @@
                       <span class="panel-h dark">Saltstein</span>
                     </div> 
                     <div class="panel-body">
-                      <div id="yr-saltstein-live" class="scrollcontainer" data-forecasttype="Saltstein" data-forecastprovider="YR">
+                      <div id="yr-saltstein-live">
                           <img id="img-yr-saltstein-live" class="img-yr" src="https://www.yr.no/sted/Hav/58,89305_9,87906/marinogram.png" />
                       </div>
                     </div>

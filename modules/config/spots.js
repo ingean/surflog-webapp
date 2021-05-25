@@ -1,21 +1,3 @@
-export const units = {
-  waveheight: {caption: 'Bølgehøyde', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
-  height: {caption: 'Bølgehøyde', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
-  waveperiod: {caption: 'Bølgeperiode', unit: 's', precision: 0, up: 'lengre', down: 'kortere'},
-  swellheight: {caption: 'Dønning', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
-  swellperiod: {caption: 'Dønning, periode', unit: 's', precision: 0, up: 'lengre', down: 'kortere'},
-  wind: {caption: 'Vind', unit: 'm/s', precision: 0, up: 'mer', down: 'mindre'},
-  swind: {caption: 'Vind, Skagerak', unit: 'm/s', precision: 0, up: 'mer', down: 'mindre'},
-  windspeed: {caption: 'Vind', unit: 'm/s', precision: 0, up: 'mer', down: 'mindre'},
-  speed: {caption: 'Vind', unit: 'm/s', precision: 0, up: 'mer', down: 'mindre'},
-  gust: {caption: 'Vindkast', unit: 'm/s', precision: 0, up: 'mer', down: 'mindre'},
-  waveheightforecast: {caption: 'Bølgehøyde, varsel', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
-  waveheightmax: {caption: 'Bølgehøyde, maks', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
-  wavedir: {caption: 'Bølgeretning', unit: '', precision: 0},
-  currentSpeed: {caption: 'Strøm', unit: 'cm/s', precision: 0, up: 'sterkere', down: 'svakere'},
-  pressure: {caption: 'Lufttrykk', unit: 'hpa', precision: 0, up: 'høyere', down: 'lavere'},
-};
-
 export const spotIds = {
   'Saltstein': {msw: {id: 556}, yr: {id: '1-2275034', name: 'Nevlungstranda'}},
   'Esso': {msw: {id: 556, name: 'Saltstein'}, yr: {id: '5-17280', name: 'Gullholmen'}},
@@ -75,47 +57,5 @@ export const spotIds = {
   'Inside Grupuk': {msw: {id: 4126}}
 }
 
-export const yrImgs = {
-  clearsky: '01',
-  fair: '02',
-  partlycloudy: '03',
-  cloudy: '04',
-  lightrainshowers: '40',
-  rainshowers: '05',
-  heavyrainshowers: '41',
-  lightrainshowersandthunder: '24',
-  rainshowersandthunder: '06',
-  heavyrainshowersandthunder: '25',
-  lightsleetshowers: '42',
-  sleetshowers: '07',
-  heavysleetshowers: '43',
-  lightsleetshowersandthunder: '26',
-  sleetshowersandthunder: '20',
-  heavysleetshowersandthunder: '27',
-  lightsnowshowers: '44',
-  snowshowers: '08',
-  heavysnowshowers: '45',
-  lightsnowshowersandthunder: '28',
-  snowshowersandthunder: '21',
-  heavysnowshowersandthunder: '29',
-  lightrain: '46',
-  rain: '09',
-  heavyrain: '10',
-  lightrainandthunder: '30',
-  rainandthunder: '22',
-  heavyrainandthunder: '11',
-  lightsleet: '47',
-  sleet: '12',
-  heavysleet: '48',
-  lightsleetandthunder: '31',
-  sleetandthunder: '23',
-  heavysleetandthunder: '32',
-  lightsnow: '49',
-  snow: '13',
-  heavysnow: '50',
-  lightsnowandthunder: '33',
-  snowandthunder: '14',
-  heavysnowandthunder: '34',
-  fog: '15'
-}
+
 

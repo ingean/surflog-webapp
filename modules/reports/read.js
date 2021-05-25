@@ -1,8 +1,8 @@
 import { log, notify, Loader } from '../utils/logger.js';
-import { updateReportList, updateReportsListPagination } from './reportsList.js';
-import { updateReportView} from './reportView.js';
+import { updateReportList, updateReportsListPagination } from './views/list.js';
+import { updateReportView} from './views/report.js';
 import { get } from '../utils/api.js';
-import { updateImageCarousels } from './imagesCarousel.js';
+import { updateImageCarousels } from './views/imagesCarousel.js';
 
 export async function getImages(date) {
   let datestring = moment(date).format('YYYY-MM-DD');

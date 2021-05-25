@@ -1,7 +1,7 @@
-import { el, arrow, hrsTd } from '../html/elements.js';
-import { updateForecastTable, display } from './forecastTable.js';
-import { get, queryTimespan } from '../utils/api.js';
-import { formatWindValue } from '../config/forecastFormat.js';
+import { el, arrow, hrsTd } from '../../html/elements.js';
+import { updateForecastTable, display } from './forecast.js';
+import { get, queryTimespan } from '../../utils/api.js';
+import { formatWindValue } from '../../config/forecasts.js';
 
 function getHeaders(forecast) {
   let headers = ['Tid'];

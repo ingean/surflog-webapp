@@ -1,9 +1,9 @@
-import { el, scoreLabel, hrsTd } from '../html/elements.js';
-import { updateForecastTable, display } from './forecastTable.js';
-import { get, queryTimespan } from '../utils/api.js';
-import { round } from '../utils/utilities.js';
-import { formatForecastValue, formatWindValue, getScoreCategory } from '../config/forecastFormat.js';
-import { isDayTime } from '../utils/time.js';
+import { el, scoreLabel, hrsTd } from '../../html/elements.js';
+import { updateForecastTable, display } from './forecast.js';
+import { get, queryTimespan } from '../../utils/api.js';
+import { round } from '../../utils/utilities.js';
+import { formatForecastValue, formatWindValue, getScoreCategory } from '../../config/forecasts.js';
+import { isDayTime } from '../../utils/time.js';
 
 const headers = ['Tid', 'Bølgehøyde', 'Bølgeperiode', 'Dønning', 'Dønning, periode', 'Wind', 'Score'];
 

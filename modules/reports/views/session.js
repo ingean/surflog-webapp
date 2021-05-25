@@ -1,9 +1,9 @@
-import { el } from '../html/elements.js';
-import { carousel } from '../html/carousel.js';
-import { reportHeader, reportText, reportPage, reportFooter } from './reportView.js';
-import { settings } from '../settings.js';
-import { units } from '../config/lookups.js';
-import { comparisonReport } from './compareReports.js';
+import { el } from '../../html/elements.js';
+import { carousel } from '../../html/carousel.js';
+import { reportHeader, reportText, reportPage, reportFooter } from './report.js';
+import { settings } from '../../settings.js';
+import { params } from '../../config/forecasts.js';
+import { comparisonReport } from '../compare.js';
 
 export async function updateSessionView(report) {
   document.getElementById('report-container').replaceChildren(
@@ -84,5 +84,5 @@ function format(comparisonReport, param) {
   if (value === 0) return;
   
   let s = (value > 0) ? 'up' : 'down';
-  return `${units[param].caption} var ${value}${units[param].unit} ${units[param][s]}.`
+  return `${params[param].caption} var ${value}${params[param].unit} ${params[param][s]}.`
 }

@@ -1,4 +1,4 @@
-import { formsOptions } from '../config/formsOptions.js';
+import { formsOptions } from '../config/forms.js';
 import { el, elFromHTML } from './elements.js';
 
 

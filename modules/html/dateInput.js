@@ -1,6 +1,6 @@
 import { notify } from '../utils/logger.js';
-import { getReport, getImages } from '../reports/getReports.js';
-import { updateHistoricImages } from '../forecasts/historicImages.js';
+import { getReport, getImages } from '../reports/read.js';
+import { updateHistoricImages } from '../forecasts/images/historic.js';
 
 const elementId = 'application-date';
 

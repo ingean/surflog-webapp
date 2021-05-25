@@ -1,8 +1,8 @@
-import { el, arrow, tempTd, hrsTd } from '../html/elements.js';
-import {getDirFromTxt} from '../config/forecastFormat.js';
-import { updateForecastTable, display } from './forecastTable.js';
-import { getUKCoast } from '../utils/api.js';
-import { isDayTime } from '../utils/time.js';
+import { el, arrow, tempTd, hrsTd } from '../../html/elements.js';
+import {getDirFromTxt} from '../../config/forecasts.js';
+import { updateForecastTable, display } from './forecast.js';
+import { getUKCoast } from '../../utils/api.js';
+import { isDayTime } from '../../utils/time.js';
 
 
 const headers = ['Tid', 'Temperatur', 'Lufttrykk', 'Vind', 'Bølgehøyde', 'Bølgeperiode', 'Vanntemp'];

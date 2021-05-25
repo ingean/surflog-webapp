@@ -1,5 +1,5 @@
-import { yrImgs } from '../config/lookups.js';
-import { getRating, getScoreCaption } from '../config/formsOptions.js';
+import { weatherIcons } from '../config/forecasts.js';
+import { getRating, getScoreCaption } from '../config/forms.js';
 
 function appendChildren(el, children) {
   if (typeof children === 'string' || typeof children === 'number') {
@@ -99,7 +99,7 @@ export function tideIcon(type, height = '24', width = '24') {
 export function weatherImg(yrCode) {
   let _pos = yrCode.indexOf('_')
   let firstPart = (_pos > -1) ? yrCode.substring(0, _pos) : yrCode;
-  let prefix = yrImgs[firstPart];
+  let prefix = weatherIcons[firstPart];
   let suffix = (_pos > -1 ) ? yrCode.substr(_pos + 1, 1) : '';
   let src = `${prefix}${suffix}.svg`;
 

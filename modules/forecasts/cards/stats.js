@@ -1,7 +1,7 @@
-import { el } from '../html/elements.js';
-import { statistics } from '../settings.js';
-import { round } from '../utils/utilities.js';
-import { units } from '../config/lookups.js';
+import { el } from '../../html/elements.js';
+import { statistics } from '../../settings.js';
+import { round } from '../../utils/utilities.js';
+import { params } from '../../config/forecasts.js';
 
 const cCls = 'td-m';
 const headers = ['min', 'avg - std', 'avg', 'avg + std', 'max', 'std'];
@@ -27,7 +27,7 @@ function getValues(stats, param) {
 
 
 function cell(v1, v2, param) {
-  let u = units[param.id];
+  let u = params[param.id];
   v1 = (v1) ? `${round(v1, u.precision)} ${u.unit}` : null;
   v2 = (v2) ? ` (${round(v2, u.precision)} ${u.unit})` : null;
   return el('div', cCls, [

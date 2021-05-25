@@ -1,7 +1,7 @@
 import { log, notify } from '../utils/logger.js';
 import { user } from '../settings.js';
 import { post } from '../utils/api.js';
-import { getReports } from './getReports.js';
+import { getReports } from './read.js';
 
 function resetForm(form) {
   let modalId = form.id.replace('form', 'modal');

@@ -1,6 +1,6 @@
-import { el } from '../html/elements.js';
-import { units } from '../config/lookups.js';
-import { round } from '../utils/utilities.js';
+import { el } from '../../html/elements.js';
+import { params } from '../../config/forecasts.js';
+import { round } from '../../utils/utilities.js';
  
 const dateFormat = {
   lastDay : '[I går]',
@@ -38,7 +38,7 @@ function forecastRows(forecast, forecastToRow) {
 
 export function display(f, param, secondary = false, lookupAlias) {
   let lu = lookupAlias || param;
-  let u = units[lu];
+  let u = params[lu];
   let v = round(f[param], u.precision);
   let p1 = '', p2 = '', p3 = '';
   if (secondary) {

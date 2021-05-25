@@ -1,9 +1,9 @@
-import { el, scoreLabel, icon } from '../html/elements.js';
-import { dateChanged } from '../html/dateInput.js';
-import { getRating } from '../config/formsOptions.js';
-import { imgSrc } from '../utils/utilities.js';
-import { getReports } from './getReports.js';
-import { get } from '../utils/api.js';
+import { el, scoreLabel, icon } from '../../html/elements.js';
+import { dateChanged } from '../../html/dateInput.js';
+import { getRating } from '../../config/forms.js';
+import { imgSrc } from '../../utils/utilities.js';
+import { get } from '../../utils/api.js';
+import { getReports } from '../read.js';
 
 function reportIcon(report) {
   let str = (report.type === 'Session') ? report.type : report.source;

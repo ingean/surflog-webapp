@@ -1,6 +1,6 @@
 import { log, notify, Loader } from '../utils/logger.js';
 import  { del } from '../utils/api.js';
-import { getReports } from './getReports.js';
+import { getReports } from './read.js';
 import { el } from '../html/elements.js';
 
 function emptyReportView() {

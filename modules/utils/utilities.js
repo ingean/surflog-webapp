@@ -25,3 +25,14 @@ export function round(value, precision) {
   let multiplier = Math.pow(10, precision || 0);
   return Math.round(value * multiplier) / multiplier;
 }
+
+export function capitalize(s) {
+  if (typeof s !== 'string') return ''
+  return s.charAt(0).toUpperCase() + s.slice(1)
+}
+
+export function toggleActive(el) { //Argument is button to be active
+  let siblings = Array.from(el.parentElement.children); //Buttom group element
+  siblings.forEach(s => s.classList.remove('active'))
+  el.classList.add('active')
+}

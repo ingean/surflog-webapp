@@ -1,10 +1,10 @@
 import { el } from './elements.js';
 import { modal } from './modal.js';
 import { get } from '../utils/api.js';
-import { formsOptions , tabNames} from '../config/formsOptions.js'; 
+import { formsOptions , tabNames} from '../config/forms.js'; 
 import { formGroup, updateLocationDropdown } from './formGroup.js';
-import { postReport} from '../reports/postReport.js';
-import { filterReportsList } from '../reports/reportsList.js';
+import { postReport} from '../reports/create.js';
+import { filterReportsList } from '../reports/views/list.js';
 
 function cancelForm(form) {
   form.reset();

@@ -1,9 +1,9 @@
-import { reportScore, conditionsDetails } from './reportsList.js';
-import { updateSessionView } from './sessionView.js';
-import { updateObservationView } from './observationView.js';
-import { el } from '../html/elements.js';
-import { spotIds } from '../config/lookups.js';
-import { urlMSW } from '../config/datasources.js';
+import { el } from '../../html/elements.js';
+import { spotIds } from '../../config/spots.js';
+import { urlMSW } from '../../config/datasources.js';
+import { reportScore, conditionsDetails } from './list.js';
+import { updateSessionView } from './session.js';
+import { updateObservationView } from './observation.js';
 
 function tide(report) {
   if(report.type === 'Session') {

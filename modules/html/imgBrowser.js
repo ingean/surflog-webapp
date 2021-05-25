@@ -1,9 +1,15 @@
 import { el } from './elements.js';
+import { navImages } from '../forecasts/images/forecast.js';
 
 function onImgBrowse(e, navDir) {
-  let imgId = e.target.previousElementSibling.id;
+  let img = e.target.parentNode.firstChild;
+  img = (img.id === '') ? img.parentNode.parentNode.firstChild : img;
+
+  let imgId = img.id;
   let source = imgId.split('-')[1];
   let type = imgId.split('-')[2];
+  let time = imgId.split('-')[3];
+  navImages(source, type, time, navDir);
 }
 
 function navBtn(navDir = 'prev') {

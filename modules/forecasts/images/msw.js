@@ -1,4 +1,4 @@
-import { urlMSWForecasts } from '../config/datasources.js';
+import { urlMSWForecasts } from '../../config/datasources.js';
 
 function setMSWTime(date) {
   document.querySelectorAll('.time-msw')

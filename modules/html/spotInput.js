@@ -1,11 +1,11 @@
-import { spotIds } from '../config/lookups.js';
-import { formsOptions } from '../config/formsOptions.js';
+import { spotIds } from '../config/spots.js';
+import { formsOptions } from '../config/forms.js';
 import { el } from '../html/elements.js';
 import { formSelectInput } from '../html/formGroup.js';
-import { updateStationCard } from '../forecasts/stationCard.js';
-import { updateDMICard } from '../forecasts/dmiStatsCard.js';
-import { updateSMHICard } from '../forecasts/smhiStatsCard.js';
-import { getYrCoastForecast } from '../forecasts/yrCoastTable.js'; 
+import { updateStationCard } from '../forecasts/cards/station.js';
+import { updateDMICard } from '../forecasts/cards/dmiStats.js';
+import { updateSMHICard } from '../forecasts/cards/smhiStats.js';
+import { getYrCoastForecast } from '../forecasts/tables/yrCoast.js'; 
 
 function clearInput(e) {
   let input = e.target.parentElement.parentElement.nextElementSibling;

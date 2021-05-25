@@ -1,8 +1,8 @@
-import { el, arrow, hrsTd } from '../html/elements.js';
-import { updateForecastTable, display } from './forecastTable.js';
-import { get } from '../utils/api.js';
-import { formatForecastValue } from '../config/forecastFormat.js';
-import { isDayTime } from '../utils/time.js';
+import { el, arrow, hrsTd } from '../../html/elements.js';
+import { updateForecastTable, display } from './forecast.js';
+import { get } from '../../utils/api.js';
+import { formatForecastValue } from '../../config/forecasts.js';
+import { isDayTime } from '../../utils/time.js';
 
 
 const headers = ['Tid', 'Bølger', 'Periode', 'Bølgevarsel'];

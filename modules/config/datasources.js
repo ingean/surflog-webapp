@@ -5,21 +5,16 @@ export const urlMSW = 'https://magicseaweed.com/';
 export const urlMSWForecasts = 'https://charts-s3.msw.ms/archive/';
 export const urlSunTimes = 'https://api.sunrise-sunset.org/json';
 
-export const forecastSources = { 
+export const forecasts = { 
   surflog: {
-    url: "https://storage.googleapis.com/fcasts/",
-    suffix: ".png",                    
-    waveheight: "Waveheight",
-    waveperiod: "Waveperiod",
-    swellheight: "Swellheight",
-    swellperiod: "Swellperiod",
-    wind: "Wind",
-    skagerak: "Skagerak",
-    saltstein: "Saltstein"
+    imgUrl: "https://storage.googleapis.com/fcasts/",
+    imgSuffix: ".png",
+    params: ['waveheight', 'waveperiod', 'swellheight', 'swellperiod', 'wind', 'skagerak', 'saltstein']                    
   },
-  dmi: {
-    url: "http://ocean.dmi.dk/anim/plots/",
-    suffix: "idf.1.png",
+  dmi: { 
+    imgUrl: "http://ocean.dmi.dk/anim/plots/",
+    imgSuffix: "idf.1.png",
+    params: ['waveheight', 'waveperiod', 'swellheight', 'swellperiod', 'wind'],   
     waveheight: "hs.",
     waveperiod: "tp.",
     swellheight: "hsw.",
@@ -27,21 +22,23 @@ export const forecastSources = {
     wind: "win."
   },
   msw : {
-    url: "https://charts-s3.msw.ms/archive/wave/940/7-",
-    windurl: "https://charts-s3.msw.ms/archive/gfs/940/7-",
-    suffix: ".gif",
+    imgUrl: "https://charts-s3.msw.ms/archive/wave/940/7-",
+    imgwUrlWind: "https://charts-s3.msw.ms/archive/gfs/940/7-",
+    imgSuffix: ".gif",
+    params: ['swellheight', 'swellperiod', 'wind'],
     swellheight: "-1",
     wind: "-4",
     swellperiod: "-2"},
   yr: {
-    url: "https://www.yr.no/sted/Hav/",
-    suffix: "/marinogram.png",
+    imgUrl: "https://www.yr.no/sted/Hav/",
+    imgSuffix: "/marinogram.png",
+    params: ['skagerak', 'saltstein'],
     saltstein: "58,89305_9,87906",
     skagerak: "58,26417_9,59732"
   },
   uk: {
     url: "http://datapoint.metoffice.gov.uk/public/data/val/wxmarineobs/all/json/",
     apiKey: "5ae6dfd7-726f-4873-ba73-1651ff663a8e",
-    locations: [{id:'162304', name: 'Sandettie'},{id: '162170', name: 'F3'}]
+    locations: [{id:'162304', name: 'Sandettie'}, {id: '162170', name: 'F3'}]
   }
 };

@@ -1,7 +1,7 @@
 import { log, notify } from './logger.js';
-import { urlAPI, urlYr, urlSunTimes, forecastSources } from '../config/datasources.js';
+import { urlAPI, urlYr, urlSunTimes, forecasts } from '../config/datasources.js';
 import { selectedSpot } from '../html/spotInput.js';
-import { getDMITime } from '../forecasts/dmiImages.js';
+import { getImgTime } from '../forecasts/images/forecast.js';
 
 function makeUrl(url) {
   return (url.includes('http') ? url : `${urlAPI}${url}`)
@@ -76,9 +76,9 @@ export async function getYrCoast(yrId) {
 
 export async function getUKCoast() {
   let requests = [];
-  let baseUrl = forecastSources.uk.url;
-  let key = forecastSources.uk.apiKey;
-  let locations = forecastSources.uk.locations;
+  let baseUrl = forecasts.uk.url;
+  let key = forecasts.uk.apiKey;
+  let locations = forecasts.uk.locations;
   locations.forEach(l => {
     requests.push(get(`${baseUrl}${l.id}?res=3hourly&key=${key}`));
   })
@@ -91,6 +91,6 @@ export function getTwin() {
 }
 
 export function getComparison(date) {
-  let time = moment(getDMITime()).format('YYYY-MM-DDTHH:mm:ss');
+  let time = moment(getImgTime()).format('YYYY-MM-DDTHH:mm:ss');
   return get(`${urlAPI}forecasts/dmi/${time}/compare?timestamp=${moment(date).format('YYYY-MM-DDTHH:00:00')}`);
 }

@@ -1,5 +1,5 @@
-import { el }  from '../html/elements.js';
-import { reportHeader, reportText, reportFooter } from './reportView.js';
+import { el }  from '../../html/elements.js';
+import { reportHeader, reportText, reportFooter } from './report.js';
 
 export function updateObservationView(report) {
   document.getElementById('report-container').replaceChildren(

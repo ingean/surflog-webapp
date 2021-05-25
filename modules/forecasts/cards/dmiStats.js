@@ -1,4 +1,4 @@
-import { updateCard } from './statsCard.js';
+import { updateCard } from './stats.js';
 
 export function updateDMICard(spot) {
   updateCard(spot, 'dmi', [
