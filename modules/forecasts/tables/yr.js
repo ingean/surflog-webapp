@@ -15,7 +15,7 @@ function getHeaders(forecast) {
 
 function stationCell(f) {
   return (
-    el('td', 'td-l', [ //Wave height and direction
+    el('td', 'td', [ //Wave height and direction
       el('span', 'td-value', display(f, 'waveheight')),
       el('span', 'td-arrow', arrow(f.wavedir))
     ])
