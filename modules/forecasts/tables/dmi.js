@@ -1,16 +1,12 @@
 import { el, scoreLabel, hrsTd } from '../../html/elements.js';
-import { updateForecastTable, display } from './forecast.js';
 import { get, queryTimespan } from '../../utils/api.js';
 import { round } from '../../utils/utilities.js';
-import { formatForecastValue, formatWindValue, getScoreCategory } from '../../config/forecasts.js';
 import { isDayTime } from '../../utils/time.js';
+import { formatValue, clsValue } from '../format.js';
+import { scoreForecast } from '../score.js';
+import { updateForecastTable } from './table.js';
 
 const headers = ['Tid', 'Bølgehøyde', 'Bølgeperiode', 'Dønning', 'Dønning, periode', 'Wind', 'Score'];
-
-function format(f, param) {
-  if (param === 'wind') return formatWindValue(f[param]);
-  return formatForecastValue('dmi', param, f[param]);
-}
 
 function paramCell(forecast, param) {
   let f1 = forecast.stations['Saltstein']
@@ -18,8 +14,8 @@ function paramCell(forecast, param) {
   
   return (
     el('td', '', [
-      el('span', `td-value ${format(f1, param)}`, display(f1, param)),
-      el('span', 'td-secondary-value hidden-xs', display(f2, param, true))
+      el('span', `td-value ${clsValue(f1, param)}`, formatValue(f1, param)),
+      el('span', 'td-secondary-value hidden-xs', formatValue(f2, param, true))
     ])
   )
 }
@@ -38,9 +34,8 @@ function paramScore(forecast, param) {
   )
 }
 
-
 function dmiForecastToRow(forecast) {
-  let score = getScoreCategory('dmi', forecast);
+  let score = scoreForecast(forecast, 'dmi');
   let cls = (score > 4) ? `bg-muted-${score}` : '';
   let emphasis = (isDayTime(forecast.localtime)) ? 'emphasis-row' : '';
   return (

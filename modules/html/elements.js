@@ -41,8 +41,8 @@ export function elFromHTML(html) {
     return template.content.firstChild;
 }
 
-export function label(category, caption, classes = '') {
-    return el('span', `label label-${category} ${classes}`, caption);
+export function label(score, caption, classes = '') {
+    return el('span', `label bg-${score} ${classes}`, caption);
 }
 
 export function scoreLabel(score, classes = '') {

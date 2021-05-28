@@ -1,9 +1,8 @@
 import { el, arrow } from '../../html/elements.js';
-import { updateForecastTable, display } from './forecast.js';
 import { get } from '../../utils/api.js';
 import { isDayTime } from '../../utils/time.js';
-
-
+import { formatValue } from '../format.js';
+import { updateForecastTable } from './table.js';
 
 function getHeaders(forecast) {
   let headers = ['Tid'];
@@ -16,7 +15,7 @@ function getHeaders(forecast) {
 function stationCell(f) {
   return (
     el('td', 'td', [ //Wave height and direction
-      el('span', 'td-value', display(f, 'waveheight')),
+      el('span', 'td-value', formatValue(f, 'waveheight')),
       el('span', 'td-arrow', arrow(f.wavedir))
     ])
   )

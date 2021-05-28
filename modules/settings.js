@@ -1,4 +1,4 @@
-
+import { selectedSpot } from '../html/spotInput.js';
 import { get } from './utils/api.js';
 
 export var settings = [];
@@ -25,6 +25,16 @@ export function setSunTimes(sun) {
   sunTimes.sunrise = formatSunTime(sun.sunrise);
   sunTimes.sunset = formatSunTime(sun.sunset);
   return sunTimes;
+}
+
+export function getStats(forecast, param) {
+  param = (forecast === 'dmi')  ? `s${param}` : param; // Use DMI-stats for Skagerak
+
+  let spot = selectedSpot();
+  let avg = statistics[spot][forecast][0][`avg(${param})`];
+  let std = statistics[spot][forecast][0][`std(${param})`];
+  let min = statistics[spot][forecast][0][`std(${param})`];
+  return {min, avg, std};
 }
 
 

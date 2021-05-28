@@ -1,7 +1,7 @@
 import { el, arrow, hrsTd } from '../../html/elements.js';
-import { updateForecastTable, display } from './forecast.js';
 import { get, queryTimespan } from '../../utils/api.js';
-import { formatWindValue } from '../../config/forecasts.js';
+import { formatValue, clsValue } from '../format.js';
+import { updateForecastTable } from './table.js';
 
 function getHeaders(forecast) {
   let headers = ['Tid'];
@@ -11,14 +11,14 @@ function getHeaders(forecast) {
   return headers
 }
 
-function format(f) {
-  return formatWindValue(f.wind, true)
+function cls(f) {
+  return clsValue(f, 'wind', 'dmi', 'txt', true)
 }
 
 function stationCell(f) {
   return (
     el('td', '', [
-      el('span', `td-value ${format(f)}`, display(f, 'wind')),
+      el('span', `td-value ${cls(f)}`, formatValue(f, 'wind')),
       el('span', 'td-arrow', arrow(f.winddir))
     ])
   )

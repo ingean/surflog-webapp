@@ -1,10 +1,7 @@
 export const defaults = {
-  width: 1500,
-  height: 120,
+  height: 300,
   interpolateNulls: true, 
   titleTextStyle: {fontSize: 12},
-  titlePosition: 'in',
-  legend: 'none',
   curveType: 'function', 
   intervals: {style: 'area'},
   focusTarget: 'category',
@@ -15,11 +12,11 @@ export const defaults = {
     }
   },
   chartArea: {
-    width: '95%',
-    height: '100%'
+    width: '80%',
+    height: '80%'
   },
   hAxis: {
-    textPosition: "in",
+    textPosition: "out",
     textStyle : {fontSize: 12,
       color:'gray',
       auraColor:'white',

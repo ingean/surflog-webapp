@@ -1,11 +1,10 @@
 import { el, arrow, weatherImg, tempTd, hrsTd } from '../../html/elements.js';
-import { updateForecastTable, display } from './forecast.js';
 import { getYrCoast } from '../../utils/api.js';
 import { isDayTime } from '../../utils/time.js';
-
+import { formatValue } from '../format.js';
+import { updateForecastTable } from './table.js';
 
 const headers = ['Tid', 'Vær', 'Temp', 'Bølger', 'Vind (byge)', 'Strøm', 'Vanntemp'];
-
 
 function yrCoastForecastToRow(f) {
   let emphasis = (isDayTime(f.start)) ? 'emphasis-row' : '';
@@ -15,16 +14,16 @@ function yrCoastForecastToRow(f) {
       el('td', '', weatherImg(f.symbolCode.next1Hour)),
       tempTd(f.temperature.value),
       el('td', '', [ //Wave height and direction
-        el('span', 'td-value', display(f.sea.wave, 'height')),
+        el('span', 'td-value', formatValue(f.sea.wave, 'height')),
         el('span', 'td-arrow', arrow(f.sea.wave.direction))
       ]),
       el('td', '', [ //Wind speed and direction
-        el('span', 'td-value', display(f.wind, 'speed')),
-        el('span', 'td-secondary-value', display(f.wind, 'gust', true)),
+        el('span', 'td-value', formatValue(f.wind, 'speed')),
+        el('span', 'td-secondary-value', formatValue(f.wind, 'gust', true)),
         el('span', 'td-arrow', arrow(f.wind.direction))
       ]),
       el('td', 'hidden-xs', [ //Current speed and direction
-        el('span', 'td-value', display(f.sea.current, 'speed', false, 'currentSpeed')),
+        el('span', 'td-value', formatValue(f.sea.current, 'speed', false, 'currentSpeed')),
         el('span', 'td-arrow', arrow(f.sea.current.direction))
       ]),
       tempTd(f.sea.temperature.value),

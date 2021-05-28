@@ -1,17 +1,12 @@
 import { el, arrow, hrsTd } from '../../html/elements.js';
-import { updateForecastTable, display } from './forecast.js';
 import { get } from '../../utils/api.js';
-import { formatForecastValue } from '../../config/forecasts.js';
 import { isDayTime } from '../../utils/time.js';
+import { formatValue, clsValue } from '../format.js';
+import { updateForecastTable } from './table.js';
 
 
 const headers = ['Tid', 'Bølger', 'Periode', 'Bølgevarsel'];
 
-function format(f, param) {
-  let value = f[param];
-  param = (param === 'waveheightforecast') ? 'waveheight' : param;
-  return formatForecastValue('smhi', param, value);
-}
 
 function smhiForecastToRow(forecast) {
   let f = forecast.stations['Väderöerna']
@@ -21,14 +16,14 @@ function smhiForecastToRow(forecast) {
     el('tr', `forecast-table-row ${emphasis}`, [
       hrsTd(forecast.localtime),
       el('td', '', [
-        el('span', `td-value ${format(f, 'waveheight')}`, display(f, 'waveheight')),
-        el('span', 'td-secondary-value', display(f, 'waveheightmax', true)),
+        el('span', `td-value ${clsValue(f, 'waveheight', 'smhi')}`, formatValue(f, 'waveheight')),
+        el('span', 'td-secondary-value', formatValue(f, 'waveheightmax', true)),
         el('span', 'td-arrow', arrow(f.wavedir))
       ]),
       el('td', '', 
-        el('span', `td-value ${format(f, 'waveperiod')}`, display(f, 'waveperiod'))),
+        el('span', `td-value ${clsValue(f, 'waveperiod', 'smhi')}`, formatValue(f, 'waveperiod'))),
       el('td', '', 
-        el('span', `td-value ${format(f, 'waveheightforecast')}`, display(f, 'waveheightforecast'))
+        el('span', `td-value ${clsValue(f, 'waveheightforecast', 'smhi')}`, formatValue(f, 'waveheightforecast'))
     )])
   )
 }

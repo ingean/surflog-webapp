@@ -1,8 +1,9 @@
 import { el, arrow, tempTd, hrsTd } from '../../html/elements.js';
 import {getDirFromTxt} from '../../config/forecasts.js';
-import { updateForecastTable, display } from './forecast.js';
 import { getUKCoast } from '../../utils/api.js';
 import { isDayTime } from '../../utils/time.js';
+import { formatValue } from '../format.js';
+import { updateForecastTable } from './table.js';
 
 
 const headers = ['Tid', 'Temperatur', 'Lufttrykk', 'Vind', 'Bølgehøyde', 'Bølgeperiode', 'Vanntemp'];
@@ -15,13 +16,13 @@ function ukForecastToRow(f) {
     el('tr', `forecast-table-row ${emphasis}`, [
       hrsTd(f.time),
       tempTd(v.temp),
-      el('td', 'td-s', display(v, 'pressure')),
+      el('td', 'td-s', formatValue(v, 'pressure')),
       el('td', 'td-l', [ //Wind speed and direction
-        el('span', 'td-value', display(v, 'windspeed')),
+        el('span', 'td-value', formatValue(v, 'windspeed')),
         el('span', 'td-arrow', arrow(v.winddir)),
       ]),
-      el('td', 'td-s', display(v, 'waveheight')),
-      el('td', 'td-s', display(v, 'waveperiod')),
+      el('td', 'td-s', formatValue(v, 'waveheight')),
+      el('td', 'td-s', formatValue(v, 'waveperiod')),
       tempTd(v.watertemp)
     ])
   )
@@ -31,7 +32,6 @@ function convertData(forecasts) {
   let forecast = [];
   let period = forecasts[0].SiteRep.DV.Location.Period;
   
-
   for (let i = 0; i < period.length; i++) {
     
     let rep = period[i].Rep;
