@@ -1,4 +1,4 @@
-import { selectedSpot } from '../html/spotInput.js';
+import { selectedSpot } from './html/spotInput.js';
 import { get } from './utils/api.js';
 
 export var settings = [];

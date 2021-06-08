@@ -1,5 +1,5 @@
 import { el, arrow, tempTd, hrsTd } from '../../html/elements.js';
-import {getDirFromTxt} from '../../config/forecasts.js';
+import { directionFromText } from '../../config/forecasts.js';
 import { getUKCoast } from '../../utils/api.js';
 import { isDayTime } from '../../utils/time.js';
 import { formatValue } from '../format.js';
@@ -18,7 +18,7 @@ function ukForecastToRow(f) {
       tempTd(v.temp),
       el('td', 'td-s', formatValue(v, 'pressure')),
       el('td', 'td-l', [ //Wind speed and direction
-        el('span', 'td-value', formatValue(v, 'windspeed')),
+        el('span', 'td-value', formatValue(v, 'windspeed', false, 'wind')),
         el('span', 'td-arrow', arrow(v.winddir)),
       ]),
       el('td', 'td-s', formatValue(v, 'waveheight')),
@@ -55,7 +55,7 @@ function createForecast(forecasts, periodInd, repInd = null) {
     if (!station) return '';
     let period = station.Period[periodInd]; 
     let values = (repInd == null)? period.Rep : period.Rep[repInd];
-    let winddir = getDirFromTxt(values.D)
+    let winddir = directionFromText(values.D)
     time = period.value;
     return {
       id: station.i,
@@ -63,7 +63,7 @@ function createForecast(forecasts, periodInd, repInd = null) {
       temp: Number(values.T) || null,
       pressure: Number(values.P) || null,
       windspeed: convertKnots(values.S) || null,
-      winddir: winddir.mid || null,
+      winddir: winddir || null,
       waveheight: Number(values.Wh) || null,
       waveperiod: Number(values.Wp) || null,
       watertemp: Number(values.St) || null

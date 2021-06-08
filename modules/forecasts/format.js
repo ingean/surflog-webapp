@@ -1,4 +1,4 @@
-import { params } from '../config/forecasts.js';
+import { forecastParamAll } from '../config/datasources.js';
 import { el } from '../html/elements.js';
 import { round } from '../utils/utilities.js';
 import { scoreWindValue, scoreValue } from './score.js';
@@ -18,21 +18,21 @@ export function formatDate(date) {
 
 export function formatValue(f, param, secondary = false, lookupAlias) {
   let lu = lookupAlias || param;
-  let u = params[lu];
-  let v = round(f[param], u.precision);
+  let u = forecastParamAll(lu);
+  let v = round(f[param], u.unit.precision);
   let p1 = '', p2 = '', p3 = '';
   if (secondary) {
     p1 = ' ';
     p2 = '(';
     p3 = ')';
   }
-  return (f[param]) ? `${p1}${p2}${v} ${u.unit}${p3}` : null;
+  return (f[param]) ? `${p1}${p2}${v} ${u.unit.unit}${p3}` : null;
 }
 
-export function clsValue(f, param, forecast = 'dmi', type = 'txt', fetch = false) {
+export function clsValue(f, param, forecast = 'dmi', type = 'txt', wind = 'local') {
   param = (param === 'waveheightforecast') ? 'waveheight' : param;
   if (param === 'wind') {
-    let score = scoreWindValue(f[param], fetch)
+    let score = scoreWindValue(f[param], wind)
     return (score) ? `${type}-${score}` : ''; //Text or background color eg txt-1 or bg-1
   } else {
     let score = scoreValue(f[param], param, forecast);

@@ -5,7 +5,8 @@ import { getStats } from '../settings.js';
 
 
 export function scoreWindValue(speed, type = 'fetch') {
-  return windspeed(speed)[type];
+  let wind = windspeed(speed)
+  return (speed) ? speed[type] : null
 }
 
 export function scoreValue(value, param, forecast, points = false) {

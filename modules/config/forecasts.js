@@ -49,6 +49,7 @@ const ratings = {
   5: {caption: 'Veldig høy', score: 'Episk'}
 };
 
+/*
 export const params = {
   waveheight: {caption: 'Bølgehøyde', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
   height: {caption: 'Bølgehøyde', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
@@ -68,6 +69,7 @@ export const params = {
   skagerak: {caption: 'Skagerak'},
   saltstein: {caption: 'Saltstein'}
 };
+*/
 
 export function direction(dir) {
   return directions.find(d => dir > d.low && dir <= d.high); 

@@ -1,4 +1,5 @@
 import { navHistoricDMIImages } from './historic.js';
+import { navMSWImages } from './msw.js';
 
 export function setImgTime(date, cls = '.time-dmi') {
   document.querySelectorAll(cls)
@@ -13,8 +14,7 @@ export function getImgTime(cls = '.time-dmi') {
   return moment(el.dataset.forecastTime).toDate();
 }
 
-export function navImages(source, type, time, dir) {
-  if (source === 'dmi' && time === 'historic') {
-    navHistoricDMIImages(dir);
-  }
+export function navImages(source, param, scope, dir) {
+  if (source === 'dmi' && scope === 'historic') navHistoricDMIImages(dir)
+  if (source === 'msw') navMSWImages(dir, scope)
 }

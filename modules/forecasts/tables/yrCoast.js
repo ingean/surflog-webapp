@@ -14,11 +14,11 @@ function yrCoastForecastToRow(f) {
       el('td', '', weatherImg(f.symbolCode.next1Hour)),
       tempTd(f.temperature.value),
       el('td', '', [ //Wave height and direction
-        el('span', 'td-value', formatValue(f.sea.wave, 'height')),
+        el('span', 'td-value', formatValue(f.sea.wave, 'height', false, 'waveheight')),
         el('span', 'td-arrow', arrow(f.sea.wave.direction))
       ]),
       el('td', '', [ //Wind speed and direction
-        el('span', 'td-value', formatValue(f.wind, 'speed')),
+        el('span', 'td-value', formatValue(f.wind, 'speed', false, 'wind')),
         el('span', 'td-secondary-value', formatValue(f.wind, 'gust', true)),
         el('span', 'td-arrow', arrow(f.wind.direction))
       ]),

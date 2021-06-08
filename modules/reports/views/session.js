@@ -2,7 +2,7 @@ import { el } from '../../html/elements.js';
 import { carousel } from '../../html/carousel.js';
 import { reportHeader, reportText, reportPage, reportFooter } from './report.js';
 import { settings } from '../../settings.js';
-import { params } from '../../config/forecasts.js';
+import { forecastParamAll } from '../../config/datasources.js';
 import { comparisonReport } from '../compare.js';
 
 export async function updateSessionView(report) {
@@ -45,7 +45,7 @@ function sessionBoard(report) {
 
   if (board) {
     return [
-      el('img', {id: "img-board", src: `images/${board.thumburl}`}),
+      el('img', {id: "img-board", src: `images/boards/${board.thumburl}`}),
       el('div', {id: "report-board-model-txt"}, board.model),
       el('div', {id: "report-board-volume-txt"}, `Volum: ${board.volume}l`),
       el('div', {id: "report-board-length-txt"}, `Lengde: ${board.length}`),
@@ -82,7 +82,10 @@ async function sessionCompare(report) {
 function format(comparisonReport, param) {
   let value = comparisonReport[param].diff;
   if (value === 0) return;
+
+  param = (param === 'swind') ? 'wind' : param
+  let p = forecastParamAll(param)
   
   let s = (value > 0) ? 'up' : 'down';
-  return `${params[param].caption} var ${value}${params[param].unit} ${params[param][s]}.`
+  return `${p.caption} var ${value}${p.unit.unit} ${p.unit[s]}.`
 }

@@ -1,4 +1,5 @@
 
+import { Loader } from './utils/logger.js'; 
 import { initDateInput } from './html/dateInput.js';
 import { initSpotList } from './html/spotInput.js';
 import { getSettings} from './settings.js';
@@ -18,8 +19,9 @@ import { initTwin } from './reports/compare.js';
 
 
 export async function startSurfLog(userId) {
+  let load = new Loader(`root-station-card-yrCoast`);
   initDateInput(); // Set current date
-  initWebcam(); //Lazy load and add eventhandlers to webcam tools
+  //initWebcam(); //Lazy load and add eventhandlers to webcam tools (Currently deactivated)
   initDMIImages(); //Add click events for img nav btns and set time
   initMSWImages();
   initTwin();

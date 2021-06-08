@@ -1,7 +1,7 @@
 import { el } from '../../html/elements.js';
 import { statistics } from '../../settings.js';
 import { round } from '../../utils/utilities.js';
-import { params } from '../../config/forecasts.js';
+import { forecastParamAll } from '../../config/datasources.js';
 
 const cCls = 'td-m';
 const headers = ['min', 'avg - std', 'avg', 'avg + std', 'max', 'std'];
@@ -27,9 +27,9 @@ function getValues(stats, param) {
 
 
 function cell(v1, v2, param) {
-  let u = params[param.id];
-  v1 = (v1) ? `${round(v1, u.precision)} ${u.unit}` : null;
-  v2 = (v2) ? ` (${round(v2, u.precision)} ${u.unit})` : null;
+  let u = forecastParamAll(param.id);
+  v1 = (v1) ? `${round(v1, u.unit.precision)} ${u.unit.unit}` : null;
+  v2 = (v2) ? ` (${round(v2, u.unit.precision)} ${u.unit.unit})` : null;
   return el('div', cCls, [
    el('span', '', v1),
    el('span', 'txt-table-2', v2)
@@ -57,6 +57,7 @@ function tableBody(stats, params) {
 }
 
 export function updateCard(spot, forecast, params) {
+  if (!statistics[spot]) return
   let stats = statistics[spot][forecast][0];
   let card = 
     el('div', 'station-card flex-row', [

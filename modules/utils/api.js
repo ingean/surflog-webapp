@@ -86,7 +86,7 @@ export async function getUKCoast() {
 }
 
 export function getTwin() {
-  let time = moment(getDMITime()).format('YYYY-MM-DDTHH:mm:ss');
+  let time = moment(getImgTime()).format('YYYY-MM-DDTHH:mm:ss');
   return get(`${urlAPI}forecasts/dmi/${time}/twin?spot=${selectedSpot()}`);
 }
 

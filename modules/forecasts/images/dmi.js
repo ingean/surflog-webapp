@@ -2,7 +2,7 @@ import { toggleActive } from '../../utils/utilities.js';
 import { toLocal } from '../../utils/time.js';
 import { dmiForecast } from '../tables/dmi.js';
 import { scoreLabel } from '../../html/elements.js';
-import { forecasts } from '../../config/datasources.js';
+import { forecastParam } from '../../config/datasources.js';
 import { getImgTime, setImgTime } from './forecast.js';
 
 function currentDMITimeStep(imgId = 'img-dmi-waveheight-live') {
@@ -25,8 +25,8 @@ function switchDMIParam(e) {
   let historicImg = document.querySelector(`#img-dmi-${param}height-historic`);
   if (historicImg) historicImg.src = historicImg.src.replace(switchFrom, switchTo)
 
-  switchTo = forecasts.dmi[param + switchTo]
-  switchFrom = forecasts.dmi[param + switchFrom]
+  switchTo = forecastParam('dmi', param + switchTo).type
+  switchFrom = forecastParam('dmi', param + switchFrom).type
 
   let liveImg = document.querySelector(`#img-dmi-${param}height-live`);
   liveImg.src = liveImg.src.replace(switchFrom, switchTo);

@@ -1,28 +1,28 @@
-import { forecasts } from '../../config/datasources.js';
+import { forecasts, imgPanels } from '../../config/datasources.js';
 import { el, scoreLabel } from '../../html/elements.js';
 import { imgBrowser } from '../../html/imgBrowser.js';
 import { toUTC} from '../../utils/time.js';
 import { capitalize } from '../../utils/utilities.js';
-import { params } from '../../config/forecasts.js';
 import { getImgTime, setImgTime } from './forecast.js';
-import { updateDMIImgs } from './dmi.js'; 
+import { updateMSWImages } from './msw.js';
 
-function surlogUrl(date, param) {
-  var f = forecasts.surflog;
-  var url = f.imgUrl + moment(date).format('YYYY/MM/DD') + '/' +  capitalize(param) + '_';
+const SL = forecasts.surflog
 
-  if (param === 'skagerak' || param === 'saltstein'){
-      return url += moment(date).format('YYYYMMDD') + '_01' + f.imgSuffix;
+function surflogUrl(date, param, source) {
+  let url = SL.baseUrl + moment(date).format('YYYY/MM/DD') + '/' +  capitalize(param.id) + '_';
+
+  if (source === 'yr') {
+      return url += `${moment(date).format('YYYYMMDD')}_01.${SL.imgFormat}`;
   } else {
-      return url += fileName(date) + f.imgSuffix;
+      return url += `${fileName(date)}.${SL.imgFormat}`;
   }
 }
 
 function updateHistoricDMIImgs(date) {
-  let params = ['waveheight', 'swellheight', 'wind'];
-  params.forEach(param => {
-    let src = surlogUrl(date, param);
-    document.getElementById(`img-dmi-${param}-historic`).src = src;
+  const dmiPanels = imgPanels('dmi')
+  dmiPanels.forEach(param => {
+    let src = surflogUrl(date, param);
+    document.getElementById(`img-dmi-${param.id}-historic`).src = src;
   })
 }
 
@@ -30,40 +30,39 @@ function fileName(date) {
   return moment(toUTC(moment(date).toDate())).format('YYYYMMDD_HH')
 }
 
-function imgFooter(param, source, report) {
-  let footer = el('div', 'panel-footer dark', [
-    //el('span', 'panel-h dark', params[param].caption  + ' '),
-    el('span', `time-${source}-historic panel-h4 dark`),
+export function imgFooter(source, report) {
+  let footer = el('div', 'panel-footer dark', 
+    el('span', `time-${source}-historic panel-h4 dark`)
+  )
+
+  if (report) footer.append(
     el('span', 'pull-right', scoreLabel(report.score))
-  ])
+    )
                 
   return footer;
 }
 
-function replaceOrAppendFooter(source, param, newFooter) {
-  let panel =  document.querySelector(`#${source}-${param}-panel`);
+export function replaceOrAppendFooter(type, param, newFooter) {
+  let panel =  document.querySelector(`#${type}-${param}-panel`);
   let oldFooter = panel.querySelector('.panel-footer');
-  if (oldFooter) {
-    panel.replaceChild(newFooter, oldFooter)
-  } else {
-    panel.append(newFooter)
-  }
+  (oldFooter) ? panel.replaceChild(newFooter, oldFooter) : panel.append(newFooter)
 }
 
 export function updateHistoricImages(report, date) {
-  let params = ['waveheight', 'swellheight', 'wind', 'skagerak', 'saltstein'];
-  params.forEach(param => {
-    let src = surlogUrl(date, param);
-    let source = (param === 'skagerak' || param === 'saltstein') ? 'yr' : 'dmi';
-    let img = imgBrowser(`img-${source}-${param}-historic`, src, `img-${source}`);
-    let footer = imgFooter(param, source, report);
+  const Panels = imgPanels('dmi').concat(imgPanels('yr')) 
+  Panels.forEach(param => {
+    let source = (param.id === 'skagerak' || param.id === 'saltstein') ? 'yr' : 'dmi'
+    let src = surflogUrl(date, param, source);
+    let img = imgBrowser(`img-${source}-${param.id}-historic`, src, `img-${source}`);
+    let footer = imgFooter(source, report);
 
-    document.querySelector(`#${source}-${param}-historic`).replaceChildren(...img);
-    replaceOrAppendFooter(source, param, footer);
+    document.querySelector(`#${source}-${param.id}-historic`).replaceChildren(...img);
+    replaceOrAppendFooter(source, param.id, footer);
     
     setImgTime(moment(date).format('YYYY-MM-DD HH:00:00'), '.time-dmi-historic');
     setImgTime(moment(date).format('YYYY-MM-DD'), '.time-yr-historic')
   })
+  updateMSWImages(report, date)
 }
 
 export function navHistoricDMIImages(dir) {

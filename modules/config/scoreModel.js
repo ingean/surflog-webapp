@@ -101,7 +101,9 @@ const paramsStatPoints = {
 };
 
 export function points(value, param) {
-  return paramsPoints[param].find(v => value >= v.min && value < v.max).points
+  let points = paramsPoints[param].find(v => value >= v.min && value < v.max)
+  return (points) ? points.points : null
+  
 }
 
 export function pointsStats(i, param){

@@ -326,28 +326,28 @@
             </div>
             <div class="panel-body">
               <!-- Swell-->
-              <div class="col-md-4 col-fullwidth-xs">
-                <div class="panel dark">
+              <div class="col-md-3 col-fullwidth-xs">
+                <div id="msw-wave-panel" class="panel dark">
                   <div class="panel-heading">
                     <span class="panel-h dark">Dønning </span>
-                    <span id="time-msw-swellheight-live" class="time-msw panel-h4 dark" data-forecasttime=""></span>  
+                    <span id="time-msw-swellheight-live" class="time-msw-live panel-h4 dark" data-forecasttime=""></span>  
                   </div>
                   <div class="panel-body">
                     <div class="container-relative">
-                      <div id="msw-swell-live"></div>
+                      <div id="msw-wave-live"></div>
                     </div> 
                     <div class="container-relative">
-                      <div id="msw-swell-historic"></div>
+                      <div id="msw-wave-historic"></div>
                     </div>
                   </div>
                 </div> 
               </div>
               <!-- Period-->
-              <div class="col-md-4 col-fullwidth-xs">
-                <div class="panel dark">
+              <div class="col-md-3 col-fullwidth-xs">
+                <div id="msw-period-panel" class="panel dark">
                   <div class="panel-heading">
                     <span class="panel-h dark">Periode </span>  
-                    <span id="time-msw-swellperiod-live" class="time-msw panel-h4 dark" data-forecasttime=""></span>
+                    <span id="time-msw-swellperiod-live" class="time-msw-live panel-h4 dark" data-forecasttime=""></span>
                   </div>
                   <span class="panel-body">
                     <div class="container-relative">
@@ -360,11 +360,11 @@
                 </div> 
               </div>
                 <!-- Wind-->
-                <div class="col-md-4 col-fullwidth-xs">
-                  <div class="panel dark">
+                <div class="col-md-3 col-fullwidth-xs">
+                  <div id="msw-wind-panel" class="panel dark">
                     <div class="panel-heading">
                       <span class="panel-h dark">Vind </span>
-                      <span id="time-msw-wind-live" class="time-msw panel-h4 dark" data-forecasttime=""></span>  
+                      <span id="time-msw-wind-live" class="time-msw-live panel-h4 dark" data-forecasttime=""></span>  
                     </div>
                     <div class="panel-body">
                       <div class="container-relative">
@@ -372,6 +372,23 @@
                       </div>
                       <div class="container-relative">
                         <div id="msw-wind-historic"></div>
+                      </div>
+                    </div> 
+                  </div> 
+                </div>
+                 <!-- Pressure-->
+                 <div class="col-md-3 col-fullwidth-xs">
+                  <div id="msw-pressure-panel" class="panel dark">
+                    <div class="panel-heading">
+                      <span class="panel-h dark">Trykk </span>
+                      <span id="time-msw-pressure-live" class="time-msw-live panel-h4 dark" data-forecasttime=""></span>  
+                    </div>
+                    <div class="panel-body">
+                      <div class="container-relative">
+                        <div id="msw-pressure-live"></div>
+                      </div>
+                      <div class="container-relative">
+                        <div id="msw-pressure-historic"></div>
                       </div>
                     </div> 
                   </div> 
@@ -421,7 +438,7 @@
         </div>
       </div>
 
-      <!-- Saltstein webcam -->
+      <!-- Saltstein webcam (Currently deactivated)-->
       <div class="row">
         <div class="col-sm-12">
           <div class="panel light">
@@ -440,8 +457,8 @@
             </div>
           </div>
         </div>
-      </div>
-
+      </div> 
+  
       <!-- Reports -->
       <div class="row">
         <div class="col-sm-12">
