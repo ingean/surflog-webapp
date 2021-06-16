@@ -63,15 +63,15 @@ export async function getSunTimes(lat, lon) {
 }
 
 export async function getYrLocation(yrId) {
-  return get(`${urlAPI}proxy/yr?id=${yrId}`) // CORS on Yr endpoint, hence surflog as proxy
+  return get(`${forecasts.yrCoast.proxyUrl}?id=${yrId}`) // CORS on Yr endpoint, hence surflog as proxy
 }
 
 export async function getYrTides(yrId) {
-  return get(`${urlAPI}proxy/yr?id=${yrId}&endpoint=tide`) // CORS on Yr endpoint, hence surflog as proxy
+  return get(`${forecasts.yrCoast.proxyUrl}?id=${yrId}&endpoint=tide`) // CORS on Yr endpoint, hence surflog as proxy
 }
 
 export async function getYrCoast(yrId) {
-  return get(`${urlYr}${yrId}/forecast/coast`);
+  return get(`${forecasts.yrCoast.proxyUrl}?id=${yrId}&endpoint=/forecast/coast`);
 }
 
 export async function getUKCoast() {
@@ -84,6 +84,22 @@ export async function getUKCoast() {
   })
   return Promise.all(requests);
 }
+
+export function getDMIObs(start, end) {
+  let time = (start && end) 
+    ? `&datetime=${moment(start).format('YYYY-MM-DDTHH:mm:ssZ')}/${moment(end)}.format('YYYY-MM-DDTHH:mm:ssZ')` 
+    : '&period=latest-day'
+
+  let requests = [];
+  let baseUrl = forecasts.dmiObs.url;
+  let key = forecasts.dmiObs.apiKey;
+  let locations = forecasts.dmiObs.locations;
+  locations.forEach(l => {
+    requests.push(get(`${baseUrl}?stationId=${l.id}${time}&api-key=${key}`));
+  })
+  return Promise.all(requests);
+}
+
 
 export function getTwin() {
   let time = moment(getImgTime()).format('YYYY-MM-DDTHH:mm:ss');

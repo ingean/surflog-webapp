@@ -79,6 +79,7 @@ export const forecasts = {
   },
   yrCoast: {
     baseUrl: 'https://www.yr.no/api/v0/locations/',
+    proxyUrl: 'https://high-plating-184911.appspot.com/proxy/yr',
     params: [
       {id: 'wind', caption: 'Vind', unit: unitSpeed},
       {id: 'gust', caption: 'Vindkast', unit: unitSpeed},
@@ -99,6 +100,11 @@ export const forecasts = {
     url: "http://datapoint.metoffice.gov.uk/public/data/val/wxmarineobs/all/json/",
     apiKey: "5ae6dfd7-726f-4873-ba73-1651ff663a8e",
     locations: [{id:'162304', name: 'Sandettie'}, {id: '162170', name: 'F3'}]
+  }, 
+  dmiObs: {
+    url: 'https://dmigw.govcloud.dk/v2/metObs/collections/observation/items',
+    apiKey: '279fa355-ec19-49ba-9ab6-e1e455876329',
+    locations: [{id: '06081', name: 'Blåvandshuk Fyr'},{id: '06052', name: 'Thyborøn'},{id: '20000', name: 'Skagen Fyr'}]
   }
 };
 

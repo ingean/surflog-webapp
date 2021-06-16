@@ -14,6 +14,7 @@ import { getDMIForecast } from './forecasts/tables/dmi.js';
 import { initDMIImages } from './forecasts/images/dmi.js';   
 import { initMSWImages } from './forecasts/images/msw.js';
 import { getUKForecast } from './forecasts/tables/uk.js';
+import { getDMIObservations } from './forecasts/tables/dmiObs.js';
 import { initTwin } from './reports/compare.js';
 
 
@@ -43,4 +44,5 @@ export async function startSurfLog(userId) {
   getSMHIForecast();
   getDMIForecast();
   getUKForecast();
+  getDMIObservations();
 }

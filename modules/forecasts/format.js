@@ -31,7 +31,7 @@ export function formatValue(f, param, secondary = false, lookupAlias) {
 
 export function clsValue(f, param, forecast = 'dmi', type = 'txt', wind = 'local') {
   param = (param === 'waveheightforecast') ? 'waveheight' : param;
-  if (param === 'wind') {
+  if (param.includes('wind')) {
     let score = scoreWindValue(f[param], wind)
     return (score) ? `${type}-${score}` : ''; //Text or background color eg txt-1 or bg-1
   } else {
