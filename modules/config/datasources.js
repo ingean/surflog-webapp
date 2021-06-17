@@ -104,7 +104,8 @@ export const forecasts = {
   dmiObs: {
     url: 'https://dmigw.govcloud.dk/v2/metObs/collections/observation/items',
     apiKey: '279fa355-ec19-49ba-9ab6-e1e455876329',
-    locations: [{id: '06081', name: 'Blåvandshuk Fyr'},{id: '06052', name: 'Thyborøn'},{id: '20000', name: 'Skagen Fyr'}]
+    locations: [{id: '06081', name: 'Blåvandshuk Fyr'},{id: '06052', name: 'Thyborøn'},{id: '06041', name: 'Skagen Fyr'},{id: '06079', name: 'Anholt Havn'},{id: '06168', name: 'Nakkehoved Fyr'}],
+    params: [{id: 'wind_speed_past1h', caption: 'Vind'}, {id: 'wind_gust_always_past1h', caption: 'Vindkast'}, {id: 'wind_dir_past1h', caption: 'Vindretning'}]
   }
 };
 

@@ -49,28 +49,6 @@ const ratings = {
   5: {caption: 'Veldig høy', score: 'Episk'}
 };
 
-/*
-export const params = {
-  waveheight: {caption: 'Bølgehøyde', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
-  height: {caption: 'Bølgehøyde', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
-  waveperiod: {caption: 'Bølgeperiode', unit: 's', precision: 0, up: 'lengre', down: 'kortere'},
-  swellheight: {caption: 'Dønning', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
-  swellperiod: {caption: 'Dønning, periode', unit: 's', precision: 0, up: 'lengre', down: 'kortere'},
-  wind: {caption: 'Vind', unit: 'm/s', precision: 0, up: 'mer', down: 'mindre'},
-  swind: {caption: 'Vind, Skagerak', unit: 'm/s', precision: 0, up: 'mer', down: 'mindre'},
-  windspeed: {caption: 'Vind', unit: 'm/s', precision: 0, up: 'mer', down: 'mindre'},
-  speed: {caption: 'Vind', unit: 'm/s', precision: 0, up: 'mer', down: 'mindre'},
-  gust: {caption: 'Vindkast', unit: 'm/s', precision: 0, up: 'mer', down: 'mindre'},
-  waveheightforecast: {caption: 'Bølgehøyde, varsel', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
-  waveheightmax: {caption: 'Bølgehøyde, maks', unit: 'm', precision: 1, up: 'større', down: 'mindre'},
-  wavedir: {caption: 'Bølgeretning', unit: '', precision: 0},
-  currentSpeed: {caption: 'Strøm', unit: 'cm/s', precision: 0, up: 'sterkere', down: 'svakere'},
-  pressure: {caption: 'Lufttrykk', unit: 'hpa', precision: 0, up: 'høyere', down: 'lavere'},
-  skagerak: {caption: 'Skagerak'},
-  saltstein: {caption: 'Saltstein'}
-};
-*/
-
 export function direction(dir) {
   return directions.find(d => dir > d.low && dir <= d.high); 
 }

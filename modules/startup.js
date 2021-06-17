@@ -20,7 +20,7 @@ import { initTwin } from './reports/compare.js';
 
 
 export async function startSurfLog(userId) {
-  let load = new Loader(`root-station-card-yrCoast`);
+  let load = new Loader(`root-forecast-table-yrCoast`);
   initDateInput(); // Set current date
   //initWebcam(); //Lazy load and add eventhandlers to webcam tools (Currently deactivated)
   initDMIImages(); //Add click events for img nav btns and set time

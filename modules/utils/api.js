@@ -94,8 +94,11 @@ export function getDMIObs(start, end) {
   let baseUrl = forecasts.dmiObs.url;
   let key = forecasts.dmiObs.apiKey;
   let locations = forecasts.dmiObs.locations;
+  let params = forecasts.dmiObs.params;
   locations.forEach(l => {
-    requests.push(get(`${baseUrl}?stationId=${l.id}${time}&api-key=${key}`));
+    params.forEach(p => {
+      requests.push(get(`${baseUrl}?stationId=${l.id}&parameterId=${p.id}${time}&api-key=${key}`));
+    })
   })
   return Promise.all(requests);
 }

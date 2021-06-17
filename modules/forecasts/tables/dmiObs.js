@@ -1,39 +1,24 @@
+import { forecasts } from '../../config/datasources.js';
 import { el, arrow, hrsTd } from '../../html/elements.js';
 import { getDMIObs } from '../../utils/api.js';
-import { toLocal } from '../../utils/time.js';
+import { toUTC } from '../../utils/time.js';
 import { formatValue, clsValue } from '../format.js';
 import { updateForecastTable } from './table.js';
 
 
-
-function process(o, data) {
-  let time = o.properties.observed
-  let process = (moment(time).format('mm') === '00') ? true : false
-  let alreadyProcessed = data.find(d => d.utctime === moment(time).format('YYYY-MM-DDTHH:mm:ss'))
-  return (alreadyProcessed) ? false : process
-}
-
-function station(time, obs, stations) {
-  let params = obs.features.filter(o => o.properties.observed === time)
-  if (!params.length) return
-
-  let stationId = params[0].properties.stationId
-  
-  stations[stationId] = {}
-  
-  params.forEach(param => {
-    let p = param.properties
-    stations[stationId][p.parameterId] = p.value
-  })
-  return stations
-}
-
 function stationList(time, obs) {
   let stations = {}
-  let ids = [0,1,2]
-  ids.forEach(i => {
-    if (obs[i].features.length) station(time, obs[i], stations)
-  })
+
+  for (let i = 0; i < obs.length; i++) {
+    let obsAtTime = obs[i].features.find(o => o.properties.observed === time)
+    let props = obsAtTime.properties
+    let stationId = props.stationId
+
+    if (!(stationId in stations)) stations[stationId] = {}
+    stations[stationId][props.parameterId] = props.value
+    stations[stationId].name = forecasts.dmiObs.locations.find(l => l.id === stationId).name
+  }
+
   return stations
 }
 
@@ -41,14 +26,12 @@ function convertData(obs) {
   let data = []
  
   obs[0].features.forEach(o => {
-    if (process(o, data)) {
-      let time = o.properties.observed
-      data.push({
-        localtime: toLocal(time),
-        utctime: moment(time).format('YYYY-MM-DDTHH:mm:ss'),
-        stations: stationList(time, obs)
-      })
-    } 
+    let time = o.properties.observed
+    data.push({
+      utctime: moment(toUTC(time)).format('YYYY-MM-DDTHH:mm:ss'),
+      localtime: moment(time).format('YYYY-MM-DDTHH:mm:ss'),
+      stations: stationList(time, obs)
+    })
   })
   return data.reverse()
 }
@@ -93,7 +76,7 @@ function getDMIObsTime(obs) {
 
 function updateDMIObsTable(obs) {
   obs = convertData(obs)
-  let headers = getHeaders(obs)
+  let headers = getHeaders(obs[0].stations)
   updateForecastTable(obs, getDMIObsTime, dmiObsToRow, 'dmiObs', headers)
 }
 
