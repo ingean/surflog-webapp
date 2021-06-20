@@ -46,13 +46,6 @@
   margin-left: 20px;
 }
 
-/*
-@media only screen and (max-width: 600px) {
-  .report-conditions {
-    display: none;
-  }
-} */
-
 .report-condition {
   margin: 1px;
   font-size: xx-small;
