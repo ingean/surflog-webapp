@@ -14,6 +14,8 @@ function tideHeaders(headers) {
 
 
 function tideRows(tide) {
+  tide = tide.sort((a, b) => moment(b.time).date() - moment(a.time).date())
+  
   let rows = [];
   tide.forEach(t => {
     rows.push( 
