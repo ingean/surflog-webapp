@@ -1,7 +1,7 @@
 import { el, arrow, tempTd, hrsTd } from '../../html/elements.js';
 import { directionFromText } from '../../config/forecasts.js';
 import { getUKCoast } from '../../utils/api.js';
-import { isDayTime } from '../../utils/time.js';
+import { isDayTime, toLocal, toUTC } from '../../utils/time.js';
 import { formatValue } from '../format.js';
 import { updateForecastTable } from './table.js';
 
@@ -10,11 +10,11 @@ const headers = ['Tid', 'Temperatur', 'Lufttrykk', 'Vind', 'Bølgehøyde', 'Bøl
 
 
 function ukForecastToRow(f) {
-  let emphasis = (isDayTime(f.time)) ? 'emphasis-row' : '';
+  let emphasis = (isDayTime(f.localtime)) ? 'tr-scope' : '';
   let v = f.stations[0];
   return (
     el('tr', `forecast-table-row ${emphasis}`, [
-      hrsTd(f.time),
+      hrsTd(f.localtime),
       tempTd(v.temp),
       el('td', 'td-s', formatValue(v, 'pressure')),
       el('td', 'td-l', [ //Wind speed and direction
@@ -56,7 +56,7 @@ function createForecast(forecasts, periodInd, repInd = null) {
     let period = station.Period[periodInd]; 
     let values = (repInd == null)? period.Rep : period.Rep[repInd];
     let winddir = directionFromText(values.D)
-    time = period.value;
+    time = moment(period.value).add(values['$'], 'minutes')
     return {
       id: station.i,
       name: station.name,
@@ -70,7 +70,8 @@ function createForecast(forecasts, periodInd, repInd = null) {
     } 
   })
   return {
-    time: `${time}00:00:00`,
+    localtime: time,
+    utctime: toUTC(time),
     stations: stations
   };
 }
@@ -85,7 +86,7 @@ function updateUKTable(forecasts) {
 }
 
 function getUKTime(forecast) {
- return forecast.time;
+ return forecast.localtime;
 }
 
 export async function getUKForecast() {

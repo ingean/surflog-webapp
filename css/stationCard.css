@@ -1,6 +1,6 @@
 .station-card.flex-row {
   margin-top: 20px;
-  background-color: var(--primary-color-bg);
+  background-color: var(--surface-color-l1);
   height: 160px;
 }
 

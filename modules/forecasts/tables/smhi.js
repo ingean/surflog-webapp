@@ -10,7 +10,7 @@ const headers = ['Tid', 'Bølger', 'Periode', 'Bølgevarsel'];
 
 function smhiForecastToRow(forecast) {
   let f = forecast.stations['Väderöerna']
-  let emphasis = (isDayTime(forecast.localtime)) ? 'emphasis-row' : '';
+  let emphasis = (isDayTime(forecast.localtime)) ? 'tr-scope' : '';
   
   return (
     el('tr', `forecast-table-row ${emphasis}`, [

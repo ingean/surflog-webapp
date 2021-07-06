@@ -1,41 +1,79 @@
-:root {
-  /* General */
-  --app-bg-color: lightgrey;
-  --primary-color-light: #E0E0E0;
-  --primary-color-dark: #757575;
-  --secondary-color-light: #EEEEEE;
-  --secondary-color-dark: #212121;
+/* Reduce img brightness in dark mode */
+body.dark-theme img {
+  filter: brightness(.8) contrast(1.2);
+}
 
-  /* Forms */
-  --form-bg-color: white;
-  --form-color: rgb(50, 118, 177);
+:root,
+html[data-theme = 'light'] {
+  /* Material design */
+  --primary-color: #2196f3; /* Material design blue 500 */
+  --primary-variant-color: #0069c0;
+  --secondary-color: #ff5722; /* Material design deep orange 500 */
+  --secondary-variant-color: #c41c00;
+  
+  --bg-color: #e0e0e0;
+  --surface-color: #f5f5f5;
+  --surface-color-l1: white;
+  
+  --on-primary-color: #FFFFFF;
+  --on-secondary-color: #000000;
+  --on-bg-color: #000000;
+  --on-surface-color: #000000;
 
+  /* Surflog colors */
+  --nav-color: #2196f3; /* Material design blue 500 */
+  --on-nav-color: #ffffff;
+  --primary-txt-color: #000000;
+  --secondary-txt-color: darkgrey;
 
-  /* Rating */
-  --rating-0:grey;
-  --rating-1: red;
-  --rating-2:orange;
-  --rating-3:blue;
-  --rating-4:green;
-  --rating-5:darkgreen;
+  --on-label-color: #FFFFFF;
+  --rating-0:#9e9e9e; /* Material design grey 500 */
+  --rating-1:#f44336; /* Material design red 500 */
+  --rating-2:#ff9800; /* Material design orange 500 */
+  --rating-3:#2196f3; /* Material design blue 500 */
+  --rating-4:#8bc34a; /* Material design light green 500 */
+  --rating-5:#4caf50; /* Material design green 500 */
   --rating-muted-0: rgba(128,128,128,0.1);
   --rating-muted-1: rgba(255,0,0,0.1);
   --rating-muted-2:rgba(255,165,0,0.1);
   --rating-muted-3:rgba(0,0,255,0.1);
   --rating-muted-4:rgba(0,128,0,0.1);
   --rating-muted-5:rgba(0,100,0,0.1);
+}
+
+html[data-theme = 'dark'] {
+  /* Material design */
+  --primary-color: #90caf9; /* Material design blue 200 */
+  --primary-variant-color: #5d99c6;
+  --secondary-color: #ffab91; /* Material design deep orange 200 */
+  --secondary-variant-color: #c97b63;
   
-  /* Reports */
-  --primary-txt-color: #212121;
-  --secondary-txt-color: #424242;
-  --color-tool-highlight: rgba(90, 189, 249, 1);
+  --bg-color: #121212;
+  --surface-color: #212121; /* Material design grey 900 */
+  --surface-color-l1: #333333;
+  
+  --on-primary-color: #FFFFFF;
+  --on-secondary-color: #000000;
+  --on-bg-color: #FFFFFF;
+  --on-surface-color: #FFFFFF;
+  
+  /* Surflog colors */
+  --nav-color: #212121; /* Material design blue 500 */
+  --on-nav-color: #ffffff;
+  --primary-txt-color: #FFFFFF;
+  --secondary-txt-color: lightgrey;
 
-  /* Station card */
-  --primary-color-bg: white;
-  --primary-txt-color: #21292B;
-  --secondary-txt-color: #56616C;
+  --on-label-color: #000000;
+  --rating-0:#eeeeee; /* Material design grey 200 */
+  --rating-1: #ef9a9a; /* Material design red 200 */
+  --rating-2:#ffcc80; /* Material design orange 200 */
+  --rating-3:#90caf9; /* Material design blue 200 */
+  --rating-4:#c5e1a5; /* Material design light green 200 */
+  --rating-5:#a5d6a7; /* Material design green 200 */
+}
 
-  /* Table */
-  --primary-txt-color: #21292B;
-  --secondary-txt-color: #56616C;
+/* Toggle theme switcher icon */
+[data-theme='light'] .d-block-light,
+[data-theme='dark'] .d-block-dark {
+    display: block !important;
 }

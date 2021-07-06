@@ -1,4 +1,4 @@
-function filenameify(str) {
+export function filenameify(str) {
   str = str.toLowerCase();
   str = str.replace(' ', '-');
   str = str.replace('æ', 'a');

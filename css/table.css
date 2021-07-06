@@ -91,8 +91,8 @@ td {
   font-weight: bold;
 }
 
-.emphasis-row {
-  background-color: white;
+.tr-scope {
+  background-color: var(--surface-color-l1);
 }
 
 /* Styling for small screens*/

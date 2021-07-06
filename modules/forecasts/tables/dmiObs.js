@@ -11,14 +11,15 @@ function stationList(time, obs) {
 
   for (let i = 0; i < obs.length; i++) {
     let obsAtTime = obs[i].features.find(o => o.properties.observed === time)
-    let props = obsAtTime.properties
-    let stationId = props.stationId
-
-    if (!(stationId in stations)) stations[stationId] = {}
-    stations[stationId][props.parameterId] = props.value
-    stations[stationId].name = forecasts.dmiObs.locations.find(l => l.id === stationId).name
+    if (obsAtTime) {
+      let props = obsAtTime.properties
+      let stationId = props.stationId
+  
+      if (!(stationId in stations)) stations[stationId] = {}
+      stations[stationId][props.parameterId] = props.value
+      stations[stationId].name = forecasts.dmiObs.locations.find(l => l.id === stationId).name
+    }
   }
-
   return stations
 }
 
@@ -45,7 +46,7 @@ function getHeaders(obs) {
 }
 
 function cls(o) {
-  return clsValue(o, 'wind_speed_past1h', 'dmi', 'txt', 'fetch')
+  return clsValue(o, 'wind_speed_past1h', 'dmi', 0, 'txt', 'fetch')
 }
 
 function stationCell(o) {

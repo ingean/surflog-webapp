@@ -1,11 +1,11 @@
 .dark {
-  color: var(--primary-color-light);
-  background: var(--primary-color-dark);
+  color: var(--on-surface-color);
+  background: var(--surface-color-l1);
 }
 
 .light {
-  color: var(--primary-color-dark);
-  background: var(--primary-color-light);
+  color: var(--on-surface-color);
+  background: var(--surface-color);
 }
 
 .flex-container {
@@ -44,8 +44,8 @@
 }
 
 .panel-body {
-  color: var(--primary-color-dark);
-  background-color: var(--primary-color-light);
+  color: var(--on-surface-color);
+  background-color: var(--surface-color);
   border-radius: 0;
   padding: 0px;
   margin: 0px;
@@ -64,7 +64,7 @@
 }
 
 .panel-btn:hover {
-  background-color: var(--secondary-color-light);
+  background-color: var(--primary-variant-color);
 }
   
 .panel-btn:focus {
@@ -104,15 +104,7 @@
   height:100%;    
 }
 
-
-/* Tabs in panel tab styling */
-.nav-tabs>li.panel-tab.active>a {
-  border-bottom: 2px solid var(--primary-color-dark);
-  background-color: var(--primary-color-light);
+.panel-footer {
+  color: var(--on-surface-color);
+  background-color: var(--surface-color);
 }
-
-.tab-toolbar {
-  margin-top: 20px;
-}
-
-

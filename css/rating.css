@@ -70,4 +70,8 @@
   background-color: var(--rating-5);
 }
 
+.label {
+  color: var(--on-label-color);
+}
+
 

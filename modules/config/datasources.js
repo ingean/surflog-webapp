@@ -39,6 +39,13 @@ const unitDir = {
   down: ''
 }
 
+const unitTemp = {
+  unit: '°',
+  precision: 0,
+  up: 'varmere',
+  down: 'kaldere'
+}
+
 export const forecasts = { 
   surflog: {
     baseUrl: 'https://storage.googleapis.com/fcasts/',
@@ -85,6 +92,21 @@ export const forecasts = {
       {id: 'gust', caption: 'Vindkast', unit: unitSpeed},
       {id: 'currentSpeed', caption: 'Strøm', unit: unitSpeed},
       {id: 'pressure', caption: 'Lufttrykk', unit: unitPressure}
+    ]
+  },
+  met: {
+    url: 'https://api.met.no/weatherapi/oceanforecast/2.0/complete',
+    locations: [
+      {name: "Oslofjorden", lat:"59.307995", lon:"10.578443"},
+      {name: "Saltstein", lat:"58.892235", lon:"9.888914"},
+      {name: "Skagerak", lat:"58.26443", lon:"9.5951"}
+    ],
+    params: [
+      {id: 'wavedir', sourceId: 'sea_surface_wave_from_direction', caption: 'Bølgeretning', unit: unitDir},
+      {id: 'waveheight', sourceId: 'sea_surface_wave_height', caption: 'Bølgehøyde', unit: unitHeight},
+      {id: 'currentSpeed', sourceId: 'sea_water_speed', caption: 'Strøm', unit: unitSpeed},
+      {id: 'watertemp', sourceId: 'sea_water_temperature', caption: 'Vanntemp', unit: unitTemp},
+      {id: 'current', sourceId: 'sea_water_to_direction', caption: 'Strømretning', unit: unitDir}
     ]
   },
   smhi: {

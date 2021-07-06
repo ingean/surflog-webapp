@@ -1,3 +1,8 @@
+.modal-content {
+  color: var(--on-surface-color);
+  background-color: var(--surface-color);
+}
+
 .modal-heading {
   font-size: medium;
   font-weight: bold;

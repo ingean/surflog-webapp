@@ -1,25 +1,19 @@
 import { el } from '../../html/elements.js';
-import { carousel } from '../../html/carousel.js';
-import { reportHeader, reportText, reportPage, reportFooter } from './report.js';
+import { tabs } from '../../html/tabs.js';
+import { reportHeader, reportFooter, reportCompare } from './report.js';
 import { settings } from '../../settings.js';
-import { forecastParamAll } from '../../config/datasources.js';
-import { comparisonReport } from '../compare.js';
+
 
 export async function updateSessionView(report) {
   document.getElementById('report-container').replaceChildren(
     el('div', {class: "report", "data-reportid": report.id}, [
       reportHeader(report), 
       el('div', {class: "report-body"},
-        carousel({
-          id: "session",
-          items: [
-            reportText('Beskrivelse', report.descr),
-            reportText('Kommentar', report.forecast),
-            reportPage('Værforhold', sessionWeather(report)),
-            reportPage('Brett', sessionBoard(report)),
-            reportPage('Sammenlikning', await sessionCompare(report))
-          ]
-      })),
+        tabs(
+          'session', 
+          ['Beskrivelse', 'Kommentar', 'Vær', 'Brett', 'Sammenlikning'], 
+          [report.descr, report.forecast, sessionWeather(report), sessionBoard(report), await reportCompare(report)]
+        )),
       reportFooter(report)
     ])
   );
@@ -55,37 +49,4 @@ function sessionBoard(report) {
   } else {
     return el('div', {class: "report-title"}, report.board);
   }
-}
-
-async function sessionCompare(report) {
-  let compare = await comparisonReport(report.reporttime);
-  if (compare) {
-    let params = ['waveheight', 'waveperiod', 'swellheight', 'swellperiod', 'wind', 'swind'];
-    let elements = [
-      el('div', "txt-report-title", "Sammenlikning"),
-      el('p', "txt-report",
-        `For denne økta var det varslet ${compare.wavesize} bølger og ${compare.windspeed} vind enn ${moment(compare.forecasttime).calendar()}.`),
-      el('div', "report-subtitle", "Detaljer"),
-    ];
-
-    for (let param of params) {
-      let txt = format(compare, param);
-      if (txt) elements.push(el('div', 'report-twin-txt', txt)) 
-    }
-    return elements;
-  } else {
-    el('div', {id: 'report-twin-info'},
-      el('div', 'report-text', 'Klarte ikke å sammenlikne varsel for denne rapporten med valgt tidspunkt (tidspunkt satt for DMI-bilder)'));
-  }
-}
-
-function format(comparisonReport, param) {
-  let value = comparisonReport[param].diff;
-  if (value === 0) return;
-
-  param = (param === 'swind') ? 'wind' : param
-  let p = forecastParamAll(param)
-  
-  let s = (value > 0) ? 'up' : 'down';
-  return `${p.caption} var ${value}${p.unit.unit} ${p.unit[s]}.`
 }

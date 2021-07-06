@@ -2,7 +2,7 @@
 import { Loader } from './utils/logger.js'; 
 import { initDateInput } from './html/dateInput.js';
 import { initSpotList } from './html/spotInput.js';
-import { getSettings} from './settings.js';
+import { getSettings } from './settings.js';
 import { createForms } from './html/form.js';
 import { initWebcam } from './html/webcam.js';
 import { addDeleteReportsEventHandlers } from './reports/delete.js';

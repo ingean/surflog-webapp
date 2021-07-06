@@ -3,10 +3,107 @@ svg > g > g:last-child { pointer-events: none }
 
 html,
 body {
-    background-color: var(--app-bg-color);
+    background-color: var(--bg-color);
     width:100%;
     height:100%;
     overflow-x: hidden;
+}
+
+
+
+/* Bootstrap buttons overrides */
+a {
+  color: var(--primary-color);
+}
+
+.btn {
+  background-image: none;
+  text-shadow: none;
+}
+
+.close {
+  color: var(--on-surface-color);
+  text-shadow: none;
+}
+
+.btn-default {
+  color: var(--on-bg-color);
+  background-color: var(--bg-color);
+}
+
+.nav-pills>li.active>a,
+.btn-default.active,
+.btn-primary {
+  color: var(--on-primary-color);
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.nav-pills>li.active>a:hover,
+.btn-default.active:hover,
+.btn-primary:hover
+.btn-success {
+  color: var(--on-primary-color);
+  background-color: var(--primary-variant-color);
+  border-color: var(--primary-variant-color);
+}
+
+.btn-success:hover {
+  background-color: var(--primary-variant-color);
+  border-color: var(--primary-variant-color);
+}
+
+
+
+
+/* Tabs in panel tab styling */
+.nav-tabs>li.panel-tab.active>a {
+  border-bottom: 2px solid var(--surface-color);
+  background-color: var(--surface-color);
+}
+
+/* NAVIGATION BAR */
+.navbar {
+  border-radius: 0;
+}
+
+.navbar-default {
+  color: var(--on-nav-color);
+  background-color: var(--nav-color);
+  background-image: none;
+  border: none;
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav>li>a {
+  color: var(--on-nav-color);
+}
+
+#navbar-profile-img {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  object-fit: cover;
+  height: 40px;
+  width: 40px;
+}
+
+.tab-toolbar {
+  margin-top: 20px;
+}
+
+.list-group-item {
+  color: var(--on-surface-color);
+  background-color: var(--surface-color-l1);
+}
+
+
+a.list-group-item {
+  color: var(--on-surface-color);
+}
+
+a.list-group-item:hover {
+  background-color: var(--surface-color);
 }
 
 .padded {
@@ -18,11 +115,6 @@ body {
   margin-left: auto;
 }
 
-/* NAVIGATION BAR */
-.navbar {
-    border-radius: 0;
-}
-
 .collapsable {
     cursor: pointer;   
 }
@@ -31,32 +123,25 @@ body {
   font-size: 20px;
   cursor: pointer;
   padding:10px;
-  color: darkgray;
+  color: var(--primary-txt-color);
 }
 
 .i-tool-small {
   font-size: 20px;
   cursor: pointer;
   margin-left: 5px;
-  color: darkgray;
+  color: var(--primary-txt-color);
 }
 
 .i-tool:hover {
-  color: gray;
+  color: var(--secondary-txt-color);
 }
 
 .i-tool-small:hover {
-  color: gray;
+  color: var(--secondary-txt-color);
 }
 
-#navbar-profile-img {
-    position: absolute;
-    right: 10px;
-    top: 5px;
-    object-fit: cover;
-    height: 40px;
-    width: 40px;
-}
+
 
 .img-dmi {
   position:relative;

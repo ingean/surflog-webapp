@@ -1,12 +1,17 @@
 import { el }  from '../../html/elements.js';
-import { reportHeader, reportText, reportFooter } from './report.js';
+import { tabs } from '../../html/tabs.js';
+import { reportHeader, reportCompare, reportFooter } from './report.js';
 
-export function updateObservationView(report) {
+export async function updateObservationView(report) {
   document.getElementById('report-container').replaceChildren(
     el('div', {class: "report", "data-reportid": report.id}, [
       reportHeader(report), 
       el('div', {class: "report-body"},
-        reportText('Beskrivelse', report.descr)),
+      tabs(
+        'observation', 
+        ['Beskrivelse', 'Sammenlikning'], 
+        [report.descr, await reportCompare(report, 'observasjonen')]
+      )),
       reportFooter(report)
     ])
   );

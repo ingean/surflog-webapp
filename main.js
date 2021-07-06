@@ -1,5 +1,7 @@
 import { statusChangeCallback } from './modules/utils/login.js';
+import { initTheme } from './modules/settings.js';
 
+initTheme(); //Set UI theme to light or dark
 moment.locale('nb_NO');
 google.charts.load('current', {'packages':['corechart'],'language':'nb_NO'}); 
 

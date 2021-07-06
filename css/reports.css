@@ -23,6 +23,7 @@
   font-size: small;
   font-weight: bold;
   margin-left: 10px;
+  color: var(--on-surface-color);
 }
 
 .report-list-date {
@@ -70,18 +71,18 @@
 
 .report-header {
   padding: 10px;
-  background-color: var(--primary-color-dark);
+  background-color: var(--primary-color);
 }
 
 .report-header-title {
-  color: var(--primary-color-light);
+  color: var(--on-primary-color);
   font-size: medium;
   font-weight: bold;
   margin-left: 10px;
 }
 
 .report-header-details {
-  color: var(--primary-color-light);
+  color: var(--on-primary-color);
   font-size: x-small;
   margin-left: 10px;
 }
@@ -89,7 +90,7 @@
 .report-body {
   padding: 10px;
   min-height: 440px;
-  background-color: var(--primary-color-light);
+  background-color: var(--surface-color);
 }
 
 #carousel-session {
@@ -142,7 +143,8 @@
 .report-footer {
   align-items: flex-end;
   padding: 10px;
-  background-color: var(--secondary-color-light);
+  color: var(--on-primary-color);
+  background-color: var(--primary-variant-color);
 }
 
 .report-tools {
@@ -156,14 +158,14 @@
   display: flex;
   flex-direction: column;
   justify-items: flex-end;
-  color: var(--primary-txt-color);
+  color: var(--on-primary-variant-color);
   margin-left: 10px;
   margin-right: 10px;
 }
 
 .report-tool:hover {
   cursor: pointer;
-  color: var(--color-tool-highlight);
+  color: var(--secondary-color);
 }
 
 .report-tools a {

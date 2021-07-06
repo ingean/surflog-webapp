@@ -2,13 +2,13 @@ import { el, scoreLabel, icon } from '../../html/elements.js';
 import { dateChanged } from '../../html/dateInput.js';
 import { getRating } from '../../config/forms.js';
 import { imgSrc } from '../../utils/utilities.js';
+import { reportSVG } from '../../html/svg.js';
 import { get } from '../../utils/api.js';
 import { getReports } from '../read.js';
 
 function reportIcon(report) {
   let str = (report.type === 'Session') ? report.type : report.source;
-  return imgSrc(str, 'report');
- 
+  return reportSVG(str);
 }
 
 function reportDetails(report) {
@@ -53,7 +53,7 @@ export function updateReportList(reports) {
   for (let report of reports) {
     let reportEl = 
       el('a', 'list-group-item report-list-item', [
-        el('img', {class: 'report-list-img', src: reportIcon(report)}),
+        el('div', 'report-list-img', reportIcon(report)),
         el('div', 'report-list-title', report.spot),
         el('img', {class: 'report-list-img-small', src: imgSrc(report.country, 'flags')}),
         el('div', 'report-list-date', moment(report.reporttime).calendar()),

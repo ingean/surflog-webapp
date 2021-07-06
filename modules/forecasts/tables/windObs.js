@@ -12,7 +12,7 @@ function getHeaders(forecast) {
 }
 
 function cls(f) {
-  return clsValue(f, 'wind', 'dmi', 'txt', 'fetch')
+  return clsValue(f, 'wind', 'dmi', 0, 'txt', 'fetch')
 }
 
 function stationCell(f) {

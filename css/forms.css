@@ -1,11 +1,16 @@
 .btn-group .notActive {
-  background-color: var(--form-bg-color);
+  background-color: var(--surface-color);
   background-image: none;
-  color: var(--form-color);
+  color: var(--on-surface-color);
 }
 
 .tab-content {
   margin-top: 2rem;
+}
+
+.form-control {
+  color: var(--on-surface-color);
+  background-color: var(--surface-color-l1);
 }
 
 input.custom-select {
@@ -13,8 +18,8 @@ input.custom-select {
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #555;
-  background-color: #fff;
+  color: var(--on-surface-color);
+  background-color: var(--surface-color-l1);
   background-image: none;
   border: 1px solid #ccc;
   border-bottom-right-radius: 4px;

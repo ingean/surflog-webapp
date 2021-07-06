@@ -74,6 +74,17 @@ export async function getYrCoast(yrId) {
   return get(`${forecasts.yrCoast.proxyUrl}?id=${yrId}&endpoint=/forecast/coast`);
 }
 
+export function getMetForecast() {
+  let requests = [];
+  let baseUrl = forecasts.met.url;
+  let locations = forecasts.met.locations;
+ 
+  locations.forEach(l => {
+    requests.push(get(`${baseUrl}?lat=${l.lat}&lon=${l.lon}`));
+  })
+  return Promise.all(requests);
+}
+
 export async function getUKCoast() {
   let requests = [];
   let baseUrl = forecasts.uk.url;

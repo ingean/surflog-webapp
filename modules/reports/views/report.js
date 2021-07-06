@@ -1,9 +1,11 @@
 import { el } from '../../html/elements.js';
 import { spotIds } from '../../config/spots.js';
 import { urlMSW } from '../../config/datasources.js';
+import { forecastParamAll } from '../../config/datasources.js';
 import { reportScore, conditionsDetails } from './list.js';
 import { updateSessionView } from './session.js';
 import { updateObservationView } from './observation.js';
+import { comparisonReport } from '../compare.js';
 
 function tide(report) {
   if(report.type === 'Session') {
@@ -77,6 +79,17 @@ function deleteButton() {
   });
 }
 
+function format(comparisonReport, param) {
+  let value = comparisonReport[param].diff;
+  if (value === 0) return;
+
+  param = (param === 'swind') ? 'wind' : param
+  let p = forecastParamAll(param)
+  
+  let s = (value > 0) ? 'up' : 'down';
+  return `${p.caption} var ${abs(value)}${p.unit.unit} ${p.unit[s]}.`
+}
+
 export function reportHeader(report) {
   let profilePicture = document.getElementById('navbar-profile-img').getAttribute('src');
   
@@ -93,7 +106,28 @@ export function reportHeader(report) {
       reportScore(report)
     ]) 
   )
-}  
+}
+
+export async function reportCompare(report, reportType = 'økta') {
+  let compare = await comparisonReport(report.reporttime);
+  if (compare) {
+    let params = ['waveheight', 'waveperiod', 'swellheight', 'swellperiod', 'wind', 'swind'];
+    let elements = [
+      el('p', "txt-report",
+        `For denne ${reportType} var det varslet ${compare.wavesize} bølger og ${compare.windspeed} vind enn ${moment(compare.forecasttime).calendar()}.`),
+      el('div', "report-subtitle", "Detaljer"),
+    ];
+
+    for (let param of params) {
+      let txt = format(compare, param);
+      if (txt) elements.push(el('div', 'report-twin-txt', txt)) 
+    }
+    return elements;
+  } else {
+    el('div', {id: 'report-twin-info'},
+      el('div', 'report-text', 'Klarte ikke å sammenlikne varsel for denne rapporten med valgt tidspunkt (tidspunkt satt for DMI-bilder)'));
+  }
+}
 
 export function reportFooter(report) {
   let content = [
