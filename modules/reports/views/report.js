@@ -87,7 +87,7 @@ function format(comparisonReport, param) {
   let p = forecastParamAll(param)
   
   let s = (value > 0) ? 'up' : 'down';
-  return `${p.caption} var ${abs(value)}${p.unit.unit} ${p.unit[s]}.`
+  return `${p.caption} var ${Math.abs(value)}${p.unit.unit} ${p.unit[s]}.`
 }
 
 export function reportHeader(report) {
