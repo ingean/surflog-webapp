@@ -88,7 +88,8 @@ const wavedir = [
 ];
 
 const boards = [
-  {caption: 'SD No Brainer', default: true},
+  {caption: 'Machado Seaside', default: true},
+  {caption: 'SD No Brainer'},
   {caption: 'CI OG Flyer'},
   {caption: 'Lost V2 Shortboard'},
   {caption: 'Von Sol Shadow'},
