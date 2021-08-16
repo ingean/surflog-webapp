@@ -89,10 +89,7 @@ const wavedir = [
 
 const boards = [
   {caption: 'Machado Seaside', default: true},
-  {caption: 'SD No Brainer'},
-  {caption: 'CI OG Flyer'},
-  {caption: 'Lost V2 Shortboard'},
-  {caption: 'Von Sol Shadow'},
+  {caption: 'FW Dominator II'},
   {caption: 'MR Expoxy Twin'},
   {caption: 'OE Longboard'},
   {caption: 'Annet'}

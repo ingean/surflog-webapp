@@ -28,7 +28,7 @@ export async function startSurfLog(userId) {
   initTwin();
   
   //Settings
-  await getSettings(userId); //Get settings, statistics and sun up/down
+  await getSettings(userId); //Get settings and statistics
 
   //Forms
   await createForms(); // Need settings to create forms (list of countries etc.)
