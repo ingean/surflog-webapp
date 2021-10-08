@@ -37,7 +37,7 @@ function yrCoastForecastToRow(f) {
 }
 
 function updateYrCoastTable(forecast) {
-  updateForecastTable(forecast.intervals, getYrCoastTime, yrCoastForecastToRow, 'yrCoast', headers);
+  updateForecastTable(forecast.shortIntervals, getYrCoastTime, yrCoastForecastToRow, 'yrCoast', headers);
 }
 
 function getYrCoastTime(forecast) {
