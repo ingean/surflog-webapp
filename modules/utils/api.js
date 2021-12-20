@@ -26,7 +26,7 @@ async function getData(response, returnCount = false) {
       log(data.error, data.message);
       return null;
     } else {
-      log(null, 'API-forespørselen feilet uten å gi noe feil');
+      log(null, 'API-forespørselen feilet uten å gi noe feilmelding');
     }
   }
 }
@@ -123,4 +123,26 @@ export function getTwin() {
 export function getComparison(date) {
   let time = moment(getImgTime()).format('YYYY-MM-DDTHH:mm:ss');
   return get(`${urlAPI}forecasts/dmi/${time}/compare?timestamp=${moment(date).format('YYYY-MM-DDTHH:00:00')}`);
+}
+
+export async function getStatistics(forecast = 'msw', spot = 'Saltstein') {
+  let stats = await get(`${urlAPI}statistics/forecasts2?forecast=${forecast}&spot=${spot}`);
+  let result = {}
+  stats.forEach(stat => {
+    if (stat.score >= 0) {
+      if (forecast == 'yr') {
+        if (stat.station) {
+          if (result[stat.score]) {
+            result[stat.score][stat.station] = stat
+          } else {
+            result[stat.score] = {}
+            result[stat.score][stat.station] = stat
+          }
+        }
+      } else {
+        result[stat.score] = stat
+      }
+    }
+  })
+  return result
 }

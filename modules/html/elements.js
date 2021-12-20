@@ -87,6 +87,19 @@ export function arrow(rotation, height = '24', width = '24') {
   return el('span', '', svg) 
 }
 
+export function stars(open, filled, max = 5) {
+  open = open || 0
+  filled = filled || 0
+  let stars = []
+  let i = 0
+  while (i < max) {
+    let cls = (i < filled) ? 'star-filled' : (i - filled < open ) ? 'star-open' : 'star';
+    stars.push(el('li', `${cls} starrating list-item-h`, el('i', 'glyphicon glyphicon-star starrating', '')))
+    i++
+  }
+  return el('ul', '', stars)
+}
+
 export function tideIcon(type, height = '24', width = '24') {
   let d = (type === 'low') ? 'M3 18c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 21c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1m-5-11l-4 3-4-3m4 3V3.5' : 'M3 18c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 15c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 21c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M8 7l4-3 4 3m-4 4V4';
   let svg = svgEl('tideIcon', height, width) 

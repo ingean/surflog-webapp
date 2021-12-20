@@ -36,3 +36,15 @@ export function toggleActive(el) { //Argument is button to be active
   siblings.forEach(s => s.classList.remove('active'))
   el.classList.add('active')
 }
+
+export function getStringValue(obj, key) {
+  let value = ''
+  try {
+    let v = obj[key]
+    if (v && v != 'null') {
+      value = v
+    }
+  } finally {
+    return value
+  }
+}

@@ -80,8 +80,8 @@ function convertKnots(kts) {
   return Number(kts) * 0.514444
 }
 
-function updateUKTable(forecasts) {
-  let forecast = convertData(forecasts)
+function updateUKTable() {
+  let forecast = convertData(ukForecast)
   updateForecastTable(forecast, getUKTime, ukForecastToRow, 'northsea', headers);
 }
 
@@ -89,8 +89,9 @@ function getUKTime(forecast) {
  return forecast.localtime;
 }
 
+export var ukForecast = []
+
 export async function getUKForecast() {
-  getUKCoast()
-  .then(forecasts => updateUKTable(forecasts))
-  .catch()
+  ukForecast = await getUKCoast()
+  updateUKTable()
 }

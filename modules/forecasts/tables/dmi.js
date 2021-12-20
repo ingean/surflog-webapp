@@ -1,5 +1,5 @@
 import { el, scoreLabel, hrsTd } from '../../html/elements.js';
-import { get, queryTimespan } from '../../utils/api.js';
+import { get, getStatistics, queryTimespan } from '../../utils/api.js';
 import { round } from '../../utils/utilities.js';
 import { isDayTime } from '../../utils/time.js';
 import { formatValue, clsValue } from '../format.js';
@@ -7,6 +7,7 @@ import { scoreForecast } from '../score.js';
 import { updateForecastTable } from './table.js';
 
 const headers = ['Tid', 'Bølgehøyde', 'Bølgeperiode', 'Dønning', 'Dønning, periode', 'Wind', 'Score'];
+let statistics = {}
 
 function paramCell(forecast, param) {
   let f1 = forecast.stations['Saltstein']
@@ -14,7 +15,7 @@ function paramCell(forecast, param) {
   
   return (
     el('td', '', [
-      el('span', `td-value ${clsValue(f1, param)}`, formatValue(f1, param)),
+      el('span', `td-value ${clsValue(statistics, f1, param)}`, formatValue(f1, param)),
       el('span', 'td-secondary-value hidden-xs', formatValue(f2, param, true))
     ])
   )
@@ -51,8 +52,9 @@ function dmiForecastToRow(forecast) {
   )
 }
 
-function updateDMITable(forecast) {
-  updateForecastTable(forecast, getDMITime, dmiForecastToRow, 'dmi', headers);
+export async function updateDMITable(spot = 'Saltstein') {
+  statistics = await getStatistics('dmi', spot)
+  updateForecastTable(dmiForecast, getDMITime, dmiForecastToRow, 'dmi', headers);
 }
 
 function getDMITime(forecast) {
@@ -64,5 +66,5 @@ export var dmiForecast = [];
 export async function getDMIForecast(start, end) {
   let query = queryTimespan(start, end);
   dmiForecast = await get(`forecasts/dmi${query}`);
-  updateDMITable(dmiForecast);
+  updateDMITable();
 }

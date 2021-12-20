@@ -1,8 +1,8 @@
 import { selectedSpot } from './html/spotInput.js';
-import { get } from './utils/api.js';
+import { getStatistics } from './utils/api.js';
 
 export var settings = [];
-export var statistics = {};
+//export var statistics = {};
 export var sunTimes = {};
 export var user;
 
@@ -19,8 +19,8 @@ function switchTheme() {
 }
 
 export async function getSettings(userId) {
-  settings = await get(`settings/${userId}`);
-  statistics = await get(`statistics/forecasts`);
+  //settings = await get(`settings/${userId}`);
+  //statistics = await get(`statistics/forecasts`);
 }
 
 export function setUser(loggedInUser) {
@@ -35,13 +35,13 @@ export function setSunTimes(sun) {
   return sunTimes;
 }
 
-export function getStats(forecast, param, location = 0) {
+export function getStats_old(forecast, param, location = 0) {
   param = (forecast === 'dmi')  ? `s${param}` : param; // Use DMI-stats for Skagerak
 
   let spot = selectedSpot();
   let avg = statistics[spot][forecast][location][`avg(${param})`];
   let std = statistics[spot][forecast][location][`std(${param})`];
-  let min = statistics[spot][forecast][location][`std(${param})`];
+  let min = statistics[spot][forecast][location][`min(${param})`];
   return {min, avg, std};
 }
 

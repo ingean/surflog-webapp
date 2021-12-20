@@ -1,13 +1,14 @@
 import { el, arrow, weatherImg, tempTd, hrsTd } from '../../html/elements.js';
-import { getYrCoast } from '../../utils/api.js';
+import { getYrCoast, getStatistics } from '../../utils/api.js';
 import { isDayTime } from '../../utils/time.js';
 import { formatValue, clsValue } from '../format.js';
 import { updateForecastTable } from './table.js';
 
 const headers = ['Tid', 'Vær', 'Temp', 'Bølger', 'Vind (byge)', 'Strøm', 'Vanntemp'];
+let statistics = {}
 
 function cls(f) {
-  return clsValue(f.sea, 'wave', 'yr', 1)
+  return clsValue(statistics, f.sea, 'wave', 'Saltstein')
 }
 
 
@@ -36,15 +37,18 @@ function yrCoastForecastToRow(f) {
   )
 }
 
-function updateYrCoastTable(forecast) {
-  updateForecastTable(forecast.shortIntervals, getYrCoastTime, yrCoastForecastToRow, 'yrCoast', headers);
+export async function updateYrCoastTable(spot = 'Saltstein') {
+  statistics = await getStatistics('yr', spot)
+  updateForecastTable(yrCoastForecast.shortIntervals, getYrCoastTime, yrCoastForecastToRow, 'yrCoast', headers);
 }
 
 function getYrCoastTime(forecast) {
   return forecast.start;
 }
 
+export var yrCoastForecast = []
+
 export async function getYrCoastForecast(yrId) {
-  let forecast = await getYrCoast(yrId);
-  updateYrCoastTable(forecast);
+  yrCoastForecast = await getYrCoast(yrId);
+  updateYrCoastTable();
 }

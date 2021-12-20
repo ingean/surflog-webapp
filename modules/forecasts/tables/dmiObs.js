@@ -46,7 +46,7 @@ function getHeaders(obs) {
 }
 
 function cls(o) {
-  return clsValue(o, 'wind_speed_past1h', 'dmi', 0, 'txt', 'fetch')
+  return clsValue(null, o, 'wind_speed_past1h', null, 'txt', 'fetch')
 }
 
 function stationCell(o) {
@@ -75,14 +75,15 @@ function getDMIObsTime(obs) {
   return obs.localtime
 }
 
-function updateDMIObsTable(obs) {
-  obs = convertData(obs)
+function updateDMIObsTable() {
+  let obs = convertData(dmiObservations)
   let headers = getHeaders(obs[0].stations)
   updateForecastTable(obs, getDMIObsTime, dmiObsToRow, 'dmiObs', headers)
 }
 
-export function getDMIObservations(start, end) {
-  getDMIObs(start, end)
-  .then(o => updateDMIObsTable(o))
-  //.catch(e => console.error(`Klarte ikke hente observasjoner fra DMI: ${e}`))
+export var dmiObservations = [];
+
+export async function getDMIObservations(start, end) {
+  dmiObservations = await getDMIObs(start, end)
+  updateDMIObsTable()
 }

@@ -476,8 +476,27 @@
           </div>
         </div>
       </div> 
+
+          <!-- Report view-->
+          <div class="row">
+            <div class="col-12">
+              <div class="panel light">
+                <div class="panel-heading">
+                  <span class="panel-h light">Rapport</span>
+                  <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
+                </div>
+                <div class="panel-body">
+                  <div class="col-12">
+                    <div id="report-container">
+                      <span class="report-title">Velg en rapport fra listen</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
   
-      <!-- Reports -->
+      <!-- Report list -->
       <div class="row">
         <div class="col-12">
           <div class="panel light">
@@ -485,14 +504,14 @@
               <span class="panel-h light">Rapporter</span>
               <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
               <span class="glyphicon glyphicon-filter i-tool pull-right" data-toggle="modal" data-target="#modal-report-filter"></span>
+              <div class="btn-group btn-group-sm pull-right">
+                <button type="button" class="btn btn-default reports-forecast-switch active">MSW</button>
+                <button type="button" class="btn btn-default reports-forecast-switch">DMI</button>
+                <button type="button" class="btn btn-default reports-forecast-switch">SMHI</button>
+              </div>
             </div>
             <div class="panel-body">
-              <div class="col-md-6 col-fullwidth-xs">
-                <div id="report-container">
-                  <span class="report-title">Velg en rapport fra listen</span>
-                </div>
-              </div>
-              <div class="col-md-6"> 
+              <div class="col-12"> 
                 <div id="report-list-container"></div>
                 <nav aria-label="Page navigation">
                   <ul id="report-list-pagination" class='pagination'></ul>

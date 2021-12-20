@@ -1,0 +1,17 @@
+{
+  "liveServer.settings.port": 5500,
+  "liveServer.settings.root": "/",
+  "liveServer.settings.AdvanceCustomBrowserCmdLine": "chrome --incognito --remote-debugging-port=9222",
+  "liveServer.settings.NoBrowser" : false,
+  "liveServer.settings.ignoreFiles" : [
+          ".vscode/**",
+          "**/*.scss",
+          "**/*.sass"
+  ],
+  "liveServer.settings.https": {
+    "enable": true, //set it true to enable the feature.
+    "cert": "/etc/apache2/ssl/localhost.crt", //full path
+    "key": "/etc/apache2/ssl/localhost.key", //full path
+    "passphrase": "12345"
+}
+}

@@ -31,20 +31,29 @@
   margin-left: 10px;
 }
 
+.report-info {
+  display: flex;
+  flex-direction: row;
+  min-width: 300px;
+}
+
 .report-details {
   display: flex;
   flex-direction: row;
   margin: 20px;
+  min-width: 50px;
 }
 
 .report-detail {
   margin: 1px;
+  min-width: 15px;
 }
 
 .report-conditions {
   display: flex;
   flex-direction: row;
   margin-left: 20px;
+  min-width: 270px;
 }
 
 .report-condition {
@@ -54,9 +63,91 @@
   min-width: 50px;
 }
 
+.report-forecast-msw {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+  min-width: 400px;
+  height: 38px;
+}
+
+.report-forecast-msw-waveheight {
+  display: flex;
+  flex-direction: row;
+  background-color: var( --rating-muted-3);
+  height: 38px;
+}
+
+.report-forecast-msw-starrating {
+  display: flex;
+  flex-direction: row;
+  height: 38px;
+}
+
+.list-item-h {
+  display: inline-block;
+}
+
+.star {
+  color: lightgrey;
+}
+
+.star-filled {
+  color: blue;
+}
+
+.star-open {
+  color: lightblue;
+}
+
+
+.report-forecast-msw-value {
+  padding: 10px;
+  min-width: 80px;
+  font-weight: bold;
+}
+
+.report-forecast-msw-value-narrow {
+  padding: 10px;
+  min-width: 40px;
+  font-weight: bold;
+}
+
+.report-forecast-msw-value-small {
+  padding: 10px;
+  min-width: 60px;
+  height: 38px;
+  font-size: small;
+  color: var(--secondary-txt-color)
+}
+
+.report-forecast-msw-value-xsmall {
+  width: 20px;
+  height: 38px;
+}
+
+.report-forecast-msw-value-short {
+  width: 40px;
+  height: 19px;
+  font-size: small;
+  color: var(--secondary-txt-color)
+}
+
+.report-forecast-msw-value-subdued {
+  padding: 10px;
+  min-width: 80px;
+  height: 38px;
+  color: var(--secondary-txt-color)
+}
+
+.report-forecast-select {
+  margin-left: 20px;
+}
+
 .report-score {
   margin-left: auto;
   flex: 0 0 65px;
+  min-width: 100px;
 }
 
 /* REPORT */

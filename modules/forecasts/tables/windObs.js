@@ -12,7 +12,7 @@ function getHeaders(forecast) {
 }
 
 function cls(f) {
-  return clsValue(f, 'wind', 'dmi', 0, 'txt', 'fetch')
+  return clsValue(null, f, 'wind', null, 'txt', 'fetch')
 }
 
 function stationCell(f) {
@@ -36,18 +36,19 @@ function windObsToRow(f) {
   )
 }
 
-function updateWindObsTable(forecast) {
-  let headers = getHeaders(forecast[0].stations);
-  updateForecastTable(forecast, getWindObsTime, windObsToRow, 'windObs', headers);
+function updateWindObsTable() {
+  let headers = getHeaders(metObservations[0].stations);
+  updateForecastTable(metObservations, getWindObsTime, windObsToRow, 'windObs', headers);
 }
 
 function getWindObsTime(forecast) {
   return forecast.localtime;
 }
 
+export var metObservations = []
 
 export async function getWindObs(start, end) {
   let query = queryTimespan(start, end);
-  let forecast = await get(`forecasts/frost${query}`);
-  updateWindObsTable(forecast);
+  metObservations = await get(`forecasts/frost${query}`);
+  updateWindObsTable();
 }

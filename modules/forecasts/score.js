@@ -1,6 +1,6 @@
 import { points } from '../config/scoreModel.js';
 import { windspeed } from '../config/forecasts.js';
-import { getStats } from '../settings.js';
+import { getStatsForParam } from '../utils/statistics.js';
 
 
 
@@ -9,8 +9,8 @@ export function scoreWindValue(speed, type = 'fetch') {
   return (speed) ? speed[type] : null
 }
 
-export function scoreValue(value, param, forecast, location = 0, points = false) {
-  let s = getStats(forecast, param, location);
+export function scoreValue(statistics, value, param, location, points) {
+  let s = getStatsForParam(statistics, param, 4, location);
   let score = (value >= (s.avg + s.std)) ? 5: (value >= s.avg) ? 4 : (value >= (s.avg - s.std) ? 3 : (value >= s.min) ? 2 : 0);
   let i = (value >= (s.avg + s.std)) ? 4: (value >= s.avg) ? 3 : (value >= (s.avg - s.std) ? 2 : (value >= s.min) ? 1 : 0);
   return (points) ? pointsStat(i) : score;

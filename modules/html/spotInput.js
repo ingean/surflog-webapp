@@ -5,7 +5,11 @@ import { formSelectInput } from '../html/formGroup.js';
 import { updateStationCard } from '../forecasts/cards/station.js';
 import { updateDMICard } from '../forecasts/cards/dmiStats.js';
 import { updateSMHICard } from '../forecasts/cards/smhiStats.js';
-import { getYrCoastForecast } from '../forecasts/tables/yrCoast.js'; 
+import { getYrCoastForecast, updateYrCoastTable } from '../forecasts/tables/yrCoast.js'; 
+import { updateDMITable } from '../forecasts/tables/dmi.js'; 
+import { updateSMHITable } from '../forecasts/tables/smhi.js'; 
+import { updateYrTable } from '../forecasts/tables/yr.js'; 
+
 
 function clearInput(e) {
   let input = e.target.parentElement.parentElement.nextElementSibling;
@@ -32,6 +36,12 @@ async function onSpotChanged(e) {
   updateDMICard(spot);
   updateSMHICard(spot);
   getYrCoastForecast(yrId);
+  
+  // Reformat tables to reflect selected spot statistics
+  updateDMITable(spot)
+  updateSMHITable(spot)
+  updateYrTable(spot)
+  updateYrCoastTable(spot)
 }
 
 export function initSpotList() {

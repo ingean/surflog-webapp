@@ -16,6 +16,7 @@ import { initMSWImages } from './forecasts/images/msw.js';
 import { getUKForecast } from './forecasts/tables/uk.js';
 import { getDMIObservations } from './forecasts/tables/dmiObs.js';
 import { initTwin } from './reports/compare.js';
+import { initReportlist } from './reports/views/list.js';
 
 
 
@@ -26,9 +27,10 @@ export async function startSurfLog(userId) {
   initDMIImages(); //Add click events for img nav btns and set time
   initMSWImages();
   initTwin();
+  initReportlist()
   
   //Settings
-  await getSettings(userId); //Get settings and statistics
+  //await getSettings(userId); //Get settings and statistics
 
   //Forms
   await createForms(); // Need settings to create forms (list of countries etc.)
