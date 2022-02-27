@@ -27,8 +27,8 @@ function cell(v, param) {
   );
 }
 
-function tableCells(stats, param) {
-  let s = getStatsForParam(stats, param);
+function tableCells(stats, param, station) {
+  let s = getStatsForParam(stats, param.id, 4, station);
   return [
     el('td', 'td-m td-left', param.caption),
     el('td', cCls, cell(s.min, param)), // max
@@ -48,9 +48,9 @@ function tableBody(stats, params) {
 
 export async function updateCard(spot, forecast, params) {
   let statistics = await getStatistics(forecast, spot)
-  if (!statistics[spot]) return
-  let stats = (forecast == 'yr') ? statistics[score]['Saltstein'] : statistics[score];
-  let card = 
+  let station = (forecast === 'yr') ? 'Saltstein' : null
+  if (!statistics) return
+    let card = 
     el('div', 'station-card flex-row', [
       el('div', 'station-card station-card-names flex-col', [
         el('div', 'station-card-spotName', spot),
@@ -58,7 +58,7 @@ export async function updateCard(spot, forecast, params) {
       ]),   
       el('table', 'station-card-table', [
         tableHead(),
-        tableBody(stats, params)
+        tableBody(statistics, params, station)
       ])
     ]);
       

@@ -36,6 +36,7 @@ function sessionWeather(report) {
  
 function sessionBoard(report) {
   //let board = settings.boards.find(b => b.model === report.board);
+  let board
 
   if (board) {
     return [
