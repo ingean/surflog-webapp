@@ -172,7 +172,7 @@ export async function filterReportsList(form) {
   data.delete('loctype');
 
   let query = formToQuery(data);
-  let reports = await get(`reports?page=1&table=reportsMSWforecasts&${query}`, true)
+  let reports = await get(`reports?page=1&table=v_reports_msw&${query}`, true)
   if (reports.data) {
     updateReportsListPagination(reports.count, 10, query);
     updateReportList(reports.data);
