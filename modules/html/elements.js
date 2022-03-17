@@ -97,7 +97,7 @@ export function stars(open, filled, max = 5) {
     stars.push(el('li', `${cls} starrating list-item-h`, el('i', 'glyphicon glyphicon-star starrating', '')))
     i++
   }
-  return el('ul', '', stars)
+  return el('ul', 'starrating-list', stars)
 }
 
 export function tideIcon(type, height = '24', width = '24') {

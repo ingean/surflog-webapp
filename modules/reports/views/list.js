@@ -57,16 +57,22 @@ function mswForecastDetails(report) {
         el('div', 'report-forecast-msw-value', formatValue(report, 'waveheight_to', false, 'waveheight'))
       ]),
       el('div', 'report-forecast-msw-starrating', stars(report['stars_open'], report['stars_filled'])),
-      el('div', 'report-forecast-msw-value', formatValue(report, 'swellheight')),
-      el('div', 'report-forecast-msw-value', formatValue(report, 'swellperiod')),
-      el('div', 'report-forecast-msw-value-narrow', arrow(report['swelldir'])),
-      el('div', 'report-forecast-msw-value-small', formatValue(report, 'subswellheight', false, 'swellheight')),
-      el('div', 'report-forecast-msw-value-small', formatValue(report, 'subswellperiod', false, 'swellperiod')),
-      el('div', 'report-forecast-msw-value-narrow', arrow(report['subswelldir'], '20', '20')),
-      el('div', 'report-forecast-msw-value-narrow', `${report['windspeed']}`),
-      el('div', 'report-forecast-msw-windgust', [
-        el('div', 'report-forecast-msw-value-short', `(${report['windgust']})`),
-        el('div', 'report-forecast-msw-value-short', 'km/t'),
+      el('div', 'report-forecast-msw-swell', [
+        el('div', 'report-forecast-msw-value', formatValue(report, 'swellheight')),
+        el('div', 'report-forecast-msw-value', formatValue(report, 'swellperiod')),
+        el('div', 'report-forecast-msw-value-narrow', arrow(report['swelldir']))
+      ]),
+      el('div', 'report-forecast-msw-subswell', [
+        el('div', 'report-forecast-msw-value-small', formatValue(report, 'subswellheight', false, 'swellheight')),
+        el('div', 'report-forecast-msw-value-small', formatValue(report, 'subswellperiod', false, 'swellperiod')),
+        el('div', 'report-forecast-msw-value-narrow', arrow(report['subswelldir'], '20', '20'))
+      ]),
+      el('div', 'report-forecast-msw-wind', [
+        el('div', 'report-forecast-msw-value-narrow', `${report['windspeed']}`),
+        el('div', 'report-forecast-msw-windgust', [
+          el('div', 'report-forecast-msw-value-short', `(${report['windgust']})`),
+          el('div', 'report-forecast-msw-value-short', 'km/t'),
+        ]),
       ]),
       el('div', `report-forecast-msw-value-narrow bg-muted-${report['windscore']}`, arrow(report['winddir'])),
     ])
