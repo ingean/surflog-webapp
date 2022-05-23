@@ -30,6 +30,14 @@ function fileName(date) {
   return moment(toUTC(moment(date).toDate())).format('YYYYMMDD_HH')
 }
 
+function displayYrImgContainers(date) {
+  if (moment(date).isAfter('2022-02-01')) {
+    document.getElementById('yr-historic-row').style.display = 'none'
+  } else {
+    document.getElementById('yr-historic-row').style.display = ''
+  }
+}
+
 export function imgFooter(source, report) {
   let footer = el('div', 'panel-footer dark', 
     el('span', `time-${source}-historic panel-h4 dark`)
@@ -63,6 +71,7 @@ export function updateHistoricImages(report, date) {
     setImgTime(moment(date).format('YYYY-MM-DD'), '.time-yr-historic')
   })
   updateMSWImages(report, date)
+  displayYrImgContainers(date)
 }
 
 export function navHistoricDMIImages(dir) {

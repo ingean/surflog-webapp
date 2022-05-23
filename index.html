@@ -416,8 +416,8 @@
         </div>
       </div>
 
-      <!-- YR forecast images -->
-      <div class="row">
+      <!-- Historic YR forecast images -->
+      <div id="yr-historic-row" class="row" style="display:none;">
         <div class="col-12">
           <div class="panel light">
             <div class="panel-heading">
@@ -431,11 +431,8 @@
                     <span class="panel-h dark">Skagerak</span>
                   </div> 
                   <div class="panel-body">
-                    <div id="yr-skagerak-live">
-                      <img id="img-yr-skagerak-live" class="img-yr" src="https://www.yr.no/sted/Hav/58,26417_9,59732/marinogram.png" />
-                    </div>
+                    <div id="yr-skagerak-historic"></div>   
                   </div>
-                  <div id="yr-skagerak-historic"></div>
                 </div>
               </div>
               <div class="col-md-6 col-fullwidth-xs">
@@ -444,11 +441,8 @@
                       <span class="panel-h dark">Saltstein</span>
                     </div> 
                     <div class="panel-body">
-                      <div id="yr-saltstein-live">
-                          <img id="img-yr-saltstein-live" class="img-yr" src="https://www.yr.no/sted/Hav/58,89305_9,87906/marinogram.png" />
-                      </div>
+                      <div id="yr-saltstein-historic"></div>  
                     </div>
-                    <div id="yr-saltstein-historic"></div>
                   </div>
                 </div>
             </div>
@@ -456,21 +450,15 @@
         </div>
       </div>
 
-      <!-- Saltstein webcam (Currently deactivated)-->
-      <div class="row">
+      <!-- Historic Saltstein webcam (Currently deactivated)-->
+      <div id="webcam-historic-row" class="row" style="display:none;">
         <div class="col-12">
           <div class="panel light">
             <div class="panel-heading">
               <span class="panel-h light">Webkamera</span>
               <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
-              <span id="webcam-btn-refresh" class="glyphicon glyphicon-refresh i-tool pull-right"></span>
-              <span id="webcam-btn-play" class="glyphicon glyphicon-play i-tool pull-right"></span>
-              <span id="webcam-btn-save" class="glyphicon glyphicon-floppy-save i-tool pull-right"></span>
             </div>
             <div class="panel-body">
-              <div id="div-webcam">
-                <img id="img-webcam-live" class="fullwidth">
-              </div>
               <div id="img-webcam-historic"></div>
             </div>
           </div>
