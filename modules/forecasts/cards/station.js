@@ -16,11 +16,14 @@ function tideHeaders(headers) {
 function tideRows(tide) {
   tide = tide.sort((a, b) => moment(b.time).date() - moment(a.time).date())
   
+  let dir = t.type === 'low' ? 'down' : 'up'
+
+
   let rows = [];
   tide.forEach(t => {
     rows.push( 
       el('tr', '', [
-        el('td', 'td-s', tideIcon(t.type)),
+        el('td', 'td-s', tideIcon(t.type, dir)),
         el('td', 'td-s', moment(t.time).format('HH:mm')),
         el('td', 'td-s', t.value)
       ])

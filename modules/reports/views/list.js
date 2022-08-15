@@ -1,4 +1,4 @@
-import { el, scoreLabel, icon, arrow, stars } from '../../html/elements.js';
+import { el, tideIcon, scoreLabel, icon, arrow, stars } from '../../html/elements.js';
 import { dateChanged } from '../../html/dateInput.js';
 import { getRating } from '../../config/forms.js';
 import { formatValue } from '../../forecasts/format.js'
@@ -35,7 +35,28 @@ function reportDetails(report) {
       rd.appendChild(icon('exclamation-sign', 'report-detail'));
     }
   }
-  return rd;
+  return rd
+}
+
+function reportTide(tide) {
+  if (!tide) return el('span')
+
+  let rt = el('div', 'report-tide');
+
+  let sign = tide.includes('-') ? 'min' : 'pos'
+  let hrs = tide.match(/\d+/)
+  hrs = hrs ? hrs[0] : 0
+  let type = tide.substring(0, tide.indexOf(' '))
+  type = type === 'Lavvann' ? 'low' : 'high'
+  type = Math.abs(hrs) > 2 ? 'medium' : type
+  let dir = 'up'
+  if (type === 'low') {
+    dir = (sign === 'pos') ? 'up' : 'down'
+  } else {
+    dir = (sign === 'pos') ? 'down' : 'up'
+  }
+
+  return rt.appendChild(tideIcon(type, dir)) 
 }
 
 export function conditionsDetails(report, suffix = '') {
@@ -133,6 +154,7 @@ export function updateReportList(reports) {
       el('a', 'list-group-item report-list-item', [
         reportInfo(report), 
         reportDetails(report),
+        reportTide(report.tide),
         conditionsDetails(report, 'Obs'),
         (forecast === 'MSW') ? mswForecastDetails(report) : (forecast === 'DMI') ? dmiForecastDetails(report) : smhiObservationsDetails(report),
         reportScore(report) 
