@@ -57,9 +57,21 @@ export async function del(url) {
 }
 
 export async function getSunTimes(lat, lon) {
-  let ds = moment().format('YYYY-MM-DD');
-  let url = `${urlSunTimes}?lat=${lat}&lng=${lon}&date=${ds}`;
-  return get(url);
+  let fin = 'hh:mm:ss a'
+  let fout = 'HH:mm'
+  let url = `${urlSunTimes}?lat=${lat}&lng=${lon}&date=today`
+  let result = await get(url)
+  
+  if (!result) return
+
+  let r = result.results
+
+  return {
+    sunrise: moment(r.sunrise, fin).format(fout),
+    sunset: moment(r.sunset, fin).format(fout),
+    firstLight: moment(r.dawn, fin).format(fout),
+    lastLight: moment(r.dusk, fin).format(fout)
+  }
 }
 
 export async function getYrLocation(yrId) {

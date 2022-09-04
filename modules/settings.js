@@ -6,10 +6,6 @@ export var settings = [];
 export var sunTimes = {};
 export var user;
 
-function formatSunTime(timeString) {
-  return moment(timeString, 'hh:mm:ss a').utc(true).tz("Europe/Stockholm").format('HH:mm')
-}
-
 function switchTheme() {
   let currentTheme = document.documentElement.getAttribute('data-theme');
   let targetTheme =  (currentTheme === 'light') ? 'dark' : 'light'
@@ -25,14 +21,6 @@ export async function getSettings(userId) {
 
 export function setUser(loggedInUser) {
   user = loggedInUser;
-}
-
-export function setSunTimes(sun) {
-  sunTimes.firstLight = formatSunTime(sun.civil_twilight_begin);
-  sunTimes.lastLight = formatSunTime(sun.civil_twilight_end);
-  sunTimes.sunrise = formatSunTime(sun.sunrise);
-  sunTimes.sunset = formatSunTime(sun.sunset);
-  return sunTimes;
 }
 
 export function getStats_old(forecast, param, location = 0) {

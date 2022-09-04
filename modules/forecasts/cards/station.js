@@ -2,7 +2,6 @@ import { Loader } from '../../utils/logger.js';
 import { getYrTides, getYrLocation, getSunTimes } from '../../utils/api.js';
 import { spotIds } from '../../config/spots.js';
 import { el, tideIcon } from '../../html/elements.js';
-import { setSunTimes } from '../../settings.js';
 
 function tideHeaders(headers) {
   let th = [];
@@ -16,7 +15,7 @@ function tideHeaders(headers) {
 function tideRows(tide) {
   tide = tide.sort((a, b) => moment(b.time).date() - moment(a.time).date())
   
-  let dir = t.type === 'low' ? 'down' : 'up'
+  let dir = tide.type === 'low' ? 'down' : 'up'
 
 
   let rows = [];
@@ -67,7 +66,6 @@ export async function updateStationCard(spot) {
   let location = await getYrLocation(yrId)
   let tide = await getYrTides(yrId);
   let sun = await getSunTimes(location.position.lat, location.position.lon);
-  sun = setSunTimes(sun.results);
 
   updateCard(spot, location, tide['_embedded'].tides, sun);
 }
