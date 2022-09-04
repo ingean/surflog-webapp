@@ -7,7 +7,7 @@ import { getImgTime, setImgTime } from './forecast.js';
 
 function currentDMITimeStep(imgId = 'img-dmi-waveheight-live') {
   let src = document.querySelector(`#${imgId}`).src;
-  return Number(src.match(/\d+/)[0]); //Timestep indicator in DMI url
+  return Number(src.substring(src.lastIndexOf('/') + 1))
 }
 
 function navDir(e) {
@@ -25,9 +25,6 @@ function switchDMIParam(e) {
   let historicImg = document.querySelector(`#img-dmi-${param}height-historic`);
   if (historicImg) historicImg.src = historicImg.src.replace(switchFrom, switchTo)
 
-  switchTo = forecastParam('dmi', param + switchTo).type
-  switchFrom = forecastParam('dmi', param + switchFrom).type
-
   let liveImg = document.querySelector(`#img-dmi-${param}height-live`);
   liveImg.src = liveImg.src.replace(switchFrom, switchTo);
   toggleActive(e.target);
@@ -35,20 +32,22 @@ function switchDMIParam(e) {
 
 function onDMIImageNav(e) {
   let dir = navDir(e)
-  navDMIImages(dir)
+  let interval =  (e.detail === 1) ? 1 : 5 // jump 6 hrs if doubleclicking
+
+  navDMIImages(dir, interval)
 }
 
-function navDMIImages(dir) {
+function navDMIImages(dir, interval) {
   let ts = currentDMITimeStep();
 
   if (dir === 'next') {
-    if (ts === 120) return;
-    updateDMIImgs(ts, ts + 1);
-    setImgTime(moment(getImgTime()).add(1, 'hours'))
+    if (ts === 120 || (ts === 115 && interval === 6)) return;
+    updateDMIImgs(ts, ts + interval);
+    setImgTime(moment(getImgTime()).add(interval, 'hours'))
   } else {
-    if (ts === 1) return;
-    updateDMIImgs(ts, ts - 1);
-    setImgTime(moment(getImgTime()).subtract(1, 'hours'))
+    if (ts === 1 || (ts < 7 && interval === 6)) return;
+    updateDMIImgs(ts, ts - interval);
+    setImgTime(moment(getImgTime()).subtract(interval, 'hours'))
   }
   updateDMIScore();
 }
@@ -95,7 +94,7 @@ export function updateDMIImgs(currentTS, newTS, scope = 'live') {
   let imgs = ['waveheight', 'swellheight', 'wind'];
   imgs.forEach(img => {
     let el = document.getElementById(`img-dmi-${img}-${scope}`);
-    el.src = el.src.replace(currentTS, newTS);
+    el.src = el.src.substring(0, el.src.lastIndexOf('/') + 1) + newTS 
   })
 }
 

@@ -39,9 +39,10 @@ function reportDetails(report) {
 }
 
 function reportTide(tide) {
-  if (!tide) return el('span')
-
+  
   let rt = el('div', 'report-tide');
+
+  if (!tide) return rt
 
   let sign = tide.includes('-') ? 'min' : 'pos'
   let hrs = tide.match(/\d+/)
@@ -71,7 +72,7 @@ export function conditionsDetails(report, suffix = '') {
 }
 
 function mswForecastDetails(report) {
-  return el('div', 'report-forecast-msw hidden-xs hidden-sm hidden-md', [
+  return el('div', 'report-forecast-msw .hidden-xs .hidden-s .hidden-md', [
       el('div', 'report-forecast-msw-waveheight', [
         el('div', 'report-forecast-msw-value', formatValue(report, 'waveheight_from', false, 'waveheight')),
         el('div', 'report-forecast-msw-value-xsmall', '-' ),
@@ -83,7 +84,7 @@ function mswForecastDetails(report) {
         el('div', 'report-forecast-msw-value', formatValue(report, 'swellperiod')),
         el('div', 'report-forecast-msw-value-narrow', arrow(report['swelldir']))
       ]),
-      el('div', 'report-forecast-msw-subswell', [
+      el('div', 'report-forecast-msw-subswell .hidden-xs .hidden-s .hidden-md .hidden-lg', [
         el('div', 'report-forecast-msw-value-small', formatValue(report, 'subswellheight', false, 'swellheight')),
         el('div', 'report-forecast-msw-value-small', formatValue(report, 'subswellperiod', false, 'swellperiod')),
         el('div', 'report-forecast-msw-value-narrow', arrow(report['subswelldir'], '20', '20'))

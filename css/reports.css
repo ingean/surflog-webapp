@@ -49,6 +49,10 @@
   min-width: 15px;
 }
 
+.report-tide {
+  width: 24px;
+}
+
 .report-conditions {
   display: flex;
   flex-direction: row;
