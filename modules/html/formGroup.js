@@ -75,6 +75,8 @@ function formHiddenInput(options) {
     value: defaultValue(options)});
 }
 
+
+
 function defaultValue(options) {
   if (!options.domain) return '';
   let defaultItem = options.domain.find(item => item.default);

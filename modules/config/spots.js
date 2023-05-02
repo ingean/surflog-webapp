@@ -54,7 +54,9 @@ export const spotIds = {
   'Outside Grupuk Left': {msw: {id: 4129, name: 'Outside Grupuk'}},
   'Tanjung': {msw: {id: 4129, name: 'Outside Grupuk'}},
   'Don-Don': {msw: {id: 4123}},
-  'Inside Grupuk': {msw: {id: 4126}}
+  'Inside Grupuk': {msw: {id: 4126}},
+  'Coconut': {msw: {id: 4589 , name: 'Rams Midigama'}},
+  'Fishermans Reef': {msw: {id: 4589 , name: 'Rams Midigama'}}
 }
 
 

@@ -5,6 +5,7 @@ import { formsOptions , tabNames} from '../config/forms.js';
 import { formGroup, updateLocationDropdown } from './formGroup.js';
 import { postReport} from '../reports/create.js';
 import { filterReportsList } from '../reports/views/list.js';
+import { setStoredValues } from '../reports/create.js';
 
 function cancelForm(form) {
   form.reset();
@@ -56,6 +57,9 @@ function createFormModals() {
   //Hide location selector in filter dialog at startup
   document.querySelector('#form-report-filter') 
   .children[1].style.display = 'None';
+
+  document.getElementById("nav-add-session")
+  .addEventListener("click", setStoredValues)
 }
 
 function createFormModal(options) {

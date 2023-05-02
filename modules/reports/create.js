@@ -2,6 +2,7 @@ import { log, notify } from '../utils/logger.js';
 import { user } from '../settings.js';
 import { post } from '../utils/api.js';
 import { getReports } from './read.js';
+import { formsOptions } from '../config/forms.js';
 
 function resetForm(form) {
   let modalId = form.id.replace('form', 'modal');
@@ -40,11 +41,37 @@ function getFormData(form) {
   return data;
 }
 
+function fieldsToStore(){
+  return formsOptions
+         .filter(option => option.save === true)
+         .map(option => option.name)
+}
+
+
+function writeToLocalStorage(data) {
+  let storeFields = fieldsToStore()
+  storeFields.forEach(fieldName => {
+    if (data.get(fieldName)) {
+      localStorage.setItem(fieldName, data.get(fieldName))
+    }
+  })
+}
+
+export function setStoredValues() {
+  let storedFields = fieldsToStore()
+  storedFields.forEach(fieldName => {
+    let input = document.getElementById(`session-${fieldName}`)
+    let storedValue = localStorage.getItem(fieldName)
+    if (storedValue) input.value = storedValue
+  })
+}
+
 export async function postReport(form) {
   let data = getFormData(form);
   let res = await post('reports', data);
 
   if (res) {
+    writeToLocalStorage(data)
     notify(res.message, 'success', 'cloud-upload');
     resetForm(form);
   } 

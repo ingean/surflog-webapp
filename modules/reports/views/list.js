@@ -1,4 +1,4 @@
-import { el, tideIcon, scoreLabel, icon, arrow, stars } from '../../html/elements.js';
+import { el, tideIcon, scoreLabel, icon, arrow, stars, div } from '../../html/elements.js';
 import { dateChanged } from '../../html/dateInput.js';
 import { getRating } from '../../config/forms.js';
 import { formatValue } from '../../forecasts/format.js'
@@ -17,11 +17,15 @@ function reportIcon(report) {
 }
 
 function reportInfo(report) {
-  return el('div', 'report-info', [
-    el('div', 'report-list-img', reportIcon(report)),
-    el('div', 'report-list-title', report.spot),
-    el('img', {class: 'report-list-img-small', src: imgSrc(report.country, 'flags')}),
-    el('div', 'report-list-date', moment(report.reporttime).calendar()),
+  return div('report-info', [
+    div('report-list-img', reportIcon(report)),
+    div('flex-col', [
+      div('flex-row', [
+        div('report-list-title', report.spot),
+        el('img', {class: 'report-list-img-small', src: imgSrc(report.country, 'flags')})
+      ]),
+      div('report-list-date', moment(report.reporttime).calendar())  
+    ])
   ])
 }
 
@@ -57,14 +61,14 @@ function reportTide(tide) {
     dir = (sign === 'pos') ? 'down' : 'up'
   }
 
-  return rt.appendChild(tideIcon(type, dir)) 
+  return rt.appendChild(tideIcon(type, dir, tide)) 
 }
 
 export function conditionsDetails(report, suffix = '') {
-  if (report.type !== 'Session') return el('span', 'report-conditions hidden-xs hidden-sm', '');
+  if (report.type !== 'Session') return el('span', 'report-conditions hidden-small', '');
   let params = ['waveheight', 'waveperiod', 'wavedir', 'windspeed', 'winddir'];
 
-  return el('div', 'report-conditions hidden-xs hidden-sm', params.map(param => {
+  return el('div', 'report-conditions hidden-small', params.map(param => {
     let value = report[`${param}${suffix}`];
     let rating = getRating(param, value);
     return el('span', `label bg-${rating} report-condition`, value);
@@ -72,7 +76,8 @@ export function conditionsDetails(report, suffix = '') {
 }
 
 function mswForecastDetails(report) {
-  return el('div', 'report-forecast-msw .hidden-xs .hidden-s .hidden-md', [
+  if (report['report_id'] === null) return
+  return el('div', 'report-forecast-msw hidden-large', [
       el('div', 'report-forecast-msw-waveheight', [
         el('div', 'report-forecast-msw-value', formatValue(report, 'waveheight_from', false, 'waveheight')),
         el('div', 'report-forecast-msw-value-xsmall', '-' ),
@@ -84,7 +89,7 @@ function mswForecastDetails(report) {
         el('div', 'report-forecast-msw-value', formatValue(report, 'swellperiod')),
         el('div', 'report-forecast-msw-value-narrow', arrow(report['swelldir']))
       ]),
-      el('div', 'report-forecast-msw-subswell .hidden-xs .hidden-s .hidden-md .hidden-lg', [
+      el('div', 'report-forecast-msw-subswell', [
         el('div', 'report-forecast-msw-value-small', formatValue(report, 'subswellheight', false, 'swellheight')),
         el('div', 'report-forecast-msw-value-small', formatValue(report, 'subswellperiod', false, 'swellperiod')),
         el('div', 'report-forecast-msw-value-narrow', arrow(report['subswelldir'], '20', '20'))

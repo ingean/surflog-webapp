@@ -31,7 +31,14 @@ function createSpotList() {
 
 async function onSpotChanged(e) {
   let spot = e.target.value;
-  let yrId = spotIds[spot].yr.id;
+  let yrId = spotIds[spot]?.yr?.id;
+
+  if (!yrId) {
+    e.target.value = 'Saltstein'
+    spot = 'Saltstein'
+    yrId = spotIds[spot]?.yr?.id
+  }
+
   await updateStationCard(spot);
   updateDMICard(spot);
   updateSMHICard(spot);

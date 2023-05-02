@@ -34,6 +34,14 @@ export function el(tagName, attributes, children) {
   return appendChildren(el, children)
 }
 
+export const div = (attributes, children) => {
+  return el('div', attributes, children)
+}
+
+export const span = (attributes, children) => {
+  return el('span', attributes, children)
+}
+
 export function elFromHTML(html) {
     let template = document.createElement('template');
     html = html.trim();
@@ -42,17 +50,17 @@ export function elFromHTML(html) {
 }
 
 export function label(score, caption, classes = '') {
-    return el('span', `label bg-${score} ${classes}`, caption);
+    return span(`label bg-${score} ${classes}`, caption)
 }
 
 export function scoreLabel(score, classes = '') {
   let caption = getScoreCaption(score);
-  return el('span', `label bg-${score} ${classes}`, caption);
+  return span(`label bg-${score} ${classes}`, caption)
 }
 
   
 export function icon(iconName, classes = '') {
-    return el('span', {class: `glyphicon glyphicon-${iconName} ${classes}`});
+    return span({class: `glyphicon glyphicon-${iconName} ${classes}`})
 }
 
 function svgEl(id, height, width, rotation) {
@@ -74,7 +82,6 @@ function pathEl(d, type = 'fill', color = 'currentColor')  {
   return path;
 }
 
-
 export function arrow(rotation, height = '24', width = '24') {
   if (!rotation) return null;
   let d = 'M11.53 3l-.941 12.857L7 15l5.001 6L17 15l-3.587.857L12.471 3h-.941z'
@@ -84,7 +91,7 @@ export function arrow(rotation, height = '24', width = '24') {
   path.setAttribute('clip-rule', 'evenodd');
   svg.appendChild(path);
   
-  return el('span', '', svg) 
+  return span('', svg) 
 }
 
 export function stars(open, filled, max = 5) {
@@ -100,7 +107,7 @@ export function stars(open, filled, max = 5) {
   return el('ul', 'starrating-list', stars)
 }
 
-export function tideIcon(type, dir, height = '24', width = '24') {
+export function tideIcon(type, dir, hoverText, height = '24', width = '24') {
 
   let tidesSVG = {
     low: {
@@ -118,13 +125,11 @@ export function tideIcon(type, dir, height = '24', width = '24') {
   }
 
   let d = tidesSVG[type][dir]
-
-  //let d = (type === 'low') ? 'M3 18c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 21c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1m-5-11l-4 3-4-3m4 3V3.5' : 'M3 18c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 15c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 21c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M8 7l4-3 4 3m-4 4V4';
   let svg = svgEl('tideIcon', height, width) 
-  let path = pathEl(d, 'stroke', '#006EDB'); 
-  path.setAttribute('stroke-width', '1.5');
+  let path = pathEl(d, 'stroke', '#006EDB');
+  path.setAttribute('stroke-width', '1.5');  
   svg.appendChild(path);
-  return el('span', '', svg)
+  return span('', svg)
 }
 
 export function weatherImg(yrCode) {
@@ -142,9 +147,9 @@ export function tempTd(temperature) {
   
   return (
     el('td', '', 
-      el ('div', cls, [ 
-        el('span', 'td-value', String(Math.round(temperature))),
-        el('span', 'td-unit-temp', '°')
+      div(cls, [ 
+        span('td-value', String(Math.round(temperature))),
+        span('td-unit-temp', '°')
       ])
     )
   )
