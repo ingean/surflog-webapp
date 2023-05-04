@@ -1,4 +1,4 @@
-import { el, tideIcon, scoreLabel, icon, arrow, stars, div } from '../../html/elements.js';
+import { el, tideIcon, scoreLabel, icon, arrow, stars, div, span } from '../../html/elements.js';
 import { dateChanged } from '../../html/dateInput.js';
 import { getRating } from '../../config/forms.js';
 import { formatValue } from '../../forecasts/format.js'
@@ -65,68 +65,70 @@ function reportTide(tide) {
 }
 
 export function conditionsDetails(report, suffix = '') {
-  if (report.type !== 'Session') return el('span', 'report-conditions hidden-small', '');
-  let params = ['waveheight', 'waveperiod', 'wavedir', 'windspeed', 'winddir'];
+  let params = ['waveheight', 'waveperiod', 'wavedir', 'windspeed', 'winddir']
+  let hidden = (report['report_id']) ? 'hidden-large' : 'hidden-small'
 
-  return el('div', 'report-conditions hidden-small', params.map(param => {
-    let value = report[`${param}${suffix}`];
-    let rating = getRating(param, value);
-    return el('span', `label bg-${rating} report-condition`, value);
+  if (report.type !== 'Session') return span(`report-conditions ${hidden}`)
+
+  return div(`report-conditions ${hidden}`, params.map(param => {
+    let value = report[`${param}${suffix}`]
+    let rating = getRating(param, value)
+    return span(`label bg-${rating} report-condition`, value)
   }))
 }
 
 function mswForecastDetails(report) {
   if (report['report_id'] === null) return
-  return el('div', 'report-forecast-msw hidden-large', [
-      el('div', 'report-forecast-msw-waveheight', [
-        el('div', 'report-forecast-msw-value', formatValue(report, 'waveheight_from', false, 'waveheight')),
-        el('div', 'report-forecast-msw-value-xsmall', '-' ),
-        el('div', 'report-forecast-msw-value', formatValue(report, 'waveheight_to', false, 'waveheight'))
+  return div('report-forecast-msw hidden-small', [
+          div('report-forecast-msw-waveheight', [
+          div('report-forecast-msw-value', formatValue(report, 'waveheight_from', false, 'waveheight')),
+          div('report-forecast-msw-value-xsmall', '-' ),
+          div('report-forecast-msw-value', formatValue(report, 'waveheight_to', false, 'waveheight'))
       ]),
-      el('div', 'report-forecast-msw-starrating', stars(report['stars_open'], report['stars_filled'])),
-      el('div', 'report-forecast-msw-swell', [
-        el('div', 'report-forecast-msw-value', formatValue(report, 'swellheight')),
-        el('div', 'report-forecast-msw-value', formatValue(report, 'swellperiod')),
-        el('div', 'report-forecast-msw-value-narrow', arrow(report['swelldir']))
+      div('report-forecast-msw-starrating', stars(report['stars_open'], report['stars_filled'])),
+        div('report-forecast-msw-swell', [
+        div('report-forecast-msw-value', formatValue(report, 'swellheight')),
+        div('report-forecast-msw-value', formatValue(report, 'swellperiod')),
+        div('report-forecast-msw-value-narrow', arrow(report['swelldir']))
       ]),
-      el('div', 'report-forecast-msw-subswell', [
-        el('div', 'report-forecast-msw-value-small', formatValue(report, 'subswellheight', false, 'swellheight')),
-        el('div', 'report-forecast-msw-value-small', formatValue(report, 'subswellperiod', false, 'swellperiod')),
-        el('div', 'report-forecast-msw-value-narrow', arrow(report['subswelldir'], '20', '20'))
+      div('report-forecast-msw-subswell', [
+        div('report-forecast-msw-value-small', formatValue(report, 'subswellheight', false, 'swellheight')),
+        div('report-forecast-msw-value-small', formatValue(report, 'subswellperiod', false, 'swellperiod')),
+        div('report-forecast-msw-value-narrow', arrow(report['subswelldir'], '20', '20'))
       ]),
-      el('div', 'report-forecast-msw-wind', [
-        el('div', 'report-forecast-msw-value-narrow', `${report['windspeed']}`),
-        el('div', 'report-forecast-msw-windgust', [
-          el('div', 'report-forecast-msw-value-short', `(${report['windgust']})`),
-          el('div', 'report-forecast-msw-value-short', 'km/t'),
+      div('report-forecast-msw-wind', [
+        div('report-forecast-msw-value-narrow', `${report['windspeed']}`),
+        div('report-forecast-msw-windgust', [
+          div('report-forecast-msw-value-short', `(${report['windgust']})`),
+          div('report-forecast-msw-value-short', 'km/t'),
         ]),
       ]),
-      el('div', `report-forecast-msw-value-narrow bg-muted-${report['windscore']}`, arrow(report['winddir'])),
+      div(`report-forecast-msw-value-narrow bg-muted-${report['windscore']}`, arrow(report['winddir'])),
     ])
 }
 
 function dmiForecastDetails(report) {
-  return el('div', 'report-forecast-msw hidden-xs hidden-sm hidden-md', [ 
-      el('div', 'report-forecast-msw-value', formatValue(report, 'waveheight')),
-      el('div', 'report-forecast-msw-value-subdued', formatValue(report, 'swaveheight', true, 'waveheight')),
-      el('div', 'report-forecast-msw-value', formatValue(report, 'waveperiod')),
-      el('div', 'report-forecast-msw-value-subdued', formatValue(report, 'swaveperiod', true, 'waveperiod')),
-      el('div', 'report-forecast-msw-value', formatValue(report, 'swellheight')),
-      el('div', 'report-forecast-msw-value-subdued', formatValue(report, 'sswellheight', true, 'swellheight')),
-      el('div', 'report-forecast-msw-value', formatValue(report, 'swellperiod')),
-      el('div', 'report-forecast-msw-value-subdued', formatValue(report, 'sswellperiod', true, 'swellperiod')),
-      el('div', 'report-forecast-msw-value', formatValue(report, 'wind')),
-      el('div', 'report-forecast-msw-value-subdued', formatValue(report, 'swind', true, 'wind')),
-    ])
+  return div('report-forecast-msw hidden-xs hidden-sm hidden-md', [ 
+          div('report-forecast-msw-value', formatValue(report, 'waveheight')),
+          div('report-forecast-msw-value-subdued', formatValue(report, 'swaveheight', true, 'waveheight')),
+          div('report-forecast-msw-value', formatValue(report, 'waveperiod')),
+          div('report-forecast-msw-value-subdued', formatValue(report, 'swaveperiod', true, 'waveperiod')),
+          div('report-forecast-msw-value', formatValue(report, 'swellheight')),
+          div('report-forecast-msw-value-subdued', formatValue(report, 'sswellheight', true, 'swellheight')),
+          div('report-forecast-msw-value', formatValue(report, 'swellperiod')),
+          div('report-forecast-msw-value-subdued', formatValue(report, 'sswellperiod', true, 'swellperiod')),
+          div('report-forecast-msw-value', formatValue(report, 'wind')),
+          div('report-forecast-msw-value-subdued', formatValue(report, 'swind', true, 'wind')),
+        ])
 }
 
 function smhiObservationsDetails(report) {
-  return el('div', 'report-forecast-msw hidden-xs hidden-sm hidden-md', [ 
-      el('div', 'report-forecast-msw-value', formatValue(report, 'waveheight')),
-      el('div', 'report-forecast-msw-value-subdued', formatValue(report, 'waveheightmax', true, 'waveheight')),
-      el('div', 'report-forecast-msw-value', formatValue(report, 'waveperiod')),
-      el('div', 'report-forecast-msw-value-narrow', arrow(report['wavedir']))
-    ])
+  return div('report-forecast-msw hidden-xs hidden-sm hidden-md', [ 
+          div('report-forecast-msw-value', formatValue(report, 'waveheight')),
+          div('report-forecast-msw-value-subdued', formatValue(report, 'waveheightmax', true, 'waveheight')),
+          div('report-forecast-msw-value', formatValue(report, 'waveperiod')),
+          div('report-forecast-msw-value-narrow', arrow(report['wavedir']))
+        ])
 }
 
 export function switchForecast(e) {
@@ -142,7 +144,7 @@ export function switchForecast(e) {
 export function reportScore(report) {
   if (report.type === 'Observasjon' || report.type === 'Observation'){
     if (report.source ==="Bomtur") {
-      return el('span', `label bg-1 report-score`, report.source);     
+      return span(`label bg-1 report-score`, report.source);     
     } else {
       let d = (report.issurfable === 1) ? 'up' : 'down';
       return icon(`thumbs-${d}`, 'report-score');
@@ -153,7 +155,7 @@ export function reportScore(report) {
 }
 
 export function updateReportList(reports) {
-  let reportsList = el('div', 'list-group'); 
+  let reportsList = div('list-group') 
 
   for (let report of reports) {
     let reportEl = 

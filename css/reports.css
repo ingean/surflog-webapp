@@ -1,34 +1,3 @@
-/* Helper classes */
-@media (max-width: 576px) {
-  .hidden-xsmall {
-    visibility: collapse;
-  }
-}
-
-@media (max-width: 768px) {
-  .hidden-small {
-    visibility: collapse;
-  }
-}
-
-@media (max-width: 992px) {
-  .hidden-medium {
-    visibility: collapse;
-  }
-}
-
-@media (max-width: 1200px) {
-  .hidden-large {
-    visibility: collapse;
-  }
-}
-
-@media (max-width: 1400px) {
-  .hidden-xlarge {
-    visibility: collapse;
-  }
-}
-
 /* Reports list */
 .list-group-item {
   display: flex;
@@ -213,7 +182,6 @@
 
 .report-score {
   margin-left: auto;
-  /*flex: 0 0 65px; */
   min-width: 100px;
 }
 

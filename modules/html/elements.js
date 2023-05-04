@@ -125,10 +125,14 @@ export function tideIcon(type, dir, hoverText, height = '24', width = '24') {
   }
 
   let d = tidesSVG[type][dir]
-  let svg = svgEl('tideIcon', height, width) 
+  let svg = svgEl('tideIcon', height, width)
+  let popover = el('a', {"data-toggle": "popover", "data-container": "body", title: "Tidevann", "data-content":hoverText, "data-placement":"right"}) 
   let path = pathEl(d, 'stroke', '#006EDB');
-  path.setAttribute('stroke-width', '1.5');  
-  svg.appendChild(path);
+  path.setAttribute('stroke-width', '1.5');
+  
+  popover.appendChild(path)
+  
+  svg.appendChild(popover);
   return span('', svg)
 }
 

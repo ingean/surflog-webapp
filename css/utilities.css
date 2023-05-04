@@ -1,0 +1,46 @@
+/* Responsive utility classes */
+@media (max-width: 576px) {
+  .hidden-xsmall {
+    /*visibility: collapse;*/
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hidden-small {
+    /*visibility: collapse;*/
+    display: none !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .hidden-medium {
+    /*visibility: collapse;*/
+    display: none !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .hidden-large {
+    /*visibility: collapse;*/
+    display: none !important;
+  }
+}
+
+@media (max-width: 1400px) {
+  .hidden-xlarge {
+    /*visibility: collapse;*/
+    display: none !important;
+  }
+}
+
+/* Flexbox utility classes */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}

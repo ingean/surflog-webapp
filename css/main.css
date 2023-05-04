@@ -9,8 +9,6 @@ body {
     overflow-x: hidden;
 }
 
-
-
 /* Bootstrap buttons overrides */
 a {
   color: var(--primary-color);
@@ -53,9 +51,6 @@ a {
   border-color: var(--primary-variant-color);
 }
 
-
-
-
 /* Tabs in panel tab styling */
 .nav-tabs>li.panel-tab.active>a {
   border-bottom: 2px solid var(--surface-color);
@@ -96,7 +91,6 @@ a {
   color: var(--on-surface-color);
   background-color: var(--surface-color-l1);
 }
-
 
 a.list-group-item {
   color: var(--on-surface-color);
@@ -141,8 +135,6 @@ a.list-group-item:hover {
   color: var(--secondary-txt-color);
 }
 
-
-
 .img-dmi {
   position:relative;
   left: -17%;
@@ -177,12 +169,12 @@ a.list-group-item:hover {
   width: 100%;
 }
 
-/* Phone and pad */
+/* Phone and pad 
 @media screen and (max-width:1200px) { 
   .container-fluid {
     padding: 0;
   }
-}
+}*/
 
 /* Phone portrait only */
 @media screen and (max-width:414px) {  
