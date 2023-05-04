@@ -7,7 +7,7 @@ import { updateSessionView } from './session.js';
 import { updateObservationView } from './observation.js';
 import { comparisonReport } from '../compare.js';
 
-function tide(report) {
+export function tide(report) {
   if(report.type === 'Session') {
     let t = report.tide;
     let beforeAfter = (t.includes('-')) ? "før" : "etter";

@@ -18,11 +18,12 @@ function tideRows(tide) {
   
   tide.forEach(t => {
     let type = (t.type === 'high') ? "Høyvann" : "Lavvann"
-    let dir = (t.type === 'high') ? "stigende" : "synkende"
+    let dir = (t.type === 'high') ? "synkende" : "stigende"
+    let hrs = (t.type === 'high') ? 3 : 0 
     
     rows.push( 
       el('tr', '', [
-        el('td', 'td-s', tideIcon(type, dir)),
+        el('td', 'td-s', tideIcon(type, dir, hrs)),
         el('td', 'td-s', moment(t.time).format('HH:mm')),
         el('td', 'td-s', t.value)
       ])

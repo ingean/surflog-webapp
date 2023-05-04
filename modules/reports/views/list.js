@@ -6,6 +6,7 @@ import { imgSrc } from '../../utils/utilities.js';
 import { reportSVG } from '../../html/svg.js';
 import { get } from '../../utils/api.js';
 import { getReports } from '../read.js';
+import { tide } from './report.js';
 
 let forecast = 'MSW'
 let selected_page = 1
@@ -24,7 +25,7 @@ function reportInfo(report) {
         div('report-list-title', report.spot),
         el('img', {class: 'report-list-img-small', src: imgSrc(report.country, 'flags')})
       ]),
-      div('report-list-date', moment(report.reporttime).calendar())  
+      div('report-list-date', `${moment(report.reporttime).format('DD.MM.YY')} ${tide(report)}`)  
     ])
   ])
 }
@@ -43,29 +44,26 @@ function reportDetails(report) {
 }
 
 function reportTide(tide) {
-  
   let rt = el('div', 'report-tide');
 
   if (!tide) return rt
 
   let t = tideTextParts(tide)
-
-  let type = Math.abs(t.hrs) > 2 ? 'Medium' : t.type
   let dir = 'stigende'
-  if (type === 'Lavvann') {
+  if (t.type === 'Lavvann') {
     dir = (t.sign === '+') ? 'stigende' : 'synkende'
   } else {
     dir = (t.sign === '+') ? 'synkende' : 'stigende'
   }
-
-  return rt.appendChild(tideIcon(type, dir, tide)) 
+  
+  return rt.appendChild(tideIcon(t.type, dir, t.hrs)) 
 }
 
 export function tideTextParts(tide) {
   let type = tide.substring(0, tide.indexOf(' ')) 
   let sign = tide.includes('-') ? '-' : '+'
   let hrs = tide.match(/\d+/)
-  hrs = hrs ? hrs[0] : 0
+  hrs = hrs ? Number(hrs[0]) : 0
    
   return {type, sign, hrs}
 }

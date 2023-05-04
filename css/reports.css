@@ -34,7 +34,7 @@
 .report-info {
   display: flex;
   flex-direction: row;
-  min-width: 175px;
+  min-width: 200px;
 }
 
 .report-details {
