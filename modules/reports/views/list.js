@@ -48,20 +48,26 @@ function reportTide(tide) {
 
   if (!tide) return rt
 
-  let sign = tide.includes('-') ? 'min' : 'pos'
-  let hrs = tide.match(/\d+/)
-  hrs = hrs ? hrs[0] : 0
-  let type = tide.substring(0, tide.indexOf(' '))
-  type = type === 'Lavvann' ? 'low' : 'high'
-  type = Math.abs(hrs) > 2 ? 'medium' : type
-  let dir = 'up'
-  if (type === 'low') {
-    dir = (sign === 'pos') ? 'up' : 'down'
+  let t = tideTextParts(tide)
+
+  let type = Math.abs(t.hrs) > 2 ? 'Medium' : t.type
+  let dir = 'stigende'
+  if (type === 'Lavvann') {
+    dir = (t.sign === '+') ? 'stigende' : 'synkende'
   } else {
-    dir = (sign === 'pos') ? 'down' : 'up'
+    dir = (t.sign === '+') ? 'synkende' : 'stigende'
   }
 
   return rt.appendChild(tideIcon(type, dir, tide)) 
+}
+
+export function tideTextParts(tide) {
+  let type = tide.substring(0, tide.indexOf(' ')) 
+  let sign = tide.includes('-') ? '-' : '+'
+  let hrs = tide.match(/\d+/)
+  hrs = hrs ? hrs[0] : 0
+   
+  return {type, sign, hrs}
 }
 
 export function conditionsDetails(report, suffix = '') {

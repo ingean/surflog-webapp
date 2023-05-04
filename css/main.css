@@ -169,12 +169,20 @@ a.list-group-item:hover {
   width: 100%;
 }
 
-/* Phone and pad 
-@media screen and (max-width:1200px) { 
-  .container-fluid {
-    padding: 0;
-  }
+
+/*
+.tideText {
+  fill: #006EDB;
+  font: bold 10px sans-serif;
 }*/
+
+.tideText {
+  color: #006EDB;
+  font: bold 10px sans-serif;
+  padding:0px;
+  margin-left: 2px;
+}
+
 
 /* Phone portrait only */
 @media screen and (max-width:414px) {  

@@ -1,7 +1,7 @@
 import { Loader } from '../../utils/logger.js'; 
 import { getYrTides, getYrLocation, getSunTimes } from '../../utils/api.js';
 import { spotIds } from '../../config/spots.js';
-import { el, tideIcon } from '../../html/elements.js';
+import { el, div, tideIcon } from '../../html/elements.js';
 
 function tideHeaders(headers) {
   let th = [];
@@ -13,16 +13,16 @@ function tideHeaders(headers) {
 
 
 function tideRows(tide) {
+  let rows = []
   tide = tide.sort((a, b) => moment(b.time).date() - moment(a.time).date())
   
-  let dir = tide.type === 'low' ? 'down' : 'up'
-
-
-  let rows = [];
   tide.forEach(t => {
+    let type = (t.type === 'high') ? "Høyvann" : "Lavvann"
+    let dir = (t.type === 'high') ? "stigende" : "synkende"
+    
     rows.push( 
       el('tr', '', [
-        el('td', 'td-s', tideIcon(t.type, dir)),
+        el('td', 'td-s', tideIcon(type, dir)),
         el('td', 'td-s', moment(t.time).format('HH:mm')),
         el('td', 'td-s', t.value)
       ])
@@ -33,22 +33,22 @@ function tideRows(tide) {
 
 function updateCard(spotName, location, tide, sun) {
   let card = 
-    el('div', 'station-card flex-row', [
-      el('div', 'station-card station-card-names flex-col', [
-        el('div', 'station-card-spotName', spotName),
-        el('div', 'station-card-stationName', location.name)
+    div('station-card flex-row', [
+      div('station-card station-card-names flex-col', [
+        div('station-card-spotName', spotName),
+        div('station-card-stationName', location.name)
       ]),
-      el('div', 'station-card flex-col', [
-        el('div', 'station-card-sunIcon', el('img', {src: 'images/yr/01m.svg', style: 'transform: rotate(180deg);'})),
-        el('div', 'station-card-sunTime', sun.firstLight),
-        el('div', 'station-card-sunTime', sun.sunrise)
+      div('station-card flex-col', [
+        div('station-card-sunIcon', el('img', {src: 'images/yr/01m.svg', style: 'transform: rotate(180deg);'})),
+        div('station-card-sunTime', sun.firstLight),
+        div('station-card-sunTime', sun.sunrise)
       ]),
-      el('div', 'station-card flex-col', [
-        el('div', 'station-card-sunIcon', el('img', {src: 'images/yr/01m.svg'})),
-        el('div', 'station-card-sunTime', sun.sunset),
-        el('div', 'station-card-sunTime', sun.lastLight)
+      div('station-card flex-col', [
+        div('station-card-sunIcon', el('img', {src: 'images/yr/01m.svg'})),
+        div('station-card-sunTime', sun.sunset),
+        div('station-card-sunTime', sun.lastLight)
       ]),
-      el('div', 'station-card flex-col', 
+      div('station-card flex-col', 
         el('table', 'station-card station-card-table', [
           tideHeaders(['Type', 'Tid', 'Høyde']),
           tideRows(tide)

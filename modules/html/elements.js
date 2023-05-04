@@ -1,5 +1,6 @@
 import { weatherIcons } from '../config/forecasts.js';
 import { getRating, getScoreCaption } from '../config/forms.js';
+import { tideTextParts } from '../reports/views/list.js'
 
 function appendChildren(el, children) {
   if (typeof children === 'string' || typeof children === 'number') {
@@ -107,32 +108,48 @@ export function stars(open, filled, max = 5) {
   return el('ul', 'starrating-list', stars)
 }
 
-export function tideIcon(type, dir, hoverText, height = '24', width = '24') {
+export function tideIcon(type, dir, tide, height = '24', width = '24') {
 
   let tidesSVG = {
-    low: {
-      up: 'M3 18c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M8 7l4-3 4 3m-4 4V4',
-      down: 'M3 18c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1m-5-11l-4 3-4-3m4 3V3.5'
+    'Lavvann': {
+      'stigende': 'M3 18c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M8 7l4-3 4 3m-4 4V4',
+      'synkende': 'M3 18c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1m-5-11l-4 3-4-3m4 3V3.5',
+      'height': '20'
     },
-    medium: {
-      up: 'M3 18c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 21c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M8 7l4-3 4 3m-4 4V4',
-      down: 'M3 18c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 21c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1m-5-11l-4 3-4-3m4 3V3.5'
+    'Medium': {
+      'stigende': 'M3 18c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 21c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M8 7l4-3 4 3m-4 4V4',
+      'synkende': 'M3 18c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 21c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1m-5-11l-4 3-4-3m4 3V3.5',
+      'height': '22'
     },
-    high: {
-      up: 'M3 18c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 15c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 21c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M8 7l4-3 4 3m-4 4V4',
-      down: 'M3 18c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 15c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 21c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1m-5-11l-4 3-4-3m4 3V3.5'
+    'Høyvann': {
+      'stigende': 'M3 18c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 15c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 21c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M8 7l4-3 4 3m-4 4V4',
+      'synkende': 'M3 18c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 15c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1M3 21c1 0 3-1 3-1s2 1 3 1 3-1 3-1 2 1 3 1 3-1 3-1 2 1 3 1m-5-11l-4 3-4-3m4 3V3.5',
+      'height': '24'
     } 
   }
 
   let d = tidesSVG[type][dir]
+  height = tidesSVG[type].height
+
   let svg = svgEl('tideIcon', height, width)
   
   let path = pathEl(d, 'stroke', '#006EDB');
   path.setAttribute('stroke-width', '1.5');
-  
   svg.appendChild(path);
-  return span('', svg)
+
+  if (tide) {
+    let text = div('tideText', formatTideText(tide)) 
+    return span('', [svg, text])
+  } else {
+    return span('', svg)
+  }
 }
+
+function formatTideText(tide) {
+  let t = tideTextParts(tide)
+  return `${t.type.charAt(0)} ${t.sign}${t.hrs}`
+}
+
 
 export function weatherImg(yrCode) {
   let _pos = yrCode.indexOf('_')
