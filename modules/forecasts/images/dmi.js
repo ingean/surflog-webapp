@@ -32,7 +32,7 @@ function switchDMIParam(e) {
 
 function onDMIImageNav(e) {
   let dir = navDir(e)
-  let interval =  (e.detail === 1) ? 1 : 5 // jump 6 hrs if doubleclicking
+  let interval = Number(document.getElementById("dmi-chart-timestep").value)
 
   navDMIImages(dir, interval)
 }
@@ -41,37 +41,15 @@ function navDMIImages(dir, interval) {
   let ts = currentDMITimeStep();
 
   if (dir === 'next') {
-    if (ts === 120 || (ts === 115 && interval === 6)) return;
+    if (ts + interval > 121) return
     updateDMIImgs(ts, ts + interval);
     setImgTime(moment(getImgTime()).add(interval, 'hours'))
   } else {
-    if (ts === 1 || (ts < 7 && interval === 6)) return;
+    if (ts - interval < 1) return
     updateDMIImgs(ts, ts - interval);
     setImgTime(moment(getImgTime()).subtract(interval, 'hours'))
   }
   updateDMIScore();
-}
-
-function togglePlaybackIcons(el, from, to) {
-  el.classList.remove(`glyphicon-${from}`)
-  el.classList.add(`glyphicon-${to}`)
-}
-
-function DMIPlayback(e) {
-  let btn = e.target
-  if (btn.classList.contains('glyphicon-play')) {
-    togglePlaybackIcons(btn, 'play', 'pause')
-    playDMIImages(btn)
-  } else {
-    togglePlaybackIcons(btn, 'pause', 'play')
-  }
-}
-
-function playDMIImages(btn) {
-  if (btn.classList.contains('glyphicon-play')) return;
-
-  navDMIImages('next')
-  setInterval(() => playDMIImages(btn), 1000)
 }
 
 function updateDMIScore() {
@@ -106,9 +84,5 @@ export function initDMIImages() {
   //Click event for forecast param switcher
   document.querySelectorAll('.param-switch-dmi')
   .forEach(el => {el.addEventListener('click', switchDMIParam)});
-
-  //Click event for dmi image player
-  document.querySelector('#play-dmi-images')
-  .addEventListener('click', DMIPlayback)
 }
 

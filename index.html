@@ -239,7 +239,17 @@
               <div class="panel-heading">
                 <span class="panel-h light">DMI </span>
                 <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
-                <span id="play-dmi-images" class="glyphicon glyphicon-play i-tool pull-right"></span>
+                <div class="pull-right">
+                  <label for="dmi-chart-timestep" class="control-label text-left">Tidssteg</label>
+                  <div class="input-group pull-right">
+                    <div class="btn-group">
+                      <a class="btn btn-primary btn-sm Active" data-toggle="dmi-chart-timestep" data-title="1">1t</a>
+                      <a class="btn btn-primary btn-sm notActive" data-toggle="dmi-chart-timestep" data-title="6">6t</a>
+                      <a class="btn btn-primary btn-sm notActive" data-toggle="dmi-chart-timestep" data-title="24">24t</a>
+                    </div>
+                    <input type="hidden" id="dmi-chart-timestep" name="dmi-chart-timestep" value="1">
+                  </div>
+                </div>
                 <span class="pull-right" id="twin"></span>
               </div>
               <div class="panel-body">
