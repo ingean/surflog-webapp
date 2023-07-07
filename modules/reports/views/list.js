@@ -1,6 +1,7 @@
 import { el, tideIcon, scoreLabel, icon, arrow, stars, div, span } from '../../html/elements.js';
 import { dateChanged } from '../../html/dateInput.js';
 import { getRating } from '../../config/forms.js';
+import { slRatingClass } from '../../config/forecasts.js';
 import { formatValue } from '../../forecasts/format.js'
 import { imgSrc } from '../../utils/utilities.js';
 import { reportSVG } from '../../html/svg.js';
@@ -85,23 +86,23 @@ function mswForecastDetails(report) {
   if (report['report_id'] === null) return
   return div('report-forecast-msw hidden-small', [
           div('report-forecast-msw-waveheight', [
-          div('report-forecast-msw-value', formatValue(report, 'waveheight_from', false, 'waveheight')),
-          div('report-forecast-msw-value-xsmall', '-' ),
-          div('report-forecast-msw-value', formatValue(report, 'waveheight_to', false, 'waveheight'))
+          div('center2 report-forecast-msw-value', formatValue(report, 'waveheight_from', false, 'waveheight')),
+          div('center2 report-forecast-msw-value-xsmall', '-' ),
+          div('center2 report-forecast-msw-value', formatValue(report, 'waveheight_to', false, 'waveheight'))
       ]),
-      div('report-forecast-msw-starrating', stars(report['stars_open'], report['stars_filled'])),
-        div('report-forecast-msw-swell', [
-        div('report-forecast-msw-value', formatValue(report, 'swellheight')),
-        div('report-forecast-msw-value', formatValue(report, 'swellperiod')),
-        div('report-forecast-msw-value-narrow', arrow(report['swelldir']))
+      mswRating(report),
+      div('report-forecast-msw-swell', [
+        div('center2 report-forecast-msw-value', formatValue(report, 'swellheight')),
+        div('center2 report-forecast-msw-value', formatValue(report, 'swellperiod')),
+        div('center2 report-forecast-msw-value-narrow', arrow(report['swelldir']))
       ]),
       div('report-forecast-msw-subswell', [
-        div('report-forecast-msw-value-small', formatValue(report, 'subswellheight', false, 'swellheight')),
-        div('report-forecast-msw-value-small', formatValue(report, 'subswellperiod', false, 'swellperiod')),
-        div('report-forecast-msw-value-narrow', arrow(report['subswelldir'], '20', '20'))
+        div('center2 report-forecast-msw-value-small', formatValue(report, 'subswellheight', false, 'swellheight')),
+        div('center2 report-forecast-msw-value-small', formatValue(report, 'subswellperiod', false, 'swellperiod')),
+        div('center2 report-forecast-msw-value-narrow', arrow(report['subswelldir'], '20', '20'))
       ]),
       div('report-forecast-msw-wind', [
-        div('report-forecast-msw-value-narrow', `${report['windspeed']}`),
+        div('center2 report-forecast-msw-value-narrow', `${report['windspeed']}`),
         div('report-forecast-msw-windgust', [
           div('report-forecast-msw-value-short', `(${report['windgust']})`),
           div('report-forecast-msw-value-short', 'km/t'),
@@ -109,6 +110,15 @@ function mswForecastDetails(report) {
       ]),
       div(`report-forecast-msw-value-narrow bg-muted-${report['windscore']}`, arrow(report['winddir'])),
     ])
+}
+
+function mswRating(report) {
+  if (report['stars_open']) {
+    return div('center2 report-forecast-msw-starrating', stars(report['stars_open'], report['stars_filled']))
+  } else {
+    let cls = slRatingClass[report['rating']]
+    return div(`center2 report-forecast-sl-rating report-forecast-sl-rating-${cls}`, report['rating'])
+  }
 }
 
 function dmiForecastDetails(report) {

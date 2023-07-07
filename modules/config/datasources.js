@@ -1,6 +1,6 @@
 export const urlAPI = 'https://high-plating-184911.appspot.com/';
 export const urlYr = 'https://www.yr.no/api/v0/locations/';
-export const urlImages = 'http://storage.googleapis.com/observations/';
+export const urlImages = 'https://storage.googleapis.com/observations/';
 export const urlMSW = 'https://magicseaweed.com/';
 export const urlSunTimesOld = 'https://api.sunrise-sunset.org/json';
 export const urlSunTimes = 'https://api.sunrisesunset.io/json'
@@ -129,6 +129,14 @@ export const forecasts = {
     apiKey: '279fa355-ec19-49ba-9ab6-e1e455876329',
     locations: [{id: '06081', name: 'Blåvandshuk Fyr'},{id: '06052', name: 'Thyborøn'},{id: '06041', name: 'Skagen Fyr'},{id: '06079', name: 'Anholt Havn'},{id: '06168', name: 'Nakkehoved Fyr'}],
     params: [{id: 'wind_speed_past1h', caption: 'Vind'}, {id: 'wind_gust_always_past1h', caption: 'Vindkast'}, {id: 'wind_dir_past1h', caption: 'Vindretning'}]
+  },
+  bw: {
+    url: 'https://www.barentswatch.no/bwapi/v1/geodata/waveforecast/pointforecast',
+    tokenUrl: 'https://id.barentswatch.no/connect/token',
+    clientID: 'inge.anundskas%40gmail.com%3ANodejs%20proxy%20for%20bruk%20i%20ArcGIS%20Velocity',
+    clientSecret: 'Zykxe8-pesreh-servub',
+    model: '',
+    locations: [{id: 1, name: ''}]
   }
 };
 

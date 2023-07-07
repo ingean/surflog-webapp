@@ -49,6 +49,16 @@ const ratings = {
   5: {caption: 'Veldig høy', score: 'Episk'}
 };
 
+export const slRatingClass = {
+  "VERY POOR": "1",
+  "POOR": "2",
+  "POOR TO FAIR": "3",
+  "FAIR": "4",
+  "FAIR TO GOOD": "5",
+  "GOOD": "6",
+  "EPIC": "7",
+}
+
 export function direction(dir) {
   return directions.find(d => dir > d.low && dir <= d.high); 
 }

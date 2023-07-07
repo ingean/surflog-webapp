@@ -23,22 +23,45 @@ function formatTide(data) {
   return data;
 }
 
-function getFormData(form) {
-  let data = new FormData(form); // Gets only form inputs with name attributes!!
-  let date = document.querySelector('#application-date').value;
-  let reportTime = moment(date).format(`YYYY-MM-DD ${data.get('reporttime')}`);
+function getReportData(form) {
+  let reportData = new FormData(form); // Gets only form inputs with name attributes!!
+  removeData(reportData)
 
-  data.set('reporttime', reportTime);
-  data.append('userid', user.id);
-  data.append('surfer', user.name);
-  data.append('hasimages', 0); // Updated serverside if upload is successful
+  let date = document.querySelector('#application-date').value
+  let reportTime = moment(date).format(`YYYY-MM-DD ${reportData.get('reporttime')}`)
+  
+  reportData.set('reporttime', reportTime)
+  reportData.append('userid', user.id)
+  reportData.append('surfer', user.name)
+  reportData.append('hasimages', 0) // Updated serverside if upload is successful
 
-  if (data.get('score')) { // Report is a surf session not an observation
-    data.set('type', 'Session');
-    data.set('issurfable', 1)
-    data = formatTide(data); // Concat tide, tidediff and tidetype
+  if (reportData.get('score')) { // Report is a surf session not an observation
+    reportData.set('type', 'Session')
+    reportData.set('issurfable', 1)
+    reportData = formatTide(reportData) // Concat tide, tidediff and tidetype
   }
-  return data;
+  return reportData
+}
+
+function getForecastData(form) {
+  let forecastData = new FormData(form) // Gets only form inputs with name attributes!!
+
+  removeData(forecastData, false)
+
+  let date = document.querySelector('#application-date').value
+  let forecastTime = moment(date).format(`YYYY-MM-DD ${forecastData.get('forecasttime')}`)
+  forecastData.set('forecasttime', forecastTime)
+
+  return forecastData
+}
+
+function removeData(data, removeForecast = true) {
+  let forecastFields = formsOptions.filter(o => o.tab == 7).map(o => o.name)
+  let reportsFields = formsOptions.filter(o => o.tab < 7).map(o => o.name)
+
+  let fieldsToRemove = (removeForecast) ? forecastFields : reportsFields
+
+  fieldsToRemove.forEach(field => data.delete(field))
 }
 
 function fieldsToStore(){
@@ -46,7 +69,6 @@ function fieldsToStore(){
          .filter(option => option.save === true)
          .map(option => option.name)
 }
-
 
 function writeToLocalStorage(data) {
   let storeFields = fieldsToStore()
@@ -66,13 +88,32 @@ export function setStoredValues() {
   })
 }
 
-export async function postReport(form) {
-  let data = getFormData(form);
-  let res = await post('reports', data);
+export async function postReport(form) { 
+  let reportData = getReportData(form)
+  let res = await post('reports', reportData)
 
   if (res) {
-    writeToLocalStorage(data)
+    writeToLocalStorage(reportData)
     notify(res.message, 'success', 'cloud-upload');
+    postForecast(form, res.id, reportData.get('reporttime'))
     resetForm(form);
   } 
+}
+
+async function postForecast(form, id, reporttime) {
+  let forecastData = getForecastData(form)
+  forecastData.set('report_id', id)
+  forecastData.set('reporttime', reporttime)
+
+  // windspeed and winddir is columns in both reports and mv_msw tables
+  forecastData.set('windspeed', forecastData.get('slwindspeed'))
+  forecastData.set('winddir', forecastData.get('slwinddir'))
+  forecastData.delete('slwinddir')
+  forecastData.delete('slwindspeed')
+  
+  let res = await post('surfline', forecastData)
+
+  if (res) {
+    notify(res.message, 'success', 'cloud-upload')
+  }
 }

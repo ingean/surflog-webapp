@@ -1,5 +1,5 @@
 import { selectedSpot } from './html/spotInput.js';
-import { getStatistics } from './utils/api.js';
+//import { getStatistics } from './utils/api.js';
 
 export var settings = [];
 //export var statistics = {};

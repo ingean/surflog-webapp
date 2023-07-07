@@ -151,6 +151,16 @@ const domains = {
   windspeed: windspeed
 }
 
+const slRating = [
+  {caption: 'VERY POOR'},
+  {caption: 'POOR'},
+  {caption: 'POOR TO FAIR'},
+  {caption: 'FAIR', default: true},
+  {caption: 'FAIR TO GOOD'},
+  {caption: 'GOOD'},
+  {caption: 'EPIC'}
+]
+
 function forms(session, observation, filter) {
   return {
     session: session,
@@ -159,7 +169,7 @@ function forms(session, observation, filter) {
   }
 }
 
-export const tabNames = ['Lokasjon', 'Forhold', 'Vurdering', 'Utstyr', 'Vær','Bilder']
+export const tabNames = ['Lokasjon', 'Forhold', 'Vurdering', 'Utstyr', 'Vær', 'Bilder', 'Varsel']
 
 export var formsOptions = [
   {name: 'loctype', save: false, type: 'btn', tab: 1, caption: 'Type sted', domain: locType, forms: forms(false, false, true)},
@@ -174,12 +184,12 @@ export var formsOptions = [
   {name: 'tide', save: false, type: 'btn', tab: 1, caption: 'Tidevann', domain: tides, forms: forms(true, false, false)},
   {name: 'tidediff', save: false, type: 'btn', tab: 1, caption: 'Differanse', domain: tideDiffs, forms: forms(true, false, false)},
   {name: 'tidetype', save: false, type: 'btn', tab: 1, caption: 'Type', domain: tideTypes, forms: forms(true, false, false)},
-  {name: 'winddir', save: false, type: 'btn', tab: 2, caption: 'Vindretning', domain: winddir, forms: forms(true, false, true)},
-  {name: 'windspeed', save: false, type: 'btn', tab: 2, caption: 'Vindstyrke', domain: windspeed, forms: forms(true, false, true)},
-  {name: 'waveheight', save: false, type: 'btn', tab: 2, caption: 'Bølgehøyde', domain: waveheight, forms: forms(true, false, true)},
-  {name: 'waveperiod', save: false, type: 'btn', tab: 2, caption: 'Bølgeperiode', domain: waveperiod, forms: forms(true, false, true)},
-  {name: 'wavedir', save: false, type: 'select', tab: 2, caption: 'Bølgeretning', domain: wavedir, forms: forms(true, false, true)},
-  {name: 'score', save: false, type: 'btn', tab: 3, caption: 'Score', domain: scores, forms: forms(true, false, true)},
+  {name: 'winddir', save: true, type: 'btn', tab: 2, caption: 'Vindretning', domain: winddir, forms: forms(true, false, true)},
+  {name: 'windspeed', save: true, type: 'btn', tab: 2, caption: 'Vindstyrke', domain: windspeed, forms: forms(true, false, true)},
+  {name: 'waveheight', save: true, type: 'btn', tab: 2, caption: 'Bølgehøyde', domain: waveheight, forms: forms(true, false, true)},
+  {name: 'waveperiod', save: true, type: 'btn', tab: 2, caption: 'Bølgeperiode', domain: waveperiod, forms: forms(true, false, true)},
+  {name: 'wavedir', save: true, type: 'select', tab: 2, caption: 'Bølgeretning', domain: wavedir, forms: forms(true, false, true)},
+  {name: 'score', save: true, type: 'btn', tab: 3, caption: 'Score', domain: scores, forms: forms(true, false, true)},
   {name: 'descr', save: false, type: 'textarea', tab: 3, caption: 'Beskrivelse', forms: forms(true, true, false)},
   {name: 'forecast', save: false, type: 'textarea', tab: 3, caption: 'Kommentar', forms: forms(true, false, false)},
   {name: 'board', save: true, type: 'select', tab: 4, caption: 'Brett', domain: boards, forms: forms(true, false, false)},
@@ -194,8 +204,21 @@ export var formsOptions = [
   {name: 'iscold', save: false, type: 'btn', tab: 5, caption: 'Kald', domain: yesNo, forms: forms(true, false, true)},
   {name: 'type', save: false, type: 'btn', tab: 1, caption: 'Type', domain: types, forms: forms(false, true, false)},
   {name: 'files', save: false, type: 'file', tab: 6, caption: 'Bilder', forms: forms(true, true, false)},
-  {name: 'isreference', save: false, type: 'btn', tab: 6, caption: 'Referanse', domain: yesNo, forms: forms(true, true, true)}
-];
+  {name: 'isreference', save: false, type: 'btn', tab: 6, caption: 'Referanse', domain: yesNo, forms: forms(true, true, true)},
+  {name: 'forecasttime', save: false, type: 'time', tab: 7, caption: 'Tidspunkt for varslet', forms: forms(true, false, false)},
+  {name: 'waveheight_from', save: false, type: 'number', tab: 7, caption: 'Surf from (m)', forms: forms(true, false, false)},
+  {name: 'waveheight_to', save: false, type: 'number', tab: 7, caption: 'Surf to (m)', forms: forms(true, false, false)},
+  {name: 'rating', save: false, type: 'select', tab: 7, caption: 'Rating', domain: slRating, forms: forms(true, false, false)},
+  {name: 'swellheight', save: false, type: 'number', tab: 7, caption: 'Waveheight (m)', forms: forms(true, false, false)},
+  {name: 'swellperiod', save: false, type: 'number', tab: 7, caption: 'Waveperiod (s)', forms: forms(true, false, false)},
+  {name: 'swelldir', save: false, type: 'number', tab: 7, caption: 'Wavedirection', forms: forms(true, false, false)},
+  {name: 'subswellheight', save: false, type: 'number', tab: 7, caption: 'Secondary waveheight, (m)', forms: forms(true, false, false)},
+  {name: 'subswellperiod', save: false, type: 'number', tab: 7, caption: 'Secondary waveperiod (s)', forms: forms(true, false, false)},
+  {name: 'subswelldir', save: false, type: 'number', tab: 7, caption: 'Secondary wavedirection', forms: forms(true, false, false)},
+  {name: 'slwindspeed', save: false, type: 'number', tab: 7, caption: 'Wind speed (kph)', forms: forms(true, false, false)},
+  {name: 'windgust', save: false, type: 'number', tab: 7, caption: 'Wind gusts (kph)', forms: forms(true, false, false)},
+  {name: 'slwinddir', save: false, type: 'number', tab: 7, caption: 'Wind direction (s)', forms: forms(true, false, false)}
+]
 
 export function getRating(param, value, key = 'caption', returnKey = 'rating') {
   let domain = domains[param];

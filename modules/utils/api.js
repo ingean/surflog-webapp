@@ -98,14 +98,7 @@ export function getMetForecast() {
 }
 
 export async function getUKCoast() {
-  let requests = [];
-  let baseUrl = forecasts.uk.url;
-  let key = forecasts.uk.apiKey;
-  let locations = forecasts.uk.locations;
-  locations.forEach(l => {
-    requests.push(get(`${baseUrl}${l.id}?res=3hourly&key=${key}`));
-  })
-  return Promise.all(requests);
+  return get(`${urlAPI}proxy/uk`)
 }
 
 export function getDMIObs(start, end) {
@@ -126,6 +119,22 @@ export function getDMIObs(start, end) {
   return Promise.all(requests);
 }
 
+export function getBWWaveForecast(start, end) {
+  const token = getBWCredentials().token
+  let requests
+
+}
+
+async function getBWCredentials() {
+  let response = await fetch(forecasts.bw.tokenUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: `client_id=${forecasts.bw.clientID}&scope=api&client_secret=${forecasts.bw.clientSecret}&grant_type=client_credentials`
+  })
+  return await response.json()
+}
 
 export function getTwin() {
   let time = moment(getImgTime()).format('YYYY-MM-DDTHH:mm:ss');

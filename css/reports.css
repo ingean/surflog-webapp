@@ -83,14 +83,48 @@
   color: var(--primary-txt-color);
   font-family: 'Helvetica Neue';
   font-weight: 700;
-  vertical-align: center;
-  text-align: center;
 }
 
 .report-forecast-msw-starrating {
   display: flex;
   flex-direction: row;
+  align-items: center;
   height: 38px;
+  min-width: 110px;
+}
+
+.report-forecast-sl-rating {
+  min-width: 110px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.report-forecast-sl-rating-1 {
+  color:#E1576F;
+}
+
+.report-forecast-sl-rating-2 {
+  color:#F19A37;
+}
+
+.report-forecast-sl-rating-3 {
+  color:#F7CF4C;
+}
+
+.report-forecast-sl-rating-4 {
+  color:#62D37E;
+}
+
+.report-forecast-sl-rating-5 {
+  color:#409173;
+}
+
+.report-forecast-sl-rating-6 {
+  color:#6452EB;
+}
+
+.report-forecast-sl-rating-7 {
+  color:#5C23C0;
 }
 
 .list-item-h {
