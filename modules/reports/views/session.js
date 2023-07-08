@@ -1,6 +1,7 @@
-import { el } from '../../html/elements.js';
+import { el, div, span } from '../../html/elements.js';
 import { tabs } from '../../html/tabs.js';
 import { reportHeader, reportFooter, reportCompare } from './report.js';
+import { getRating } from '../../config/forms.js';
 import { settings } from '../../settings.js';
 
 
@@ -11,8 +12,8 @@ export async function updateSessionView(report) {
       el('div', {class: "report-body"},
         tabs(
           'session', 
-          ['Beskrivelse', 'Kommentar', 'Vær', 'Brett', 'Sammenlikning'], 
-          [report.descr, report.forecast, sessionWeather(report), sessionBoard(report), await reportCompare(report)]
+          ['Beskrivelse', 'Kommentar', 'Merker', 'Vær', 'Brett', 'Sammenlikning'], 
+          [report.descr, report.forecast, sessionTags(report), sessionWeather(report), sessionBoard(report), await reportCompare(report)]
         )),
       reportFooter(report)
     ])
@@ -33,7 +34,36 @@ function sessionWeather(report) {
     ])
   ]; 
 }
- 
+
+function sessionTags(report) {
+  return div('', [
+    div('', [
+      "Størrelse:",
+      span(`label bg-${getRating('size', report.size)} report-condition`, report.size)  
+    ]),
+    div('', [
+      "Push:",
+      span(`label bg-${getRating('push', report.push)} report-condition`, report.push)  
+    ]),
+    div('', [
+      "Shape:",
+      span(`label bg-${getRating('shape', report.shape)} report-condition`, report.shape)  
+    ]),
+    div('', [
+      "Closeout:",
+      span(`label bg-${getRating('closeout', report.closeout)} report-condition`, report.closeout)  
+    ]),
+    div('', [
+      "Consistency:",
+      span(`label bg-${getRating('consistency', report.consistency)} report-condition`, report.consistency)  
+    ]),
+    div('', [
+      "Wavecount:",
+      span(`label bg-${getRating('wavecount', report.wavecount)} report-condition`, report.wavecount)  
+    ]) 
+  ])
+}
+
 function sessionBoard(report) {
   //let board = settings.boards.find(b => b.model === report.board);
   let board

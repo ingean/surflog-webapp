@@ -70,14 +70,28 @@ export function tideTextParts(tide) {
 }
 
 export function conditionsDetails(report, suffix = '') {
-  let params = ['waveheight', 'waveperiod', 'wavedir', 'windspeed', 'winddir']
+  let params = [
+    {id: 'waveheight', alias: 'waveheightObs'}, {id: 'waveperiod', alias: 'waveperiodObs'},
+    {id: 'wavedir', alias: 'wavedirObs'}, {id: 'windspeed', alias: 'windspeedObs'}, 
+    {id: 'winddir', alias: 'winddirObs'}
+  ]
+  
+  /* let params = [
+    {id: 'waveheight', alias: 'waveheightObs'}, {id: 'size', alias: 'size'}, 
+    {id: 'push', alias: 'push'}, {id: 'closeout', alias: 'closeout'},  
+    {id: 'consistency', alias: 'consistency'}, {id: 'wavecount', alias: 'wavecount'},
+    {id: 'windspeed', alias: 'windspeedObs'}, {id: 'winddir', alias: 'winddirObs'}, 
+    {id: 'shape', alias: 'shape'}
+  ] */
+
   let hidden = (report['report_id']) ? 'hidden-large' : 'hidden-small'
 
   if (report.type !== 'Session') return span(`report-conditions ${hidden}`)
 
   return div(`report-conditions ${hidden}`, params.map(param => {
-    let value = report[`${param}${suffix}`]
-    let rating = getRating(param, value)
+    //let value = report[`${param}${suffix}`]
+    let value = report[param.alias]
+    let rating = getRating(param.id, value)
     return span(`label bg-${rating} report-condition`, value)
   }))
 }

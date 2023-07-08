@@ -56,8 +56,8 @@ function getForecastData(form) {
 }
 
 function removeData(data, removeForecast = true) {
-  let forecastFields = formsOptions.filter(o => o.tab == 7).map(o => o.name)
-  let reportsFields = formsOptions.filter(o => o.tab < 7).map(o => o.name)
+  let forecastFields = formsOptions.filter(o => o.tab == 6).map(o => o.name)
+  let reportsFields = formsOptions.filter(o => o.tab < 6).map(o => o.name)
 
   let fieldsToRemove = (removeForecast) ? forecastFields : reportsFields
 

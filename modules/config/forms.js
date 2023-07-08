@@ -87,6 +87,60 @@ const wavedir = [
   {caption: 'Sørøst', rating: 0}
 ];
 
+const closeout = [
+  {caption: 'Ukjent', rating: 0},
+  {caption: 'Veldig ofte', rating: 1},
+  {caption: 'Ofte', rating: 2},
+  {caption: 'Normalt', rating: 3, default: true},
+  {caption: 'Skjelden', rating: 4},
+  {caption: 'Veldig skjelden', rating: 5}
+];
+
+const consistency = [
+  {caption: 'Ukjent', rating: 0},
+  {caption: 'Lange pauser', rating: 2},
+  {caption: 'Litt pauser', rating: 3, default: true},
+  {caption: 'Lite pauser', rating: 4},
+  {caption: 'Ingen pauser', rating: 5}
+];
+
+const wavecount = [
+  {caption: 'Ukjent', rating: 0},
+  {caption: 'Velig lav', rating: 1},
+  {caption: 'Lav', rating: 2},
+  {caption: 'Ok', rating: 3, default: true},
+  {caption: 'Høy', rating: 4},
+  {caption: 'Veldig høy', rating: 5}
+];
+
+const shape = [
+  {caption: 'Ukjent', rating: 0},
+  {caption: 'Veldig rotete', rating: 1},
+  {caption: 'Rotete', rating: 2},
+  {caption: 'Ok', rating: 3, default: true},
+  {caption: 'Cleant', rating: 4},
+  {caption: 'Glassy', rating: 5}
+];
+
+const push = [
+  {caption: 'Ukjent', rating: 0},
+  {caption: 'Veldig slapt', rating: 1},
+  {caption: 'Slapt', rating: 2},
+  {caption: 'Ok', rating: 3, default: true},
+  {caption: 'Kraftig', rating: 4},
+  {caption: 'Veldig kraftig', rating: 5}
+];
+
+const size = [
+  {caption: 'Ukjent', rating: 0},
+  {caption: 'For lite', rating: 1},
+  {caption: 'Lite', rating: 2},
+  {caption: 'Medium', rating: 4, default: true},
+  {caption: 'Stort', rating: 3},
+  {caption: 'Veldig stort', rating: 2},
+  {caption: 'For stort', rating: 1},
+];
+
 const boards = [
   {caption: 'Lost RNF96', default: true},
   {caption: 'Lost Little Wing'},
@@ -144,11 +198,17 @@ const yesNo = [
 
 const domains = {
   score: scores,
-  waveheight: waveheight,
-  waveperiod: waveperiod,
-  wavedir: wavedir,
-  winddir: winddir,
-  windspeed: windspeed
+  closeout, 
+  consistency,
+  wavecount,
+  shape,
+  push,
+  size,
+  waveheight,
+  waveperiod,
+  wavedir,
+  winddir,
+  windspeed
 }
 
 const slRating = [
@@ -169,7 +229,7 @@ function forms(session, observation, filter) {
   }
 }
 
-export const tabNames = ['Lokasjon', 'Forhold', 'Vurdering', 'Utstyr', 'Vær', 'Bilder', 'Varsel']
+export const tabNames = ['Lokasjon', 'Forhold', 'Vurdering', 'Merker', 'Utstyr', 'Varsel']
 
 export var formsOptions = [
   {name: 'loctype', save: false, type: 'btn', tab: 1, caption: 'Type sted', domain: locType, forms: forms(false, false, true)},
@@ -192,32 +252,38 @@ export var formsOptions = [
   {name: 'score', save: true, type: 'btn', tab: 3, caption: 'Score', domain: scores, forms: forms(true, false, true)},
   {name: 'descr', save: false, type: 'textarea', tab: 3, caption: 'Beskrivelse', forms: forms(true, true, false)},
   {name: 'forecast', save: false, type: 'textarea', tab: 3, caption: 'Kommentar', forms: forms(true, false, false)},
-  {name: 'board', save: true, type: 'select', tab: 4, caption: 'Brett', domain: boards, forms: forms(true, false, false)},
-  {name: 'suit', save: true, type: 'select', tab: 4, caption: 'Drakt', domain: suits, forms: forms(true, false, false)},
-  {name: 'gloves', save: true, type: 'select', tab: 4, caption: 'Hansker', domain: gloves, forms: forms(true, false, false)},
-  {name: 'boots', save: true, type: 'select', tab: 4, caption: 'Booties', domain: boots, forms: forms(true, false, false)},
-  {name: 'hood', save: true, type: 'btn', tab: 4, caption: 'Hette', domain: yesNo, forms: forms(true, false, false)},
+  {name: 'closeout', save: true, type: 'btn', tab: 4, caption: 'Closeouts', domain: closeout, forms: forms(true, false, true)},
+  {name: 'consistency', save: true, type: 'btn', tab: 4, caption: 'Bølgefrekvens', domain: consistency, forms: forms(true, false, true)},
+  {name: 'wavecount', save: true, type: 'btn', tab: 4, caption: 'Wavecount', domain: wavecount, forms: forms(true, false, true)},
+  {name: 'shape', save: true, type: 'btn', tab: 4, caption: 'Shape', domain: shape, forms: forms(true, false, true)},
+  {name: 'push', save: true, type: 'btn', tab: 4, caption: 'Push', domain: push, forms: forms(true, false, true)},
+  {name: 'size', save: true, type: 'btn', tab: 4, caption: 'Størrelse', domain: size, forms: forms(true, false, true)},
+  {name: 'files', save: false, type: 'file', tab: 4, caption: 'Bilder', forms: forms(true, true, false)},
+  {name: 'isreference', save: false, type: 'btn', tab: 4, caption: 'Referanse', domain: yesNo, forms: forms(true, true, true)},
+  {name: 'board', save: true, type: 'select', tab: 5, caption: 'Brett', domain: boards, forms: forms(true, false, false)},
+  {name: 'suit', save: true, type: 'select', tab: 5, caption: 'Drakt', domain: suits, forms: forms(true, false, false)},
+  {name: 'gloves', save: true, type: 'select', tab: 5, caption: 'Hansker', domain: gloves, forms: forms(true, false, false)},
+  {name: 'boots', save: true, type: 'select', tab: 5, caption: 'Booties', domain: boots, forms: forms(true, false, false)},
+  {name: 'hood', save: true, type: 'btn', tab: 5, caption: 'Hette', domain: yesNo, forms: forms(true, false, false)},
   {name: 'airtemp', save: true, type: 'number', tab: 5, caption: 'Lufttemperatur', forms: forms(true, false, false)},
   {name: 'watertemp', save: true, type: 'number', tab: 5, caption: 'Vanntemperatur', forms: forms(true, false, false)},
   {name: 'temp', save: false, type: 'textarea', tab: 5, caption: 'Beskrivelse', forms: forms(true, false, false)},
   {name: 'issurfable', save: false, type: 'btn', tab: 1, caption: 'Surfbart', domain: yesNo, forms: forms(false, true, true)},
   {name: 'iscold', save: false, type: 'btn', tab: 5, caption: 'Kald', domain: yesNo, forms: forms(true, false, true)},
   {name: 'type', save: false, type: 'btn', tab: 1, caption: 'Type', domain: types, forms: forms(false, true, false)},
-  {name: 'files', save: false, type: 'file', tab: 6, caption: 'Bilder', forms: forms(true, true, false)},
-  {name: 'isreference', save: false, type: 'btn', tab: 6, caption: 'Referanse', domain: yesNo, forms: forms(true, true, true)},
-  {name: 'forecasttime', save: false, type: 'time', tab: 7, caption: 'Tidspunkt for varslet', forms: forms(true, false, false)},
-  {name: 'waveheight_from', save: false, type: 'number', tab: 7, caption: 'Surf from (m)', forms: forms(true, false, false)},
-  {name: 'waveheight_to', save: false, type: 'number', tab: 7, caption: 'Surf to (m)', forms: forms(true, false, false)},
-  {name: 'rating', save: false, type: 'select', tab: 7, caption: 'Rating', domain: slRating, forms: forms(true, false, false)},
-  {name: 'swellheight', save: false, type: 'number', tab: 7, caption: 'Waveheight (m)', forms: forms(true, false, false)},
-  {name: 'swellperiod', save: false, type: 'number', tab: 7, caption: 'Waveperiod (s)', forms: forms(true, false, false)},
-  {name: 'swelldir', save: false, type: 'number', tab: 7, caption: 'Wavedirection', forms: forms(true, false, false)},
-  {name: 'subswellheight', save: false, type: 'number', tab: 7, caption: 'Secondary waveheight, (m)', forms: forms(true, false, false)},
-  {name: 'subswellperiod', save: false, type: 'number', tab: 7, caption: 'Secondary waveperiod (s)', forms: forms(true, false, false)},
-  {name: 'subswelldir', save: false, type: 'number', tab: 7, caption: 'Secondary wavedirection', forms: forms(true, false, false)},
-  {name: 'slwindspeed', save: false, type: 'number', tab: 7, caption: 'Wind speed (kph)', forms: forms(true, false, false)},
-  {name: 'windgust', save: false, type: 'number', tab: 7, caption: 'Wind gusts (kph)', forms: forms(true, false, false)},
-  {name: 'slwinddir', save: false, type: 'number', tab: 7, caption: 'Wind direction (s)', forms: forms(true, false, false)}
+  {name: 'forecasttime', save: false, type: 'time', tab: 6, caption: 'Tidspunkt for varslet', forms: forms(true, false, false)},
+  {name: 'waveheight_from', save: false, type: 'number', tab: 6, caption: 'Surf from (m)', forms: forms(true, false, false)},
+  {name: 'waveheight_to', save: false, type: 'number', tab: 6, caption: 'Surf to (m)', forms: forms(true, false, false)},
+  {name: 'rating', save: false, type: 'select', tab: 6, caption: 'Rating', domain: slRating, forms: forms(true, false, false)},
+  {name: 'swellheight', save: false, type: 'number', tab: 6, caption: 'Waveheight (m)', forms: forms(true, false, false)},
+  {name: 'swellperiod', save: false, type: 'number', tab: 6, caption: 'Waveperiod (s)', forms: forms(true, false, false)},
+  {name: 'swelldir', save: false, type: 'number', tab: 6, caption: 'Wavedirection', forms: forms(true, false, false)},
+  {name: 'subswellheight', save: false, type: 'number', tab: 6, caption: 'Secondary waveheight, (m)', forms: forms(true, false, false)},
+  {name: 'subswellperiod', save: false, type: 'number', tab: 6, caption: 'Secondary waveperiod (s)', forms: forms(true, false, false)},
+  {name: 'subswelldir', save: false, type: 'number', tab: 6, caption: 'Secondary wavedirection', forms: forms(true, false, false)},
+  {name: 'slwindspeed', save: false, type: 'number', tab: 6, caption: 'Wind speed (kph)', forms: forms(true, false, false)},
+  {name: 'windgust', save: false, type: 'number', tab: 6, caption: 'Wind gusts (kph)', forms: forms(true, false, false)},
+  {name: 'slwinddir', save: false, type: 'number', tab: 6, caption: 'Wind direction (s)', forms: forms(true, false, false)}
 ]
 
 export function getRating(param, value, key = 'caption', returnKey = 'rating') {

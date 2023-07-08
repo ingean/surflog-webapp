@@ -21,7 +21,7 @@ export async function getTwin(date, spot = 'Saltstein', source = 'dmi') {
 
 export async function getReport(date, id) {
   let load = new Loader('report-container');
-  let url = (id) ? `reports/${id}` : `reports?datestring=${moment(date).format('YYYY-MM-DD')}`;
+  let url = (id) ? `reports/${id}?table=v_reports_msw` : `reports?datestring=${moment(date).format('YYYY-MM-DD')}&table=v_reports_msw`;
   let reports = await get(url)
 
   if (reports) {
