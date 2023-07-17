@@ -20,7 +20,7 @@ a {
 }
 
 .close {
-  color: var(--on-surface-color);
+  color: var(--on-surface-color-l1);
   text-shadow: none;
 }
 
@@ -169,12 +169,26 @@ a.list-group-item:hover {
   width: 100%;
 }
 
+.tile {
+  border-radius: 15px;
+  background: var(--surface-color-l1);
+  padding: 20px;
+  margin: 10px;
+  overflow-y: scroll;
+}
 
-/*
-.tideText {
-  fill: #006EDB;
-  font: bold 10px sans-serif;
-}*/
+.tile-lg {
+  width: 350px;
+  height: 150px;
+}
+
+.tile-title {
+  font-weight: bold;
+}
+
+.tile-column {
+  margin: 5px;
+}
 
 .tideText {
   color: #006EDB;
@@ -182,7 +196,6 @@ a.list-group-item:hover {
   padding:0px;
   margin-left: 2px;
 }
-
 
 /* Phone portrait only */
 @media screen and (max-width:414px) {  

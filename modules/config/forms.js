@@ -142,11 +142,11 @@ const size = [
 ];
 
 const boards = [
-  {caption: 'Lost RNF96', default: true},
-  {caption: 'Lost Little Wing'},
-  {caption: 'Machado Seaside'},
-  {caption: 'FW Dominator II'},
-  {caption: 'OE Longboard'},
+  {caption: 'Lost RNF96', default: true, volume: 36.5, length: "5'11", width: 21, thickness: 2.6, fins: 'Twin + trailer', type: 'Groveler', material: 'PU'},
+  {caption: 'Lost Little Wing', volume: 32, length: "6'0", width: 20.13, thickness: 2.53, fins: 'Thruster', type: 'Shortboard', material: 'PU'},
+  {caption: 'Machado Seaside', volume: 33.6, length: "5'7", width: "21 5/8" , thickness: 2.5, fins: 'Quad / Twin', type: 'Groveler', material: 'Epoxy'},
+  {caption: 'FW Dominator II', volume: 31.5, length: "5'9", width: '20 1/8', thickness: "2 7/16", fins: 'Thruster / Quad', type: 'Groveler', material: 'Epoxy'},
+  {caption: 'OE Longboard', volume: 94, length: "9'0", width: 23, thickness: 3.5, fins: 'Thruster', type: 'Longboard', material: 'Softtop'},
   {caption: 'Annet'}
 ];
 
@@ -198,17 +198,17 @@ const yesNo = [
 
 const domains = {
   score: scores,
-  closeout, 
-  consistency,
-  wavecount,
-  shape,
-  push,
-  size,
-  waveheight,
-  waveperiod,
-  wavedir,
-  winddir,
-  windspeed
+  closeout: closeout, 
+  consistency: consistency,
+  wavecount: wavecount,
+  shape: shape,
+  push: push,
+  size: size,
+  waveheight: waveheight,
+  waveperiod: waveperiod,
+  wavedir: wavedir,
+  winddir: winddir,
+  windspeed: windspeed
 }
 
 const slRating = [
@@ -295,4 +295,9 @@ export function getRating(param, value, key = 'caption', returnKey = 'rating') {
 
 export function getScoreCaption(score) {
   return scores[score].caption;
+}
+
+export const getBoardInfo = (board) => {
+  let result = boards.filter(b => b.caption === board)
+  return result[0]
 }

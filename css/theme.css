@@ -39,6 +39,15 @@ html[data-theme = 'light'] {
   --rating-muted-3:rgba(0,0,255,0.1);
   --rating-muted-4:rgba(0,128,0,0.1);
   --rating-muted-5:rgba(0,100,0,0.1);
+
+  /* Surfline rating colors */
+  --sl-rating-1:#E1576F;
+  --sl-rating-2:#F19A37;
+  --sl-rating-3:#F7CF4C;
+  --sl-rating-4:#62D37E;
+  --sl-rating-5:#409173;
+  --sl-rating-6:#6452EB;
+  --sl-rating-7:#5C23C0;
 }
 
 html[data-theme = 'dark'] {
@@ -70,6 +79,15 @@ html[data-theme = 'dark'] {
   --rating-3:#90caf9; /* Material design blue 200 */
   --rating-4:#c5e1a5; /* Material design light green 200 */
   --rating-5:#a5d6a7; /* Material design green 200 */
+
+  /* Surfline rating colors */
+  --sl-rating-1:#E1576F;
+  --sl-rating-2:#F19A37;
+  --sl-rating-3:#F7CF4C;
+  --sl-rating-4:#62D37E;
+  --sl-rating-5:#409173;
+  --sl-rating-6:#6452EB;
+  --sl-rating-7:#5C23C0;
 }
 
 /* Toggle theme switcher icon */

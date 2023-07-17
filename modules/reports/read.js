@@ -33,6 +33,8 @@ export async function getReport(date, id) {
 }
 
 export async function getReports(page = 1, query = '', table = 'MSW') {
+  let pageQuery = (page) ? `&page=${page}` : ''
+  
   let tables = {
     MSW: 'v_reports_msw',
     DMI: 'v_reports_dmi',
@@ -40,7 +42,7 @@ export async function getReports(page = 1, query = '', table = 'MSW') {
   }
   
   let load = new Loader('report-list-container');
-  let url = `reports?page=${page}&table=${tables[table]}&${query}`;
+  let url = `reports?table=${tables[table]}${query}${pageQuery}`;
   let reports = await get(url, true);
 
   if (reports) {

@@ -60,7 +60,11 @@ export function scoreLabel(score, classes = '') {
   return span(`label bg-${score} ${classes}`, caption)
 }
 
-  
+export function paramLabel(param, value, caption = '', cls = '') {
+  caption = (caption) ? `${value} ${caption}` : value
+  return span(`label bg-${getRating(param, value)} ${cls} report-condition`, caption)
+}
+
 export function icon(iconName, classes = '') {
     return span({class: `glyphicon glyphicon-${iconName} ${classes}`})
 }
@@ -135,22 +139,40 @@ export function weatherImg(yrCode) {
   return el('img', {src: `images/yr/${src}`, class: 'img-weather'})
 }
 
-export function tempTd(temperature) {
-  let cls = (temperature < 0) ? 'temp-freeze' : 'temp-warm';
+export function tempTd(temp) {
+  return el('td', '', tempSpan('td-value', temp))
+}
+
+export function tempSpan(cls, temp) {
+  let tmpCls = (temp < 0) ? 'temp-freeze' : 'temp-warm';
   
-  return (
-    el('td', '', 
-      div(cls, [ 
-        span('td-value', String(Math.round(temperature))),
-        span('td-unit-temp', '°')
-      ])
-    )
-  )
+  return span(`${tmpCls} ${cls}`, `${String(Math.round(temp))}°`)
 }
 
 export function hrsTd(date) {
   return el('td', 'td-fixed', 
           el('strong', '', moment(date).format('HH')));
 }
+
+export const tile = (title, frontContent, backContent, footer, iconName = 'transfer', size = 'lg') => {
+  let content = frontContent
+  let body = [icon(iconName, 'top-right')]
+  if (title) body.push(div('tile-title', title))
+  body.push(div('tile-content', content))
+  if (footer) body.push(div('tile-footer', footer))
+
+  let tile = div(`tile tile-${size}`, body)
+
+  if (backContent) {
+    tile.addEventListener('click', e => {
+      content = (content === frontContent) ? backContent : frontContent
+      tile.getElementsByClassName('tile-content')[0].replaceChildren(content)
+    })
+  }
+
+  return tile
+}
+
+
 
 

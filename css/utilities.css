@@ -50,3 +50,13 @@
   align-items: center;
   justify-content: center;
 }
+
+.top-right {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.margin-left {
+  margin-left: 10px;
+}

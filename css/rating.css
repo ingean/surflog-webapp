@@ -74,4 +74,30 @@
   color: var(--on-label-color);
 }
 
+.report-forecast-sl-rating-1 {
+  color: var(--sl-rating-1);
+}
 
+.report-forecast-sl-rating-2 {
+  color: var(--sl-rating-2);
+}
+
+.report-forecast-sl-rating-3 {
+  color: var(--sl-rating-3);
+}
+
+.report-forecast-sl-rating-4 {
+  color: var(--sl-rating-4);
+}
+
+.report-forecast-sl-rating-5 {
+  color: var(--sl-rating-5);
+}
+
+.report-forecast-sl-rating-6 {
+  color: var(--sl-rating-6);
+}
+
+.report-forecast-sl-rating-7 {
+  color: var(--sl-rating-7);
+}

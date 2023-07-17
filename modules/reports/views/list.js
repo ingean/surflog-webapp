@@ -1,13 +1,12 @@
-import { el, tideIcon, scoreLabel, icon, arrow, stars, div, span } from '../../html/elements.js';
+import { el, tideIcon, scoreLabel, icon, arrow, paramLabel, div, span } from '../../html/elements.js';
 import { dateChanged } from '../../html/dateInput.js';
-import { getRating } from '../../config/forms.js';
-import { slRatingClass } from '../../config/forecasts.js';
 import { formatValue } from '../../forecasts/format.js'
 import { imgSrc } from '../../utils/utilities.js';
 import { reportSVG } from '../../html/svg.js';
-import { get } from '../../utils/api.js';
 import { getReports } from '../read.js';
 import { tide } from './report.js';
+import { slWaveheight, slRating, slSwell, slSubswell, slWind } from './slForecast.js';
+import { setSpotListTo } from '../../html/spotInput.js';
 
 let forecast = 'MSW'
 let selected_page = 1
@@ -69,70 +68,30 @@ export function tideTextParts(tide) {
   return {type, sign, hrs}
 }
 
-export function conditionsDetails(report, suffix = '') {
+export function conditionsDetails(report) {
   let params = [
     {id: 'waveheight', alias: 'waveheightObs'}, {id: 'waveperiod', alias: 'waveperiodObs'},
     {id: 'wavedir', alias: 'wavedirObs'}, {id: 'windspeed', alias: 'windspeedObs'}, 
     {id: 'winddir', alias: 'winddirObs'}
   ]
   
-  /* let params = [
-    {id: 'waveheight', alias: 'waveheightObs'}, {id: 'size', alias: 'size'}, 
-    {id: 'push', alias: 'push'}, {id: 'closeout', alias: 'closeout'},  
-    {id: 'consistency', alias: 'consistency'}, {id: 'wavecount', alias: 'wavecount'},
-    {id: 'windspeed', alias: 'windspeedObs'}, {id: 'winddir', alias: 'winddirObs'}, 
-    {id: 'shape', alias: 'shape'}
-  ] */
-
   let hidden = (report['report_id']) ? 'hidden-large' : 'hidden-small'
-
   if (report.type !== 'Session') return span(`report-conditions ${hidden}`)
 
   return div(`report-conditions ${hidden}`, params.map(param => {
-    //let value = report[`${param}${suffix}`]
-    let value = report[param.alias]
-    let rating = getRating(param.id, value)
-    return span(`label bg-${rating} report-condition`, value)
+    return paramLabel(param.id, report[param.alias])
   }))
 }
 
 function mswForecastDetails(report) {
   if (report['report_id'] === null) return
   return div('report-forecast-msw hidden-small', [
-          div('report-forecast-msw-waveheight', [
-          div('center2 report-forecast-msw-value', formatValue(report, 'waveheight_from', false, 'waveheight')),
-          div('center2 report-forecast-msw-value-xsmall', '-' ),
-          div('center2 report-forecast-msw-value', formatValue(report, 'waveheight_to', false, 'waveheight'))
-      ]),
-      mswRating(report),
-      div('report-forecast-msw-swell', [
-        div('center2 report-forecast-msw-value', formatValue(report, 'swellheight')),
-        div('center2 report-forecast-msw-value', formatValue(report, 'swellperiod')),
-        div('center2 report-forecast-msw-value-narrow', arrow(report['swelldir']))
-      ]),
-      div('report-forecast-msw-subswell', [
-        div('center2 report-forecast-msw-value-small', formatValue(report, 'subswellheight', false, 'swellheight')),
-        div('center2 report-forecast-msw-value-small', formatValue(report, 'subswellperiod', false, 'swellperiod')),
-        div('center2 report-forecast-msw-value-narrow', arrow(report['subswelldir'], '20', '20'))
-      ]),
-      div('report-forecast-msw-wind', [
-        div('center2 report-forecast-msw-value-narrow', `${report['windspeed']}`),
-        div('report-forecast-msw-windgust', [
-          div('report-forecast-msw-value-short', `(${report['windgust']})`),
-          div('report-forecast-msw-value-short', 'km/t'),
-        ]),
-      ]),
-      div(`report-forecast-msw-value-narrow bg-muted-${report['windscore']}`, arrow(report['winddir'])),
-    ])
-}
-
-function mswRating(report) {
-  if (report['stars_open']) {
-    return div('center2 report-forecast-msw-starrating', stars(report['stars_open'], report['stars_filled']))
-  } else {
-    let cls = slRatingClass[report['rating']]
-    return div(`center2 report-forecast-sl-rating report-forecast-sl-rating-${cls}`, report['rating'])
-  }
+    slWaveheight(report),
+    slRating(report),
+    slSwell(report),
+    slSubswell(report),
+    slWind(report)
+  ])
 }
 
 function dmiForecastDetails(report) {
@@ -196,7 +155,10 @@ export function updateReportList(reports) {
         reportScore(report) 
       ]
     );
-    reportEl.addEventListener('click', () => {dateChanged(report.reporttime, report.id)});
+    reportEl.addEventListener('click', () => {
+      dateChanged(report.reporttime, report.id)
+      setSpotListTo(report.spot)
+    });
     reportsList.appendChild(reportEl);
   }
 
@@ -227,7 +189,6 @@ function deleteFormData(data, keys) {
   }
 }
 
-
 export async function filterReportsList(form) {
   let data = new FormData(form);
   if (data.get('loctype') === 'Alle') {
@@ -235,12 +196,9 @@ export async function filterReportsList(form) {
   }
   data.delete('loctype');
 
-  let query = formToQuery(data);
-  let reports = await get(`reports?page=1&table=v_reports_msw&${query}`, true)
-  if (reports.data) {
-    updateReportsListPagination(reports.count, 10, query);
-    updateReportList(reports.data);
-  } 
+  let query = formToQuery(data)
+  let reports = await getReports(1, query)
+  if (reports?.data) updateList(reports) 
 }
 
 function formToQuery(data) {
@@ -259,5 +217,15 @@ export function initReportlist() {
   .forEach(e => {
     e.addEventListener('click', switchForecast)
   })
+}
+
+export const filterReportListBySpot = async (spot) => {
+  let reports = await getReports(1, `&spot=${spot}`)
+  if (reports?.data) updateList
+}
+
+const updateList = (reports, query) => {
+  updateReportsListPagination(reports.count, 10, query)
+  updateReportList(reports.data)
 }
 

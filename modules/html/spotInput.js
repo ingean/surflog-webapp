@@ -1,6 +1,6 @@
 import { spotIds } from '../config/spots.js';
 import { formsOptions } from '../config/forms.js';
-import { el } from '../html/elements.js';
+import { el, div } from '../html/elements.js';
 import { formSelectInput } from '../html/formGroup.js';
 import { updateStationCard } from '../forecasts/cards/station.js';
 import { updateDMICard } from '../forecasts/cards/dmiStats.js';
@@ -9,6 +9,7 @@ import { getYrCoastForecast, updateYrCoastTable } from '../forecasts/tables/yrCo
 import { updateDMITable } from '../forecasts/tables/dmi.js'; 
 import { updateSMHITable } from '../forecasts/tables/smhi.js'; 
 import { updateYrTable } from '../forecasts/tables/yr.js'; 
+import { filterReportListBySpot } from '../reports/views/list.js';
 
 
 function clearInput(e) {
@@ -20,7 +21,7 @@ function createSpotList() {
   let options = formsOptions.find(item => item.name === 'spot');
   options.formName = 'navbar'
   options.id = `${options.formName}-${options.name}`;
-  let spots = el('div', 'input-group', formSelectInput(options));
+  let spots = div('input-group', formSelectInput(options));
   document.querySelector('#navbar-spots-list')
   .replaceChildren(spots);
 
@@ -38,6 +39,8 @@ async function onSpotChanged(e) {
     spot = 'Saltstein'
     yrId = spotIds[spot]?.yr?.id
   }
+
+  filterReportListBySpot(spot)
 
   await updateStationCard(spot);
   updateDMICard(spot);
@@ -64,4 +67,8 @@ export function initSpotList() {
 
 export function selectedSpot() {
   return document.querySelector('#navbar-spot').value;
+}
+
+export const setSpotListTo = (spot) => {
+  document.querySelector('#navbar-spot').value = spot
 }

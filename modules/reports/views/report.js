@@ -1,4 +1,4 @@
-import { el } from '../../html/elements.js';
+import { el, div} from '../../html/elements.js';
 import { spotIds } from '../../config/spots.js';
 import { urlMSW } from '../../config/datasources.js';
 import { forecastParamAll } from '../../config/datasources.js';
@@ -30,7 +30,7 @@ function headerDetails(report) {
 }
 
 function footerToolbar(report) {
-  return el('div', 'report-tools', [
+  return div('report-tools', [
     imagesButton(report),
     mswLink(report),
     deleteButton()
@@ -39,7 +39,7 @@ function footerToolbar(report) {
 
 function imagesButton(report) {
   if (report.hasimages === 1) {
-    return el('div', {
+    return div({
       "id": "img-report-tool-images", 
       "class": "glyphicon glyphicon-picture report-tool",
       "data-toggle": "modal",
@@ -57,13 +57,13 @@ function mswLink(report) {
   let start = moment(report.reporttime).subtract(3, 'days').format('YYYY-MM-DD');
   let end = moment(report.reporttime).add(3, 'days').format('YYYY-MM-DD');
   let url = `${urlMSW}${spot}-Surf-Report/${mswId.id}/Historic/?start=${start}&end=${end}`;
-  return  el('div', 'report-footer-tool', 
+  return  div('report-footer-tool', 
     el('a', { href: url, target: '_blank', class: 'report-tool'}, 
-      el ('div', 'glyphicon glyphicon-calendar')))
+      div('glyphicon glyphicon-calendar')))
 }
 
 function deleteButton() {
-  return el('div', {
+  return div({
     "id":"btn-deleteReport",
     "class": "glyphicon glyphicon-trash report-tool",
     "data-toggle": "confirmation",
@@ -76,7 +76,7 @@ function deleteButton() {
     "data-btn-cancel-class": "btn-success",
     "data-title": "Slett rapport", 
     "data-content": "Er du sikker?"
-  });
+  })
 }
 
 function format(comparisonReport, param) {
@@ -94,14 +94,14 @@ export function reportHeader(report) {
   let profilePicture = document.getElementById('navbar-profile-img').getAttribute('src');
   
   return (
-    el('div', 'report-header', [
+    div('report-header', [
       el('img', { 
         src: profilePicture,
         class: "report-header-img img-circle"}
       ), 
-      el('div', 'report-header-text', [
-        el('div', 'report-header-title', [report.spot, ' ', moment(report.reporttime).calendar()]),
-        el('div', 'report-header-details', headerDetails(report))
+      div('report-header-text', [
+        div('report-header-title', [report.spot, ' ', moment(report.reporttime).calendar()]),
+        div('report-header-details', headerDetails(report))
       ]),
       reportScore(report)
     ]) 
@@ -114,18 +114,17 @@ export async function reportCompare(report, reportType = 'økta') {
     let params = ['waveheight', 'waveperiod', 'swellheight', 'swellperiod', 'wind', 'swind'];
     let elements = [
       el('p', "txt-report",
-        `For denne ${reportType} var det varslet ${compare.wavesize} bølger og ${compare.windspeed} vind enn ${moment(compare.forecasttime).calendar()}.`),
-      el('div', "report-subtitle", "Detaljer"),
+        `For denne ${reportType} var det varslet ${compare.wavesize} bølger og ${compare.windspeed} vind enn ${moment(compare.forecasttime).calendar()}.`)
     ];
 
     for (let param of params) {
       let txt = format(compare, param);
-      if (txt) elements.push(el('div', 'report-twin-txt', txt)) 
+      if (txt) elements.push(div('report-twin-txt', txt)) 
     }
     return elements;
   } else {
-    el('div', {id: 'report-twin-info'},
-      el('div', 'report-text', 'Klarte ikke å sammenlikne varsel for denne rapporten med valgt tidspunkt (tidspunkt satt for DMI-bilder)'));
+    div({id: 'report-twin-info'},
+    div('report-text', 'Klarte ikke å sammenlikne varsel for denne rapporten med valgt tidspunkt (tidspunkt satt for DMI-bilder)'));
   }
 }
 
@@ -149,9 +148,9 @@ export function reportText(title, text) {
 
 export function reportPage(title, content) {
   
-  return el('div', {class: "report-page"}, [
-          el('div', 'report-page-title', title),
-          el('div', 'report-page-body', content)
+  return div({class: "report-page"}, [
+          div('report-page-title', title),
+          div('report-page-body', content)
         ])
 }
 
