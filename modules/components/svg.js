@@ -1,5 +1,6 @@
 import { filenameify } from '../utils/utilities.js';
-import { el } from './elements.js';
+import { el, span } from './elements.js';
+import { tidesSVGPaths } from '../../images/tides.js';
 
 const paths = {
   bomtur: [
@@ -98,45 +99,96 @@ const paths = {
   ]
 }
 
-function svgEl(id, height, width, rotation) {
-  let svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+function svg(id, height, width, rotation, attributes) {
+  let node = document.createElementNS('http://www.w3.org/2000/svg','svg');
+  if (id) node.setAttribute('id', id)
   
-  svg.setAttribute('width', `${width}`);
-  svg.setAttribute('height', `${height}`);
-  svg.setAttribute('viewBox', `0 0 512 512`);
-  svg.setAttribute('preserveAspectRatio', `xMidYMid meet`);
+  node.setAttribute('viewBox', `0 0 ${width} ${height}`)
+  node.setAttribute('height', `${height}px`)
+  node.setAttribute('width', `${width}px`)
   
-  return svg;
+  if (rotation) node.setAttribute('style', `transform: rotate(${rotation}deg)`);
+  
+  if (attributes) {
+    attributes.forEach(attr => {
+      node.setAttribute(attr.key, attr.value)
+    })
+  }
+  return node
 }
 
-function pathEl(d) {
-  let path = document.createElementNS('http://www.w3.org/2000/svg','path'); 
-  //path.setAttribute(type, color);
-  path.setAttribute('d', d);
-  return path;
+function path(d, type, color)  {
+  let node = document.createElementNS('http://www.w3.org/2000/svg','path')
+  node.setAttribute('d', d)
+
+  if (type && color) node.setAttribute(type, color)
+  return node
 }
 
-function gEl() {
-  let g = document.createElementNS('http://www.w3.org/2000/svg','g');
-  g.setAttribute('transform', 'translate(0,512) scale(0.1,-0.1)')
-  g.setAttribute('stroke', 'currentColor')
-  g.setAttribute('fill', 'currentColor')
-  return g 
+function g() {
+  let node = document.createElementNS('http://www.w3.org/2000/svg','g');
+  node.setAttribute('transform', 'translate(0,512) scale(0.1,-0.1)')
+  node.setAttribute('stroke', 'currentColor')
+  node.setAttribute('fill', 'currentColor')
+  return node 
 }
+
+
+export function arrow(rotation, height = '24', width = '24') {
+  if (!rotation) return null;
+  let d = 'M11.53 3l-.941 12.857L7 15l5.001 6L17 15l-3.587.857L12.471 3h-.941z'
+  let svgArrow = svg(null, height, width, rotation)
+  let pathArrow = path(d, 'fill', 'currentColor')
+  pathArrow.setAttribute('fill-rule', 'evenodd')
+  pathArrow.setAttribute('clip-rule', 'evenodd')
+  svgArrow.appendChild(pathArrow)
+  
+  return span('', svgArrow) 
+}
+
+export function tideIcon(type, dir, hrs, height = '24', width = '24') {
+
+  let tideHeight = (type === 'Høyvann') ? 6 - hrs : 0 + hrs
+
+  let p = tidesSVGPaths[tideHeight][dir]
+  height = tidesSVGPaths[tideHeight].height
+
+  let svgTide = svg(null, height, width)
+  
+  let pathTide = path(p, 'stroke', '#006EDB');
+  pathTide.setAttribute('stroke-width', '1.5');
+  svgTide.appendChild(pathTide);
+
+  return span('', svgTide)  
+}
+
 
 export function reportSVG(type) {
   type = filenameify(type)
-  let svg = svgEl('report-type-svg', 20, 20)
-  let g = gEl()
+  let svgReport = svg(null, 20, 20, null, [{key:'preserveAspectRatio' , value: 'xMidYMid meet'}])
+  svgReport.setAttribute('viewBox', '0 0 512 512')
+  let gReport = g()
 
   paths[type].forEach(d => {
-    let path = pathEl(d)
-    g.appendChild(path)
+    let pathReport = path(d, 'fill', 'currentColor')
+    gReport.appendChild(pathReport)
   })
-  svg.appendChild(g)
-  return svg
+  svgReport.appendChild(gReport)
+  return svgReport
 }
 
+export const slLogo = (fill = '#fff', width = 14, height = 18) => {
+  let d = "M6.713 15.615a4.265 4.265 0 0 1-1.075-.151c1.865-.464 3.26-2.166 3.288-4.21a1.086 1.086 0 0 1 1.092-1.084c.594.008 1.07.506 1.062 1.112-.033 2.427-1.987 4.366-4.367 4.333Zm-3.188-3.337a1.089 1.089 0 0 1-1.064-1.113C2.493 8.74 4.448 6.8 6.828 6.832a4.22 4.22 0 0 1 1.076.153c-1.866.462-3.261 2.162-3.288 4.21a1.087 1.087 0 0 1-1.091 1.083ZM12.79 8.36C12.046 6.414 6.77.058 6.77.058S1.493 6.414.748 8.36a6.867 6.867 0 0 0-.623 2.863c0 3.74 2.975 6.772 6.645 6.772 3.67 0 6.644-3.031 6.644-6.772a6.851 6.851 0 0 0-.623-2.863Z"
+  
+  let svgLogo = svg(null, height, width)
+  let pathLogo = path(d, 'fill', fill)
+  svgLogo.appendChild(pathLogo)
+  return svgLogo
+}
+
+export const dmiLogo = (height = 18, width = 18) => {
+  return el('img', {src: '../../images/logos/dmi.svg', height: height, width: width})
+}
 
 
 

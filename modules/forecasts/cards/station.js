@@ -1,7 +1,8 @@
 import { Loader } from '../../utils/logger.js'; 
 import { getYrTides, getYrLocation, getSunTimes } from '../../utils/api.js';
 import { spotIds } from '../../config/spots.js';
-import { el, div, tideIcon } from '../../html/elements.js';
+import { el, div } from '../../components/elements.js';
+import { tideIcon } from '../../components/svg.js';
 
 function tideHeaders(headers) {
   let th = [];

@@ -1,4 +1,4 @@
-import { selectedSpot } from './html/spotInput.js';
+import { selectedSpot } from './components/spotInput.js';
 //import { getStatistics } from './utils/api.js';
 
 export var settings = [];

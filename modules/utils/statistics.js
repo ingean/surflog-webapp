@@ -1,4 +1,4 @@
-import { selectedSpot } from '../html/spotInput.js';
+import { selectedSpot } from '../components/spotInput.js';
 
 export function getStatsForParam(statistics, param, score = 4, station = null) {
   let stats = {

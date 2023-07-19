@@ -1,4 +1,4 @@
-import { el, scoreLabel, hrsTd } from '../../html/elements.js';
+import { el, ratingLabel, hrsTd } from '../../components/elements.js';
 import { get, getStatistics, queryTimespan } from '../../utils/api.js';
 import { round } from '../../utils/utilities.js';
 import { isDayTime } from '../../utils/time.js';
@@ -25,7 +25,7 @@ function paramScore(forecast, param) {
   let v1 = forecast[param][param];
   let v2 = forecast[param].p;
 
-  let score = (param === 'score') ? scoreLabel(v1) : (v1 === 1) ? 'Ja' : 'Nei';
+  let score = (param === 'score') ? ratingLabel(v1, 'sm') : (v1 === 1) ? 'Ja' : 'Nei';
   
   return (
     el('td', '', [

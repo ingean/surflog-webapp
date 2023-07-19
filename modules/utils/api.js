@@ -1,6 +1,6 @@
 import { log, notify } from './logger.js';
 import { urlAPI, urlYr, urlSunTimes, forecasts } from '../config/datasources.js';
-import { selectedSpot } from '../html/spotInput.js';
+import { selectedSpot } from '../components/spotInput.js';
 import { getImgTime } from '../forecasts/images/forecast.js';
 
 function makeUrl(url) {

@@ -1,4 +1,4 @@
-import { el } from '../../html/elements.js';
+import { el } from '../../components/elements.js';
 import { formatDate } from '../format.js';
 
 function splitForecastPrDay(forecast, getForecastTime) {

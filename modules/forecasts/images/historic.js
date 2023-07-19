@@ -1,6 +1,6 @@
 import { forecasts, imgPanels } from '../../config/datasources.js';
-import { el, scoreLabel } from '../../html/elements.js';
-import { imgBrowser } from '../../html/imgBrowser.js';
+import { el, ratingLabel } from '../../components/elements.js';
+import { imgBrowser } from '../../components/imgBrowser.js';
 import { toUTC} from '../../utils/time.js';
 import { capitalize } from '../../utils/utilities.js';
 import { getImgTime, setImgTime } from './forecast.js';
@@ -44,8 +44,9 @@ export function imgFooter(source, report) {
   )
 
   if (report) footer.append(
-    el('span', 'pull-right', scoreLabel(report.score))
-    )
+    ratingLabel(report.score, 'md', 'align-right')
+  )
+    
                 
   return footer;
 }

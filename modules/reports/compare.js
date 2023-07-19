@@ -1,5 +1,5 @@
 import { getTwin, getComparison } from '../utils/api.js';
-import { setDateInput } from '../html/dateInput.js';
+import { setDateInput } from '../components/dateInput.js';
 
 var twin = undefined;
 var comparison = undefined;

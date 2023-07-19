@@ -1,7 +1,7 @@
 import { Loader } from './utils/logger.js'; 
-import { initDateInput } from './html/dateInput.js';
-import { initSpotList } from './html/spotInput.js';
-import { createForms } from './html/form.js';
+import { initDateInput } from './components/dateInput.js';
+import { initSpotList } from './components/spotInput.js';
+import { createForms } from './components/form.js';
 import { addDeleteReportsEventHandlers } from './reports/delete.js';
 import { getReports } from './reports/read.js';
 import { getWindObs } from './forecasts/tables/windObs.js';

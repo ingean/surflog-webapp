@@ -1,4 +1,4 @@
-import { el } from '../html/elements.js';
+import { el } from '../components/elements.js';
 
 export function log(error, title, severity = 'error') {
   

@@ -1,4 +1,4 @@
-import { el } from './elements.js';
+import { el, div, span } from './elements.js';
 
 function indicators(options) {
   let indList = el('ol', {class: `carousel-indicators report-${options.id}-indicators`});
@@ -15,10 +15,10 @@ function indicators(options) {
 }
 
 function pages(options) {
-  let pages = el('div', {class: 'carousel-inner'})
+  let pages = div('carousel-inner')
 
   for (let i = 0; i < options.items.length; i++) {
-    let page = el('div', {
+    let page = div({
       "class": (i === 0) ? "item carousel-item active" : "item carousel-item"
     }, options.items[i]);
     pages.appendChild(page);
@@ -32,14 +32,14 @@ function control(options, direction) {
       "class": `${direction} carousel-control report-${options.id}-control`, 
       "href": `#carousel-${options.id}`, 
       "data-slide": (direction === 'left') ? "prev" : "next"},
-      el('span', `glyphicon glyphicon-chevron-${direction} report-${options.id}-control-icon`) 
+      span(`glyphicon glyphicon-chevron-${direction} report-${options.id}-control-icon`) 
     )
   );
 }
 
 export function carousel(options) {
   return ( 
-    el('div', {
+    div({
       id: `carousel-${options.id}`, 
       class: 'carousel slide', 
       "data-ride": "carousel",

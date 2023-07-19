@@ -1,12 +1,12 @@
-import { el, tideIcon, scoreLabel, icon, arrow, paramLabel, div, span } from '../../html/elements.js';
-import { dateChanged } from '../../html/dateInput.js';
+import { el, icon, paramLabel, div, span, ratingLabel } from '../../components/elements.js';
+import { arrow, tideIcon, reportSVG } from '../../components/svg.js';
+import { dateChanged } from '../../components/dateInput.js';
 import { formatValue } from '../../forecasts/format.js'
 import { imgSrc } from '../../utils/utilities.js';
-import { reportSVG } from '../../html/svg.js';
 import { getReports } from '../read.js';
 import { tide } from './report.js';
 import { slWaveheight, slRating, slSwell, slSubswell, slWind } from './slForecast.js';
-import { setSpotListTo } from '../../html/spotInput.js';
+import { setSpotListTo } from '../../components/spotInput.js';
 
 let forecast = 'MSW'
 let selected_page = 1
@@ -131,13 +131,13 @@ export function switchForecast(e) {
 export function reportScore(report) {
   if (report.type === 'Observasjon' || report.type === 'Observation'){
     if (report.source ==="Bomtur") {
-      return span(`label bg-1 report-score`, report.source);     
+      return span(`label bg-1 score-label score-label-lg align-right`, report.source);     
     } else {
       let d = (report.issurfable === 1) ? 'up' : 'down';
-      return icon(`thumbs-${d}`, 'report-score');
+      return icon(`thumbs-${d}`, 'align-right');
     } 
   } else {
-    return scoreLabel(report.score, 'report-score');
+    return ratingLabel(report.score, 'lg', 'align-right')
   }
 }
 

@@ -1,5 +1,6 @@
 import { formatValue } from '../../forecasts/format.js'
-import { arrow, stars, div } from '../../html/elements.js'
+import { stars, div } from '../../components/elements.js'
+import { arrow } from '../../components/svg.js';
 import { slRatingClass } from '../../config/forecasts.js';
 
 export const slWaveheight = (report, stat = '') => {
@@ -17,7 +18,7 @@ export const slRating = (report) => {
     return div('center2 report-forecast-msw-starrating', stars(report['stars_open'], report['stars_filled']))
   } else {
     let cls = slRatingClass[report['rating']]
-    return div(`center2 report-forecast-sl-rating report-forecast-sl-rating-${cls}`, report['rating'])
+    return div(`center2 report-forecast-sl-rating txt-rating-${cls}`, report['rating'])
   }
 }
 

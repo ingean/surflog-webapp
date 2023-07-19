@@ -1,7 +1,7 @@
 import { defaults } from '../../config/charts.js';
 import { deepmerge } from '../../utils/deepMerge.js';
 import { formatValue, labelValue } from '../format.js';
-import { el } from '../../html/elements.js';
+import { el } from '../../components/elements.js';
 
 
 function createChart(id, forecast, headers, createRow, fcOptions, combo = false) { 

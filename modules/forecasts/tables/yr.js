@@ -1,4 +1,5 @@
-import { el, arrow } from '../../html/elements.js';
+import { el } from '../../components/elements.js';
+import { arrow } from '../../components/svg.js';
 import { forecasts } from '../../config/datasources.js';
 import { getMetForecast, getStatistics } from '../../utils/api.js';
 import { isDayTime, toUTC } from '../../utils/time.js';

@@ -1,4 +1,4 @@
-import { el, div} from '../../html/elements.js';
+import { el, div} from '../../components/elements.js';
 import { spotIds } from '../../config/spots.js';
 import { urlMSW } from '../../config/datasources.js';
 import { forecastParamAll } from '../../config/datasources.js';
@@ -6,6 +6,7 @@ import { reportScore, conditionsDetails } from './list.js';
 import { updateSessionView } from './session.js';
 import { updateObservationView } from './observation.js';
 import { comparisonReport } from '../compare.js';
+import { slLogo, dmiLogo } from '../../components/svg.js';
 
 export function tide(report) {
   if(report.type === 'Session') {
@@ -92,9 +93,10 @@ function format(comparisonReport, param) {
 
 export function reportHeader(report) {
   let profilePicture = document.getElementById('navbar-profile-img').getAttribute('src');
-  
+  let bgCls = (report.score) ? `bg-${report.score}` : ''
+
   return (
-    div('report-header', [
+    div(`report-header ${bgCls}`, [
       el('img', { 
         src: profilePicture,
         class: "report-header-img img-circle"}
@@ -156,4 +158,18 @@ export function reportPage(title, content) {
 
 export function updateReportView(report) {
   (report.type === 'Session') ? updateSessionView(report) : updateObservationView(report);
+}
+
+export const slLogoTitle = (title) => {
+  return div('flex-row', [
+    slLogo('#fff'),
+    div('tile-logo-text', title)
+  ])
+}
+
+export const dmiLogoTitle = (title) => {
+  return div('flex-row', [
+    dmiLogo(),
+    div('tile-logo-text', title)
+  ])
 }

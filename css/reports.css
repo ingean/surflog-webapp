@@ -186,11 +186,6 @@
   margin-left: 20px;
 }
 
-.report-score {
-  margin-left: auto;
-  min-width: 100px;
-}
-
 /* REPORT */
 
 .report-header,
@@ -203,7 +198,6 @@
 
 .report-header {
   padding: 10px;
-  background-color: var(--primary-color);
 }
 
 .report-header-title {

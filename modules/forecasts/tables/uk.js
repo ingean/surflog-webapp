@@ -1,4 +1,5 @@
-import { el, arrow, tempTd, hrsTd } from '../../html/elements.js';
+import { el, tempTd, hrsTd } from '../../components/elements.js';
+import { arrow } from '../../components/svg.js';
 import { directionFromText } from '../../config/forecasts.js';
 import { getUKCoast } from '../../utils/api.js';
 import { isDayTime, toLocal, toUTC } from '../../utils/time.js';

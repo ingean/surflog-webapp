@@ -1,5 +1,5 @@
-import { modal } from '../html/modal.js';
-import { el } from '../html/elements.js';
+import { modal } from '../components/modal.js';
+import { el } from '../components/elements.js';
 import { startSurfLog } from '../startup.js';
 import { setUser } from '../settings.js';
 

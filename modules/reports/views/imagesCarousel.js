@@ -1,7 +1,7 @@
 import { urlImages } from '../../config/datasources.js';
-import { el } from '../../html/elements.js';
-import { modal } from '../../html/modal.js';
-import { carousel } from '../../html/carousel.js';
+import { el } from '../../components/elements.js';
+import { modal } from '../../components/modal.js';
+import { carousel } from '../../components/carousel.js';
 
 function getTime(url) {
   let time = url.substring(

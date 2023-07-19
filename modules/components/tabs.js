@@ -1,4 +1,4 @@
-import { el } from './elements.js';
+import { el, div } from './elements.js';
 
 export function tabs(id, tabNames, tabPages) {
   let listItems = [];
@@ -16,9 +16,9 @@ export function tabs(id, tabNames, tabPages) {
   }
 
   let list = el('ul', 'nav nav-pills nav-justified', listItems);
-  let content = el('div', 'tab-content', pages);
+  let content = div('tab-content', pages)
 
-  return el('div', '', [list, content]);
+  return div('', [list, content])
 }
 
 

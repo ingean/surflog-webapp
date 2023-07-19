@@ -1,7 +1,7 @@
 import { spotIds } from '../config/spots.js';
 import { formsOptions } from '../config/forms.js';
-import { el, div } from '../html/elements.js';
-import { formSelectInput } from '../html/formGroup.js';
+import { div } from './elements.js';
+import { formSelectInput } from './formGroup.js';
 import { updateStationCard } from '../forecasts/cards/station.js';
 import { updateDMICard } from '../forecasts/cards/dmiStats.js';
 import { updateSMHICard } from '../forecasts/cards/smhiStats.js';

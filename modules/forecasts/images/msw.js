@@ -1,5 +1,5 @@
 import { forecasts, imgPanels } from '../../config/datasources.js';
-import { imgBrowser } from '../../html/imgBrowser.js';
+import { imgBrowser } from '../../components/imgBrowser.js';
 import { toLocal, toUTC } from '../../utils/time.js';
 import { replaceOrAppendFooter, imgFooter } from './historic.js';
 import { setImgTime } from './forecast.js';

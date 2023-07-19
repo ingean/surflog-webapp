@@ -1,6 +1,7 @@
-import { div, tile, paramLabel, tempSpan } from '../../html/elements.js';
-import { tabs } from '../../html/tabs.js';
-import { reportHeader, reportFooter, reportCompare } from './report.js';
+import { div, paramLabel, tempSpan } from '../../components/elements.js';
+import { tile } from '../../components/tile.js';
+import { tabs } from '../../components/tabs.js';
+import { reportHeader, reportFooter, reportCompare, slLogoTitle } from './report.js';
 import { getBoardInfo } from '../../config/forms.js';
 import { slWaveheight, slRating, slSwell, slSubswell, slWind } from './slForecast.js';
 import { statsDashboard } from './statistics.js';
@@ -39,8 +40,7 @@ function sessionDashboard(report) {
 }
 
 const waveForecastTile = (report) => {
-  return  div('tile tile-lg', [
-    div('tile-title', 'Varsel'),
+  return  tile(slLogoTitle('Bølger'), [
     div('flex-row', [
       div('', [
         slWaveheight(report),
@@ -61,8 +61,7 @@ const waveForecastTile = (report) => {
 }
 
 const windForecastTile = (report) => {
-  return div('tile tile-lg', [
-    div('tile-title', 'Kvalitet'),
+  return tile(slLogoTitle('Vind'), [
     slWind(report),
     div('flex-row', [
       paramLabel('winddir', report.winddirObs, `${report.windspeedObs.toLowerCase()}`),
@@ -79,8 +78,7 @@ const windForecastTile = (report) => {
 const boardTile = (report) => {
   let board = getBoardInfo(report.board)
   
-  return div('tile tile-lg', [
-    div('tile-title', 'Brett'),
+  return tile('Brett', [
     div('tile-text', `${report.board} ${board.volume}l`),
     div('tile-text', `${board.length} ${board.width} ${board.thickness}`),
     div('tile-text', `${board.type} ${board.fins}`)

@@ -1,4 +1,5 @@
-import { el, arrow, hrsTd } from '../../html/elements.js';
+import { el, hrsTd } from '../../components/elements.js';
+import { arrow } from '../../components/svg.js';
 import { get, getStatistics } from '../../utils/api.js';
 import { isDayTime } from '../../utils/time.js';
 import { formatValue, clsValue } from '../format.js';

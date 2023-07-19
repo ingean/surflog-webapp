@@ -1,25 +1,25 @@
 .txt-0 {
-  color: var(--rating-0);
+  color: var(--sl-rating-0);
 }
 
 .txt-1 {
-  color: var(--rating-1);
+  color: var(--sl-rating-1);
 }
 
 .txt-2 {
-  color: var(--rating-2);
+  color: var(--sl-rating-2);
 }
 
 .txt-3 {
-  color: var(--rating-3);
+  color: var(--sl-rating-4);
 }
 
 .txt-4 {
-  color: var(--rating-4);
+  color: var(--sl-rating-5);
 }
 
 .txt-5 {
-  color: var(--rating-5);
+  color: var(--sl-rating-6);
 }
 
 .bg-muted-0 {
@@ -47,57 +47,104 @@
 }
 
 .bg-0 {
-  background-color: var(--rating-0);
+  background-color: var(--sl-rating-0);
 }
 
 .bg-1 {
-  background-color: var(--rating-1);
+  background-color: var(--sl-rating-1);
 }
 
 .bg-2 {
-  background-color: var(--rating-2);
+  background-color: var(--sl-rating-2);
 }
 
 .bg-3 {
-  background-color: var(--rating-3);
+  background-color: var(--sl-rating-4);
 }
 
 .bg-4 {
-  background-color: var(--rating-4);
+  background-color: var(--sl-rating-5);
 }
 
 .bg-5 {
-  background-color: var(--rating-5);
+  background-color: var(--sl-rating-6);
 }
 
 .label {
   color: var(--on-label-color);
 }
 
-.report-forecast-sl-rating-1 {
+.txt-rating-1 {
   color: var(--sl-rating-1);
 }
 
-.report-forecast-sl-rating-2 {
+.txt-rating-2 {
   color: var(--sl-rating-2);
 }
 
-.report-forecast-sl-rating-3 {
+.txt-rating-3 {
   color: var(--sl-rating-3);
 }
 
-.report-forecast-sl-rating-4 {
+.txt-rating-4 {
   color: var(--sl-rating-4);
 }
 
-.report-forecast-sl-rating-5 {
+.txt-rating-5 {
   color: var(--sl-rating-5);
 }
 
-.report-forecast-sl-rating-6 {
+.txt-rating-6 {
   color: var(--sl-rating-6);
 }
 
-.report-forecast-sl-rating-7 {
+.txt-rating-7 {
   color: var(--sl-rating-7);
+}
+
+.bg-rating-1 {
+  background-color: var(--sl-rating-1);
+}
+
+.bg-rating-2 {
+  background-color: var(--sl-rating-2);
+}
+
+.bg-rating-3 {
+  background-color: var(--sl-rating-3);
+}
+
+.bg-rating-4 {
+  background-color: var(--sl-rating-4);
+}
+
+.bg-rating-5 {
+  background-color: var(--sl-rating-5);
+}
+
+.bg-rating-6 {
+  background-color: var(--sl-rating-6);
+}
+
+.bg-rating-7 {
+  background-color: var(--sl-rating-7);
+}
+
+.score-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-label-lg {
+  min-width: 100px;
+  border: 1px solid white;
+}
+
+.score-label-md {
+  min-width: 75px;
+}
+
+.score-label-sm {
+  min-width: 50px;
 }

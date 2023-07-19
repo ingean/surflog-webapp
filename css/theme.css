@@ -41,6 +41,7 @@ html[data-theme = 'light'] {
   --rating-muted-5:rgba(0,100,0,0.1);
 
   /* Surfline rating colors */
+  --sl-rating-0:#eeeeee;
   --sl-rating-1:#E1576F;
   --sl-rating-2:#F19A37;
   --sl-rating-3:#F7CF4C;
@@ -81,6 +82,7 @@ html[data-theme = 'dark'] {
   --rating-5:#a5d6a7; /* Material design green 200 */
 
   /* Surfline rating colors */
+  --sl-rating-0:#eeeeee;
   --sl-rating-1:#E1576F;
   --sl-rating-2:#F19A37;
   --sl-rating-3:#F7CF4C;

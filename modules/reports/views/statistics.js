@@ -1,7 +1,9 @@
 import { getReports } from "../read.js"
-import { div, tile, scoreLabel } from "../../html/elements.js"
+import { div, ratingLabel } from "../../components/elements.js"
+import { tile } from"../../components/tile.js"
 import { get } from "../../utils/api.js"
 import { slWaveheight, slSwell, slSubswell, slWind } from "./slForecast.js"
+import { dmiLogoTitle, slLogoTitle } from "./report.js"
 
 export const statsDashboard =  async (spot) => {
   //let reports = await getReports(null, `&spot=${spot}`)
@@ -37,7 +39,7 @@ const reportCount = (reports) => {
 const slForecastStats = (stats) => {
   let stat = statToUse(stats)
   return  tile(
-    'Surfline',
+    slLogoTitle('Snittvarsel'),
     div('flex-row', [
       div('', [
         slWaveheight(stat, 'avg'),
@@ -49,7 +51,7 @@ const slForecastStats = (stats) => {
       ])  
     ]),
     null,
-    scoreStatFooter(stat.score)
+    ratingLabel(stat.score, 'sm', 'align-right')
   )
 }
 
@@ -75,7 +77,7 @@ const dmiForecastStats = (stats) => {
 
   
   return  tile(
-    'DMI',
+    dmiLogoTitle('Snittall'),
     div('', [
       div('flex-row', [
         div(cls, `${v.waveheight.avg}m`),
@@ -95,7 +97,7 @@ const dmiForecastStats = (stats) => {
       ])
     ]),
     null,
-    scoreStatFooter(stat.score)
+    ratingLabel(stat.score, 'sm', 'align-right')
   )
 }
 
@@ -113,13 +115,5 @@ const dmiStatValues = (stat) => {
   })
 
   return result
-}
-
-const scoreStatFooter = (score) => {
-  return div('flex-row', [
-    'Statistikk fra økter med ',
-    scoreLabel(score),
-    ' score'
-  ])
 }
 

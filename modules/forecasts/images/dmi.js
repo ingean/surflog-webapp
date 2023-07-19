@@ -1,8 +1,7 @@
 import { toggleActive } from '../../utils/utilities.js';
 import { toLocal } from '../../utils/time.js';
 import { dmiForecast } from '../tables/dmi.js';
-import { scoreLabel } from '../../html/elements.js';
-import { forecastParam } from '../../config/datasources.js';
+import { ratingLabel } from '../../components/elements.js';
 import { getImgTime, setImgTime } from './forecast.js';
 
 function currentDMITimeStep(imgId = 'img-dmi-waveheight-live') {
@@ -56,7 +55,7 @@ function updateDMIScore() {
   if(dmiForecast.length === 0) return; //If forecast hasnt loaded yet
   let time = getImgTime();
   let fc = dmiForecast.find(f => moment(f.localtime).isSame(time, 'hour'))
-  let lbl = scoreLabel(fc.score.score);
+  let lbl = ratingLabel(fc.score.score);
   document.querySelectorAll('.score-dmi')
   .forEach(el => {el.replaceChildren(lbl)});
 }

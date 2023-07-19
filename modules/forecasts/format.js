@@ -1,5 +1,5 @@
 import { forecastParamAll } from '../config/datasources.js';
-import { el } from '../html/elements.js';
+import { el } from '../components/elements.js';
 import { round } from '../utils/utilities.js';
 import { scoreWindValue, scoreValue } from './score.js';
 

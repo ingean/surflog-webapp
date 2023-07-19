@@ -3,6 +3,7 @@ import { user } from '../settings.js';
 import { post } from '../utils/api.js';
 import { getReports } from './read.js';
 import { formsOptions } from '../config/forms.js';
+import { setActiveById } from '../utils/utilities.js';
 
 function resetForm(form) {
   let modalId = form.id.replace('form', 'modal');
@@ -82,9 +83,13 @@ function writeToLocalStorage(data) {
 export function setStoredValues() {
   let storedFields = fieldsToStore()
   storedFields.forEach(fieldName => {
-    let input = document.getElementById(`session-${fieldName}`)
+    let id = `session-${fieldName}`
+    let input = document.getElementById(id)
     let storedValue = localStorage.getItem(fieldName)
-    if (storedValue) input.value = storedValue
+    if (storedValue) {
+      input.value = storedValue
+      setActiveById(id, storedValue)  // If button group, set stored value as active
+    }
   })
 }
 

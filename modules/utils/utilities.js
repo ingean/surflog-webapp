@@ -37,6 +37,21 @@ export function toggleActive(el) { //Argument is button to be active
   el.classList.add('active')
 }
 
+export function setActiveById(id, activeValue) {
+  let btns = document.querySelectorAll(`[data-toggle='${id}']`)
+    if (btns) {
+      btns.forEach(btn => {
+        if (btn.innerText === activeValue) {
+          btn.classList.remove("notActive")
+          btn.classList.add("Active")
+        } else {
+          btn.classList.remove("Active")
+          btn.classList.add("notActive")
+        }
+      })
+    }
+}
+
 export function getStringValue(obj, key) {
   let value = ''
   try {

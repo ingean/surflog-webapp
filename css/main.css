@@ -186,6 +186,10 @@ a.list-group-item:hover {
   font-weight: bold;
 }
 
+.tile-logo-text {
+  margin-left: 8px;
+}
+
 .tile-column {
   margin: 5px;
 }

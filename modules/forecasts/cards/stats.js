@@ -1,4 +1,4 @@
-import { el } from '../../html/elements.js';
+import { el } from '../../components/elements.js';
 import { getStatistics } from '../../utils/api.js';
 import { getStatsForParam } from '../../utils/statistics.js';
 import { round } from '../../utils/utilities.js';
