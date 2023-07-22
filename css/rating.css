@@ -143,8 +143,12 @@
 
 .score-label-md {
   min-width: 75px;
+  border: 1px solid white;
 }
 
 .score-label-sm {
   min-width: 50px;
+  margin: 1px;
+  font-size: xx-small;
+  font-weight: normal;
 }

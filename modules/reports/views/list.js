@@ -1,10 +1,10 @@
-import { el, icon, paramLabel, div, span, ratingLabel } from '../../components/elements.js';
-import { arrow, tideIcon, reportSVG } from '../../components/svg.js';
+import { el, paramLabel, div, span, ratingLabel } from '../../components/elements.js';
+import { arrow, icon, iconReport, iconTide } from '../../components/icons.js'
 import { dateChanged } from '../../components/dateInput.js';
 import { formatValue } from '../../forecasts/format.js'
 import { imgSrc } from '../../utils/utilities.js';
 import { getReports } from '../read.js';
-import { tide } from './report.js';
+import { tideText } from './report.js';
 import { slWaveheight, slRating, slSwell, slSubswell, slWind } from './slForecast.js';
 import { setSpotListTo } from '../../components/spotInput.js';
 
@@ -12,20 +12,15 @@ let forecast = 'MSW'
 let selected_page = 1
 let active_query = ''
 
-function reportIcon(report) {
-  let str = (report.type === 'Session') ? report.type : report.source;
-  return reportSVG(str);
-}
-
 function reportInfo(report) {
   return div('report-info', [
-    div('report-list-img', reportIcon(report)),
+    div('report-list-img', iconReport(report)),
     div('flex-col', [
       div('flex-row', [
         div('report-list-title', report.spot),
         el('img', {class: 'report-list-img-small', src: imgSrc(report.country, 'flags')})
       ]),
-      div('report-list-date', `${moment(report.reporttime).format('DD.MM.YY')} ${tide(report)}`)  
+      div('report-list-date', `${moment(report.reporttime).format('DD.MM.YY')} ${tideText(report)}`)  
     ])
   ])
 }
@@ -43,30 +38,7 @@ function reportDetails(report) {
   return rd
 }
 
-function reportTide(tide) {
-  let rt = el('div', 'report-tide');
 
-  if (!tide) return rt
-
-  let t = tideTextParts(tide)
-  let dir = 'stigende'
-  if (t.type === 'Lavvann') {
-    dir = (t.sign === '+') ? 'stigende' : 'synkende'
-  } else {
-    dir = (t.sign === '+') ? 'synkende' : 'stigende'
-  }
-  
-  return rt.appendChild(tideIcon(t.type, dir, t.hrs)) 
-}
-
-export function tideTextParts(tide) {
-  let type = tide.substring(0, tide.indexOf(' ')) 
-  let sign = tide.includes('-') ? '-' : '+'
-  let hrs = tide.match(/\d+/)
-  hrs = hrs ? Number(hrs[0]) : 0
-   
-  return {type, sign, hrs}
-}
 
 export function conditionsDetails(report) {
   let params = [
@@ -114,7 +86,7 @@ function smhiObservationsDetails(report) {
           div('report-forecast-msw-value', formatValue(report, 'waveheight')),
           div('report-forecast-msw-value-subdued', formatValue(report, 'waveheightmax', true, 'waveheight')),
           div('report-forecast-msw-value', formatValue(report, 'waveperiod')),
-          div('report-forecast-msw-value-narrow', arrow(report['wavedir']))
+          div('report-forecast-msw-value-narrow', arrow(report['wavedir'], 'sm'))
         ])
 }
 
@@ -149,12 +121,12 @@ export function updateReportList(reports) {
       el('a', 'list-group-item report-list-item', [
         reportInfo(report), 
         reportDetails(report),
-        reportTide(report.tide),
+        div('report-tide', iconTide(report)),
         conditionsDetails(report, 'Obs'),
         (forecast === 'MSW') ? mswForecastDetails(report) : (forecast === 'DMI') ? dmiForecastDetails(report) : smhiObservationsDetails(report),
         reportScore(report) 
       ]
-    );
+    )
     reportEl.addEventListener('click', () => {
       dateChanged(report.reporttime, report.id)
       setSpotListTo(report.spot)

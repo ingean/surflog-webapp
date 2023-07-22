@@ -71,7 +71,6 @@ export function updateHistoricImages(report, date) {
     setImgTime(moment(date).format('YYYY-MM-DD HH:00:00'), '.time-dmi-historic');
     setImgTime(moment(date).format('YYYY-MM-DD'), '.time-yr-historic')
   })
-  updateMSWImages(report, date)
   displayYrImgContainers(date)
 }
 

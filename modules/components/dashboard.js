@@ -1,6 +1,7 @@
-import { div, icon } from './elements.js';
+import { div } from './elements.js';
+import { icon } from './icons.js'
 
-export const tile = (title, frontContent, backContent, footer, iconName = 'stats', size = 'lg') => {
+export const tile = (title, frontContent, backContent, footer, iconName = 'stats', size = 'md') => {
   iconName = (backContent) ? 'transfer' : iconName // Make it obvious that tile has two sides
   
   let content = frontContent
@@ -22,4 +23,12 @@ export const tile = (title, frontContent, backContent, footer, iconName = 'stats
   }
 
   return tile
+}
+
+export const indicator = (header, content, footer, rating, size = 'lg') => {
+  return div(`flex-col center2 indicator indicator-${size}`, [
+    div('indicator-header', header),
+    div(`indicator-content txt-${rating}`, content),
+    div('indicator-footer', footer)
+  ])
 }

@@ -60,11 +60,7 @@ export function ratingLabel(score, size = 'md', classes = '') {
 
 export function paramLabel(param, value, caption = '', cls = '') {
   caption = (caption) ? `${value} ${caption}` : value
-  return span(`label bg-${getRating(param, value)} ${cls} report-condition`, caption)
-}
-
-export function icon(iconName, classes = '') {
-    return span({class: `glyphicon glyphicon-${iconName} ${classes}`})
+  return span(`label bg-${getRating(param, value)} ${cls} score-label-sm`, caption)
 }
 
 export function stars(open, filled, max = 5) {

@@ -1,5 +1,5 @@
 import { el } from '../../components/elements.js';
-import { arrow } from '../../components/svg.js';
+import { arrow } from '../../components/icons.js';
 import { forecasts } from '../../config/datasources.js';
 import { getMetForecast, getStatistics } from '../../utils/api.js';
 import { isDayTime, toUTC } from '../../utils/time.js';
@@ -20,7 +20,7 @@ function stationCell(f, location) {
   return (
     el('td', 'td', [ //Wave height and direction
       el('span', `td-value ${clsValue(statistics, f, 'waveheight', location)}`, formatValue(f, 'waveheight')),
-      el('span', 'td-arrow', arrow(f.wavedir))
+      el('span', 'td-arrow', arrow(f.wavedir, 'sm'))
     ])
   )
 }

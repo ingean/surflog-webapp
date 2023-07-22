@@ -1,5 +1,5 @@
 import { el, hrsTd } from '../../components/elements.js';
-import { arrow } from '../../components/svg.js';
+import { arrow } from '../../components/icons.js';
 import { get, getStatistics } from '../../utils/api.js';
 import { isDayTime } from '../../utils/time.js';
 import { formatValue, clsValue } from '../format.js';
@@ -19,7 +19,7 @@ function smhiForecastToRow(forecast) {
       el('td', '', [
         el('span', `td-value ${clsValue(statistics, f, 'waveheight')}`, formatValue(f, 'waveheight')),
         el('span', 'td-secondary-value', formatValue(f, 'waveheightmax', true)),
-        el('span', 'td-arrow', arrow(f.wavedir))
+        el('span', 'td-arrow', arrow(f.wavedir, 'sm'))
       ]),
       el('td', '', 
         el('span', `td-value ${clsValue(statistics, f, 'waveperiod')}`, formatValue(f, 'waveperiod'))),

@@ -1,6 +1,6 @@
 import { forecasts } from '../../config/datasources.js';
 import { el, hrsTd } from '../../components/elements.js';
-import { arrow } from '../../components/svg.js';
+import { arrow } from '../../components/icons.js';
 import { getDMIObs } from '../../utils/api.js';
 import { toUTC } from '../../utils/time.js';
 import { formatValue, clsValue } from '../format.js';

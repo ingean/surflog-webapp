@@ -60,13 +60,6 @@
   min-width: 270px;
 }
 
-.report-condition {
-  margin: 1px;
-  font-size: xx-small;
-  font-weight: normal;
-  min-width: 50px;
-}
-
 .report-forecast-msw {
   display: flex;
   flex-direction: row;
@@ -240,37 +233,10 @@
   color: var(--primary-txt-color);
 }
 
-#report-wetsuit-img {
-  float: left;
-  opacity: 0.2;
-}
-
-#report-hood-txt {
-  top: 25px;
-}
-
-#report-suit-txt {
-  top: 70px;
-}
-
-#report-gloves-txt {
-  top: 113px;
-}
-
-#report-boots-txt {
-  top: 155px;
-}
-
-#report-board-txt {
-  float: left;
-  height: 200px;
-}
-
 .report-footer {
   align-items: flex-end;
   padding: 10px;
   color: var(--on-primary-color);
-  background-color: var(--primary-variant-color);
 }
 
 .report-tools {

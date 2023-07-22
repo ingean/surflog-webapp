@@ -1,10 +1,11 @@
 import { div, paramLabel, tempSpan } from '../../components/elements.js';
-import { tile } from '../../components/tile.js';
+import { tile } from '../../components/dashboard.js';
 import { tabs } from '../../components/tabs.js';
-import { reportHeader, reportFooter, reportCompare, slLogoTitle } from './report.js';
+import { reportHeader, reportFooter, reportCompare } from './report.js';
 import { getBoardInfo } from '../../config/forms.js';
 import { slWaveheight, slRating, slSwell, slSubswell, slWind } from './slForecast.js';
 import { statsDashboard } from './statistics.js';
+import { iconLogoWithText } from '../../components/icons.js';
 
 export async function updateSessionView(report) {
   document.getElementById('report-container').replaceChildren(
@@ -40,7 +41,7 @@ function sessionDashboard(report) {
 }
 
 const waveForecastTile = (report) => {
-  return  tile(slLogoTitle('Bølger'), [
+  return  tile(iconLogoWithText('Bølger', 'surfline'), [
     div('flex-row', [
       div('', [
         slWaveheight(report),
@@ -61,7 +62,7 @@ const waveForecastTile = (report) => {
 }
 
 const windForecastTile = (report) => {
-  return tile(slLogoTitle('Vind'), [
+  return tile(iconLogoWithText('Vind', 'surfline'), [
     slWind(report),
     div('flex-row', [
       paramLabel('winddir', report.winddirObs, `${report.windspeedObs.toLowerCase()}`),

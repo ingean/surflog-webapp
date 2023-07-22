@@ -17,3 +17,17 @@ export function isDayTime(date) {
       moment(sunTimes.lastLight, 'HH:mm'))) return true;
   return false;
 }
+
+export const monthAsText = (month) => {
+  return moment(String(month), 'M').format('MMMM')
+}
+
+export const thisMonth = () => {
+  let date = new Date()
+  return date.getMonth() + 1
+}
+
+export const thisYear = () => {
+  let date = new Date()
+  return date.getFullYear()
+}

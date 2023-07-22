@@ -1,5 +1,5 @@
 import { el, hrsTd } from '../../components/elements.js';
-import { arrow } from '../../components/svg.js';
+import { arrow } from '../../components/icons.js';
 import { get, queryTimespan } from '../../utils/api.js';
 import { formatValue, clsValue } from '../format.js';
 import { updateForecastTable } from './table.js';

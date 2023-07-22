@@ -95,6 +95,10 @@ td {
   background-color: var(--surface-color-l1);
 }
 
+.td-arrow {
+  margin: 8px;
+}
+
 /* Styling for small screens*/
 @media screen and (max-width:799px) { 
   table {

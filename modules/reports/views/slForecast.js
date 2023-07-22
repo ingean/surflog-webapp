@@ -1,6 +1,6 @@
 import { formatValue } from '../../forecasts/format.js'
 import { stars, div } from '../../components/elements.js'
-import { arrow } from '../../components/svg.js';
+import { arrow } from '../../components/icons.js';
 import { slRatingClass } from '../../config/forecasts.js';
 
 export const slWaveheight = (report, stat = '') => {
@@ -30,7 +30,7 @@ export const slSwell = (report, stat = '') => {
   return div('report-forecast-msw-swell', [
     div('center2 report-forecast-msw-value', formatValue(report, p1, false, 'swellheight')),
     div('center2 report-forecast-msw-value', formatValue(report, p2, false, 'swellperiod')),
-    div('center2 report-forecast-msw-value-narrow', arrow(report[p3]))
+    div('center2 report-forecast-msw-value-narrow', arrow(report[p3], 'sm'))
   ])
 }
 
@@ -42,7 +42,7 @@ export const slSubswell = (report, stat = '') => {
   return div('report-forecast-msw-subswell', [
     div('center2 report-forecast-msw-value-small', formatValue(report, p1, false, 'swellheight')),
     div('center2 report-forecast-msw-value-small', formatValue(report, p2, false, 'swellperiod')),
-    div('center2 report-forecast-msw-value-narrow', arrow(report[p3], '20', '20'))
+    div('center2 report-forecast-msw-value-narrow', arrow(report[p3], 'sm'))
   ])
 }
 

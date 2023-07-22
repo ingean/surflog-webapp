@@ -6,26 +6,23 @@ import { reportScore, conditionsDetails } from './list.js';
 import { updateSessionView } from './session.js';
 import { updateObservationView } from './observation.js';
 import { comparisonReport } from '../compare.js';
-import { slLogo, dmiLogo } from '../../components/svg.js';
+import { tideParts } from '../../utils/utilities.js';
 
-export function tide(report) {
-  if(report.type === 'Session') {
-    let t = report.tide;
-    let beforeAfter = (t.includes('-')) ? "før" : "etter";
-    let hours = t.match(/\d+/); //Find number in str
-    let highLow = t.substr(0,t.indexOf(' ')).toLowerCase(); //Find tide
-    if(hours) {
-      return `(${hours}t ${beforeAfter} ${highLow})`;
-    } else {
-      return `(${highLow[0].toUpperCase()}${highLow.slice(1)})`;
-    }
+export function tideText(report) {
+  if(report.type !== 'Session') return ''
+  
+  let p = tideParts(report.tide)
+ 
+  if(p.hours) {
+    return `(${p.hours}t ${p.beforeAfter} ${p.type})`
+  } else {
+    return `(${p.type})`;
   }
-  return '';
 }
 
 function headerDetails(report) {
   if (report.type === "Session") {
-    return `${report.duration}t fra kl ${moment(report.reporttime).format('HH:mm')} ${tide(report)}`;
+    return `${report.duration}t fra kl ${moment(report.reporttime).format('HH:mm')} ${tideText(report)}`;
   }
   return `kl ${moment(report.reporttime).format('HH:mm')}`;
 }
@@ -33,7 +30,6 @@ function headerDetails(report) {
 function footerToolbar(report) {
   return div('report-tools', [
     imagesButton(report),
-    mswLink(report),
     deleteButton()
   ])
 }
@@ -49,18 +45,6 @@ function imagesButton(report) {
   } else {
    return ''; 
   }
-}
-
-function mswLink(report) {
-  if (!spotIds[report.spot]) return '';
-  let mswId = spotIds[report.spot].msw;
-  let spot = mswId.name ?? report.spot.replace(' ', '-');
-  let start = moment(report.reporttime).subtract(3, 'days').format('YYYY-MM-DD');
-  let end = moment(report.reporttime).add(3, 'days').format('YYYY-MM-DD');
-  let url = `${urlMSW}${spot}-Surf-Report/${mswId.id}/Historic/?start=${start}&end=${end}`;
-  return  div('report-footer-tool', 
-    el('a', { href: url, target: '_blank', class: 'report-tool'}, 
-      div('glyphicon glyphicon-calendar')))
 }
 
 function deleteButton() {
@@ -131,6 +115,8 @@ export async function reportCompare(report, reportType = 'økta') {
 }
 
 export function reportFooter(report) {
+  let bgCls = (report.score) ? `bg-${report.score}` : ''
+  
   let content = [
     footerToolbar(report)
   ]
@@ -140,7 +126,7 @@ export function reportFooter(report) {
   } else {
     content.unshift(conditionsDetails(report));
   }
-  return el('div', 'report-footer', content);
+  return el('div', `report-footer ${bgCls}`, content)
 }
 
 export function reportText(title, text) {
@@ -158,18 +144,4 @@ export function reportPage(title, content) {
 
 export function updateReportView(report) {
   (report.type === 'Session') ? updateSessionView(report) : updateObservationView(report);
-}
-
-export const slLogoTitle = (title) => {
-  return div('flex-row', [
-    slLogo('#fff'),
-    div('tile-logo-text', title)
-  ])
-}
-
-export const dmiLogoTitle = (title) => {
-  return div('flex-row', [
-    dmiLogo(),
-    div('tile-logo-text', title)
-  ])
 }

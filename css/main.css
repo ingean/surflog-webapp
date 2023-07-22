@@ -113,6 +113,13 @@ a.list-group-item:hover {
     cursor: pointer;   
 }
 
+.svg-icon {
+  width: 24px;
+  height: 24px;
+  align-items: flex-start;
+  justify-items: flex-start;
+}
+
 .i-tool {
   font-size: 20px;
   cursor: pointer;
@@ -167,31 +174,6 @@ a.list-group-item:hover {
 
 .webcam-img {
   width: 100%;
-}
-
-.tile {
-  border-radius: 15px;
-  background: var(--surface-color-l1);
-  padding: 20px;
-  margin: 10px;
-  overflow-y: scroll;
-}
-
-.tile-lg {
-  width: 350px;
-  height: 150px;
-}
-
-.tile-title {
-  font-weight: bold;
-}
-
-.tile-logo-text {
-  margin-left: 8px;
-}
-
-.tile-column {
-  margin: 5px;
 }
 
 .tideText {

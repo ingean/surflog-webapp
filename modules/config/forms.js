@@ -1,10 +1,10 @@
-const scores = [
-  {value: 0, caption: 'Flatt', rating: 0},
-  {value: 1, caption: 'Despo', rating: 1},
-  {value: 2, caption: 'Dårlig', rating: 2},
-  {value: 3, caption: 'OK', rating: 3},
-  {value: 4, caption: 'Bra', rating: 4, default: true},
-  {value: 5, caption: 'Episk', rating: 5}
+export const scores = [
+  {value: 0, caption: 'Flatt', rating: 0, color: '#eeeeee'},
+  {value: 1, caption: 'Despo', rating: 1, color: '#E1576F'},
+  {value: 2, caption: 'Dårlig', rating: 2, color: '#F19A37'},
+  {value: 3, caption: 'OK', rating: 3, color: '#62D37E'},
+  {value: 4, caption: 'Bra', rating: 4, color: '#409173', default: true},
+  {value: 5, caption: 'Episk', rating: 5, color: '#6452EB'}
 ];
 
 const locType = [
@@ -241,6 +241,8 @@ export var formsOptions = [
   {name: 'duration', save: false, type: 'number', tab: 1, caption: 'Varighet', forms: forms(true, false, false)},
   {name: 'source', save: false, type: 'btn', tab: 1, caption: 'Kilde', domain: sources, forms: forms(false, true, true)},
   {name: 'tidesFilter', save: false, type: 'btn', tab: 1, caption: 'Tidevann', domain: tidesFilter, forms: forms(false, false, true)},
+  {name: 'tidestart', save: false, type: 'number', tab: 1, caption: 'Tidevannsnivå, start', forms: forms(true, false, false)},
+  {name: 'tideend', save: false, type: 'number', tab: 1, caption: 'Tidevannsnivå, slutt', forms: forms(true, false, false)},
   {name: 'tide', save: false, type: 'btn', tab: 1, caption: 'Tidevann', domain: tides, forms: forms(true, false, false)},
   {name: 'tidediff', save: false, type: 'btn', tab: 1, caption: 'Differanse', domain: tideDiffs, forms: forms(true, false, false)},
   {name: 'tidetype', save: false, type: 'btn', tab: 1, caption: 'Type', domain: tideTypes, forms: forms(true, false, false)},
@@ -294,7 +296,11 @@ export function getRating(param, value, key = 'caption', returnKey = 'rating') {
 }
 
 export function getScoreCaption(score) {
-  return scores[score].caption;
+  return scores[score].caption
+}
+
+export function scoreColor(score) {
+  return scores[score].color
 }
 
 export const getBoardInfo = (board) => {

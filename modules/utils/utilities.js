@@ -63,3 +63,17 @@ export function getStringValue(obj, key) {
     return value
   }
 }
+
+export const tideParts = (t) => {
+  let sign = (t.includes('-')) ? "-" : (t.includes('+')) ? "+" : null
+  let p =  {
+    type: t.substr(0,t.indexOf(' ')),
+    sign: sign,
+    beforeAfter: (sign === '-') ? 'før' : 'etter',
+    hours: Number(t.match(/\d+/)?.[0]),
+    phase: t.substring(t.indexOf('(') + 1 , t.indexOf(')')),
+  } 
+  p.direction = ((p.type === 'Lavvann' && p.sign !== '-') || (p.type === 'Høyvann' && (p.sign === '-' || p.sign == null))) ? 'stigende' : 'synkende'   
+  p.id = `${filenameify(p.type)}_${p.direction}${(p.hours ? p.hours : '')}`
+  return p
+}

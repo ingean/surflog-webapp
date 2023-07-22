@@ -1,5 +1,5 @@
 import { el, weatherImg, tempTd, hrsTd } from '../../components/elements.js';
-import { arrow } from '../../components/svg.js';
+import { arrow } from '../../components/icons.js'
 import { getYrCoast, getStatistics } from '../../utils/api.js';
 import { isDayTime } from '../../utils/time.js';
 import { formatValue, clsValue } from '../format.js';
@@ -22,7 +22,7 @@ function yrCoastForecastToRow(f) {
       tempTd(f.temperature.value),
       el('td', '', [ //Wave height and direction
         el('span', `td-value ${cls(f)}`, formatValue(f.sea.wave, 'height', false, 'waveheight')),
-        el('span', 'td-arrow', arrow(f.sea.wave.direction))
+        el('span', 'td-arrow', arrow(f.sea.wave.direction, 'sm'))
       ]),
       el('td', '', [ //Wind speed and direction
         el('span', 'td-value', formatValue(f.wind, 'speed', false, 'wind')),
@@ -31,7 +31,7 @@ function yrCoastForecastToRow(f) {
       ]),
       el('td', 'hidden-xs', [ //Current speed and direction
         el('span', 'td-value', formatValue(f.sea.current, 'speed', false, 'currentSpeed')),
-        el('span', 'td-arrow', arrow(f.sea.current.direction))
+        el('span', 'td-arrow', arrow(f.sea.current.direction, 'sm'))
       ]),
       tempTd(f.sea.temperature.value),
     ])

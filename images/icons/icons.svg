@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg">
+  <defs pointer-events="all">
+    
+    <symbol id="arrow" viewBox="0 0 24 24">
+      <path d="m11.53 3-.941 12.857L7 15l5.001 6L17 15l-3.587.857L12.471 3h-.941z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"/>
+      <rect x="0" y="0" width="100%" height="100%" fill="none" />
+    </symbol>
+
+    <symbol id="arrow2" viewBox="0 0 8 13">
+      <path d="M 0.097 1.941 L 3.5 13 L 6.903 1.941 A 1.5 1.5 180 0 0 5.469 0 h -3.938 a 1.5 1.5 180 0 0 -1.434 1.941 Z" fill="currentColor" />
+      <rect x="0" y="0" width="100%" height="100%" fill="none" />
+    </symbol>
+  </defs>
+</svg>
