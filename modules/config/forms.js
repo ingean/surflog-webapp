@@ -285,7 +285,8 @@ export var formsOptions = [
   {name: 'subswelldir', save: false, type: 'number', tab: 6, caption: 'Secondary wavedirection', forms: forms(true, false, false)},
   {name: 'slwindspeed', save: false, type: 'number', tab: 6, caption: 'Wind speed (kph)', forms: forms(true, false, false)},
   {name: 'windgust', save: false, type: 'number', tab: 6, caption: 'Wind gusts (kph)', forms: forms(true, false, false)},
-  {name: 'slwinddir', save: false, type: 'number', tab: 6, caption: 'Wind direction (s)', forms: forms(true, false, false)}
+  {name: 'slwinddir', save: false, type: 'number', tab: 6, caption: 'Wind direction (s)', forms: forms(true, false, false)},
+  {name: 'energy', save: false, type: 'number', tab: 6, caption: 'Bølgeenergi (kJ)', forms: forms(true, false, false)}
 ]
 
 export function getRating(param, value, key = 'caption', returnKey = 'rating') {

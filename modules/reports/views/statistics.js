@@ -10,7 +10,6 @@ import { round } from '../../utils/utilities.js'
 
 const reportStats = await get(`statistics/reports`)
 
-
 export const statsDashboard =  async (spot) => {
   let dmiStats = await get(`statistics/forecasts2?forecast=dmi&spot=${spot}`)
   let slStats = await get(`statistics/forecasts2?forecast=msw&spot=${spot}`)

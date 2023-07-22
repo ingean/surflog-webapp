@@ -5,7 +5,7 @@ import { formatValue } from '../../forecasts/format.js'
 import { imgSrc } from '../../utils/utilities.js';
 import { getReports } from '../read.js';
 import { tideText } from './report.js';
-import { slWaveheight, slRating, slSwell, slSubswell, slWind } from './slForecast.js';
+import { slWaveheight, slRating, slSwell, slSubswell, slWind, slEnergy } from './slForecast.js';
 import { setSpotListTo } from '../../components/spotInput.js';
 
 let forecast = 'MSW'
@@ -62,7 +62,8 @@ function mswForecastDetails(report) {
     slRating(report),
     slSwell(report),
     slSubswell(report),
-    slWind(report)
+    slWind(report),
+    slEnergy(report)
   ])
 }
 

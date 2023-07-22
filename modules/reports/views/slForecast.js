@@ -62,3 +62,9 @@ export const slWind = (report, stat = '') => {
     ])
   )
 }
+
+export const slEnergy = (report) => {
+  let content = (report.energy) ? `${report.energy} kJ` : ''
+  return div('center2 report-forecast-msw-value',  content)
+
+}
