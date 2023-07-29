@@ -20,7 +20,7 @@ export const sprite = (folder, file, id, height = 20, width = 20, rotation, titl
     gNode.appendChild(titleNode)
   }
   
-  if (rotation) svgNode.setAttribute('style', `transform: rotate(${rotation}deg)`);
+  if (rotation != null) svgNode.setAttribute('style', `transform: rotate(${rotation}deg)`);
 
   let useNode = document.createElementNS('http://www.w3.org/2000/svg','use')
   useNode.setAttribute('href', `images/${folder}/${file}.svg#${id}`)
@@ -52,16 +52,16 @@ export const iconReport = (report) => {
   return sprite('reports', 'type', id)
 }
 
-export const iconTide = (report) => {
+export const iconTide = (report, height = 24, width = 24) => {
   if(report.type !== 'Session') return
   let p = tideParts(report.tide)
   let title = (report.tidestart) ? `${report.tidestart} - ${report.tideend}m` : ''
  
-  return sprite('tides', 'tides', p.id, 24, 24, null, title) 
+  return sprite('tides', 'tides', p.id, height, width, null, title) 
 }
 
 export const arrow = (rotation, size = 'md') => {
-  if (!rotation) return
+  if (rotation == null) return
   let title = `${rotation}° ${direction(rotation).short.toUpperCase()}`
   let id = (size === 'sm') ? 'arrow2' : 'arrow'
   let height = (size === 'sm') ? 18 : 24

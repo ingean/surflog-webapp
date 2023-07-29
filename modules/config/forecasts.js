@@ -60,11 +60,12 @@ export const slRatingClass = {
 }
 
 export function direction(dir) {
-  return directions.find(d => dir > d.low && dir <= d.high); 
+  return directions.find(d => dir >= d.low && dir <= d.high); 
 }
 
 export function directionFromText(dirTxt) {
-  return directions.find(d => d.short === dirTxt).mid
+  let dir = directions.find(d => d.short === dirTxt)
+  return dir?.mid 
 }
 
 export function windspeed(speed) {

@@ -2,6 +2,7 @@ import { formatValue } from '../../forecasts/format.js'
 import { stars, div } from '../../components/elements.js'
 import { arrow } from '../../components/icons.js';
 import { slRatingClass } from '../../config/forecasts.js';
+import { round } from '../../utils/utilities.js'
 
 export const slWaveheight = (report, stat = '') => {
   let p1 = (stat) ? `waveheight_from_${stat}` : 'waveheight_from'
@@ -53,9 +54,9 @@ export const slWind = (report, stat = '') => {
   
   return (
     div('report-forecast-msw-wind', [
-      div('center2 report-forecast-msw-value-narrow', `${report[p1]}`),
+      div('center2 report-forecast-msw-value-narrow', `${round(report[p1])}`),
       div('report-forecast-msw-windgust', [
-        div('report-forecast-msw-value-short', `(${report[p2]})`),
+        div('report-forecast-msw-value-short', `(${round(report[p2])})`),
         div('report-forecast-msw-value-short', 'km/t'),
       ]),
       div(`report-forecast-msw-value-narrow bg-muted-${report['windscore']}`, arrow(report[p3]))

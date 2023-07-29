@@ -51,6 +51,16 @@
   justify-content: center;
 }
 
+.center-h {
+  display: flex;
+  justify-content: center;
+}
+
+.center-v {
+  display: flex;
+  align-items: center;
+}
+
 .top-right {
   position: absolute;
   top: 5px;
@@ -58,7 +68,7 @@
 }
 
 .margin-left {
-  margin-left: 10px;
+  margin-left: 8px;
 }
 
 .align-right {

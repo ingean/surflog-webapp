@@ -1,7 +1,7 @@
 import { spotIds } from '../config/spots.js';
 import { formsOptions } from '../config/forms.js';
 import { div } from './elements.js';
-import { formSelectInput } from './formGroup.js';
+import { inputSelect } from './formGroup.js';
 import { updateStationCard } from '../forecasts/cards/station.js';
 import { updateDMICard } from '../forecasts/cards/dmiStats.js';
 import { updateSMHICard } from '../forecasts/cards/smhiStats.js';
@@ -21,7 +21,7 @@ function createSpotList() {
   let options = formsOptions.find(item => item.name === 'spot');
   options.formName = 'navbar'
   options.id = `${options.formName}-${options.name}`;
-  let spots = div('input-group', formSelectInput(options));
+  let spots = div('input-group', inputSelect(options));
   document.querySelector('#navbar-spots-list')
   .replaceChildren(spots);
 
@@ -40,7 +40,7 @@ async function onSpotChanged(e) {
     yrId = spotIds[spot]?.yr?.id
   }
 
-  filterReportListBySpot(spot)
+  //filterReportListBySpot(spot)
 
   await updateStationCard(spot);
   updateDMICard(spot);

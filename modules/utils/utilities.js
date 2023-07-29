@@ -41,7 +41,7 @@ export function setActiveById(id, activeValue) {
   let btns = document.querySelectorAll(`[data-toggle='${id}']`)
     if (btns) {
       btns.forEach(btn => {
-        if (btn.innerText === activeValue) {
+        if (btn.getAttribute('data-title') === activeValue) {
           btn.classList.remove("notActive")
           btn.classList.add("Active")
         } else {
@@ -76,4 +76,18 @@ export const tideParts = (t) => {
   p.direction = ((p.type === 'Lavvann' && p.sign !== '-') || (p.type === 'Høyvann' && (p.sign === '-' || p.sign == null))) ? 'stigende' : 'synkende'   
   p.id = `${filenameify(p.type)}_${p.direction}${(p.hours ? p.hours : '')}`
   return p
+}
+
+export const copyObject = (obj) => {
+  return JSON.parse(JSON.stringify(obj))
+}
+
+export const minMaxValues = (obj) => {
+  let max = Object.keys(obj).reduce((a, b) => obj[a] > obj[b] ? a : b)
+  let min = Object.keys(obj).reduce((a, b) => obj[a] < obj[b] ?  a : b)
+  
+  return {
+    min: {key: min, value: obj[min]},
+    max: {key: max, value: obj[max]}
+  }
 }

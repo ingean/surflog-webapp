@@ -34,3 +34,29 @@ input.custom-select {
 select {
   background-color: var(--bg-color);
 }
+
+.form-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.form-input {
+  margin-bottom: 16px;
+  padding-left: 16px;
+}
+
+.form-input-12 {
+  width: 100%;
+}
+
+.form-input-6 {
+  width: 50%;
+}
+
+.form-input-4 {
+  width: 33%;
+}
+
+.form-input-3 {
+  width: 25%;
+}

@@ -1,8 +1,8 @@
-import { el } from './elements.js';
+import { el, div } from './elements.js';
 import { modal } from './modal.js';
 import { get } from '../utils/api.js';
 import { formsOptions , tabNames} from '../config/forms.js'; 
-import { formGroup, updateLocationDropdown } from './formGroup.js';
+import { inputGroup, updateLocationDropdown } from './formGroup.js';
 import { postReport} from '../reports/create.js';
 import { filterReportsList } from '../reports/views/list.js';
 import { setStoredValues } from '../reports/create.js';
@@ -23,7 +23,6 @@ function footerBtns(caption, onClick, form) {
   ]
 }
 
-
 function createFormModals() {
   let modals = [
     {
@@ -35,13 +34,13 @@ function createFormModals() {
     {
       id: 'modal-report-observation',
       title: 'Registrere ny observasjon', 
-      body: form('observation', inputEls('observation')),
+      body: form('observation', div('form-container', inputEls('observation'))),
       get footer() {return footerBtns('Lagre', postReport, this.body)}
     }, 
     {
       id: 'modal-report-filter',
       title: 'Filtrere rapporter',
-      body: form('filter', inputEls('filter')), 
+      body: form('filter', div('form-container', inputEls('filter'))), 
       get footer() {return footerBtns('Se resultat', filterReportsList, this.body)}
     }
   ];
@@ -56,7 +55,7 @@ function createFormModals() {
 
   //Hide location selector in filter dialog at startup
   document.querySelector('#form-report-filter') 
-  .children[1].style.display = 'None';
+  .children[0].children[1].style.display = 'None';
 
   document.getElementById("nav-add-session")
   .addEventListener("click", setStoredValues)
@@ -69,9 +68,9 @@ function createFormModal(options) {
 
 function form(formName, content) {
   return el('form', {
-    id: `form-report-${formName}`,
-    class: 'form-horisontal',
-    enctype: 'multipart/form-data'}, content);
+      id: `form-report-${formName}`,
+      class: 'form-horisontal',
+      enctype: 'multipart/form-data'}, content)
 }
 
 function formWithTabs(formName, tabNames) {
@@ -83,33 +82,34 @@ function formWithTabs(formName, tabNames) {
       el('li', `${(i === 1) ? 'active' : ''}`,
         el('a', {href: `#form-step-${i}`, "data-toggle": "tab"}, tabNames[i - 1]))
     );  
-    pages.push(el('div', {
+    pages.push(div({
       id: `form-step-${i}`, 
       class: `tab-pane fade ${(i === 1) ? 'active in' : ''}`
-    }, inputEls(formName, i)));
+    }, div('form-container', inputEls(formName, i))))
   }
 
   let list = el('ul', 'nav nav-pills nav-justified', listItems);
   let content = el('div', 'tab-content', pages);
 
-  return form(formName, [list, el('hr'), content]);
+  //return form(formName, [list, el('hr'), content]);
+  return form(formName, [list, content]);
 }
 
 function inputEls(formName, tab) {
   let inputEls = [];
   
   for (let o of formsOptions) {
-    let options = JSON.parse(JSON.stringify(o)); // Clone option json object
-    options.formName = formName;
-    options.id = `${options.formName}-${options.name}`;
-
+    let options = JSON.parse(JSON.stringify(o)) // Clone option json object
+    options.formName = formName
+    options.id = `${options.formName}-${options.name}`
+ 
     if (tab) {
       if (options.tab === tab && options.forms[formName]) {
-        inputEls.push(formGroup(options))
+        inputEls.push(inputGroup(options))
       }
     } else {
       if (options.forms[formName]) {
-        inputEls.push(formGroup(options))
+        inputEls.push(inputGroup(options))
       }
     }
   }

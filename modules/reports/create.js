@@ -2,8 +2,10 @@ import { log, notify } from '../utils/logger.js';
 import { user } from '../settings.js';
 import { post } from '../utils/api.js';
 import { getReports } from './read.js';
-import { formsOptions } from '../config/forms.js';
+import { formsOptions, slRating } from '../config/forms.js';
 import { setActiveById } from '../utils/utilities.js';
+import { getFirstFloatFromString, getFirstIntFromString, getStrPart } from '../utils/parseString.js';
+import { find, resetLatestIndex } from '../utils/imageToText.js'
 
 function resetForm(form) {
   let modalId = form.id.replace('form', 'modal');
@@ -63,6 +65,8 @@ function removeData(data, removeForecast = true) {
   let fieldsToRemove = (removeForecast) ? forecastFields : reportsFields
 
   fieldsToRemove.forEach(field => data.delete(field))
+
+  data.delete('forecastimage') // Remove forecast image
 }
 
 function fieldsToStore(){
@@ -121,4 +125,40 @@ async function postForecast(form, id, reporttime) {
   if (res) {
     notify(res.message, 'success', 'cloud-upload')
   }
+}
+
+export const slForecastFromImage = (result) => {
+  let r = result.text.split(/\r?\n/)
+  let ratings = slRating.map(r => r.caption)
+  resetLatestIndex()
+
+  return [
+    { id: 'forecasttime', value: suggestDateTime(find(r,['am', 'pm']))},
+    { id: 'waveheight_from', value: suggestFloat(find(r,['-']), '-', 0)},
+    { id: 'waveheight_to', value: suggestFloat(find(r,['-']), '-', 1)}, 
+    { id: 'rating', value: find(r, ratings, 2)},
+    { id: 'swellheight', value: suggestFloat(find(r,['m']))},
+    { id: 'swellperiod', value: suggestInt(find(r,['s']))},
+    { id: 'subswellheight', value: suggestFloat(find(r,['m']))},
+    { id: 'subswellperiod', value: suggestInt(find(r,['s']))},
+    { id: 'slwindspeed', value: suggestInt(find(r))},
+    { id: 'windgust', value: suggestInt(find(r))},
+    { id: 'energy', value: suggestInt(find(r,['kJ']))}
+  ]
+}
+
+const suggestDateTime = (str, separator, i) => {
+  let hour = suggestInt(str, separator, i)
+  let a = (str.includes('am')) ? 'am' : 'pm'
+  return moment(`${hour} ${a}`, 'h a').format('HH:mm')
+}
+
+const suggestFloat = (str, separator, i) => {
+  str = getStrPart(str, separator, i)
+  return getFirstFloatFromString(str)
+}
+
+const suggestInt = (str, separator, i) => {
+  str = getStrPart(str, separator, i)
+  return getFirstIntFromString(str)
 }

@@ -42,6 +42,14 @@ export const span = (attributes, children) => {
   return el('span', attributes, children)
 }
 
+export const image = (src, attributes, children) => {
+  if (typeof attributes === 'string' || !attributes) {
+    attributes = {class: attributes}
+  }
+  attributes.src = src
+  return el('img', attributes, children)
+}
+
 export function elFromHTML(html) {
     let template = document.createElement('template');
     html = html.trim();

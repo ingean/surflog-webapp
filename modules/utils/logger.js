@@ -37,7 +37,7 @@ export class Loader {
   start() {
     let loader = 
       el('div', {id: this.elementId, class: 'loader-container'},
-        el('img', {class: 'loader-img', src: "images/loader.gif"})
+        el('img', {class: 'loader-img', src: "images/loader.gif", height: "40px" })
     )
     
     document

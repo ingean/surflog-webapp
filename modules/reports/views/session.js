@@ -1,38 +1,45 @@
-import { div, paramLabel, tempSpan } from '../../components/elements.js';
-import { tile } from '../../components/dashboard.js';
+import { div, image, paramLabel, tempSpan, ratingLabel } from '../../components/elements.js';
+import { tile, indicator } from '../../components/dashboard.js';
 import { tabs } from '../../components/tabs.js';
 import { reportHeader, reportFooter, reportCompare } from './report.js';
 import { getBoardInfo } from '../../config/forms.js';
-import { slWaveheight, slRating, slSwell, slSubswell, slWind } from './slForecast.js';
-import { statsDashboard } from './statistics.js';
+import { slWaveheight, slRating, slSwell, slSubswell, slWind, slEnergy } from './slForecast.js';
+import { statsDashboard } from './stats/statistics.js';
 import { iconLogoWithText } from '../../components/icons.js';
+import { tideTile } from './stats/otherStats.js';
+import { get } from '../../utils/api.js'
+import { getRating } from '../../config/forms.js';
 
 export async function updateSessionView(report) {
+  let spotReportStats = await get(`statistics/reports?spot=${report.spot}&location=${report.location}`)
+
   document.getElementById('report-container').replaceChildren(
     div({class: "report", "data-reportid": report.id}, [
       reportHeader(report), 
       div("report-body",
         tabs(
           'session', 
-          ['Dashboard', 'Statistikk'], 
-          [sessionDashboard(report), await statsDashboard(report.spot)]
+          ['Om økta', 'Statistikk'], 
+          [sessionDashboard(report, spotReportStats), await statsDashboard(report, spotReportStats)]
         )),
       reportFooter(report)
     ])
   );
 }
 
-function sessionDashboard(report) {
+function sessionDashboard(report, spotReportStats) {
   return div('report-dashboard', [
       div('flex-row', [ 
         waveForecastTile(report),
         tile('Beskrivelse', report.descr),
-        boardTile(report)
+        boardTile(report),
+        tideTile(report, spotReportStats)
       ]),
       div('flex-row', [ 
         windForecastTile(report),
         tile('Analyse', report.forecast),
-        tile(null, equipmentTileFront(report), equipmentTileBack(report))
+        tile(null, equipmentTileFront(report), equipmentTileBack(report)),
+        scoreTile(report)
       ]),
       div('flex-row', [
         compareTile(report)
@@ -63,7 +70,10 @@ const waveForecastTile = (report) => {
 
 const windForecastTile = (report) => {
   return tile(iconLogoWithText('Vind', 'surfline'), [
-    slWind(report),
+    div('flex-row', [
+      slWind(report),
+      slEnergy(report)
+    ]),
     div('flex-row', [
       paramLabel('winddir', report.winddirObs, `${report.windspeedObs.toLowerCase()}`),
       paramLabel('shape', report.shape, 'shape'),
@@ -80,9 +90,14 @@ const boardTile = (report) => {
   let board = getBoardInfo(report.board)
   
   return tile('Brett', [
-    div('tile-text', `${report.board} ${board.volume}l`),
-    div('tile-text', `${board.length} ${board.width} ${board.thickness}`),
-    div('tile-text', `${board.type} ${board.fins}`)
+    div('flex-row center2', [
+      image(`images/boards/${report.board}.png`, {height: '90px'}),
+      div('flex-col', [
+        div('tile-text', `${report.board} ${board.volume}l`),
+        div('tile-text', `${board.length} ${board.width} ${board.thickness}`),
+        div('tile-text', `${board.type} ${board.fins}`)
+      ])
+    ])   
   ])
 }
 
@@ -119,9 +134,42 @@ const equipmentTileBack = report => {
 }
 
 const compareTile = async (report) => {
-  return div('tile tile-lg', [
-    div('tile-tile', 'Sammenlikning'),
-    await reportCompare(report)
-  ])
+  let compare = await reportCompare(report)
+  return tile('Sammenlikning', 
+    compare,
+    null, null, null, 'md')
+}
+const scoreTile = (report) => {
+  let score = calcScore(report)
+  return tile(
+    'Score',
+    div('flex-row center2', [
+      indicator('Beregnet score', score, 'Snitt av merker', Math.round(score), 'md'),
+      div('flex-col', [
+        ratingLabel(report.score, 'lg'),
+        slRating(report)
+      ])
+    ]), 
+    null,
+    null,
+    null,
+    'md'
+  )
+}
+
+
+const calcScore = (report) => {
+  let total = 0
+  let count = 0
+
+  let params = ['waveheight', 'windspeed', 'winddir', 'shape', 'push', 'closeout', 'consistency']
+  params.forEach(p => {
+    let rating = getRating(p, report[p])
+    if (rating) {
+      total += rating
+      count ++
+    }
+  })
+  return total / count
 }
 

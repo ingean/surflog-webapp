@@ -1,4 +1,4 @@
-import { el, div} from '../../components/elements.js';
+import { el, image, div} from '../../components/elements.js';
 import { spotIds } from '../../config/spots.js';
 import { urlMSW } from '../../config/datasources.js';
 import { forecastParamAll } from '../../config/datasources.js';
@@ -76,14 +76,15 @@ function format(comparisonReport, param) {
 }
 
 export function reportHeader(report) {
-  let profilePicture = document.getElementById('navbar-profile-img').getAttribute('src');
+  let avatarURL = document.getElementById('navbar-profile-img').getAttribute('src');
   let bgCls = (report.score) ? `bg-${report.score}` : ''
 
   return (
     div(`report-header ${bgCls}`, [
-      el('img', { 
-        src: profilePicture,
-        class: "report-header-img img-circle"}
+      image(avatarURL, { 
+        class: "report-header-img img-circle",
+        height: '40px'
+      }
       ), 
       div('report-header-text', [
         div('report-header-title', [report.spot, ' ', moment(report.reporttime).calendar()]),
@@ -124,7 +125,7 @@ export function reportFooter(report) {
   if (report.type === 'Observasjon') {
     content.unshift(el('div', 'report-footer-detail', report.source));
   } else {
-    content.unshift(conditionsDetails(report));
+    content.unshift(div('report-conditions-bg',conditionsDetails(report)));
   }
   return el('div', `report-footer ${bgCls}`, content)
 }

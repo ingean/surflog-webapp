@@ -3,7 +3,7 @@ import { urlAPI, urlYr, urlSunTimes, forecasts } from '../config/datasources.js'
 import { selectedSpot } from '../components/spotInput.js';
 import { getImgTime } from '../forecasts/images/forecast.js';
 
-function makeUrl(url) {
+export function makeUrl(url) {
   return (url.includes('http') ? url : `${urlAPI}${url}`)
 }
 

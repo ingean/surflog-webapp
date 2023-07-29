@@ -1,19 +1,10 @@
 import { scores } from '../config/forms.js'
+import { chartOption } from '../config/charts.js'
 
 google.charts.load('current', {'packages':['corechart', 'controls']})
 
 export const scoreColors = (data) => {
   return data.map(d => scores.find(s => d[0] === s.caption).color)
-}
-
-export const addDefaultOptions = (options) => {
-  options.backgroundColor =  { fill: 'transparent' }
-  
-  if (!('legend' in options)) options.legend = {}
-  options.legend.textStyle = {
-    color: 'white'
-  }
-  return options
 }
 
 const mergeHeaders = (headers, data) => {
@@ -22,33 +13,35 @@ const mergeHeaders = (headers, data) => {
   return data
 }
 
-
 const prepareChart = (headers, data, options) => {
   mergeHeaders(headers, data)
-  options = addDefaultOptions(options)
+  options = chartOption(options)
  
-  return google.visualization.arrayToDataTable(data)
+  return {
+    table: google.visualization.arrayToDataTable(data),
+    options
+  }
 }
 
 export const drawPieChart = (container, headers, data, options) => {  
-  let table = prepareChart(headers, data, options)
+  let c = prepareChart(headers, data, options)
 
   let chart = new google.visualization.PieChart(container)
-  chart.draw(table, options)
+  chart.draw(c.table, c.options)
 }
 
 export const drawColumnChart = (container, headers, data, options) => {
-  let table = prepareChart(headers, data, options)
+  let c = prepareChart(headers, data, options)
 
   let chart = new google.visualization.ColumnChart(container)
-  chart.draw(table, options)
+  chart.draw(c.table, c.options)
 }
 
 export const drawLineChart = (container, headers, data, options) => {
-  let table = prepareChart(headers, data, options)
+  let c = prepareChart(headers, data, options)
 
   let chart = new google.visualization.LineChart(container)
-  chart.draw(table, options)
+  chart.draw(c.table, c.options)
 }
 
 export const dbChart = (options) => {

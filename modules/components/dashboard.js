@@ -9,9 +9,12 @@ export const tile = (title, frontContent, backContent, footer, iconName = 'stats
   if (title) header.push(div('tile-title', title))
   header.push(icon(iconName, 'align-right'))
 
-  let body = [div('flex-row', header)]
-  body.push(div('tile-content', content))
-  if (footer) body.push(div('tile-footer flex-row', footer))
+  let body = [
+    div('tile-header flex-row', header),
+    div('tile-content', content),
+    div('tile-footer flex-row', footer)
+  ]
+  //if (footer) body.push(div('tile-footer flex-row', footer))
 
   let tile = div(`tile tile-${size}`, body)
 
@@ -30,5 +33,12 @@ export const indicator = (header, content, footer, rating, size = 'lg') => {
     div('indicator-header', header),
     div(`indicator-content txt-${rating}`, content),
     div('indicator-footer', footer)
+  ])
+}
+
+export const fact = (text) => {
+  return div('center-v flex-row db-fact', [
+    icon('info-sign'),
+    div('db-fact-text', text)
   ])
 }
