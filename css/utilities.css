@@ -38,11 +38,13 @@
 .flex-row {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .flex-col {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .center2 {
@@ -71,6 +73,14 @@
   margin-left: 8px;
 }
 
+.margin-right {
+  margin-right: 8px;
+}
+
 .align-right {
   margin-left: auto;
+}
+
+.flex-right {
+  justify-content: flex-end;
 }

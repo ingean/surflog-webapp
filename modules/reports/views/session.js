@@ -28,7 +28,7 @@ export async function updateSessionView(report) {
 }
 
 function sessionDashboard(report, spotReportStats) {
-  return div('report-dashboard', [
+  return div('report-dashboard flex-col', [
       div('flex-row', [ 
         waveForecastTile(report),
         tile('Beskrivelse', report.descr),

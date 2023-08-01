@@ -41,7 +41,7 @@ export const prepPieChartData = (param, stats) => {
 
   let options = {
     height: 250,
-    width: 300
+    width: 275
   }
 
   if (param === 'score')  options.colors =  scoreColors(data)

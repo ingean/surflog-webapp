@@ -23,10 +23,11 @@
 
 .station-card-sunIcon {
  vertical-align: middle;
+ height: 100px;
 }
 
 .station-card-sunTime {
-  height: 40px;
+  height: 20px;
   text-align: center;
   padding-bottom: 10px;
 }
