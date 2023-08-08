@@ -229,7 +229,8 @@ function forms(session, observation, filter) {
   }
 }
 
-export const tabNames = ['Lokasjon', 'Forhold', 'Vurdering', 'Merker', 'Utstyr', 'Varsel']
+export const tabNamesSession = ['Lokasjon', 'Forhold', 'Vurdering', 'Merker', 'Utstyr', 'Varsel']
+export const tabNamesObs = ['Vurdering', 'Varsel']
 
 export var formsOptions = [
   {name: 'loctype', save: false, type: 'btn', tab: 1, caption: 'Type sted', domain: locType, forms: forms(false, false, true)},
@@ -273,21 +274,21 @@ export var formsOptions = [
   {name: 'issurfable', save: false, type: 'btn', tab: 1, caption: 'Surfbart', domain: yesNo, forms: forms(false, true, true)},
   {name: 'iscold', save: false, type: 'btn', tab: 5, caption: 'Kald', domain: yesNo, forms: forms(true, false, true)},
   {name: 'type', save: false, type: 'btn', tab: 1, caption: 'Type', domain: types, forms: forms(false, true, false)},
-  {name: 'forecastimage', save: false, type: 'imgToTxt', tab: 6, caption: 'Hent forslag fra bilde', forms: forms(true, false, false)},
-  {name: 'forecasttime', save: false, type: 'time', tab: 6, caption: 'Tidspunkt for varslet', forms: forms(true, false, false)},
-  {name: 'waveheight_from', save: false, type: 'number', tab: 6, size: 6, caption: 'Surf from', units: 'm', forms: forms(true, false, false)},
-  {name: 'waveheight_to', save: false, type: 'number', tab: 6, size: 6, caption: 'Surf to', units: 'm', forms: forms(true, false, false)},
-  {name: 'rating', save: false, type: 'select', tab: 6, caption: 'Rating', domain: slRating, forms: forms(true, false, false)},
-  {name: 'swellheight', save: false, type: 'number', tab: 6, size: 4, caption: 'Waveheight', units: 'm', forms: forms(true, false, false)},
-  {name: 'swellperiod', save: false, type: 'number', tab: 6, size: 4, caption: 'Waveperiod', units: 's', forms: forms(true, false, false)},
-  {name: 'swelldir', save: false, type: 'number', tab: 6, size: 4, caption: 'Wavedirection', units: 'arrow', forms: forms(true, false, false)},
-  {name: 'subswellheight', save: false, type: 'number', tab: 6, size: 4, caption: 'Secondary waveheight', units: 'm', forms: forms(true, false, false)},
-  {name: 'subswellperiod', save: false, type: 'number', tab: 6, size: 4, caption: 'Secondary waveperiod', units: 's', forms: forms(true, false, false)},
-  {name: 'subswelldir', save: false, type: 'number', tab: 6, size: 4, caption: 'Secondary wavedirection', units: 'arrow', forms: forms(true, false, false)},
-  {name: 'slwindspeed', save: false, type: 'number', tab: 6, size: 4, caption: 'Wind speed', units: 'kph', forms: forms(true, false, false)},
-  {name: 'windgust', save: false, type: 'number', tab: 6, size: 4, caption: 'Wind gusts', units: 'kph', forms: forms(true, false, false)},
-  {name: 'slwinddir', save: false, type: 'number', tab: 6, size: 4, caption: 'Wind direction',  units: 'arrow', forms: forms(true, false, false)},
-  {name: 'energy', save: false, type: 'number', tab: 6, caption: 'Energy', units: 'kJ', forms: forms(true, false, false)}
+  {name: 'forecastimage', save: false, type: 'imgToTxt', tab: 6, caption: 'Hent forslag fra bilde', forms: forms(true, true, false)},
+  {name: 'forecasttime', save: false, type: 'time', tab: 6, caption: 'Tidspunkt for varslet', forms: forms(true, true, false)},
+  {name: 'waveheight_from', save: false, type: 'number', tab: 6, size: 6, caption: 'Surf from', units: 'm', forms: forms(true, true, false)},
+  {name: 'waveheight_to', save: false, type: 'number', tab: 6, size: 6, caption: 'Surf to', units: 'm', forms: forms(true, true, false)},
+  {name: 'rating', save: false, type: 'select', tab: 6, caption: 'Rating', domain: slRating, forms: forms(true, true, false)},
+  {name: 'swellheight', save: false, type: 'number', tab: 6, size: 4, caption: 'Waveheight', units: 'm', forms: forms(true, true, false)},
+  {name: 'swellperiod', save: false, type: 'number', tab: 6, size: 4, caption: 'Waveperiod', units: 's', forms: forms(true, true, false)},
+  {name: 'swelldir', save: false, type: 'number', tab: 6, size: 4, caption: 'Wavedirection', units: 'arrow', forms: forms(true, true, false)},
+  {name: 'subswellheight', save: false, type: 'number', tab: 6, size: 4, caption: 'Secondary waveheight', units: 'm', forms: forms(true, true, false)},
+  {name: 'subswellperiod', save: false, type: 'number', tab: 6, size: 4, caption: 'Secondary waveperiod', units: 's', forms: forms(true, true, false)},
+  {name: 'subswelldir', save: false, type: 'number', tab: 6, size: 4, caption: 'Secondary wavedirection', units: 'arrow', forms: forms(true, true, false)},
+  {name: 'slwindspeed', save: false, type: 'number', tab: 6, size: 4, caption: 'Wind speed', units: 'kph', forms: forms(true, true, false)},
+  {name: 'windgust', save: false, type: 'number', tab: 6, size: 4, caption: 'Wind gusts', units: 'kph', forms: forms(true, true, false)},
+  {name: 'slwinddir', save: false, type: 'number', tab: 6, size: 4, caption: 'Wind direction',  units: 'arrow', forms: forms(true, true, false)},
+  {name: 'energy', save: false, type: 'number', tab: 6, caption: 'Energy', units: 'kJ', forms: forms(true, true, false)}
 ]
 
 export function getRating(param, value, key = 'caption', returnKey = 'rating') {
@@ -308,4 +309,10 @@ export function scoreColor(score) {
 export const getBoardInfo = (board) => {
   let result = boards.filter(b => b.caption === board)
   return result[0]
+}
+
+export const getTabNr = (name, form = "session") => {
+  let option = formsOptions.find(o => o.name === name)
+  if (form === 'session') return option.tab
+  return (option.tab === 6) ? 2 : 1
 }

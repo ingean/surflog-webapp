@@ -26,7 +26,7 @@ export function formatValue(f, param, secondary = false, lookupAlias) {
     p2 = '(';
     p3 = ')';
   }
-  return (f[param]) ? `${p1}${p2}${v} ${u.unit.unit}${p3}` : null;
+  return (f[param] !== null) ? `${p1}${p2}${v} ${u.unit.unit}${p3}` : null;
 }
 
 export function clsValue(statistics, f, param,  location, type = 'txt', wind = 'local') {

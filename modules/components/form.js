@@ -1,7 +1,7 @@
 import { el, div } from './elements.js';
 import { modal } from './modal.js';
 import { get } from '../utils/api.js';
-import { formsOptions , tabNames} from '../config/forms.js'; 
+import { formsOptions , tabNamesSession, tabNamesObs, getTabNr} from '../config/forms.js'; 
 import { inputGroup, updateLocationDropdown } from './formGroup.js';
 import { postReport} from '../reports/create.js';
 import { filterReportsList } from '../reports/views/list.js';
@@ -28,13 +28,13 @@ function createFormModals() {
     {
       id: 'modal-report-session',
       title: 'Registere ny session', 
-      body: formWithTabs('session', tabNames),
+      body: formWithTabs('session', tabNamesSession),
       get footer() {return footerBtns('Lagre', postReport, this.body)}
     }, 
     {
       id: 'modal-report-observation',
       title: 'Registrere ny observasjon', 
-      body: form('observation', div('form-container', inputEls('observation'))),
+      body: formWithTabs('observation', tabNamesObs),
       get footer() {return footerBtns('Lagre', postReport, this.body)}
     }, 
     {
@@ -80,10 +80,10 @@ function formWithTabs(formName, tabNames) {
   for (let i = 1; i <= tabNames.length; i++) {
     listItems.push(
       el('li', `${(i === 1) ? 'active' : ''}`,
-        el('a', {href: `#form-step-${i}`, "data-toggle": "tab"}, tabNames[i - 1]))
+        el('a', {href: `#${formName}-step-${i}`, "data-toggle": "tab"}, tabNames[i - 1]))
     );  
     pages.push(div({
-      id: `form-step-${i}`, 
+      id: `${formName}-step-${i}`, 
       class: `tab-pane fade ${(i === 1) ? 'active in' : ''}`
     }, div('form-container', inputEls(formName, i))))
   }
@@ -104,7 +104,8 @@ function inputEls(formName, tab) {
     options.id = `${options.formName}-${options.name}`
  
     if (tab) {
-      if (options.tab === tab && options.forms[formName]) {
+      let t = getTabNr(options.name, formName)
+      if (t === tab && options.forms[formName]) {
         inputEls.push(inputGroup(options))
       }
     } else {
