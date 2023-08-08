@@ -18,7 +18,7 @@ export async function updateSessionView(report) {
       reportHeader(report), 
       div("report-body",
         tabs(
-          'session', 
+          'report', 
           ['Om økta', 'Statistikk'], 
           [sessionDashboard(report, spotReportStats), await statsDashboard(report, spotReportStats)]
         )),
