@@ -1,7 +1,7 @@
 import { forecastParamAll } from '../config/datasources.js';
 import { span } from '../components/elements.js';
 import { round } from '../utils/utilities.js';
-import { scoreWindValue, scoreValue } from './score.js';
+import { scoreWindValue, scoreValue, scorePressureValue } from './score.js';
 import { paramStats } from '../utils/statistics.js';
 
 const noCalendarDates = {
@@ -51,6 +51,8 @@ export function clsValue(obj, param, options) {
 export function valueRating(obj, param, options) {
   if (param.includes('wind')) {
     return scoreWindValue(obj[param], options.wind)
+  } else if (param.includes('pressure')) {
+    return scorePressureValue(obj[param])
   } else {
     let rating = calcRating(obj, param, options)
     return (rating > 2) ? rating : null

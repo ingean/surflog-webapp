@@ -1,10 +1,9 @@
 import { forecasts, imgPanels } from '../../config/datasources.js';
-import { el, ratingLabel } from '../../components/elements.js';
+import { div, span, ratingLabel } from '../../components/elements.js';
 import { imgBrowser } from '../../components/imgBrowser.js';
 import { toUTC} from '../../utils/time.js';
 import { capitalize } from '../../utils/utilities.js';
 import { getImgTime, setImgTime } from './forecast.js';
-import { updateMSWImages } from './msw.js';
 
 const SL = forecasts.surflog
 
@@ -39,15 +38,13 @@ function displayYrImgContainers(date) {
 }
 
 export function imgFooter(source, report) {
-  let footer = el('div', 'panel-footer dark', 
-    el('span', `time-${source}-historic panel-h4 dark`)
-  )
+  let footer = div('panel-footer', span(`time-${source}-historic panel-h4`))
 
-  if (report) footer.append(
-    ratingLabel(report.score, 'md', 'align-right')
-  )
-    
-                
+  if (report) {
+    footer.append(ratingLabel(report.score, 'md', 'align-right'))
+    footer.classList.add(`bg-${report.score}`)
+  } 
+           
   return footer;
 }
 

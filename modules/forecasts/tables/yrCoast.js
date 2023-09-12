@@ -6,7 +6,7 @@ import { formatValue, formatValue2, clsValue } from '../format.js';
 import { updateForecastTable } from './table.js';
 import { getStats } from '../../utils/statistics.js';
 
-const headers = ['Tid', 'Vær', 'Temp', 'Bølger', 'Vind (byge)', 'Strøm', 'Vanntemp'];
+const headers = ['Tid', 'Vær', 'Temp', 'Høyde', 'Vind (byge)', 'Strøm', 'Vanntemp.'];
 var stats = {}
 
 function cls(f) {

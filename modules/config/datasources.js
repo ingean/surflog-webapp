@@ -30,14 +30,7 @@ const unitPressure = {
   unit: 'hpa',
   precision: 0,
   up: 'høyere',
-  down: 'lavere',
-  classes: [
-    {min: 0, max: 960, caption: 'Ekstremt lavtrykk', score: 7},
-    {min: 961, max: 980, caption: 'Kraftig lavtrykk', score: 6},
-    {min: 981, max: 1000, caption: 'Moderat lavtrykk', score: 5},
-    {min: 1001, max: 1020, caption: 'Svakt lavtrykk', score: 3},
-    {min: 1020, max: 5000, caption: 'Høytrykk', score: 2},
-  ]
+  down: 'lavere'
 }
 
 const unitDir = {

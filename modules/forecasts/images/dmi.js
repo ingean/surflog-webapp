@@ -56,8 +56,22 @@ function updateDMIScore() {
   let time = getImgTime();
   let fc = dmiForecast.find(f => moment(f.localtime).isSame(time, 'hour'))
   let lbl = ratingLabel(fc.score.score);
-  document.querySelectorAll('.score-dmi')
-  .forEach(el => {el.replaceChildren(lbl)});
+  let scores = document.querySelectorAll('.score-dmi')
+  scores = Array.from(scores)
+  scores.forEach(el => {el.replaceChildren(lbl)});
+
+  let headings = document.querySelectorAll('.dmi-heading')
+  headings = Array.from(headings)
+  headings.forEach(el => {
+    let scores = [0,1,2,3,4,5,6,7]
+    let prevscore = null
+    scores.every(s => {
+      prevscore = el.classList.contains(`bg-${s}`) ? s : null
+      return (prevscore != null) ? false : true
+    })
+    el.classList.remove(`bg-${prevscore}`)
+    el.classList.add(`bg-${fc.score.score}`)      
+  });
 }
 
 function dmiStartTime(){ //Estimates the start time for forecast coming live from DMI

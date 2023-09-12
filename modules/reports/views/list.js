@@ -104,13 +104,13 @@ export function switchForecast(e) {
 export function reportScore(report) {
   if (report.type === 'Observasjon' || report.type === 'Observation'){
     if (report.source ==="Bomtur") {
-      return span(`label bg-1 score-label score-label-lg align-right`, report.source);     
+      return span(`label bg-1 score-label score-label-md align-right`, report.source);     
     } else {
       let d = (report.issurfable === 1) ? 'up' : 'down';
       return icon(`thumbs-${d}`, 'align-right');
     } 
   } else {
-    return ratingLabel(report.score, 'lg', 'align-right')
+    return ratingLabel(report.score, 'md', 'align-right')
   }
 }
 

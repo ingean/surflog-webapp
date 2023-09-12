@@ -49,6 +49,14 @@ const ratings = {
   5: {caption: 'Veldig høy', score: 'Episk'}
 };
 
+const airpressure = [
+  {min: 0, max: 960, caption: 'Ekstremt lavtrykk', score: 7},
+  {min: 961, max: 980, caption: 'Kraftig lavtrykk', score: 6},
+  {min: 981, max: 1000, caption: 'Moderat lavtrykk', score: 5},
+  {min: 1001, max: 1020, caption: 'Svakt lavtrykk', score: 3},
+  {min: 1020, max: 5000, caption: 'Høytrykk', score: 2},
+]
+
 export const slRatingClass = {
   "VERY POOR": "1",
   "POOR": "2",
@@ -78,6 +86,10 @@ export function current(speed) {
 
 export function score(score) {
   return ratings[score].score;
+}
+
+export function pressure(hpa) {
+  return airpressure.find(p => hpa > p.min && hpa <= p.max); 
 }
 
 export const weatherIcons = {

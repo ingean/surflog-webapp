@@ -9,8 +9,8 @@ export const tideTile = (report, stats) => {
   let footer = `${x.min.value} - ${x.max.value} m`
   
   let frontContent = div('flex-row', [
-    indicator(report.spot, iconTide(report, 48, 48), tideText(report), null, 'md'),
-    indicator('Snitthøyde', `${round(stats.tides[0].avgtide, 1)} m`, footer, 4, 'md')
+    indicator(report.spot, iconTide(report, 48, 48), tideText(report), null, 'wide'),
+    indicator('Snitthøyde', `${round(stats.tides[0].avgtide, 1)} m`, footer, 4, 'sm')
   ])
   
   return tile(`Tidevann`, frontContent, null, null, 'stats', 'md')

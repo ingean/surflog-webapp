@@ -37,10 +37,10 @@ function buoyObsToRow(f) {
 export async function updateBuoyObsTable(obs, smhi = true, spot = 'Saltstein') {
   
   if (smhi) {
-    const headers = ['Tid', 'Bølger', 'Periode', 'Bølgevarsel']
+    const headers = ['Tid', 'Høyde', 'Periode', 'Varsel']
     updateForecastTable(obs, getSMHITime, smhiForecastToRow, 'buoyObs', headers);
   } else {
-    const headers = ['Tid', 'Bølger', 'Periode', 'Vindstyrke og retning', 'Lufttrykk', 'Lufttemperatur']
+    const headers = ['Tid', 'Høyde', 'Periode', 'Vind', 'Trykk', 'Lufttemp.']
     updateForecastTable(obs, getBuoyObsTime, buoyObsToRow, 'buoyObs', headers);
   }
 }

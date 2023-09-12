@@ -144,7 +144,7 @@ const scoreTile = (report) => {
   return tile(
     'Score',
     div('flex-row center2', [
-      indicator('Beregnet score', score, 'Snitt av merker', Math.round(score), 'md'),
+      indicator('Beregnet score', score, 'Snitt av merker', Math.round(score), 'wide'),
       div('flex-col', [
         ratingLabel(report.score, 'lg'),
         slRating(report)

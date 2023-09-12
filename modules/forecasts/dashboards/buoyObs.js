@@ -43,7 +43,7 @@ const ukTile = (obs) => {
       indicator('Vinddir', arrow(data.winddir), `${data.winddir} ${direction(data.winddir).short}`, null, 'sm')
     ]),
     div('flex-row', [
-      indicator('Lufttrykk', round(data.airpressure, 0), 'hPa', null, 'sm'),
+      indicator('Lufttrykk', round(data.airpressure, 0), 'hPa', rating(data, 'airpressure'), 'sm'),
       indicator('Lufttemp', tempSpan('', data.airtemp), null, null, 'sm')
     ]), 
     `Sist oppdatert ${moment(toLocal(data.utctime)).calendar()}`,
@@ -79,7 +79,7 @@ export const updateBuoyDashboard = (stats, ukBuoys, smhiBuoys) => {
   tiles.push(smhiTile(smhiBuoys))
 
   let container = document.getElementById('buoy-db-container')
-  container.appendChild(div({id: 'buoy-tile-group', class: 'flex-row'}, tiles))
+  container.appendChild(div({id: 'buoy-tile-group', class: 'flex-row center-h'}, tiles))
 }
 
 const tileSelected = (e) => {

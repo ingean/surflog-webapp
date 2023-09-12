@@ -1,13 +1,3 @@
-.dark {
-  color: var(--on-surface-color);
-  background: var(--surface-color-l1);
-}
-
-.light {
-  color: var(--on-surface-color);
-  background: var(--surface-color);
-}
-
 .flex-container {
   display: flex;
   border-radius: 0;
@@ -96,5 +86,31 @@
 
 .panel-footer {
   color: var(--on-surface-color);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: var(--on-surface-color);
+}
+
+.section-header {
+  display: flex;
+  min-height: 70px;
+  color: var(--on-surface-color);
+  background-color: var(--surface-color);
+}
+
+.section-title {
+  font-size: x-large;
+  font-weight: bold;
+  margin: 20px;
+  align-items: center;
+}
+
+.section-body {
+  color: var(--on-surface-color);
+  border-bottom: 1 solid var(--on-surface-color);
   background-color: var(--surface-color);
 }

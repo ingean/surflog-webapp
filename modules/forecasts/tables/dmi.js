@@ -7,7 +7,7 @@ import { scoreForecast } from '../score.js';
 import { updateForecastTable } from './table.js';
 import { getStats } from '../../utils/statistics.js';
 
-const headers = ['Tid', 'Bølgehøyde', 'Bølgeperiode', 'Dønning', 'Dønning, periode', 'Wind', 'Score'];
+const headers = ['Tid', 'Høyde', 'Periode', 'Dønning', 'Periode', 'Vind', 'Score'];
 var stats = {}
 
 function cls(obj, param) {

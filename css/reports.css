@@ -2,9 +2,11 @@
 .list-group-item {
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
   height: 50px;
-  padding: 10px;
+  padding: 4px;
   align-items: center;
+  overflow: hidden;
 }
 
 .report-list-img {
@@ -40,8 +42,8 @@
 .report-details {
   display: flex;
   flex-direction: row;
-  margin: 10px;
-  min-width: 50px;
+  margin: 4px;
+  min-width: 40px;
 }
 
 .report-detail {
@@ -214,7 +216,6 @@
 }
 
 .report-body {
-  padding: 10px;
   min-height: 440px;
   background-color: var(--surface-color);
 }

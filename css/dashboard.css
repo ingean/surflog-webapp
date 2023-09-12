@@ -5,12 +5,12 @@
   border-radius: 15px;
   background: var(--surface-color-l1);
   padding: 8px;
-  margin: 8px;
+  margin: 4px;
   overflow-y: scroll;
 }
 
 .tile-md {
-  width: 350px;
+  width: 370px;
   height: 175px;
 }
 
@@ -53,6 +53,11 @@ input[type=radio].tile-radio {
   height: 300px;
 }
 
+.indicator-wide {
+  width: 170px;
+  height: 80px;
+}
+
 .indicator-md {
   width: 125px;
   height: 80px;
@@ -70,6 +75,11 @@ input[type=radio].tile-radio {
 .indicator-content-lg {
   font-weight: bolder;
   font-size: xx-large;
+}
+
+.indicator-content-wide {
+  font-weight: bolder;
+  font-size: large;
 }
 
 .indicator-content-md {

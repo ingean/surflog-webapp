@@ -1,10 +1,15 @@
 import { points } from '../config/scoreModel.js';
-import { windspeed } from '../config/forecasts.js';
+import { windspeed, pressure } from '../config/forecasts.js';
 
 
 export function scoreWindValue(speed, type = 'fetch') {
   let wind = windspeed(speed)
   return (wind) ? wind[type] : null
+}
+
+export function scorePressureValue(hpa) {
+  let airpressure = pressure(hpa)
+  return (airpressure) ? airpressure.score : null
 }
 
 export function scoreValue(statistics, value, param, location, points) {
