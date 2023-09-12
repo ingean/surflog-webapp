@@ -24,6 +24,13 @@
 .tile-footer {
   padding: 8px;
 }
+input[type=radio].tile-radio {
+  margin: 4px;
+}
+
+.tile-icon {
+  cursor: pointer;
+}
 
 .tile-footer {
   min-height: 20px;
@@ -72,7 +79,7 @@
 
 .indicator-content-sm {
   font-weight: bolder;
-  font-size: x-large;
+  font-size: large;
   min-height: 35px;
 }
 

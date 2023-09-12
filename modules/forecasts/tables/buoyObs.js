@@ -34,8 +34,8 @@ function buoyObsToRow(f) {
   ])
 }
 
-async function updateBuoyObsTable(obs, smhi = true, spot = 'Saltstein') {
-  stats = await getStats('buoy')
+export async function updateBuoyObsTable(obs, smhi = true, spot = 'Saltstein') {
+  
   if (smhi) {
     const headers = ['Tid', 'Bølger', 'Periode', 'Bølgevarsel']
     updateForecastTable(obs, getSMHITime, smhiForecastToRow, 'buoyObs', headers);
@@ -49,12 +49,14 @@ function getBuoyObsTime(forecast) {
   return toLocal(forecast.utctime)
 }
 
-export var buoyObservations = []
+export var ukBuoys = []
+export var smhiBuoys = []
 
 export async function getBuoyObs() {
-  let ukBuoys = await get(`observations/buoys`);
-  let smhiBuoys = await get('forecasts/smhi');
-  updateBuoyDashboard(ukBuoys, smhiBuoys)
+  stats = await getStats('buoy')
+  ukBuoys = await get(`observations/buoys`);
+  smhiBuoys = await get('forecasts/smhi');
+  updateBuoyDashboard(stats, ukBuoys, smhiBuoys)
   //updateBuoyObsTable(smhiBuoys);
   updateBuoyObsTable(ukBuoys[0].data, false);
 }
