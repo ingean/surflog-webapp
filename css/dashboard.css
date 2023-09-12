@@ -48,20 +48,37 @@
 
 .indicator-md {
   width: 125px;
-  height: 125px;
+  height: 80px;
+}
+
+.indicator-sm {
+  width: 75px;
+  height: 80px;
 }
 
 .indicator-title {
  font-weight: bold;
 }
 
-.indicator-content {
+.indicator-content-lg {
   font-weight: bolder;
   font-size: xx-large;
 }
 
+.indicator-content-md {
+  font-weight: bolder;
+  font-size: xx-large;
+}
+
+.indicator-content-sm {
+  font-weight: bolder;
+  font-size: x-large;
+  min-height: 35px;
+}
+
 .indicator-footer {
  font-weight: lighter;
+ min-height: 20px;
 }
 
 .db-fact-text {

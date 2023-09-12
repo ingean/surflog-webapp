@@ -1,6 +1,5 @@
 import { el } from '../../components/elements.js';
-import { getStatistics } from '../../utils/api.js';
-import { getStatsForParam } from '../../utils/statistics.js';
+import { paramStats, getStats } from '../../utils/statistics.js';
 import { round } from '../../utils/utilities.js';
 import { forecastParamAll } from '../../config/datasources.js';
 
@@ -27,8 +26,9 @@ function cell(v, param) {
   );
 }
 
-function tableCells(stats, param, station) {
-  let s = getStatsForParam(stats, param.id, 4, station);
+function tableCells(stats, param) {
+  let s = paramStats(param.id, {stats})
+  
   return [
     el('td', 'td-m td-left', param.caption),
     el('td', cCls, cell(s.min, param)), // max
@@ -47,7 +47,7 @@ function tableBody(stats, params) {
 }
 
 export async function updateCard(spot, forecast, params) {
-  let statistics = await getStatistics(forecast, spot)
+  let statistics = await getStats(forecast, spot)
   let station = (forecast === 'yr') ? 'Saltstein' : null
   if (!statistics) return
     let card = 
@@ -55,11 +55,13 @@ export async function updateCard(spot, forecast, params) {
       el('div', 'station-card station-card-names flex-col', [
         el('div', 'station-card-spotName', spot),
         el('div', 'station-card-stationName', `Statistikk for ${forecast.toUpperCase()}`)
-      ]),   
-      el('table', 'station-card-table', [
-        tableHead(),
-        tableBody(statistics, params, station)
-      ])
+      ]),
+      el('div', '',    
+        el('table', 'station-card-table', [
+          tableHead(),
+          tableBody(statistics, params, station)
+        ])
+      )
     ]);
       
   document.querySelector(`#root-station-card-${forecast}`)

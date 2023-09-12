@@ -92,6 +92,10 @@ td {
 }
 
 .tr-scope {
+  background-color: var(--surface-color);
+}
+
+.tr-outofscope {
   background-color: var(--surface-color-l1);
 }
 

@@ -8,14 +8,15 @@ export function toUTC(localDate, timeZone = 'Europe/Stockholm') {
   return moment.tz(localDate, timeZone).utc();
 }
 
-export function isDayTime(date) {
-  if (moment(date).isBefore(moment())) return false;
+export function isDayTime(date, checkPast = true) {
+  if (checkPast) {
+    if (moment(date).isBefore(moment())) return false;
+  }
   
   let dateHr = moment(date).format('HH:mm:ss')
-  if (moment(dateHr, 'HH:mm:ss').isBetween(
+  return (moment(dateHr, 'HH:mm:ss').isBetween(
       moment(sunTimes.firstLight, 'HH:mm'),
-      moment(sunTimes.lastLight, 'HH:mm'))) return true;
-  return false;
+      moment(sunTimes.lastLight, 'HH:mm'))) ? true : false
 }
 
 export const monthAsText = (month) => {

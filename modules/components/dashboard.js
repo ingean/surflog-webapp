@@ -31,7 +31,7 @@ export const tile = (title, frontContent, backContent, footer, iconName = 'stats
 export const indicator = (header, content, footer, rating, size = 'lg') => {
   return div(`flex-col center2 indicator indicator-${size}`, [
     div('indicator-header', header),
-    div(`indicator-content txt-${rating}`, content),
+    div(`indicator-content-${size} txt-${rating}`, content),
     div('indicator-footer', footer)
   ])
 }

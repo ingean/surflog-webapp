@@ -8,9 +8,9 @@ export const slWaveheight = (report, stat = '') => {
   let p1 = (stat) ? `waveheight_from_${stat}` : 'waveheight_from'
   let p2 = (stat) ? `waveheight_to_${stat}` : 'waveheight_to'
   return div('report-forecast-msw-waveheight', [
-          div('center2 report-forecast-msw-value', formatValue(report, p1, false, 'waveheight')),
+          div('center2 report-forecast-msw-value', formatValue(report, p1, 'waveheight')),
           div('center2 report-forecast-msw-value-xsmall', '-' ),
-          div('center2 report-forecast-msw-value', formatValue(report, p2, false, 'waveheight'))
+          div('center2 report-forecast-msw-value', formatValue(report, p2, 'waveheight'))
         ])
 }
 
@@ -29,8 +29,8 @@ export const slSwell = (report, stat = '') => {
   let p3 = (stat) ? `swelldir_${stat}` : 'swelldir'
 
   return div('report-forecast-msw-swell', [
-    div('center2 report-forecast-msw-value', formatValue(report, p1, false, 'swellheight')),
-    div('center2 report-forecast-msw-value', formatValue(report, p2, false, 'swellperiod')),
+    div('center2 report-forecast-msw-value', formatValue(report, p1, 'swellheight')),
+    div('center2 report-forecast-msw-value', formatValue(report, p2, 'swellperiod')),
     div('center2 report-forecast-msw-value-narrow', arrow(report[p3], 'sm'))
   ])
 }
@@ -41,8 +41,8 @@ export const slSubswell = (report, stat = '') => {
   let p3 = (stat) ? `subswelldir_${stat}` : 'subswelldir'
 
   return div('report-forecast-msw-subswell', [
-    div('center2 report-forecast-msw-value-small', formatValue(report, p1, false, 'swellheight')),
-    div('center2 report-forecast-msw-value-small', formatValue(report, p2, false, 'swellperiod')),
+    div('center2 report-forecast-msw-value-small', formatValue(report, p1, 'swellheight')),
+    div('center2 report-forecast-msw-value-small', formatValue(report, p2, 'swellperiod')),
     div('center2 report-forecast-msw-value-narrow', arrow(report[p3], 'sm'))
   ])
 }

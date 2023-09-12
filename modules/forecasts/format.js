@@ -1,7 +1,8 @@
 import { forecastParamAll } from '../config/datasources.js';
-import { el } from '../components/elements.js';
+import { span } from '../components/elements.js';
 import { round } from '../utils/utilities.js';
 import { scoreWindValue, scoreValue } from './score.js';
+import { paramStats } from '../utils/statistics.js';
 
 const noCalendarDates = {
   lastDay : '[I går]',
@@ -16,20 +17,21 @@ export function formatDate(date) {
   return moment(date).calendar(null, noCalendarDates)
 }
 
-export function formatValue(f, param, secondary = false, lookupAlias) {
-  let lu = lookupAlias || param;
-  let u = forecastParamAll(lu);
-  let v = round(f[param], u.unit.precision);
-  let p1 = '', p2 = '', p3 = '';
-  if (secondary) {
-    p1 = ' ';
-    p2 = '(';
-    p3 = ')';
-  }
-  return (f[param] !== null) ? `${p1}${p2}${v} ${u.unit.unit}${p3}` : null;
+export function formatValue(obj, param, paramAlias) {
+  if (!obj?.[param]) return null
+  let value = obj[param]
+  param = (paramAlias) ? paramAlias : param
+  let u = forecastParamAll(param)
+  value = round(value, u.unit.precision)
+  
+  return `${value} ${u.unit.unit}`
 }
 
-export function clsValue(statistics, f, param,  location, type = 'txt', wind = 'local') {
+export function formatValue2(value, param, paramAlias) {
+  return ` (${formatValue(value, param, paramAlias)})`
+}
+
+export function clsValue_old(statistics, f, param,  location, type = 'txt', wind = 'local') {
   param = (param === 'waveheightforecast') ? 'waveheight' : param;
   if (param.includes('wind')) {
     let score = scoreWindValue(f[param], wind)
@@ -40,6 +42,28 @@ export function clsValue(statistics, f, param,  location, type = 'txt', wind = '
   }
 }
 
+export function clsValue(obj, param, options) {
+  let type = options?.type || 'txt'
+  let rating = valueRating(obj, param, options)
+  return (rating) ? `${type}-rating-${rating}` : ''
+}
+
+export function valueRating(obj, param, options) {
+  if (param.includes('wind')) {
+    return scoreWindValue(obj[param], options.wind)
+  } else {
+    let rating = calcRating(obj, param, options)
+    return (rating > 2) ? rating : null
+  }
+}
+
 export function labelValue(f, param, forecast, fetch = false) {
-  return el('span', clsValue(f, param, forecast, 'bg', fetch), formatValue(f, param))
+  let options = {source: forecast, fetch: fetch, type: 'bg'}
+  return span(clsValue(f, param, options), formatValue(f, param))
+}
+
+function calcRating(obj, param, options) {
+  let v = obj[param]
+  let s = paramStats(param, options)
+  return (v >= (s.avg + s.std)) ? 7: (v >= s.avg) ? 5 : (v >= (s.avg - s.std) ? 4 : (v >= s.min) ? 3 : 0);
 }

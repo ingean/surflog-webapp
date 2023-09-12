@@ -108,6 +108,9 @@
                   <a href="#tab-forecast-dmi" data-toggle="tab">DMI</a>
                 </li>
                 <li class="panel-tab">
+                  <a href="#tab-forecast-northsea" data-toggle="tab">Bølgeobservasjoner</a>
+                </li>
+                <li class="panel-tab">
                   <a href="#tab-forecast-smhi" data-toggle="tab">SMHI</a>
                 </li>
                 <li class="panel-tab">
@@ -119,11 +122,10 @@
                 <li class="panel-tab">
                   <a href="#tab-forecast-dmiObs" data-toggle="tab">Danmark</a>
                 </li>
-                <li class="panel-tab">
-                  <a href="#tab-forecast-northsea" data-toggle="tab">Nordsjøen</a>
-                </li>
               </ul>
               <div class="tab-content">
+
+                <!-- Yr coast card and table -->
                 <div id="tab-forecast-yrCoast" class="tab-pane fade active in">
                   <div class="tab-body flex-panel">
                     <div class="flex-col">
@@ -138,18 +140,129 @@
                     </div>
                   </div>
                 </div>
+
+                <!-- DMI forecast images and table -->
                 <div id="tab-forecast-dmi" class="tab-pane fade">
                   <div class="tab-body flex-panel">
                     <div class="flex-col">
-                      <div id="root-station-card-dmi" class="hidden-xs hidden-sm"></div>
-                      <div class="tab-toolbar flex-panel">
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-default active">Tabell</button>
-                          <button type="button" class="btn btn-default">Graf</button>
+                      <div class="panel-heading">       
+                        <div class="flex-row center-v flex-right">
+                          <label for="dmi-chart-timestep" class="control-label text-left margin-right">Tidssteg</label>
+                          <div class="input-group pull-right">
+                            <div class="btn-group">
+                              <a class="btn btn-primary btn-sm Active" data-toggle="dmi-chart-timestep" data-title="1">1t</a>
+                              <a class="btn btn-primary btn-sm notActive" data-toggle="dmi-chart-timestep" data-title="6">6t</a>
+                              <a class="btn btn-primary btn-sm notActive" data-toggle="dmi-chart-timestep" data-title="24">24t</a>
+                            </div>
+                            <input type="hidden" id="dmi-chart-timestep" name="dmi-chart-timestep" value="1">
+                          </div>
                         </div>
+                        <span class="pull-right" id="twin"></span>
                       </div>
+                      <div class="panel-body">
+                        <!-- Waveheight and period-->
+                        <div class="col-lg-4 col-fullwidth-xs">
+                          <div id="dmi-waveheight-panel" class="panel dark">
+                            <div class="panel-heading">
+                              <span class="panel-h dark">Bølger</span>
+                              <span class="time-dmi panel-h4 dark"></span>  
+                              <span class="score-dmi"></span>
+                              <div class="btn-group btn-group-sm pull-right param-switch-dmi">
+                                <button id="switch-dmi-wave-height" type="button" class="btn btn-default active">Høyde</button>
+                                <button id="switch-dmi-wave-period" type="button" class="btn btn-default">Periode</button>
+                              </div>
+                            </div> 
+                            <div class="panel-body">
+                              <div class="container-relative">
+                                <div id="dmi-waveheight-live">
+                                  <img id="img-dmi-waveheight-live" class="img-dmi" src="https://high-plating-184911.appspot.com/proxy/dmi/waveheight/1" />
+                                  <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                  </button>
+                                  <button class="panel-btn-nav forecast-nav-dmi next" type="button">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                  </button> 
+                                </div>
+                              </div>
+                              <div class="container-relative">
+                                <div id="dmi-waveheight-historic"></div>
+                              </div>
+                            </div>
+                          </div> 
+                        </div>
+                        <!-- Swellheight and period-->
+                        <div class="col-lg-4 col-fullwidth-xs">
+                            <div id="dmi-swellheight-panel" class="panel dark">
+                              <div class="panel-heading">
+                                <span class="panel-h dark">Dønning</span>
+                                <span class="time-dmi panel-h4 dark"></span>
+                                <span class="score-dmi"></span> 
+                                <div class="btn-group btn-group-sm pull-right param-switch-dmi">
+                                  <button id="switch-dmi-swell-height" type="button" class="btn btn-default active">Høyde</button>
+                                  <button id="switch-dmi-swell-period" type="button" class="btn btn-default">Periode</button>
+                                </div>  
+                              </div> 
+                              <div class="panel-body">
+                                <div class="container-relative">
+                                  <div id="dmi-swellheight-live">
+                                    <img id="img-dmi-swellheight-live" class="img-dmi" src="https://high-plating-184911.appspot.com/proxy/dmi/swellheight/1" />
+                                    <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
+                                      <span class="glyphicon glyphicon-chevron-left"></span>
+                                    </button>
+                                    <button class="panel-btn-nav forecast-nav-dmi next" type="button">
+                                      <span class="glyphicon glyphicon-chevron-right"></span>
+                                    </button> 
+                                  </div>
+                                </div>
+                                <div class="container-relative">
+                                  <div id="dmi-swellheight-historic"></div>
+                                </div>
+                              </div>
+                            </div> 
+                          </div>
+                          <!-- Wind-->
+                          <div class="col-lg-4 col-fullwidth-xs">
+                            <div id="dmi-wind-panel" class="panel dark">
+                              <div class="panel-heading">
+                                <span class="panel-h dark">Vind</span>
+                                <span class="time-dmi panel-h4 dark"></span>
+                                <span class="score-dmi"></span>   
+                              </div> 
+                              <div class="panel-body">
+                                <div class="container-relative">
+                                  <div id="dmi-wind-live">
+                                      <img id="img-dmi-wind-live" class="img-dmi" src="https://high-plating-184911.appspot.com/proxy/dmi/wind/1" />
+                                      <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
+                                          <span class="glyphicon glyphicon-chevron-left"></span>
+                                      </button>
+                                      <button class="panel-btn-nav forecast-nav-dmi next" type="button">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                      </button> 
+                                  </div>
+                                </div>
+                                <div class="container-relative">
+                                  <div id="dmi-wind-historic"></div>
+                                </div>
+                              </div>
+                            </div> 
+                          </div>
+                        </div>
+                           
+                      <div id="root-station-card-dmi" class="hidden-xs hidden-sm"></div>
                       <div id="root-forecast-table-dmi"></div>
                       <div id="root-forecast-table-dmi-historic"></div>
+                    </div>  
+                  </div>
+                </div>
+
+                <!-- Real time buoy dashboard and tables -->
+                <div id="tab-forecast-northsea" class="tab-pane fade">
+                  <div class="tab-body flex-panel">
+                    <div class="flex-col">
+                      <div id="buoy-map"></div>
+                      <div id="buoy-db-container" class="flex-row"></div>
+                      <div id="root-forecast-table-buoyObs"></div>
+                      <div id="root-forecast-table-buoyObs-historic"></div>
                     </div>  
                   </div>
                 </div>
@@ -168,6 +281,8 @@
                     </div>  
                   </div>
                 </div>
+
+                <!-- Yr forecast images and table -->
                 <div id="tab-forecast-yr" class="tab-pane fade">
                   <div class="tab-body flex-panel">
                     <div class="flex-col">
@@ -178,10 +293,46 @@
                           <button type="button" class="btn btn-default">Graf</button>
                         </div>
                       </div>
+                      
+                      <!-- Historic YR forecast images -->
+                      <div id="yr-historic-row" class="row" style="display:none;">
+                        <div class="col-12">
+                          <div class="panel light">
+                            <div class="panel-heading">
+                              <span class="panel-h light">Yr</span>
+                              <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
+                            </div>
+                            <div class="panel-body">
+                              <div class="col-md-6 col-fullwidth-xs">
+                                <div id="yr-skagerak-panel" class="panel dark">
+                                  <div class="panel-heading">
+                                    <span class="panel-h dark">Skagerak</span>
+                                  </div> 
+                                  <div class="panel-body">
+                                    <div id="yr-skagerak-historic"></div>   
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-fullwidth-xs">
+                                  <div id="yr-saltstein-panel" class="panel dark">
+                                    <div class="panel-heading">
+                                      <span class="panel-h dark">Saltstein</span>
+                                    </div> 
+                                    <div class="panel-body">
+                                      <div id="yr-saltstein-historic"></div>  
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                       <div id="root-forecast-table-yr"></div>
                     </div>  
                   </div>
                 </div>
+
+                <!-- Met wind observations table -->
                 <div id="tab-forecast-frost" class="tab-pane fade">
                   <div class="tab-body flex-panel">
                     <div class="flex-col">
@@ -197,6 +348,8 @@
                     </div>  
                   </div>
                 </div>
+
+                <!-- DMI wind observations table -->
                 <div id="tab-forecast-dmiObs" class="tab-pane fade">
                   <div class="tab-body flex-panel">
                     <div class="flex-col">
@@ -212,173 +365,12 @@
                     </div>  
                   </div>
                 </div>
-                <div id="tab-forecast-northsea" class="tab-pane fade">
-                  <div class="tab-body flex-panel">
-                    <div class="flex-col">
-                      <div id="root-station-card-northsea" class="hidden-xs hidden-sm"></div>
-                      <div class="tab-toolbar flex-panel">
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-default active">Tabell</button>
-                          <button type="button" class="btn btn-default">Graf</button>
-                        </div>
-                      </div>
-                      <div id="root-forecast-table-northsea"></div>
-                      <div id="root-forecast-table-northsea-historic"></div>
-                    </div>  
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- DMI forecast images -->
-      <div class="row">
-        <div class="col-12">
-            <div class="panel light">
-              <div class="panel-heading">
-                <span class="panel-h light">DMI </span>
-                <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
-                <div class="flex-row center-v flex-right">
-                  <label for="dmi-chart-timestep" class="control-label text-left margin-right">Tidssteg</label>
-                  <div class="input-group pull-right">
-                    <div class="btn-group">
-                      <a class="btn btn-primary btn-sm Active" data-toggle="dmi-chart-timestep" data-title="1">1t</a>
-                      <a class="btn btn-primary btn-sm notActive" data-toggle="dmi-chart-timestep" data-title="6">6t</a>
-                      <a class="btn btn-primary btn-sm notActive" data-toggle="dmi-chart-timestep" data-title="24">24t</a>
-                    </div>
-                    <input type="hidden" id="dmi-chart-timestep" name="dmi-chart-timestep" value="1">
-                  </div>
-                </div>
-                <span class="pull-right" id="twin"></span>
-              </div>
-              <div class="panel-body">
-                <!-- Waveheight and period-->
-                <div class="col-lg-4 col-fullwidth-xs">
-                  <div id="dmi-waveheight-panel" class="panel dark">
-                    <div class="panel-heading">
-                      <span class="panel-h dark">Bølger</span>
-                      <span class="time-dmi panel-h4 dark"></span>  
-                      <span class="score-dmi"></span>
-                      <div class="btn-group btn-group-sm pull-right param-switch-dmi">
-                        <button id="switch-dmi-wave-height" type="button" class="btn btn-default active">Høyde</button>
-                        <button id="switch-dmi-wave-period" type="button" class="btn btn-default">Periode</button>
-                      </div>
-                    </div> 
-                    <div class="panel-body">
-                      <div class="container-relative">
-                        <div id="dmi-waveheight-live">
-                          <img id="img-dmi-waveheight-live" class="img-dmi" src="https://high-plating-184911.appspot.com/proxy/dmi/waveheight/1" />
-                          <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                          </button>
-                          <button class="panel-btn-nav forecast-nav-dmi next" type="button">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                          </button> 
-                        </div>
-                      </div>
-                      <div class="container-relative">
-                        <div id="dmi-waveheight-historic"></div>
-                      </div>
-                    </div>
-                  </div> 
-                </div>
-                <!-- Swellheight and period-->
-                <div class="col-lg-4 col-fullwidth-xs">
-                    <div id="dmi-swellheight-panel" class="panel dark">
-                      <div class="panel-heading">
-                        <span class="panel-h dark">Dønning</span>
-                        <span class="time-dmi panel-h4 dark"></span>
-                        <span class="score-dmi"></span> 
-                        <div class="btn-group btn-group-sm pull-right param-switch-dmi">
-                          <button id="switch-dmi-swell-height" type="button" class="btn btn-default active">Høyde</button>
-                          <button id="switch-dmi-swell-period" type="button" class="btn btn-default">Periode</button>
-                        </div>  
-                      </div> 
-                      <div class="panel-body">
-                        <div class="container-relative">
-                          <div id="dmi-swellheight-live">
-                            <img id="img-dmi-swellheight-live" class="img-dmi" src="https://high-plating-184911.appspot.com/proxy/dmi/swellheight/1" />
-                            <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
-                              <span class="glyphicon glyphicon-chevron-left"></span>
-                            </button>
-                            <button class="panel-btn-nav forecast-nav-dmi next" type="button">
-                              <span class="glyphicon glyphicon-chevron-right"></span>
-                            </button> 
-                          </div>
-                        </div>
-                        <div class="container-relative">
-                          <div id="dmi-swellheight-historic"></div>
-                        </div>
-                      </div>
-                    </div> 
-                  </div>
-                  <!-- Wind-->
-                  <div class="col-lg-4 col-fullwidth-xs">
-                    <div id="dmi-wind-panel" class="panel dark">
-                      <div class="panel-heading">
-                        <span class="panel-h dark">Vind</span>
-                        <span class="time-dmi panel-h4 dark"></span>
-                        <span class="score-dmi"></span>   
-                      </div> 
-                      <div class="panel-body">
-                        <div class="container-relative">
-                          <div id="dmi-wind-live">
-                              <img id="img-dmi-wind-live" class="img-dmi" src="https://high-plating-184911.appspot.com/proxy/dmi/wind/1" />
-                              <button class="panel-btn-nav forecast-nav-dmi prev" type="button">
-                                  <span class="glyphicon glyphicon-chevron-left"></span>
-                              </button>
-                              <button class="panel-btn-nav forecast-nav-dmi next" type="button">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                              </button> 
-                          </div>
-                        </div>
-                        <div class="container-relative">
-                          <div id="dmi-wind-historic"></div>
-                        </div>
-                      </div>
-                    </div> 
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      <!-- Historic YR forecast images -->
-      <div id="yr-historic-row" class="row" style="display:none;">
-        <div class="col-12">
-          <div class="panel light">
-            <div class="panel-heading">
-              <span class="panel-h light">Yr</span>
-              <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
-            </div>
-            <div class="panel-body">
-              <div class="col-md-6 col-fullwidth-xs">
-                <div id="yr-skagerak-panel" class="panel dark">
-                  <div class="panel-heading">
-                    <span class="panel-h dark">Skagerak</span>
-                  </div> 
-                  <div class="panel-body">
-                    <div id="yr-skagerak-historic"></div>   
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-fullwidth-xs">
-                  <div id="yr-saltstein-panel" class="panel dark">
-                    <div class="panel-heading">
-                      <span class="panel-h dark">Saltstein</span>
-                    </div> 
-                    <div class="panel-body">
-                      <div id="yr-saltstein-historic"></div>  
-                    </div>
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+  
       <!-- Historic Saltstein webcam (Currently deactivated)-->
       <div id="webcam-historic-row" class="row" style="display:none;">
         <div class="col-12">

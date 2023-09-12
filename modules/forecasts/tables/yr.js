@@ -1,25 +1,30 @@
 import { el } from '../../components/elements.js';
 import { arrow } from '../../components/icons.js';
 import { forecasts } from '../../config/datasources.js';
-import { getMetForecast, getStatistics } from '../../utils/api.js';
+import { getMetForecast } from '../../utils/api.js';
 import { isDayTime, toUTC } from '../../utils/time.js';
 import { formatValue, clsValue } from '../format.js';
 import { updateForecastTable } from './table.js';
+import { getStats } from '../../utils/statistics.js';
 
-let statistics = {}
+var stats = {}
 
 function getHeaders(forecast) {
   let headers = ['Tid'];
-  for (let key of Object.keys(forecast)) {
+  for (let key of Object.keys(forecast).reverse()) {
     headers.push(key);
   }
   return headers
 }
 
-function stationCell(f, location) {
+function cls(obj, param, location) {
+  return clsValue(obj, param, {station: location, stats})
+}
+
+function stationCell(f, station) {
   return (
     el('td', 'td', [ //Wave height and direction
-      el('span', `td-value ${clsValue(statistics, f, 'waveheight', location)}`, formatValue(f, 'waveheight')),
+      el('span', `td-value ${cls(f, 'waveheight', station)}`, formatValue(f, 'waveheight')),
       el('span', 'td-arrow', arrow(f.wavedir, 'sm'))
     ])
   )
@@ -31,19 +36,19 @@ function yrForecastToRow(f) {
     el('td', 'td-s', moment(f.localtime).format('HH'))
   ];
 
-  for (let key of Object.keys(f.stations)) {
-    cells.push(stationCell(f.stations[key], location));
-    location++
-  }
+  let stations = Object.keys(f.stations).reverse()
+  stations.forEach(station => {
+    cells.push(stationCell(f.stations[station], station));
+  })
   
-  let emphasis = (isDayTime(f.localtime)) ? 'tr-scope' : '';
+  let emphasis = (isDayTime(f.localtime)) ? 'tr-scope' : 'tr-outofscope';
   return (
     el('tr', `forecast-table-row ${emphasis}`, cells)
   )
 }
 
 export async function updateYrTable(spot = 'Saltstein') {
-  statistics = await getStatistics('yr', spot)
+  stats = await getStats('yr')
   let forecast = convertToForecast(yrForecasts)
   let headers = getHeaders(forecast[0].stations);
   updateForecastTable(forecast, getYrTime, yrForecastToRow, 'yr', headers);

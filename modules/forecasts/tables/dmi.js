@@ -1,13 +1,19 @@
 import { el, ratingLabel, hrsTd } from '../../components/elements.js';
-import { get, getStatistics, queryTimespan } from '../../utils/api.js';
+import { get, queryTimespan } from '../../utils/api.js';
 import { round } from '../../utils/utilities.js';
 import { isDayTime } from '../../utils/time.js';
-import { formatValue, clsValue } from '../format.js';
+import { formatValue, formatValue2, clsValue } from '../format.js';
 import { scoreForecast } from '../score.js';
 import { updateForecastTable } from './table.js';
+import { getStats } from '../../utils/statistics.js';
 
 const headers = ['Tid', 'Bølgehøyde', 'Bølgeperiode', 'Dønning', 'Dønning, periode', 'Wind', 'Score'];
-let statistics = {}
+var stats = {}
+
+function cls(obj, param) {
+  let options = {stats}
+  return clsValue(obj, param, options)
+}
 
 function paramCell(forecast, param) {
   let f1 = forecast.stations['Saltstein']
@@ -15,8 +21,8 @@ function paramCell(forecast, param) {
   
   return (
     el('td', '', [
-      el('span', `td-value ${clsValue(statistics, f1, param)}`, formatValue(f1, param)),
-      el('span', 'td-secondary-value hidden-xs', formatValue(f2, param, true))
+      el('span', `td-value ${cls(f1, param)}`, formatValue(f1, param)),
+      el('span', 'td-secondary-value hidden-xs', formatValue2(f2, param))
     ])
   )
 }
@@ -38,7 +44,7 @@ function paramScore(forecast, param) {
 function dmiForecastToRow(forecast) {
   let score = scoreForecast(forecast, 'dmi');
   let cls = (score > 4) ? `bg-muted-${score}` : '';
-  let emphasis = (isDayTime(forecast.localtime)) ? 'tr-scope' : '';
+  let emphasis = (isDayTime(forecast.localtime)) ? 'tr-scope' : 'tr-outofscope';
   return (
     el('tr', `forecast-table-row ${cls} ${emphasis}`, [
       hrsTd(forecast.localtime),
@@ -52,8 +58,8 @@ function dmiForecastToRow(forecast) {
   )
 }
 
-export async function updateDMITable(spot = 'Saltstein') {
-  statistics = await getStatistics('dmi', spot)
+export async function updateDMITable() {
+  stats = await getStats('dmi')
   updateForecastTable(dmiForecast, getDMITime, dmiForecastToRow, 'dmi', headers);
 }
 

@@ -6,7 +6,6 @@ import { isDayTime, toLocal, toUTC } from '../../utils/time.js';
 import { formatValue } from '../format.js';
 import { updateForecastTable } from './table.js';
 
-
 const headers = ['Tid', 'Temperatur', 'Lufttrykk', 'Vind', 'Bølgehøyde', 'Bølgeperiode', 'Vanntemp'];
 
 

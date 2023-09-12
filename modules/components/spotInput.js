@@ -45,7 +45,7 @@ async function onSpotChanged(e) {
   await updateStationCard(spot);
   updateDMICard(spot);
   updateSMHICard(spot);
-  getYrCoastForecast(yrId);
+  await getYrCoastForecast(yrId);
   
   // Reformat tables to reflect selected spot statistics
   updateDMITable(spot)

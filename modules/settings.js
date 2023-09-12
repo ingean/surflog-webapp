@@ -1,5 +1,5 @@
 import { selectedSpot } from './components/spotInput.js';
-//import { getStatistics } from './utils/api.js';
+import { getSunTimes } from './utils/api.js';
 
 export var settings = [];
 //export var statistics = {};
@@ -33,14 +33,28 @@ export function getStats_old(forecast, param, location = 0) {
   return {min, avg, std};
 }
 
-export function initTheme() {
+export async function initTheme() {
   let toggle = document.getElementById("theme-toggle");
   let storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 
   if (storedTheme)
     document.documentElement.setAttribute('data-theme', storedTheme)
 
-  toggle.addEventListener('click', switchTheme)  
+  toggle.addEventListener('click', switchTheme)
+  await getSunTimesForPosition()  
+}
+
+export async function getSunTimesForPosition() {  
+  
+/*   async function getSun(p) {
+    const lat = p.coords.latitude
+    const lon = p.coords.longitude
+    sunTimes = await getSunTimes(lat, lon)
+  }
+  
+  navigator.geolocation.getCurrentPosition(getSun) */
+
+  sunTimes = await getSunTimes(59.89, 10.61)
 }
 
 

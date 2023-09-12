@@ -2,10 +2,9 @@ import { forecasts } from '../../config/datasources.js';
 import { el, hrsTd } from '../../components/elements.js';
 import { arrow } from '../../components/icons.js';
 import { getDMIObs } from '../../utils/api.js';
-import { toUTC } from '../../utils/time.js';
-import { formatValue, clsValue } from '../format.js';
+import { toUTC, isDayTime } from '../../utils/time.js';
+import { formatValue, formatValue2, clsValue } from '../format.js';
 import { updateForecastTable } from './table.js';
-
 
 function stationList(time, obs) {
   let stations = {}
@@ -47,14 +46,14 @@ function getHeaders(obs) {
 }
 
 function cls(o) {
-  return clsValue(null, o, 'wind_speed_past1h', null, 'txt', 'fetch')
+  return clsValue(o, 'wind_speed_past1h', {wind: 'fetch'})
 }
 
 function stationCell(o) {
   return (
     el('td', '', [
-      el('span', `td-value ${cls(o)}`, formatValue(o, 'wind_speed_past1h', false, 'wind')),
-      el('span', 'td-secondary-value', formatValue(o, 'wind_gust_always_past1h', true, 'wind')),
+      el('span', `td-value ${cls(o)}`, formatValue(o, 'wind_speed_past1h', 'wind')),
+      el('span', 'td-secondary-value', formatValue2(o, 'wind_gust_always_past1h', 'wind')),
       el('span', 'td-arrow', arrow(o['wind_dir_past1h']))
     ])
   )
@@ -67,8 +66,9 @@ function dmiObsToRow(o) {
     cells.push(stationCell(o.stations[key]));
   }
   
+  let emphasis = (isDayTime(o.localtime, false)) ? 'tr-scope' : 'tr-outofscope';
   return (
-    el('tr', 'forecast-table-row', cells)
+    el('tr', `forecast-table-row ${emphasis}`, cells)
   )
 }
 
@@ -79,7 +79,7 @@ function getDMIObsTime(obs) {
 function updateDMIObsTable() {
   let obs = convertData(dmiObservations)
   let headers = getHeaders(obs[0].stations)
-  updateForecastTable(obs, getDMIObsTime, dmiObsToRow, 'dmiObs', headers)
+  updateForecastTable(obs.reverse(), getDMIObsTime, dmiObsToRow, 'dmiObs', headers)
 }
 
 export var dmiObservations = [];
