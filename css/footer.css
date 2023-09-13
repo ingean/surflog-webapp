@@ -1,0 +1,12 @@
+.footer-info.flex-col {
+  padding: 20px;
+}
+
+.footer-info-spotName {
+ font-size: large;
+ font-weight: bold;
+}
+
+.footer-info-stationName {
+ font-size: medium;
+}

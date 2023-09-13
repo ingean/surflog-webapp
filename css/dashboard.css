@@ -6,7 +6,7 @@
   background: var(--surface-color-l1);
   padding: 8px;
   margin: 4px;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 .tile-md {
@@ -100,4 +100,16 @@ input[type=radio].tile-radio {
 
 .db-fact-text {
   margin-left: 8px;
+}
+
+.txtArea-preview {
+ cursor: pointer;
+}
+
+.txtArea-fullview {
+  font-size: large;
+}
+
+.txtArea-link {
+  color: var( --secondary-color)
 }

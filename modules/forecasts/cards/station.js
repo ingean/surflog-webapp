@@ -12,10 +12,14 @@ function tideHeaders(headers) {
   return el('thead', '', el('tr', '', th));
 }
 
+function sortTides(tide) {
+  return tide.sort((a, b) => moment(b.time).date() - moment(a.time).date())
+}
+
 
 function tideRows(tide) {
   let rows = []
-  tide = tide.sort((a, b) => moment(b.time).date() - moment(a.time).date())
+  tide = sortTides(tide)
   
   tide.forEach(t => {
     let id = (t.type === 'high') ? "hoyvann_synkende1" : "lavvann_stigende1"
@@ -23,7 +27,7 @@ function tideRows(tide) {
     rows.push( 
       el('tr', '', [
         el('td', 'td-s', sprite('tides', 'tides', id, 24, 24)),
-        el('td', 'td-s', moment(t.time).format('HH:mm')),
+        el('td', 'td-s', formatTideTime(t.time)),
         el('td', 'td-s', t.value)
       ])
     )
@@ -60,6 +64,54 @@ function updateCard(spotName, location, tide, sun) {
   .replaceChildren(card);
 }
 
+function formatTideTitle(title) {
+  return (title === 'high') ? 'Høyvann' : 'Lavvann'
+}
+
+function formatTideTime(time) {
+  return moment(time).format('HH:mm')
+}
+
+function updateFooter(spot, location, sun, tide) {
+  tide = sortTides(tide)
+  let tideTitles = []
+  let tideTimes = []
+
+  tide.forEach(t => {
+    tideTitles.push(div('footer-info-tideTime', formatTideTitle(t.type)))
+    tideTimes.push(div('footer-info-tideTime', formatTideTime(t.time)))
+  })
+
+  let info = 
+  div('footer-info flex-col center-v', [
+    div('footer-info-spotName', spot),
+    div('footer-info-stationName', location.name),
+    div('footer-info flex-row center-h', [
+      div('footer-info flex-col', [
+        div('footer-info-sunTime', `Første lys:` ),
+        div('footer-info-sunTime', `Soloppgang:` ),
+        div('footer-info-sunTime', `Solnedgang:` ),
+        div('footer-info-sunTime', `Siste lys:` )
+      ]),
+      div('footer-info flex-col', [
+        div('footer-info-sunTime', sun.firstLight),
+        div('footer-info-sunTime', sun.sunrise),
+        div('footer-info-sunTime', sun.sunset),
+        div('footer-info-sunTime', sun.lastLight)
+      ])
+    ]),
+    div('footer-info flex-row center-h', [
+      div('footer-info flex-col', tideTitles),
+      div('footer-info flex-col', tideTimes)
+    ])
+  ]) 
+
+  document.getElementById('footer-container-spot')
+  .replaceChildren(info);
+}
+
+
+
 export async function updateStationCard(spot) {
   let load = new Loader(`root-station-card-yrCoast`);
   let yrId = spotIds[spot].yr.id;
@@ -68,4 +120,5 @@ export async function updateStationCard(spot) {
   let sun = await getSunTimes(location.position.lat, location.position.lon);
 
   updateCard(spot, location, tide['_embedded'].tides, sun);
+  updateFooter(spot, location, sun, tide['_embedded'].tides)
 }

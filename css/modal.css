@@ -7,3 +7,9 @@
   font-size: medium;
   font-weight: bold;
 }
+
+.modal-close {
+  cursor: pointer;
+  color: var(--on-surface-color-l1);
+  text-shadow: none;
+}

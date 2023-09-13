@@ -19,11 +19,6 @@ a {
   text-shadow: none;
 }
 
-.close {
-  color: var(--on-surface-color-l1);
-  text-shadow: none;
-}
-
 .btn-default {
   color: var(--on-bg-color);
   background-color: var(--bg-color);
@@ -201,5 +196,9 @@ a.list-group-item:hover {
   .panel-btn-nav.next {
     right: 0px !important;
   }
+}
+
+#theme-toggle {
+  margin-right: 50px;
 }
 

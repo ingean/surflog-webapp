@@ -1,5 +1,5 @@
 import { div, image, paramLabel, tempSpan, ratingLabel } from '../../components/elements.js';
-import { tile, indicator } from '../../components/dashboard.js';
+import { tile, indicator, txtArea } from '../../components/dashboard.js';
 import { tabs } from '../../components/tabs.js';
 import { reportHeader, reportFooter, reportCompare } from './report.js';
 import { getBoardInfo } from '../../config/forms.js';
@@ -28,22 +28,16 @@ export async function updateSessionView(report) {
 }
 
 function sessionDashboard(report, spotReportStats) {
-  return div('report-dashboard flex-col', [
-      div('flex-row', [ 
+  return div('report-dashboard flex-row', [
         waveForecastTile(report),
-        tile('Beskrivelse', report.descr),
+        tile('Beskrivelse', txtArea(report.descr)),
         boardTile(report),
-        tideTile(report, spotReportStats)
-      ]),
-      div('flex-row', [ 
+        tideTile(report, spotReportStats),
         windForecastTile(report),
-        tile('Analyse', report.forecast),
+        tile('Analyse', txtArea(report.forecast)),
         tile(null, equipmentTileFront(report), equipmentTileBack(report)),
-        scoreTile(report)
-      ]),
-      div('flex-row', [
+        scoreTile(report),
         compareTile(report)
-      ])
     ])
 }
 

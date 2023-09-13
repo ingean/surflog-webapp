@@ -1,5 +1,6 @@
-import { div, el } from './elements.js';
+import { el, div, span } from './elements.js';
 import { icon } from './icons.js'
+import { modal, openModal } from './modal.js';
 
 export const tile = (title, frontContent, backContent, footer, iconName = 'stats', size = 'md', selectable = false, id,  onSelection) => {
   iconName = (backContent) ? 'transfer' : iconName // Make it obvious that tile has two sides
@@ -68,4 +69,33 @@ export const fact = (text) => {
     icon('info-sign'),
     div('db-fact-text', text)
   ])
+}
+
+export const txtArea = (text, attributes = null, maxLength = 240) => {
+  if (text.length <= maxLength) return text
+  
+  let txtPreview = text.substring(0, maxLength - 3)
+
+  attributes = attributes || 'txtArea-preview'
+
+  let preview = div(attributes, [
+    span(attributes, txtPreview),
+    span('txtArea-link', '...')
+  ]) 
+  
+  let fullview = div('txtArea-fulltext', text)
+
+  let options = {
+    id: 'txt-area-random',
+    title: '',
+    body: fullview,
+    containerId: 'root-modal-txtArea'
+  }
+
+  let txtModal = modal(options)
+
+  preview.addEventListener('click', e => {
+    openModal(txtModal)
+  })
+  return preview
 }
