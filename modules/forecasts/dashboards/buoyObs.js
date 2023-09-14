@@ -1,4 +1,6 @@
 import { tile, checkTile, indicator } from "../../components/dashboard.js"
+import { chartOption } from "../../config/charts.js"
+import { drawLineChart } from "../../components/charts.js";
 import { div, tempSpan } from "../../components/elements.js"
 import { arrow } from '../../components/icons.js';
 import { formatValue, valueRating } from '../../forecasts/format.js'
@@ -33,6 +35,11 @@ const getLastSMHIObs = (obs) => {
 }
 
 const ukTile = (obs) => {
+  let obsData = obs.data.toReversed()
+  let chartContainer = div('tile-chart-line')
+  let chartData = obsData.map(o => [toLocal(o.utctime), o.waveheight])
+  drawLineChart(chartContainer, ['Tid', `Høyde (m)`], chartData, chartOption('smallColumn'))
+  
   let data = getLastObs(obs.data)
   return tile(
     obs.name, 
@@ -44,7 +51,8 @@ const ukTile = (obs) => {
     ]),
     div('flex-row', [
       indicator('Lufttrykk', round(data.airpressure, 0), 'hPa', rating(data, 'airpressure'), 'sm'),
-      indicator('Lufttemp', tempSpan('', data.airtemp), null, null, 'sm')
+      indicator('Lufttemp', tempSpan('', data.airtemp), null, null, 'sm'),
+      div('flex-row center2', chartContainer)
     ]), 
     `Sist oppdatert ${moment(toLocal(data.utctime)).calendar()}`,
     null,
@@ -55,6 +63,13 @@ const ukTile = (obs) => {
 }
 
 const smhiTile = (obs) => {
+  let chartContainer = div('tile-chart-line')
+  let chartData = obs.filter(o => o.stations['Väderöerna'].waveheight).map(o => {
+    let wh = o.stations['Väderöerna'].waveheight
+    if (wh) return [o.localtime, o.stations['Väderöerna'].waveheight]
+  })
+  drawLineChart(chartContainer, ['Tid', `Høyde (m)`], chartData, chartOption('smallColumn'))
+
   let data = getLastSMHIObs(obs)
   return tile(
     'Väderöerna',
@@ -64,7 +79,7 @@ const smhiTile = (obs) => {
       indicator('Retning', arrow(data.wavedir), `${round(data.wavedir, 0)} ${direction(data.wavedir).short}`, null, 'sm'),
       indicator('Varsel', formatValue(data, 'waveheightforecast'), null, smhiRating(data, 'waveheight'), 'sm')
     ]),
-    null,
+    div('flex-row center2', chartContainer),
     `Sist oppdatert ${moment(data.localtime).calendar()}`,
     null,
     'md',

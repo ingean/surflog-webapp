@@ -72,14 +72,20 @@ function formatTideTime(time) {
   return moment(time).format('HH:mm')
 }
 
+function formatTideLevel(level) {
+  return `${level} cm`
+}
+
 function updateFooter(spot, location, sun, tide) {
   tide = sortTides(tide)
   let tideTitles = []
   let tideTimes = []
+  let tideLevels = []
 
   tide.forEach(t => {
     tideTitles.push(div('footer-info-tideTime', formatTideTitle(t.type)))
     tideTimes.push(div('footer-info-tideTime', formatTideTime(t.time)))
+    tideLevels.push(div('footer-info-tideTime', formatTideLevel(t.value)))
   })
 
   let info = 
@@ -102,7 +108,8 @@ function updateFooter(spot, location, sun, tide) {
     ]),
     div('footer-info flex-row center-h', [
       div('footer-info flex-col', tideTitles),
-      div('footer-info flex-col', tideTimes)
+      div('footer-info flex-col', tideTimes),
+      div('footer-info flex-col', tideLevels)
     ])
   ]) 
 
