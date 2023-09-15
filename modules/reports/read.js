@@ -20,7 +20,7 @@ export async function getTwin(date, spot = 'Saltstein', source = 'dmi') {
 }
 
 export async function getReport(date, id) {
-  let load = new Loader('report-container');
+  let load = new Loader('#report-container');
   let url = (id) ? `reports/${id}?table=v_reports_msw` : `reports?datestring=${moment(date).format('YYYY-MM-DD')}&table=v_reports_msw`;
   let reports = await get(url)
 
@@ -41,7 +41,7 @@ export async function getReports(page = 1, query = '', table = 'MSW') {
     SMHI: 'v_reports_smhi',
   }
   
-  let load = new Loader('report-list-container');
+  let load = new Loader('#report-list-container');
   let url = `reports?table=${tables[table]}${query}${pageQuery}`;
   let reports = await get(url, true);
 

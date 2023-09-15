@@ -40,16 +40,12 @@ async function onSpotChanged(e) {
     yrId = spotIds[spot]?.yr?.id
   }
 
-  //filterReportListBySpot(spot)
-
   await updateStationCard(spot);
   updateDMICard(spot);
-  updateSMHICard(spot);
   await getYrCoastForecast(yrId);
   
   // Reformat tables to reflect selected spot statistics
   updateDMITable(spot)
-  updateSMHITable(spot)
   updateYrTable(spot)
   updateYrCoastTable(spot)
 }

@@ -8,6 +8,7 @@ import { toLocal } from "../../utils/time.js";
 import { direction } from "../../config/forecasts.js";
 import { round } from '../../utils/utilities.js';
 import { updateBuoyObsTable, smhiBuoys, ukBuoys } from "../tables/buoyObs.js";
+import { getSMHIStats } from "../tables/smhi.js";
 
 var buoyStats = {}
 
@@ -17,7 +18,7 @@ function rating(obj, param) {
 }
 
 function smhiRating(obj, param) {
-  let options = {stats: buoyStats}
+  let options = {stats: getSMHIStats()}
   return valueRating(obj, param, options)
 }
 

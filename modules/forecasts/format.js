@@ -18,17 +18,17 @@ export function formatDate(date) {
 }
 
 export function formatValue(obj, param, paramAlias) {
-  if (!obj?.[param]) return null
+  if (!obj?.[param]) return ''
   let value = obj[param]
   param = (paramAlias) ? paramAlias : param
   let u = forecastParamAll(param)
   value = round(value, u.unit.precision)
   
-  return `${value} ${u.unit.unit}`
+  return (value) ? `${value} ${u.unit.unit}` : ''
 }
 
 export function formatValue2(value, param, paramAlias) {
-  return ` (${formatValue(value, param, paramAlias)})`
+  return (value[param]) ? ` (${formatValue(value, param, paramAlias)})` : ''
 }
 
 export function clsValue_old(statistics, f, param,  location, type = 'txt', wind = 'local') {
@@ -55,7 +55,7 @@ export function valueRating(obj, param, options) {
     return scorePressureValue(obj[param])
   } else {
     let rating = calcRating(obj, param, options)
-    return (rating > 2) ? rating : null
+    return (rating) ? rating : null
   }
 }
 
@@ -67,5 +67,5 @@ export function labelValue(f, param, forecast, fetch = false) {
 function calcRating(obj, param, options) {
   let v = obj[param]
   let s = paramStats(param, options)
-  return (v >= (s.avg + s.std)) ? 7: (v >= s.avg) ? 5 : (v >= (s.avg - s.std) ? 4 : (v >= s.min) ? 3 : 0);
+  return (v >= (s.avg + s.std)) ? 6: (v >= s.avg) ? 4 : (v >= (s.avg - s.std) ? 3 : (v >= s.min) ? 2 : 0);
 }

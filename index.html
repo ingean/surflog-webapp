@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/utilities.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/rating.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/forms.css">
     <link rel="stylesheet" href="css/panel.css">
@@ -27,92 +26,92 @@
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/stationCard.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/rating.css">
     
   </head>
   <body>
     <nav class="navbar navbar-default">
-      <!--div class="container-fluid" -->
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">SurfLog</a>
-        </div>
     
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <span class="glyphicon glyphicon-bookmark"></span>
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="https://magicseaweed.com/Saltstein-Surf-Report/556/">Magic Seaweed</a></li>
-                <li><a href="https://www.kartverket.no/sehavniva/sehavniva-lokasjonside/?cityid=23014&city=Nevlunghavn">Tidevann</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <span class="glyphicon glyphicon-plus"></span>
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="#" data-toggle="modal" data-target="#modal-report-observation">Observasjon</a></li>
-                <li><a id="nav-add-session" href="#" data-toggle="modal" data-target="#modal-report-session">Session</a></li>
-              </ul>
-            </li>
-          </ul>
-          <form id="navbar-spots-list" class="navbar-form navbar-left"></form>
-          <form class="navbar-form navbar-left">
-            <div class="form-group">
-              <input type="date" id="application-date" class="form-control">
-            </div>
-          </form>
-          <form class="navbar-form navbar-left">
-            <div class="form-group">
-              <button type="button" id="report-twin-btn" class="form-control"><span class="glyphicon glyphicon-duplicate"></span></button>
-            </div>
-          </form>
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <img id="navbar-profile-img" href="#" data-toggle="popover" 
-                   data-placement="left" tabindex="50" 
-                   data-content="<div id='fb-username'></div><button id='btn-userreport' class='btn-primary' onClick='getUserStats()'>Statistikk</button>" 
-                   src="images/placeholder.png" class="img-circle" alt="Facebook user">
-            </li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <button id="theme-toggle" class="btn btn-link btn-sm ms-2 small d-flex" type="button">
-                <span class="d-block-light hidden">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                  </svg>
-                </span>
-                <span class="d-block-dark hidden">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun">
-                    <circle cx="12" cy="12" r="5"></circle>
-                    <line x1="12" y1="1" x2="12" y2="3"></line>
-                    <line x1="12" y1="21" x2="12" y2="23"></line>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                    <line x1="1" y1="12" x2="3" y2="12"></line>
-                    <line x1="21" y1="12" x2="23" y2="12"></line>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                  </svg>
-                </span>
-              </button>
-            </div>
-          </form>
-         
-        </div><!-- /.navbar-collapse -->
-      <!--/div--><!-- /.container-fluid -->
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">SurfLog</a>
+      </div>
+  
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="glyphicon glyphicon-bookmark"></span>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="https://magicseaweed.com/Saltstein-Surf-Report/556/">Magic Seaweed</a></li>
+              <li><a href="https://www.kartverket.no/sehavniva/sehavniva-lokasjonside/?cityid=23014&city=Nevlunghavn">Tidevann</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="glyphicon glyphicon-plus"></span>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#" data-toggle="modal" data-target="#modal-report-observation">Observasjon</a></li>
+              <li><a id="nav-add-session" href="#" data-toggle="modal" data-target="#modal-report-session">Session</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form id="navbar-spots-list" class="navbar-form navbar-left"></form>
+        <form class="navbar-form navbar-left">
+          <div class="form-group">
+            <input type="date" id="application-date" class="form-control">
+          </div>
+        </form>
+        <form class="navbar-form navbar-left">
+          <div class="form-group">
+            <button type="button" id="report-twin-btn" class="form-control"><span class="glyphicon glyphicon-duplicate"></span></button>
+          </div>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <img id="navbar-profile-img" href="#" data-toggle="popover" 
+                  data-placement="left" tabindex="50" 
+                  data-content="<div id='fb-username'></div><button id='btn-userreport' class='btn-primary' onClick='getUserStats()'>Statistikk</button>" 
+                  src="images/placeholder.png" class="img-circle" alt="Facebook user">
+          </li>
+        </ul>
+        <form class="navbar-form navbar-right">
+          <div class="form-group">
+            <button id="theme-toggle" class="btn btn-link btn-sm ms-2 small d-flex" type="button">
+              <span class="d-block-light hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+              </span>
+              <span class="d-block-dark hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun">
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <line x1="12" y1="1" x2="12" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="23"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="1" y1="12" x2="3" y2="12"></line>
+                  <line x1="21" y1="12" x2="23" y2="12"></line>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+              </span>
+            </button>
+          </div>
+        </form>
+      </div><!-- /.navbar-collapse -->
+ 
     </nav>
    
     <!-- Forecast and observation graphs -->
@@ -133,9 +132,6 @@
               <a href="#tab-forecast-northsea" data-toggle="tab">Bølgeobservasjoner</a>
             </li>
             <li class="panel-tab">
-              <a href="#tab-forecast-smhi" data-toggle="tab">SMHI</a>
-            </li>
-            <li class="panel-tab">
               <a href="#tab-forecast-yr" data-toggle="tab">Yr</a>
             </li>
             <li class="panel-tab">
@@ -149,22 +145,20 @@
 
             <!-- Yr coast card and table -->
             <div id="tab-forecast-yrCoast" class="tab-pane fade active in">
-              <div class="tab-body flex-panel">
-                <div class="flex-col">
-                  <div id="root-station-card-yrCoast" class="hidden-xs hidden-sm"></div>
-                  <div id="root-forecast-table-yrCoast"></div>
-                </div>
+              <div class="tab-body flex-col align-content-center">
+                <div id="root-station-card-yrCoast" class="hidden-xs hidden-sm"></div>
+                <div id="root-forecast-table-yrCoast"></div>
               </div>
             </div>
 
             <!-- DMI forecast images and table -->
             <div id="tab-forecast-dmi" class="tab-pane fade">
-              <div class="tab-body flex-panel">
-                <div class="flex-col">
-                  <div class="panel-heading">       
-                    <div class="flex-row center-v flex-right">
+              <div class="tab-body flex-col align-content-center">
+             
+                  <div class="section-header">    
+                    <div class="flex-row center-v align-right">
                       <label for="dmi-chart-timestep" class="control-label text-left margin-right">Tidssteg</label>
-                      <div class="input-group pull-right">
+                      <div class="input-group">
                         <div class="btn-group">
                           <a class="btn btn-primary btn-sm Active" data-toggle="dmi-chart-timestep" data-title="1">1t</a>
                           <a class="btn btn-primary btn-sm notActive" data-toggle="dmi-chart-timestep" data-title="6">6t</a>
@@ -175,20 +169,26 @@
                     </div>
                     <span class="pull-right" id="twin"></span>
                   </div>
-                  <div class="panel-body">
+
+                 <div class="section-body">
+              
                     <!-- Waveheight and period-->
                     <div class="col-lg-4 col-fullwidth-xs">
-                      <div id="dmi-waveheight-panel" class="panel">
-                        <div class="panel-heading dmi-heading">
-                          <span class="panel-h">Bølger</span>
-                          <span class="time-dmi panel-h4"></span>  
-                          <span class="score-dmi"></span>
-                          <div class="btn-group btn-group-sm pull-right param-switch-dmi">
+                      <div id="dmi-waveheight-panel" class="sub-section">
+                        
+                        <div class="sub-section-header dmi-heading">
+                          <div class="sub-section-title">Bølger</div>
+                          <div class="time-dmi sub-section-subtitle"></div>
+                          <div class="time-dmi-reset-container">
+                            <div class="time-dmi-reset glyphicon glyphicon-refresh sub-section-subtitle tool"></div>
+                          </div>
+                          <div class="btn-group btn-group-sm align-right param-switch-dmi">
                             <button id="switch-dmi-wave-height" type="button" class="btn btn-default active">Høyde</button>
                             <button id="switch-dmi-wave-period" type="button" class="btn btn-default">Periode</button>
-                          </div>
-                        </div> 
-                        <div class="panel-body">
+                          </div>  
+                        </div>
+                        
+                        <div class="sub-section-body">
                           <div class="container-relative">
                             <div id="dmi-waveheight-live">
                               <img id="img-dmi-waveheight-live" class="img-dmi" src="https://high-plating-184911.appspot.com/proxy/dmi/waveheight/1" />
@@ -208,17 +208,19 @@
                     </div>
                     <!-- Swellheight and period-->
                     <div class="col-lg-4 col-fullwidth-xs">
-                        <div id="dmi-swellheight-panel" class="panel">
-                          <div class="panel-heading dmi-heading">
-                            <span class="panel-h">Dønning</span>
-                            <span class="time-dmi panel-h4"></span>
-                            <span class="score-dmi"></span> 
-                            <div class="btn-group btn-group-sm pull-right param-switch-dmi">
+                        <div id="dmi-swellheight-panel" class="sub-section">
+                          <div class="sub-section-header dmi-heading">
+                            <div class="sub-section-title">Dønning</div>
+                            <div class="time-dmi sub-section-subtitle"></div>
+                            <div class="time-dmi-reset-container">
+                              <div class="time-dmi-reset glyphicon glyphicon-refresh sub-section-subtitle tool"></div>
+                            </div>
+                            <div class="btn-group btn-group-sm align-right param-switch-dmi">
                               <button id="switch-dmi-swell-height" type="button" class="btn btn-default active">Høyde</button>
                               <button id="switch-dmi-swell-period" type="button" class="btn btn-default">Periode</button>
-                            </div>  
+                            </div>   
                           </div> 
-                          <div class="panel-body">
+                          <div class="sub-section-body">
                             <div class="container-relative">
                               <div id="dmi-swellheight-live">
                                 <img id="img-dmi-swellheight-live" class="img-dmi" src="https://high-plating-184911.appspot.com/proxy/dmi/swellheight/1" />
@@ -238,13 +240,16 @@
                       </div>
                       <!-- Wind-->
                       <div class="col-lg-4 col-fullwidth-xs">
-                        <div id="dmi-wind-panel" class="panel">
-                          <div class="panel-heading dmi-heading">
-                            <span class="panel-h">Vind</span>
-                            <span class="time-dmi panel-h4"></span>
-                            <span class="score-dmi"></span>   
+                        <div id="dmi-wind-panel" class="sub-section">
+                          <div class="sub-section-header dmi-heading">
+                            <div class="sub-section-title">Vind</div>
+                            <div class="time-dmi sub-section-subtitle"></div>
+                            <div class="time-dmi-reset-container">
+                              <div class="time-dmi-reset glyphicon glyphicon-refresh sub-section-subtitle tool"></div>   
+                            </div>
+                            <div class="score-dmi align-right"></div>
                           </div> 
-                          <div class="panel-body">
+                          <div class="sub-section-body">
                             <div class="container-relative">
                               <div id="dmi-wind-live">
                                   <img id="img-dmi-wind-live" class="img-dmi" src="https://high-plating-184911.appspot.com/proxy/dmi/wind/1" />
@@ -267,109 +272,74 @@
                   <div id="root-station-card-dmi" class="hidden-xs hidden-sm"></div>
                   <div id="root-forecast-table-dmi"></div>
                   <div id="root-forecast-table-dmi-historic"></div>
-                </div>  
+               
               </div>
             </div>
 
             <!-- Real time buoy dashboard and tables -->
             <div id="tab-forecast-northsea" class="tab-pane fade">
-              <div class="tab-body flex-panel">
-                <div class="flex-col">
-                  <div id="buoy-map"></div>
-                  <div id="buoy-db-container" class="flex-row"></div>
-                  <div id="root-forecast-table-buoyObs"></div>
-                  <div id="root-forecast-table-buoyObs-historic"></div>
-                </div>  
-              </div>
-            </div>
-            <div id="tab-forecast-smhi" class="tab-pane fade">
-              <div class="tab-body flex-panel">
-                <div class="flex-col">
-                  <div id="root-station-card-smhi" class="hidden-xs hidden-sm"></div>
-                  <div id="root-forecast-table-smhi"></div>
-                  <div id="root-forecast-table-smhi-historic"></div>
-                </div>  
+              <div class="tab-body flex-col align-content-center">
+                <div id="buoy-map"></div>
+                <div id="buoy-db-container" class="flex-row"></div>
+                <div id="root-forecast-table-buoyObs"></div>
+                <div id="root-forecast-table-buoyObs-historic"></div>
               </div>
             </div>
 
             <!-- Yr forecast images and table -->
             <div id="tab-forecast-yr" class="tab-pane fade">
-              <div class="tab-body flex-panel">
-                <div class="flex-col">
-                  <div id="root-station-card-yr" class="hidden-xs hidden-sm"></div>
-                  <div class="tab-toolbar flex-panel">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-default active">Tabell</button>
-                      <button type="button" class="btn btn-default">Graf</button>
-                    </div>
-                  </div>
-                  
-                  <!-- Historic YR forecast images -->
-                  <div id="yr-historic-row" class="row" style="display:none;">
-                    <div class="col-12">
-                      <div class="panel light">
-                        <div class="panel-heading">
-                          <span class="panel-h light">Yr</span>
-                          <span class="pull-right collapsable"><i class="glyphicon glyphicon-chevron-up i-tool"></i></span>
-                        </div>
-                        <div class="panel-body">
-                          <div class="col-md-6 col-fullwidth-xs">
-                            <div id="yr-skagerak-panel" class="panel">
-                              <div class="panel-heading">
-                                <span class="panel-h">Skagerak</span>
-                              </div> 
-                              <div class="panel-body">
-                                <div id="yr-skagerak-historic"></div>   
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6 col-fullwidth-xs">
-                              <div id="yr-saltstein-panel" class="panel">
-                                <div class="panel-heading">
-                                  <span class="panel-h">Saltstein</span>
-                                </div> 
-                                <div class="panel-body">
-                                  <div id="yr-saltstein-historic"></div>  
-                                </div>
-                              </div>
-                            </div>
-                        </div>
+              <div class="tab-body flex-col align-content-center">
+                <!-- Historic YR Skagerak -->
+                <div id="yr-historic-row" style="display:none;">
+                  <div class="col-lg-6 col-fullwidth-xs">
+                    <div id="yr-skagerak-panel" class="sub-section">
+                      <div class="sub-section-header">
+                        <div class="sub-section-title">Skagerak</div>
+                      </div> 
+                      <div class="sub-section-body">
+                        <div id="yr-skagerak-historic"></div> 
                       </div>
                     </div>
                   </div>
-                  <div id="root-forecast-table-yr"></div>
-                </div>  
+                  <!-- Historic YR Saltstein -->
+                  <div class="col-lg-6 col-fullwidth-xs">
+                    <div id="yr-saltstein-panel" class="sub-section col-lg-6 col-fullwidth-xs">
+                      <div class="sub-section-header">
+                        <div class="sub-section-title">Saltstein</div>
+                      </div> 
+                      <div class="sub-section-body">
+                        <div id="yr-saltstein-historic"></div> 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- YR Table-->
+                <div id="root-forecast-table-yr"></div>
               </div>
             </div>
 
             <!-- Met wind observations table -->
             <div id="tab-forecast-frost" class="tab-pane fade">
-              <div class="tab-body flex-panel">
-                <div class="flex-col">
-                  <div id="root-station-card-windObs" class="hidden-xs hidden-sm"></div>
-                  <div id="root-forecast-table-windObs"></div>
-                  <div id="root-forecast-table-windObs-historic"></div>
-                </div>  
+              <div class="tab-body flex-col align-content-center">
+                <div id="root-station-card-windObs" class="hidden-xs hidden-sm"></div>
+                <div id="root-forecast-table-windObs"></div>
+                <div id="root-forecast-table-windObs-historic"></div>
               </div>
             </div>
 
             <!-- DMI wind observations table -->
             <div id="tab-forecast-dmiObs" class="tab-pane fade">
-              <div class="tab-body flex-panel">
-                <div class="flex-col">
-                  <div id="root-station-card-dmiObs" class="hidden-xs hidden-sm"></div>
-                  <div id="root-forecast-table-dmiObs"></div>
-                  <div id="root-forecast-table-dmiObs-historic"></div>
-                </div>  
+              <div class="tab-body flex-col align-content-center">
+                <div id="root-station-card-dmiObs" class="hidden-xs hidden-sm"></div>
+                <div id="root-forecast-table-dmiObs"></div>
+                <div id="root-forecast-table-dmiObs-historic"></div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </div> <!-- Tab content end -->
+        </div> <!-- Section body end -->
+      </div> <!-- Section end-->
        
-  
       <!-- Historic Saltstein webcam (Currently deactivated)-->
-      
       <div class="section" style="display:none;">
         <div class="section-header">
           <div class="section-title">Webkamera</div>
@@ -379,7 +349,6 @@
         </div>
       </div>
         
-
       <!-- Report view-->
       <div class="section">
         <div class="section-header">
@@ -392,11 +361,9 @@
         </div>
       </div>
         
-  
       <!-- Report list -->
-      
       <div class="section">
-        <div class="section-heading">
+        <div class="section-header">
           <div class="section-title">Rapporter</div>
           <span class="glyphicon glyphicon-filter i-tool pull-right" data-toggle="modal" data-target="#modal-report-filter"></span>
           <div id="report-list-forecast-btn-group" class="btn-group btn-group-sm">

@@ -7,10 +7,18 @@ import { updateForecastTable } from './table.js';
 import { getStats } from '../../utils/statistics.js';
 
 const headers = ['Tid', 'Høyde', 'Periode', 'Varsel'];
-var stats = {}
+var smhiStats = null
 
-function cls(obj, param) {
-  return clsValue(obj, param, {stats})
+export async function getSMHIStats() {
+  if (!smhiStats) smhiStats = await getStats('smhi')
+  return smhiStats
+}
+
+function cls(obj, param, alias) {
+  let options = {stats: smhiStats}
+  if (alias) options.alias = alias
+
+  return clsValue(obj, param, options)
 }
 
 export function smhiForecastToRow(forecast) {
@@ -28,7 +36,7 @@ export function smhiForecastToRow(forecast) {
       el('td', '', 
         el('span', `td-value ${cls(f, 'waveperiod')}`, formatValue(f, 'waveperiod'))),
       el('td', '', 
-        el('span', `td-value ${cls(f, 'waveheightforecast')}`, formatValue(f, 'waveheightforecast'))
+        el('span', `td-value ${cls(f, 'waveheightforecast', 'waveheight')}`, formatValue(f, 'waveheightforecast'))
     )])
   )
 }
@@ -47,4 +55,17 @@ export var smhiForecast = [];
 export async function getSMHIForecast(start, end) {
   smhiForecast = await get('forecasts/smhi');
   updateSMHITable();
+}
+
+export function setNulls(obs) {
+  obs.forEach(o => {
+    let d = o.stations['Väderöerna']
+    if (d.waveheight === 0 && d.waveheightmax === 0 && d.waveperiod === 0 && d.wavedir === 0) {
+      d.waveheight = null;
+      d.waveheightmax = null;
+      d.waveperiod = null;
+      d.wavedir = null;
+    }
+  })
+  return obs
 }

@@ -38,7 +38,7 @@ function displayYrImgContainers(date) {
 }
 
 export function imgFooter(source, report) {
-  let footer = div('panel-footer', span(`time-${source}-historic panel-h4`))
+  let footer = div('section-footer', span(`time-${source}-historic panel-h4`))
 
   if (report) {
     footer.append(ratingLabel(report.score, 'md', 'align-right'))

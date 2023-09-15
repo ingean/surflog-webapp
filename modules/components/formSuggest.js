@@ -65,7 +65,7 @@ const uploadForecastImage = async () => {
   let fileInput = document.getElementById('session-forecastimage')
   data.append('files', fileInput.files[0])
   
-  let load = new Loader('forecast-image-status')
+  let load = new Loader('#forecast-image-status')
   let r = await post('images', data)  
   load.stop()
   return true
@@ -74,7 +74,7 @@ const uploadForecastImage = async () => {
 const convertForecastImageToText = async () => {
   let image = document.getElementById('forecast-image-preview')
   
-  let load = new Loader('forecast-image-status')
+  let load = new Loader('#forecast-image-status')
   let result = await post('images', image.src)
 
   let suggestions = slForecastFromImage(result)

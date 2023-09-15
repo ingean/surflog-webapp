@@ -3,6 +3,9 @@ import { toLocal } from '../../utils/time.js';
 import { dmiForecast } from '../tables/dmi.js';
 import { ratingLabel } from '../../components/elements.js';
 import { getImgTime, setImgTime } from './forecast.js';
+import { notify } from '../../utils/logger.js';
+import { get } from '../../utils/api.js';
+import { Loader } from '../../utils/logger.js';
 
 function currentDMITimeStep(imgId = 'img-dmi-waveheight-live') {
   let src = document.querySelector(`#${imgId}`).src;
@@ -81,6 +84,18 @@ function dmiStartTime(){ //Estimates the start time for forecast coming live fro
   return moment(date).format(`YYYY-MM-DDT${hr}:00:00`);
 }
 
+const resetDMITime = async () => { 
+  let loader = new Loader('.time-dmi-reset-container', 16)
+  let id = currentDMITimeStep()
+  let result = await get(`forecasts/dmi/currentdate?id=${id}`)
+  if (result?.utctime) {
+    setImgTime(toLocal(result.utctime))
+  } else {
+    notify('Klarte ikke å resette tiden på DMI-bildene', null, 'time')
+  }
+  loader.stop()
+}
+
 export function updateDMIImgs(currentTS, newTS, scope = 'live') {
   let imgs = ['waveheight', 'swellheight', 'wind'];
   imgs.forEach(img => {
@@ -97,5 +112,8 @@ export function initDMIImages() {
   //Click event for forecast param switcher
   document.querySelectorAll('.param-switch-dmi')
   .forEach(el => {el.addEventListener('click', switchDMIParam)});
-}
 
+  //Click event for forecast param switcher
+  document.querySelectorAll('.time-dmi-reset')
+  .forEach(el => {el.addEventListener('click', resetDMITime)});
+}

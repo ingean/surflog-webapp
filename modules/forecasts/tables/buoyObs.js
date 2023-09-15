@@ -4,7 +4,7 @@ import { get } from '../../utils/api.js';
 import { formatValue, clsValue } from '../format.js';
 import { updateForecastTable } from './table.js';
 import { updateBuoyDashboard } from '../dashboards/buoyObs.js';
-import { smhiForecastToRow, getSMHITime } from './smhi.js';
+import { smhiForecastToRow, getSMHITime, setNulls, getSMHIStats } from './smhi.js';
 import { isDayTime, toLocal } from '../../utils/time.js';
 import { getStats } from '../../utils/statistics.js';
 
@@ -54,9 +54,9 @@ export var smhiBuoys = []
 
 export async function getBuoyObs() {
   stats = await getStats('buoy')
+  await getSMHIStats()
   ukBuoys = await get(`observations/buoys`);
-  smhiBuoys = await get('forecasts/smhi');
+  smhiBuoys = setNulls(await get('forecasts/smhi'));
   updateBuoyDashboard(stats, ukBuoys, smhiBuoys)
-  //updateBuoyObsTable(smhiBuoys);
   updateBuoyObsTable(ukBuoys[0].data, false);
 }

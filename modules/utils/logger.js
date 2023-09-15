@@ -1,4 +1,4 @@
-import { el } from '../components/elements.js';
+import { el, div, image } from '../components/elements.js';
 
 export function log(error, title, severity = 'error') {
   
@@ -28,28 +28,38 @@ export function notify(text, type, icon) {
 }
 
 export class Loader {
-  constructor(parentElementId){
-    this.parentElementId = parentElementId;
-    this.elementId = `${parentElementId}-loader`;
-    this.start();
+  constructor(containerQuery, size = 40){
+    this.containers = document.querySelectorAll(containerQuery)
+    this.loaders = []
+    this.contents = []
+    this.size = size
+    this.start()
+  }
+
+  _create() {
+    let l = div('loader-container',
+              image('images/loader.gif', {class: 'loader-img', height: `${this.size}px`, width: `${this.size}px`}))
+    
+              this.loaders.push(l)
+    return l
   }
 
   start() {
-    let loader = 
-      el('div', {id: this.elementId, class: 'loader-container'},
-        el('img', {class: 'loader-img', src: "images/loader.gif", height: "40px" })
-    )
-    
-    document
-    .getElementById(this.parentElementId).appendChild(loader);
+    this.containers.forEach(c => {
+      let clone = c.cloneNode(true)
+      this.contents.push(clone.childNodes)
+      c.replaceChildren(this._create())
+    })
   }
   
   stop() {
-    let e = document.getElementById(this.elementId);
-    if (e) {
-      e.parentNode.removeChild(e)
-    } else {
-      log(null, 'Attempted to remove noexisting loader GIF');
-    };
+    this.containers.forEach((c, idx) => {
+      if (this.containers[idx]) {
+        c.replaceChildren(...this.contents[idx])
+      } else {
+        c.removeChild(this.loaders[idx])
+      }
+       
+    })
   }
 }

@@ -21,7 +21,7 @@ import { getSunTimesForPosition } from './settings.js';
 //import { initMSWImages } from './forecasts/images/msw.js';
 
 export async function startSurfLog(userId) {
-  let load = new Loader(`root-forecast-table-yrCoast`);
+  let load = new Loader(`#root-forecast-table-yrCoast`);
   initDateInput(); // Set current date
   //initWebcam(); // No linger available
   initDMIImages(); // Add click events for img nav btns and set time
@@ -43,9 +43,7 @@ export async function startSurfLog(userId) {
   // Forecasts
   getWindObs();
   getYrForecast();
-  getSMHIForecast();
   getDMIForecast();
-  //getUKForecast();
   getDMIObservations();
   getBuoyObs()
 }

@@ -82,17 +82,21 @@ const windForecastTile = (report) => {
 
 const boardTile = (report) => {
   let board = getBoardInfo(report.board)
-  
-  return tile('Brett', [
-    div('flex-row center2', [
+  let content = null
+  if (board) {
+    content = div('flex-row center2', [
       image(`images/boards/${report.board}.png`, {height: '90px'}),
       div('flex-col', [
         div('tile-text', `${report.board} ${board.volume}l`),
         div('tile-text', `${board.length} ${board.width} ${board.thickness}`),
         div('tile-text', `${board.type} ${board.fins}`)
       ])
-    ])   
-  ])
+    ])
+  } else {
+    content = div('tile-text', `${report.board}`)
+  }
+  
+  return tile('Brett', content)
 }
 
 const equipmentTileFront = (report) => {

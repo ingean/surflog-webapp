@@ -97,9 +97,11 @@
 
 .section-header {
   display: flex;
+  flex-direction: row;
   min-height: 70px;
   color: var(--on-surface-color);
   background-color: var(--surface-color);
+  padding: 8px;
 }
 
 .section-title {
@@ -113,4 +115,38 @@
   color: var(--on-surface-color);
   border-bottom: 1 solid var(--on-surface-color);
   background-color: var(--surface-color);
+}
+
+.sub-section {
+  width: 100%;
+}
+
+.sub-section-header {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  align-content: space-around;
+  min-height: 50px;
+  padding: 8px;
+  background-color: var(--surface-color-l1);
+}
+
+.sub-section-title {
+  font-size: large;
+  font-weight: bold;
+}
+
+.sub-section-subtitle {
+  font-size: medium;
+  margin-left: 8px;
+}
+
+.sub-section-body {
+  width:100%;
+}
+
+.sub-section-footer {
+  min-height: 30px;
+  padding: 8px;
+  background-color: var(--surface-color-l1);
 }
