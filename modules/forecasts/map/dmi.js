@@ -39,19 +39,6 @@ const addMapElements = () => {
   children.forEach(c => container.appendChild(c))
 }
 
-const lockedMapOptions = () => {
-  return defaults({
-      doubleClickZoom: false,
-      dragAndDrop: false,
-      dragPan: false,
-      keyboardPan: false,
-      keyboardZoom: false,
-      mouseWheelZoom: false,
-      pointer: false,
-      select: false
-    })
-}
-
 const toggleMapLock = () => {
   let interactions = map.getInteractions()
   interactions.forEach(i => i.setActive(!mapLock))
