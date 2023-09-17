@@ -1,0 +1,28 @@
+.map-lock-control {
+  top: 65px;
+  left: .5em;
+  color:black
+}
+.ol-touch .map-lock-control {
+  top: 80px;
+}
+
+.map-legend {
+  position: absolute;
+  bottom: 30px;
+  right: 24px;
+  box-sizing: border-box;
+  z-index: 1000;
+  box-shadow: rgba(51, 51, 51, 0.4) 0px 1px 1px 1px;
+}
+
+.map-legend-list {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+  font-weight: 500;
+  color: white;
+  font-size: 10px;
+  text-shadow: rgba(22, 20, 20, 0.5) -1px -1px 0px, rgba(22, 20, 20, 0.5) 1px -1px 0px, rgba(22, 20, 20, 0.5) -1px 1px 0px, rgba(22, 20, 20, 0.5) 1px 1px 0px;
+}
