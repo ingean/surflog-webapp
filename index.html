@@ -11,12 +11,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
    
+    <!-- OpenLayers stylesheet-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.1.0/ol.css">
 
     <!-- Local stylesheet -->
     <link rel="stylesheet" href="css/lib/simplePagination.css">
     <link rel="stylesheet" href="css/lib/animate.css">
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/slider.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/forms.css">
@@ -113,6 +116,9 @@
       </div><!-- /.navbar-collapse -->
  
     </nav>
+
+    <!-- DMI forecast map -->
+    <div id="dmi-map-section" class="section center-v"></div>
    
     <!-- Forecast and observation graphs -->
   
@@ -154,21 +160,21 @@
             <!-- DMI forecast images and table -->
             <div id="tab-forecast-dmi" class="tab-pane fade">
               <div class="tab-body flex-col align-content-center">
-             
-                  <div class="section-header">    
-                    <div class="flex-row center-v align-right">
-                      <label for="dmi-chart-timestep" class="control-label text-left margin-right">Tidssteg</label>
-                      <div class="input-group">
-                        <div class="btn-group">
-                          <a class="btn btn-primary btn-sm Active" data-toggle="dmi-chart-timestep" data-title="1">1t</a>
-                          <a class="btn btn-primary btn-sm notActive" data-toggle="dmi-chart-timestep" data-title="6">6t</a>
-                          <a class="btn btn-primary btn-sm notActive" data-toggle="dmi-chart-timestep" data-title="24">24t</a>
-                        </div>
-                        <input type="hidden" id="dmi-chart-timestep" name="dmi-chart-timestep" value="1">
+
+                <div class="section-header">    
+                  <div class="flex-row center-v align-right">
+                    <label for="dmi-chart-timestep" class="control-label text-left margin-right">Tidssteg</label>
+                    <div class="input-group">
+                      <div class="btn-group">
+                        <a class="btn btn-primary btn-sm Active" data-toggle="dmi-chart-timestep" data-title="1">1t</a>
+                        <a class="btn btn-primary btn-sm notActive" data-toggle="dmi-chart-timestep" data-title="6">6t</a>
+                        <a class="btn btn-primary btn-sm notActive" data-toggle="dmi-chart-timestep" data-title="24">24t</a>
                       </div>
+                      <input type="hidden" id="dmi-chart-timestep" name="dmi-chart-timestep" value="1">
                     </div>
-                    <span class="pull-right" id="twin"></span>
                   </div>
+                  <span class="pull-right" id="twin"></span>
+                </div>
 
                  <div class="section-body">
               
@@ -395,6 +401,8 @@
     <div id="root-modal-txtArea"></div>
 
     <!-- Scripts -->
+    <!--script src="https://cdn.jsdelivr.net/npm/ol@v8.1.0/dist/ol.js"></script--> <!-- Open Layers -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.9.0/proj4.min.js" integrity="sha512-Y/B11KRfeaNHAonSdwnF0fvpzsA+W27fqfMPmfkxRAwuySCcA7aT9LfJcWz5fi32McMI02jngFYj7LYT1z+VVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>  
     <script src="https://www.gstatic.com/charts/loader.js"></script>

@@ -15,6 +15,7 @@ import { initTwin } from './reports/compare.js';
 import { initReportlist } from './reports/views/list.js';
 import { getBWWaveForecast } from './utils/api.js';
 import { getBuoyObs } from './forecasts/tables/buoyObs.js';
+import { initDMIMap } from './forecasts/map/dmi.js';
 
 import { getSunTimesForPosition } from './settings.js';
 //import { initWebcam } from './html/webcam.js';
@@ -46,4 +47,7 @@ export async function startSurfLog(userId) {
   getDMIForecast();
   getDMIObservations();
   getBuoyObs()
+
+  // Maps
+  initDMIMap()
 }

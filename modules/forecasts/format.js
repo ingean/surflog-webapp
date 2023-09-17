@@ -17,6 +17,14 @@ export function formatDate(date) {
   return moment(date).calendar(null, noCalendarDates)
 }
 
+export const formatWH = (obj, alias) => formatValue(obj, alias || 'waveheight', 'waveheight')
+export const formatWHF = (obj, alias) => formatValue(obj, alias || 'waveheightforecast', 'waveheight')
+export const formatWP = (obj, alias) => formatValue(obj, alias || 'waveperiod', 'waveperiod')
+export const formatSH = (obj, alias) => formatValue(obj, alias || 'swellheight', 'swellheight')
+export const formatSP = (obj, alias) => formatValue(obj, alias || 'swellperiod', 'swellperiod')
+export const formatW = (obj, alias) => formatValue(obj, alias || 'wind', 'wind')
+export const formatP = (obj, alias) => formatValue(obj, alias || 'airpressure', 'pressure')
+
 export function formatValue(obj, param, paramAlias) {
   if (!obj?.[param]) return ''
   let value = obj[param]
@@ -29,17 +37,6 @@ export function formatValue(obj, param, paramAlias) {
 
 export function formatValue2(value, param, paramAlias) {
   return (value[param]) ? ` (${formatValue(value, param, paramAlias)})` : ''
-}
-
-export function clsValue_old(statistics, f, param,  location, type = 'txt', wind = 'local') {
-  param = (param === 'waveheightforecast') ? 'waveheight' : param;
-  if (param.includes('wind')) {
-    let score = scoreWindValue(f[param], wind)
-    return (score) ? `${type}-${score}` : ''; //Text or background color eg txt-1 or bg-1
-  } else {
-    let score = scoreValue(statistics, f[param], param, location);
-    return (score > 2) ? `${type}-${score}` : ''; //Text or background color eg txt-1 or bg-1
-  }
 }
 
 export function clsValue(obj, param, options) {

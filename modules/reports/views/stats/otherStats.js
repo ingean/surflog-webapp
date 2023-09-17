@@ -1,8 +1,9 @@
 import { round, minMaxValues } from "../../../utils/utilities.js"
-import { tile, indicator } from "../../../components/dashboard.js"
+import { indicator } from "../../../components/dashboard.js"
+import { tile } from '../../../components/dashboard/tile.js'
 import { div } from "../../../components/elements.js"
 import { tideText } from "../report.js"
-import { arrow, icon, iconReport, iconTide } from '../../../components/icons.js'
+import { iconTide } from '../../../components/icons.js'
 
 export const tideTile = (report, stats) => {
   let x = minMaxValues(stats.tides[0])
@@ -13,5 +14,5 @@ export const tideTile = (report, stats) => {
     indicator('Snitthøyde', `${round(stats.tides[0].avgtide, 1)} m`, footer, 4, 'sm')
   ])
   
-  return tile(`Tidevann`, frontContent, null, null, 'stats', 'md')
+  return tile({title: `Tidevann`, contents: [frontContent], icon: 'stats'})
 }

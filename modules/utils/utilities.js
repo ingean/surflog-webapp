@@ -91,3 +91,17 @@ export const minMaxValues = (obj) => {
     max: {key: max, value: obj[max]}
   }
 }
+
+export const maxObj = (arr, getValue) => {
+  arr = arr.filter(o => getValue(o)) // Remove objs without values
+  return arr.reduce((prev, current) => {
+    return (getValue(prev)) > getValue(current) ? prev : current
+  })
+}
+
+export const minObj = (arr, getValue) => {
+  arr = arr.filter(o => getValue(o)) // Remove objs without values
+  return arr.reduce((prev, current) => {
+    return (getValue(prev)) < getValue(current) ? prev : current
+  })
+}

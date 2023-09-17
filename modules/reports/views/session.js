@@ -1,5 +1,6 @@
 import { div, image, paramLabel, tempSpan, ratingLabel } from '../../components/elements.js';
-import { tile, indicator, txtArea } from '../../components/dashboard.js';
+import { indicator, txtArea } from '../../components/dashboard.js';
+import { tile } from '../../components/dashboard/tile.js'
 import { tabs } from '../../components/tabs.js';
 import { reportHeader, reportFooter, reportCompare } from './report.js';
 import { getBoardInfo } from '../../config/forms.js';
@@ -30,54 +31,61 @@ export async function updateSessionView(report) {
 function sessionDashboard(report, spotReportStats) {
   return div('report-dashboard flex-row', [
         waveForecastTile(report),
-        tile('Beskrivelse', txtArea(report.descr)),
+        tile({title: 'Beskrivelse', contents: [txtArea(report.descr)]}),
         boardTile(report),
         tideTile(report, spotReportStats),
         windForecastTile(report),
-        tile('Analyse', txtArea(report.forecast)),
-        tile(null, equipmentTileFront(report), equipmentTileBack(report)),
+        tile({title: 'Analyse', contents: [txtArea(report.forecast)]}),
+        tile({contents: [equipmentTileFront(report), equipmentTileBack(report)]}),
         scoreTile(report),
         compareTile(report)
     ])
 }
 
 const waveForecastTile = (report) => {
-  return  tile(iconLogoWithText('Bølger', 'surfline'), [
-    div('flex-row', [
-      div('', [
-        slWaveheight(report),
-        slRating(report)
-      ]),
-    div('', [
-      slSwell(report),
-      slSubswell(report),
-    ])  
-  ]),  
-  div('flex-row', [
-    paramLabel('waveheight', report.waveheightObs, 'høyt'),
-    paramLabel('size', report.size, 'størrelse'),
-    paramLabel('waveperiod', report.waveperiodObs, 'periode'),
-    paramLabel('push', report.push, 'push')
-  ])
-  ])
+  return  tile({
+    title: iconLogoWithText('Bølger', 'surfline'), 
+    contents: [
+      [
+        div('flex-row', [
+          div('', [
+            slWaveheight(report),
+            slRating(report)
+          ]),
+        div('', [
+          slSwell(report),
+          slSubswell(report),
+        ])  
+      ]),  
+      div('flex-row', [
+        paramLabel('waveheight', report.waveheightObs, 'høyt'),
+        paramLabel('size', report.size, 'størrelse'),
+        paramLabel('waveperiod', report.waveperiodObs, 'periode'),
+        paramLabel('push', report.push, 'push')
+      ])
+    ]
+  ]})
 }
 
 const windForecastTile = (report) => {
-  return tile(iconLogoWithText('Vind', 'surfline'), [
-    div('flex-row', [
-      slWind(report),
-      slEnergy(report)
-    ]),
-    div('flex-row', [
-      paramLabel('winddir', report.winddirObs, `${report.windspeedObs.toLowerCase()}`),
-      paramLabel('shape', report.shape, 'shape'),
-      paramLabel('closeout', report.closeout, 'closeouts')
-    ]),
-    div('flex-row', [
-      paramLabel('consistency', report.consistency, 'mellom settene'),
-      paramLabel('wavecount', report.wavecount, 'wavecount'),
-    ])   
-  ])
+  return tile({
+    title: iconLogoWithText('Vind', 'surfline'), 
+    contents: [[
+      div('flex-row', [
+        slWind(report),
+        slEnergy(report)
+      ]),
+      div('flex-row', [
+        paramLabel('winddir', report.winddirObs, `${report.windspeedObs.toLowerCase()}`),
+        paramLabel('shape', report.shape, 'shape'),
+        paramLabel('closeout', report.closeout, 'closeouts')
+      ]),
+      div('flex-row', [
+        paramLabel('consistency', report.consistency, 'mellom settene'),
+        paramLabel('wavecount', report.wavecount, 'wavecount'),
+      ])
+    ]   
+  ]})
 }
 
 const boardTile = (report) => {
@@ -96,7 +104,7 @@ const boardTile = (report) => {
     content = div('tile-text', `${report.board}`)
   }
   
-  return tile('Brett', content)
+  return tile({title: 'Brett', contents: [content]})
 }
 
 const equipmentTileFront = (report) => {
@@ -133,25 +141,19 @@ const equipmentTileBack = report => {
 
 const compareTile = async (report) => {
   let compare = await reportCompare(report)
-  return tile('Sammenlikning', 
-    compare,
-    null, null, null, 'md')
+  return tile({title: 'Sammenlikning', contents: [compare]})
 }
 const scoreTile = (report) => {
   let score = calcScore(report)
-  return tile(
-    'Score',
-    div('flex-row center2', [
+  return tile({
+    title: 'Score',
+    contents: [div('flex-row center2', [
       indicator('Beregnet score', score, 'Snitt av merker', Math.round(score), 'wide'),
       div('flex-col', [
         ratingLabel(report.score, 'lg'),
         slRating(report)
       ])
-    ]), 
-    null,
-    null,
-    null,
-    'md'
+    ])]}
   )
 }
 

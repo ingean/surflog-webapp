@@ -1,4 +1,5 @@
-import { indicator, tile, fact } from "../../../components/dashboard.js"
+import { indicator, fact } from "../../../components/dashboard.js"
+import { tile } from '../../../components/dashboard/tile.js'
 import { drawPieChart,} from "../../../components/charts.js"
 import { div } from '../../../components/elements.js'
 import { prepPieChartData } from "./statistics.js"
@@ -15,7 +16,7 @@ export const byScoreTile = (report, stats, allStats) => {
   let frontContent = byScoreTileFrontContent(report, spotResult)
   let backContent = bySpotTileBackContent(report, stats)
 
-  return tile(`Score og spots i nærheten`, frontContent, backContent, footer, 'transfer', 'lg')
+  return tile({title: `Score og spots i nærheten`, contents: [frontContent, backContent], footer, size:'lg'})
 }
 
 const byScoreTileFrontContent = (report, results) => {

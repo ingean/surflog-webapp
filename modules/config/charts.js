@@ -27,6 +27,13 @@ const chartOptions = {
     legend: {
       position: 'none'
     }
+  },
+  mdTile: {
+    height: 75,
+    width: 300,
+    legend: {
+      position: 'none'
+    }
   }
 }
 

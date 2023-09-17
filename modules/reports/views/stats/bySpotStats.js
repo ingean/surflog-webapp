@@ -1,4 +1,4 @@
-import { indicator, tile } from "../../../components/dashboard.js"
+import { indicator } from "../../../components/dashboard.js"
 import { drawPieChart,} from "../../../components/charts.js"
 import { div } from '../../../components/elements.js'
 import { prepPieChartData } from "./statistics.js"

@@ -1,5 +1,6 @@
 import { chartOption } from "../../../config/charts.js"
-import { tile, indicator, fact } from "../../../components/dashboard.js"
+import { indicator, fact } from "../../../components/dashboard.js"
+import { tile } from '../../../components/dashboard/tile.js'
 import { div } from "../../../components/elements.js"
 import { drawColumnChart, dbChart, dbControl, drawDashboard } from "../../../components/charts.js"
 import { monthAsText, thisMonth, thisYear } from "../../../utils/time.js"
@@ -20,7 +21,7 @@ export const byMonthTile = (spot, stats, allStats) => {
   let frontContent = byMonthTileFrontContent(byMonth, headers)
   let backContent = byMonthTileBackContent(byMonth, headers)
 
-  return tile(`Så langt i år på ${spot}`, frontContent, backContent, footer, 'stats', 'lg')
+  return tile({title: `Så langt i år på ${spot}`, contents: [frontContent, backContent], footer, icon: 'stats', size:'lg'})
 }
 
 const byMonthTileFrontContent = (byMonth) => {

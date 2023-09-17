@@ -1,14 +1,16 @@
-import { tile, checkTile, indicator } from "../../components/dashboard.js"
+import { indicator } from "../../components/dashboard.js"
 import { chartOption } from "../../config/charts.js"
 import { drawLineChart } from "../../components/charts.js";
 import { div, tempSpan } from "../../components/elements.js"
 import { arrow } from '../../components/icons.js';
-import { formatValue, valueRating } from '../../forecasts/format.js'
+import { valueRating, formatWH, formatWHF, formatWP, formatW } from '../../forecasts/format.js'
 import { toLocal } from "../../utils/time.js";
 import { direction } from "../../config/forecasts.js";
 import { round } from '../../utils/utilities.js';
 import { updateBuoyObsTable, smhiBuoys, ukBuoys } from "../tables/buoyObs.js";
 import { getSMHIStats } from "../tables/smhi.js";
+import { minObj, maxObj } from "../../utils/utilities.js";
+import { tile, checkTile } from "../../components/dashboard/tile.js"
 
 var buoyStats = {}
 
@@ -35,65 +37,103 @@ const getLastSMHIObs = (obs) => {
   return lastObs.stations['Väderöerna']
 }
 
+export function ukWH(o) { return o.waveheight}
+export function smhiWH(o) { return o.stations['Väderöerna'].waveheight }
+export function ukWP(o) { return o.waveperiod}
+export function smhiWP(o) { return o.stations['Väderöerna'].waveperiod }
+export function ukW(o) { return o.windspeed}
+export function smhiW(o) { return o.stations['Väderöerna'].windspeed }
+export function ukP(o) { return o.airpressure}
+export function ukAT(o) { return o.airtemp}
+export function smhiWHF(o) { return o.stations['Väderöerna'].waveheightforecast }
+
 const ukTile = (obs) => {
   let obsData = obs.data.toReversed()
   let chartContainer = div('tile-chart-line')
   let chartData = obsData.map(o => [toLocal(o.utctime), o.waveheight])
-  drawLineChart(chartContainer, ['Tid', `Høyde (m)`], chartData, chartOption('smallColumn'))
+  drawLineChart(chartContainer, ['Tid', `Høyde (m)`], chartData, chartOption('mdTile'))
   
   let data = getLastObs(obs.data)
-  return tile(
-    obs.name, 
-    div('flex-row', [
-      indicator('Bølgehøyde', formatValue(data, 'waveheight'), null, rating(data, 'waveheight'), 'sm'),
-      indicator('Periode', formatValue(data, 'waveperiod'), null, rating(data, 'waveperiod'), 'sm'),
-      indicator('Vind', formatValue(data, 'windspeed', 'wind'), null, rating(data, 'windspeed'), 'sm'),
+
+  return tile({
+    title: obs.name, 
+    contents: [div('flex-row', [
+      indicator(
+        'Bølgehøyde', 
+        formatWH(data), 
+        `Max: ${formatWH(maxObj(obs.data, ukWH))}`, 
+        rating(data, 'waveheight'), 'sm'),
+      indicator(
+        'Periode', 
+        formatWP(data), 
+        `Max: ${formatWP(maxObj(obs.data, ukWP))}`,  
+        rating(data, 'waveperiod'), 'sm'),
+      indicator(
+        'Vind', 
+        formatW(data, 'windspeed'), 
+        `Max: ${formatW(maxObj(obs.data, ukW), 'windspeed')}`, 
+        rating(data, 'windspeed'), 'sm'),
       indicator('Vinddir', arrow(data.winddir), `${data.winddir} ${direction(data.winddir).short}`, null, 'sm')
     ]),
     div('flex-row', [
-      indicator('Lufttrykk', round(data.airpressure, 0), 'hPa', rating(data, 'airpressure'), 'sm'),
-      indicator('Lufttemp', tempSpan('', data.airtemp), null, null, 'sm'),
+      indicator(
+        'Lufttrykk', 
+        round(data.airpressure, 0), 
+        `Min: ${round(minObj(obs.data, ukP))}`, 
+        rating(data, 'airpressure'), 'sm'),
+      indicator(
+        'Lufttemp', 
+        tempSpan('', data.airtemp), 
+        `Min: ${round(minObj(obs.data, ukAT).airtemp)}°`,  
+        null, 'sm'),
+      ]),
       div('flex-row center2', chartContainer)
-    ]), 
-    `Sist oppdatert ${moment(toLocal(data.utctime)).calendar()}`,
-    null,
-    'md',
-    true,
-    obs.id,
-    tileSelected)
+    ], 
+    footer: `Sist oppdatert ${moment(toLocal(data.utctime)).calendar()}`,
+    id: obs.id,
+    onSelect: tileSelected})
 }
 
 const smhiTile = (obs) => {
   let chartContainer = div('tile-chart-line')
   let chartData = obs.filter(o => o.stations['Väderöerna'].waveheight).map(o => {
     let wh = o.stations['Väderöerna'].waveheight
-    if (wh) return [o.localtime, o.stations['Väderöerna'].waveheight]
+    let whf = o.stations['Väderöerna'].waveheightforecast
+    if (whf) return [o.localtime, wh, whf]
   })
-  drawLineChart(chartContainer, ['Tid', `Høyde (m)`], chartData, chartOption('smallColumn'))
+  drawLineChart(chartContainer, ['Tid', 'Høyde (m)', 'Varsel (m)'], chartData, chartOption('mdTile'))
 
   let data = getLastSMHIObs(obs)
-  return tile(
-    'Väderöerna',
-    div('flex-row', [
-      indicator('Bølgehøyde', formatValue(data, 'waveheight'), `Max: ${formatValue(data, 'waveheightmax')}`, smhiRating(data, 'waveheight'), 'sm'),
-      indicator('Periode', formatValue(data, 'waveperiod'), null, smhiRating(data, 'waveperiod'), 'sm'),
+  return tile({
+    title: 'Väderöerna',
+    contents: [div('flex-row', [
+      indicator(
+        'Bølgehøyde', 
+        formatWH(data), 
+         `Max: ${formatWH(maxObj(obs, smhiWH).stations['Väderöerna'])}`,
+        smhiRating(data, 'waveheight'), 'sm'),
+      indicator(
+        'Periode', 
+        formatWP(data),
+        `Max: ${formatWP(maxObj(obs, smhiWP).stations['Väderöerna'])}`, 
+        smhiRating(data, 'waveperiod'), 'sm'),
       indicator('Retning', arrow(data.wavedir), `${round(data.wavedir, 0)} ${direction(data.wavedir).short}`, null, 'sm'),
-      indicator('Varsel', formatValue(data, 'waveheightforecast'), null, smhiRating(data, 'waveheight'), 'sm')
+      indicator(
+        'Varsel', 
+        formatWHF(data), 
+        `Max: ${formatWHF(maxObj(obs, smhiWHF).stations['Väderöerna'])}`, 
+        smhiRating(data, 'waveheight'), 'sm')
     ]),
-    div('flex-row center2', chartContainer),
-    `Sist oppdatert ${moment(data.localtime).calendar()}`,
-    null,
-    'md',
-    true,
-    'smhi',
-    tileSelected)
+    div('flex-row center2', chartContainer)],
+    footer: `Sist oppdatert ${moment(data.localtime).calendar()}`,
+    id: 'smhi',
+    onSelect: tileSelected})
 }
 
 export const updateBuoyDashboard = (stats, ukBuoys, smhiBuoys) => {
   buoyStats = stats
   let tiles = ukBuoys.map(o => ukTile(o))
   tiles.push(smhiTile(smhiBuoys))
-
   let container = document.getElementById('buoy-db-container')
   container.appendChild(div({id: 'buoy-tile-group', class: 'flex-row center-h'}, tiles))
 }
