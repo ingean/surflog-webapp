@@ -6,6 +6,9 @@ import { isDayTime, toUTC } from '../../utils/time.js';
 import { formatValue, clsValue } from '../format.js';
 import { updateForecastTable } from './table.js';
 import { getStats } from '../../utils/statistics.js';
+import { vectorLayer } from '../../utils/map/vectorLayer.js';
+import { addLayerToMap } from '../map/dmi.js';
+import { valueRating } from '../format.js';
 
 var stats = {}
 
@@ -49,6 +52,7 @@ function yrForecastToRow(f) {
 
 export async function updateYrTable(spot = 'Saltstein') {
   stats = await getStats('yr')
+  addYrToMap(yrForecasts, stats)
   let forecast = convertToForecast(yrForecasts)
   let headers = getHeaders(forecast[0].stations);
   updateForecastTable(forecast, getYrTime, yrForecastToRow, 'yr', headers);
@@ -94,4 +98,20 @@ export var yrForecasts = []
 export async function getYrForecast() {
   yrForecasts = await getMetForecast()
   updateYrTable()
+}
+
+const addYrToMap = (forecast, stats) => {
+  let features = forecast.map((f, idx) => {
+    let wh = f.properties.timeseries[0].data.instant.details
+    let name = forecasts.met.locations[idx].name
+
+    return {
+      name,
+      lat: f.geometry.coordinates[1], 
+      lon: f.geometry.coordinates[0],
+      rating: valueRating(wh, 'sea_surface_wave_height', {station: name, stats, alias: 'waveheight'})
+    }
+  })
+  let layer = vectorLayer(features)
+  addLayerToMap(layer)
 }

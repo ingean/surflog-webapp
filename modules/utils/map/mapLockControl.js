@@ -11,7 +11,7 @@ export class mapLock extends Control {
    
     const button = document.createElement('button');
     //button.innerHTML = 'O';
-    button.appendChild(sprite('icons','icons', 'unlock', 16, 16))
+    button.appendChild(sprite('icons','icons', 'unlock', 24, 24))
 
     const element = document.createElement('div');
     element.className = 'map-lock-control ol-unselectable ol-control';
@@ -34,7 +34,7 @@ export class mapLock extends Control {
     interactions.forEach(i => i.setActive(!this.isLocked))
     
     let iconId = (this.isLocked) ? 'unlock' : 'lock'
-    this.button.replaceChildren(sprite('icons','icons', iconId, 16, 16))
+    this.button.replaceChildren(sprite('icons','icons', iconId, 24, 24))
     
     this.isLocked = !this.isLocked
   }

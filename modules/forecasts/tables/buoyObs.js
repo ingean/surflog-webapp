@@ -1,7 +1,7 @@
 import { el, hrsTd, tempTd } from '../../components/elements.js';
 import { arrow } from '../../components/icons.js';
 import { get } from '../../utils/api.js';
-import { formatValue, clsValue } from '../format.js';
+import { formatValue, clsValue, valueRating } from '../format.js';
 import { updateForecastTable } from './table.js';
 import { updateBuoyDashboard } from '../dashboards/buoyObs.js';
 import { smhiForecastToRow, getSMHITime, setNulls, getSMHIStats } from './smhi.js';
@@ -59,13 +59,13 @@ export async function getBuoyObs() {
   await getSMHIStats()
   ukBuoys = await get(`observations/buoys`);
   smhiBuoys = setNulls(await get('forecasts/smhi'))
-  addBuoysToMap(ukBuoys)
+  addBuoysToMap(ukBuoys, stats)
   updateBuoyDashboard(stats, ukBuoys, smhiBuoys)
   updateBuoyObsTable(ukBuoys[0].data, false);
 }
 
-const addBuoysToMap = (ukBuoys) => {
-  let features = ukBuoys.map(b => { return {lat: b.lat, lon: b.lon, name: b.name}})
+const addBuoysToMap = (ukBuoys, stats) => {
+  let features = ukBuoys.map(b => { return {lat: b.lat, lon: b.lon, name: b.name, rating: valueRating(b.data[0], 'waveheight', {stats})}})
   let layer = vectorLayer(features)
   addLayerToMap(layer)
 }

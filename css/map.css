@@ -1,10 +1,17 @@
+.ol-control button { 
+  height: 50px !important;
+  width: 50px !important;
+  font-size: x-large !important;
+}
+
+
 .map-lock-control {
-  top: 65px;
+  top: 130px;
   left: .5em;
   color:black
 }
 .ol-touch .map-lock-control {
-  top: 80px;
+  top: 130px;
 }
 
 .map-legend {
