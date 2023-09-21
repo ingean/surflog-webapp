@@ -40,7 +40,7 @@ export async function updateBuoyObsTable(obs, smhi = true, spot = 'Saltstein') {
   
   if (smhi) {
     const headers = ['Tid', 'Høyde', 'Periode', 'Varsel']
-    updateForecastTable(obs, getSMHITime, smhiForecastToRow, 'buoyObs', headers);
+    updateForecastTable(obs.data, getSMHITime, smhiForecastToRow, 'buoyObs', headers);
   } else {
     const headers = ['Tid', 'Høyde', 'Periode', 'Vind', 'Trykk', 'Lufttemp.']
     updateForecastTable(obs, getBuoyObsTime, buoyObsToRow, 'buoyObs', headers);

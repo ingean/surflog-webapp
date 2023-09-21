@@ -53,5 +53,6 @@ export var metObservations = []
 export async function getWindObs(start, end) {
   let query = queryTimespan(start, end);
   metObservations = await get(`forecasts/frost${query}`);
+  metObservations = metObservations.data
   updateWindObsTable();
 }

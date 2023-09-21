@@ -30,22 +30,22 @@ const getLastObs = (obs) => {
 
 const getLastSMHIObs = (obs) => {
   let lastObs = null
-  obs.forEach(o => {
-    let wh = o.stations['Väderöerna'].waveheight
+  obs.data.forEach(o => {
+    let wh = o.waveheight
     if (wh) lastObs = o
   })
-  return lastObs.stations['Väderöerna']
+  return lastObs
 }
 
 export function ukWH(o) { return o.waveheight}
-export function smhiWH(o) { return o.stations['Väderöerna'].waveheight }
+export function smhiWH(o) { return o.waveheight }
 export function ukWP(o) { return o.waveperiod}
-export function smhiWP(o) { return o.stations['Väderöerna'].waveperiod }
+export function smhiWP(o) { return o.waveperiod }
 export function ukW(o) { return o.windspeed}
-export function smhiW(o) { return o.stations['Väderöerna'].windspeed }
+export function smhiW(o) { return o.windspeed }
 export function ukP(o) { return o.airpressure}
 export function ukAT(o) { return o.airtemp}
-export function smhiWHF(o) { return o.stations['Väderöerna'].waveheightforecast }
+export function smhiWHF(o) { return o.waveheightforecast }
 
 const ukTile = (obs) => {
   let obsData = obs.data.toReversed()
@@ -96,9 +96,9 @@ const ukTile = (obs) => {
 
 const smhiTile = (obs) => {
   let chartContainer = div('tile-chart-line')
-  let chartData = obs.filter(o => o.stations['Väderöerna'].waveheight).map(o => {
-    let wh = o.stations['Väderöerna'].waveheight
-    let whf = o.stations['Väderöerna'].waveheightforecast
+  let chartData = obs.data.filter(o => o.waveheight).map(o => {
+    let wh = o.waveheight
+    let whf = o.waveheightforecast
     if (whf) return [o.localtime, wh, whf]
   })
   drawLineChart(chartContainer, ['Tid', 'Høyde (m)', 'Varsel (m)'], chartData, chartOption('mdTile'))
@@ -110,18 +110,18 @@ const smhiTile = (obs) => {
       indicator(
         'Bølgehøyde', 
         formatWH(data), 
-         `Max: ${formatWH(maxObj(obs, smhiWH).stations['Väderöerna'])}`,
+         `Max: ${formatWH(maxObj(obs.data, smhiWH))}`,
         smhiRating(data, 'waveheight'), 'sm'),
       indicator(
         'Periode', 
         formatWP(data),
-        `Max: ${formatWP(maxObj(obs, smhiWP).stations['Väderöerna'])}`, 
+        `Max: ${formatWP(maxObj(obs.data, smhiWP))}`, 
         smhiRating(data, 'waveperiod'), 'sm'),
       indicator('Retning', arrow(data.wavedir), `${round(data.wavedir, 0)} ${direction(data.wavedir).short}`, null, 'sm'),
       indicator(
         'Varsel', 
         formatWHF(data), 
-        `Max: ${formatWHF(maxObj(obs, smhiWHF).stations['Väderöerna'])}`, 
+        `Max: ${formatWHF(maxObj(obs.data, smhiWHF))}`, 
         smhiRating(data, 'waveheight'), 'sm')
     ]),
     div('flex-row center2', chartContainer)],

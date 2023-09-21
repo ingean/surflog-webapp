@@ -24,18 +24,18 @@ export class mapLock extends Control {
 
     button.addEventListener('click', this.lockMap.bind(this), false);
     
-    this.isLocked = false
+    this.isOpen = true
     this.button = button
   }
 
   lockMap() {
     if (!this.getMap()) return
     let interactions = this.getMap().getInteractions()
-    interactions.forEach(i => i.setActive(!this.isLocked))
+    interactions.forEach(i => i.setActive(!this.isOpen))
     
-    let iconId = (this.isLocked) ? 'unlock' : 'lock'
+    let iconId = (this.isOpen) ? 'unlock' : 'lock'
     this.button.replaceChildren(sprite('icons','icons', iconId, 24, 24))
     
-    this.isLocked = !this.isLocked
+    this.isOpen = !this.isOpen
   }
 }

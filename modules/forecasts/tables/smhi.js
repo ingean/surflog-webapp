@@ -22,7 +22,7 @@ function cls(obj, param, alias) {
 }
 
 export function smhiForecastToRow(forecast) {
-  let f = forecast.stations['Väderöerna']
+  let f = forecast
   let emphasis = (isDayTime(forecast.localtime)) ? 'tr-scope' : 'tr-outofscope';
   
   return (
@@ -58,8 +58,7 @@ export async function getSMHIForecast(start, end) {
 }
 
 export function setNulls(obs) {
-  obs.forEach(o => {
-    let d = o.stations['Väderöerna']
+  obs.data.forEach(d => {
     if (d.waveheight === 0 && d.waveheightmax === 0 && d.waveperiod === 0 && d.wavedir === 0) {
       d.waveheight = null;
       d.waveheightmax = null;
