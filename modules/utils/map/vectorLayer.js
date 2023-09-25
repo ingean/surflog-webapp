@@ -13,7 +13,8 @@ const projectPoint = (lat, lon, targetProjection) => {
   return proj4(targetProjection, [lon, lat])
 }
 
-export const vectorLayer = (features) => {
+export const vectorLayer = (features, title) => {
+  title = title || 'Grafikklag'
   let targetProj = "+proj=laea +lat_0=90 +lon_0=10 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +type=crs"
   features = features.map(f => new Feature({
     geometry: point(f.lat, f.lon, targetProj),
@@ -28,6 +29,7 @@ export const vectorLayer = (features) => {
   })
 
   return new VectorLayer({
+    title,
     source: vectorSource,
     style: function (feature) {
       return pointStyle(feature)

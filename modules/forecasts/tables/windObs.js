@@ -3,7 +3,13 @@ import { arrow } from '../../components/icons.js';
 import { get, queryTimespan } from '../../utils/api.js';
 import { stationsCols, updateForecastTable, addObsToMap } from './table.js';
 import { toLocal } from '../../utils/time.js'
-import { mergeTimeseries } from '../../utils/utilities.js';
+import { mergeTimeseries, round } from '../../utils/utilities.js';
+import { tile } from '../../components/dashboard/tile.js'
+import { indicator } from '../../components/dashboard.js'
+import { getVal } from '../../config/forecastValues.js';
+import { direction } from '../../config/forecasts.js';
+import { drawLineChart } from '../../components/charts.js';
+import { chartOption } from "../../config/charts.js"
 
 const windObsToRow = (f) => {
   return stationsCols(f, {
@@ -27,43 +33,50 @@ export async function getWindObs(start, end) {
   let frostStations = await get(`observations/frost${query}`)
   addObsToMap(frostStations)
   updateWindObsTable(frostStations);
-  //addObsToDash(frostStations)
+  addObsToDash(frostStations[0])
 }
 
 const addObsToDash = (obs) => {
-  let container = document.getElementById('buoy-db-container')
+  let container = document.getElementById('buoy-tile-group')
   
   let chartContainer = div('tile-chart-line')
-  let chartData = obs.data.filter(o => o.stations["SN76920:0"].waveheight).map(o => {
+  let chartData = obs.data.map(o => {
     let wh = o.waveheight
-    if (wh) return [o.localtime, wh, whf]
+    if (wh) return [o.utctime, wh]
   })
+  chartData = chartData.filter( Boolean )
+
   drawLineChart(chartContainer, ['Tid', 'Høyde (m)'], chartData, chartOption('mdTile'))
 
-  let data = getLastSMHIObs(obs)
-  return tile({
-    title: 'Ekofisk',
+  let data = obs.data.findLast(o => o.waveheight)
+  let frostTile = tile({
+    title: data.name,
     contents: [div('flex-row', [
       indicator(
         'Bølgehøyde', 
-        formatWH(data), 
-          `Max: ${formatWH(maxObj(obs.data, smhiWH))}`,
-        smhiRating(data, 'waveheight'), 'sm'),
+        getVal(data, 'waveheight'), 
+        null,
+        null, 'sm'),
       indicator(
         'Periode', 
-        formatWP(data),
-        `Max: ${formatWP(maxObj(obs.data, smhiWP))}`, 
-        smhiRating(data, 'waveperiod'), 'sm'),
-      indicator('Retning', arrow(data.wavedir), `${round(data.wavedir, 0)} ${direction(data.wavedir).short}`, null, 'sm'),
+        getVal(data, 'waveperiod'), 
+        null, 
+        null, 'sm'),
       indicator(
-        'Varsel', 
-        formatWHF(data), 
-        `Max: ${formatWHF(maxObj(obs.data, smhiWHF))}`, 
-        smhiRating(data, 'waveheight'), 'sm')
+        'Vind', 
+        getVal(data, 'windspeed'), 
+        null, 
+        null, 'sm'),
+      indicator('Retning', arrow(data.winddir), `${round(data.winddir, 0)} ${direction(data.winddir).short}`, null, 'sm'),
     ]),
     div('flex-row center2', chartContainer)],
-    footer: `Sist oppdatert ${moment(data.localtime).calendar()}`,
-    id: 'smhi',
+    footer: `Sist oppdatert ${moment(data.utctime).calendar()}`,
+    id: 'frost',
     onSelect: tileSelected})
-  
+
+  container.insertBefore(frostTile, container.childNodes[6])
+}
+
+const tileSelected = () => {
+  console.log('TODO: Frost Ekofisk tile selected')
 }

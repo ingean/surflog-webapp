@@ -1,4 +1,5 @@
-import { inputSelect } from "../../components/formGroup.js";
+import { inputSelect } from "../../components/formGroup.js"
+import { changeLayerVisibility } from "../../forecasts/map/dmi.js"
 
 
 export const layerList = () => {
@@ -17,6 +18,9 @@ export const layerList = () => {
     caption: 'Kartlag', 
     domain: layers
   }
+
+  //let select = inputSelect(options)
+  //select.addEventListener('click', changeLayerVisibility)
 
   return inputSelect(options)
 }

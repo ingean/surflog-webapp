@@ -8,19 +8,21 @@ import { get } from '../../utils/api.js'
 
 const pixelRatio = parseInt(window.devicePixelRatio) || 1;
 
-export const wmsTileLayer = (layerName, time) => {
+export const wmsTileLayer = (options) => {
   return new Tile({
+    title: options.title,
+    visible: options.visible,
     source: new TileWMS({
-        url: `${urlAPI}forecasts/dmi/maps`, // Replace with the URL of your WMS service
+        url: `${urlAPI}forecasts/dmi/maps`,
         params: {
-            'LAYERS': layerName, // Replace with the name of the WMS layer you want to display
+            'LAYERS': options.wmslayers,
             'TILED': true,
-            'TIME': time,
+            'TIME': options.wmstime,
             'VERSION': '1.1.1'
         },
         tileGrid: createTileGrid(),
         tilePixelRatio: pixelRatio,
-        projection: getProjection("EPSG:3575"), // Set the projection to EPSG 3575
+        projection: getProjection("EPSG:3575")
     })
   })
 }

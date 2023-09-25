@@ -62,7 +62,7 @@ const params = [
   {id: 'airpressure', caption: 'Trykk.', unit: unitPressure}
 ]
 
-const getVal = (obj, key) => {
+export const getVal = (obj, key) => {
   let prefix = ''
   let suffix = ''
   let param = params.find(p => p.id.includes(key))

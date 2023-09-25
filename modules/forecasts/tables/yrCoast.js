@@ -21,10 +21,10 @@ const value = (f, param) => {
 }
 
 function yrCoastForecastToRow(f) {
-  let emphasis = (isDayTime(toLocal(f.utctime))) ? 'tr-scope' : 'tr-outofscope';
+  let emphasis = (isDayTime(f.utctime)) ? 'tr-scope' : 'tr-outofscope';
   return (
     el('tr', `forecast-table-row ${emphasis}`, [
-      hrsTd(toLocal(f.utctime)),
+      hrsTd(f.utctime),
       el('td', '', weatherImg(f.weathersymbol)),
       tempTd(f.airtemp),
       el('td', '', [ //Wave height and direction

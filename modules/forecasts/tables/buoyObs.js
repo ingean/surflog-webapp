@@ -19,9 +19,9 @@ function cls(obj, param) {
 
 function buoyObsToRow(f) {
   
-  let emphasis = (isDayTime(toLocal(f.utctime), false)) ? 'tr-scope' : 'tr-outofscope';
+  let emphasis = (isDayTime(f.utctime, false)) ? 'tr-scope' : 'tr-outofscope';
   return el('tr', `forecast-table-row ${emphasis}`, [
-    hrsTd(toLocal(f.utctime)),
+    hrsTd(f.utctime),
     el('td', '', 
       el('span', `td-value ${cls(f, 'waveheight')}`, formatValue(f, 'waveheight'))),
     el('td', '', 

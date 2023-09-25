@@ -23,11 +23,11 @@ function cls(obj, param, alias) {
 
 export function smhiForecastToRow(forecast) {
   let f = forecast
-  let emphasis = (isDayTime(forecast.localtime)) ? 'tr-scope' : 'tr-outofscope';
+  let emphasis = (isDayTime(forecast.utctime)) ? 'tr-scope' : 'tr-outofscope';
   
   return (
     el('tr', `forecast-table-row ${emphasis}`, [
-      hrsTd(forecast.localtime),
+      hrsTd(forecast.utctime),
       el('td', '', [
         el('span', `td-value ${cls(f, 'waveheight')}`, formatValue(f, 'waveheight')),
         el('span', 'td-secondary-value', formatValue2(f, 'waveheightmax')),

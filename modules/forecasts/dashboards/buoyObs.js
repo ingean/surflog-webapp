@@ -51,7 +51,7 @@ export function smhiWHF(o) { return o.waveheightforecast }
 const ukTile = (obs) => {
   let obsData = obs.data.toReversed()
   let chartContainer = div('tile-chart-line')
-  let chartData = obsData.map(o => [toLocal(o.utctime), o.waveheight])
+  let chartData = obsData.map(o => [o.utctime, o.waveheight])
   drawLineChart(chartContainer, ['Tid', `Høyde (m)`], chartData, chartOption('mdTile'))
   
   let data = getLastObs(obs.data)
@@ -90,7 +90,7 @@ const ukTile = (obs) => {
       ]),
       div('flex-row center2', chartContainer)
     ], 
-    footer: `Sist oppdatert ${moment(toLocal(data.utctime)).calendar()}`,
+    footer: `Sist oppdatert ${moment(data.utctime).calendar()}`,
     id: obs.id,
     onSelect: tileSelected})
 }
@@ -100,7 +100,7 @@ const smhiTile = (obs) => {
   let chartData = obs.data.filter(o => o.waveheight).map(o => {
     let wh = o.waveheight
     let whf = o.waveheightforecast
-    if (whf) return [o.localtime, wh, whf]
+    if (whf) return [o.utctime, wh, whf]
   })
   drawLineChart(chartContainer, ['Tid', 'Høyde (m)', 'Varsel (m)'], chartData, chartOption('mdTile'))
 
@@ -126,7 +126,7 @@ const smhiTile = (obs) => {
         smhiRating(data, 'waveheight'), 'sm')
     ]),
     div('flex-row center2', chartContainer)],
-    footer: `Sist oppdatert ${moment(data.localtime).calendar()}`,
+    footer: `Sist oppdatert ${moment(data.utctime).calendar()}`,
     id: 'smhi',
     onSelect: tileSelected})
 }

@@ -50,8 +50,6 @@ export function updateForecastTable(forecast, forecastDate, forecastToRow, table
   .replaceChildren(container);
 }
 
-
-
 export const stationsCols = (f, options) => {
   options.time = toLocal(f.utctime)
   let cols = [hrsTd(options.time)]
