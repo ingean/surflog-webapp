@@ -61,8 +61,8 @@ export const iconTide = (report, height = 24, width = 24) => {
 }
 
 export const arrow = (rotation, size = 'md') => {
-  if (rotation == null) return
-  let title = `${rotation}° ${direction(rotation).short.toUpperCase()}`
+  if (rotation == null || rotation < 0 || rotation > 365) return
+  let title = `${rotation}° ${direction(rotation)?.short.toUpperCase()}`
   let id = (size === 'sm') ? 'arrow2' : 'arrow'
   let height = (size === 'sm') ? 18 : 24
   let width = (size === 'sm') ? 12 : 24

@@ -105,3 +105,30 @@ export const minObj = (arr, getValue) => {
     return (getValue(prev)) < getValue(current) ? prev : current
   })
 }
+
+export const mergeTimeseries = (arr) => {
+  let i = findLongestTimeserie(arr, 'data')
+  
+  let result = []
+  arr[i].data.forEach(ts => {
+    let timestep = {utctime: ts.utctime}
+    arr.forEach(station => {
+      let data = station.data.find(s => s.utctime === ts.utctime)
+      if (data) timestep[station.name] = data
+    })
+    result.push(timestep)
+  })
+  return result
+}
+
+export const findLongestTimeserie = (arr, key) => {
+  const result = arr.reduce((acc, obj, index) => {
+    const currentLength = obj[key].length
+    if (currentLength > acc.maxLength) {
+      return { maxLength: currentLength, maxIndex: index }
+    } else {
+      return acc
+    }
+  }, { maxLength: -1, maxIndex: 0 })
+  return result.maxIndex
+}

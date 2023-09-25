@@ -67,9 +67,10 @@ export const initDMIMap = async () => {
   })
 
   map.on('pointermove', (e) => {
+    let mapContainer = document.getElementById('dmi-map')
     const pixel = map.getEventPixel(e.originalEvent)
     const hit = map.hasFeatureAtPixel(pixel)
-    map.getTarget().style.cursor = hit ? 'pointer' : ''
+    mapContainer.style.cursor = (hit) ? 'pointer' : ''
   })
 }
 

@@ -26,7 +26,7 @@ export const wmsTileLayer = (layerName, time) => {
 }
 
 export const getTimeExtent = async () => {
-  let result = await get('/forecasts/dmi/maps/layers')
+  let result = await get('forecasts/dmi/maps/layers')
   let layer = result.layers.find(l => l.name === 'wave_eu')
   return layer.extents.time
 }

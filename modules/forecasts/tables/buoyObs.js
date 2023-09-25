@@ -3,7 +3,7 @@ import { arrow } from '../../components/icons.js';
 import { get } from '../../utils/api.js';
 import { formatValue, clsValue, valueRating } from '../format.js';
 import { updateForecastTable } from './table.js';
-import { updateBuoyDashboard } from '../dashboards/buoyObs.js';
+import { updateBuoyDashboard, getLastSMHIObs } from '../dashboards/buoyObs.js';
 import { smhiForecastToRow, getSMHITime, setNulls, getSMHIStats } from './smhi.js';
 import { isDayTime, toLocal } from '../../utils/time.js';
 import { getStats } from '../../utils/statistics.js';
@@ -56,16 +56,28 @@ export var smhiBuoys = []
 
 export async function getBuoyObs() {
   stats = await getStats('buoy')
-  await getSMHIStats()
+  let smhiStats = await getSMHIStats()
   ukBuoys = await get(`observations/buoys`);
   smhiBuoys = setNulls(await get('forecasts/smhi'))
   addBuoysToMap(ukBuoys, stats)
-  updateBuoyDashboard(stats, ukBuoys, smhiBuoys)
+  addSMHIToMap(smhiBuoys, smhiStats)
+  updateBuoyDashboard(stats, smhiStats, ukBuoys, smhiBuoys)
   updateBuoyObsTable(ukBuoys[0].data, false);
 }
 
 const addBuoysToMap = (ukBuoys, stats) => {
   let features = ukBuoys.map(b => { return {lat: b.lat, lon: b.lon, name: b.name, rating: valueRating(b.data[0], 'waveheight', {stats})}})
+  let layer = vectorLayer(features)
+  addLayerToMap(layer)
+}
+
+const addSMHIToMap = (smhiBuoys, stats) => {
+  let features = [{ 
+    lat: smhiBuoys.lat, 
+    lon: smhiBuoys.lon, 
+    name: smhiBuoys.name, 
+    rating: valueRating(getLastSMHIObs(smhiBuoys), 'waveheight', {stats})
+  }]
   let layer = vectorLayer(features)
   addLayerToMap(layer)
 }

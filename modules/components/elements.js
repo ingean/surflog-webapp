@@ -42,6 +42,14 @@ export const span = (attributes, children) => {
   return el('span', attributes, children)
 }
 
+export const tr = (attributes, children) => {
+  return el('tr', attributes, children)
+}
+
+export const td = (attributes, children) => {
+  return el('td', attributes, children)
+}
+
 export const image = (src, attributes, children) => {
   if (typeof attributes === 'string' || !attributes) {
     attributes = {class: attributes}

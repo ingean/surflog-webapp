@@ -13,7 +13,7 @@ function tideHeaders(headers) {
 }
 
 function sortTides(tide) {
-  return tide.sort((a, b) => moment(b.time).date() - moment(a.time).date())
+  return tide.sort((a, b) => moment(b.localtime).date() - moment(a.localtime).date())
 }
 
 
@@ -22,13 +22,13 @@ function tideRows(tide) {
   tide = sortTides(tide)
   
   tide.forEach(t => {
-    let id = (t.type === 'high') ? "hoyvann_synkende1" : "lavvann_stigende1"
+    let id = (t.tidetype === 'high') ? "hoyvann_synkende1" : "lavvann_stigende1"
     
     rows.push( 
       el('tr', '', [
         el('td', 'td-s', sprite('tides', 'tides', id, 24, 24)),
-        el('td', 'td-s', formatTideTime(t.time)),
-        el('td', 'td-s', t.value)
+        el('td', 'td-s', formatTideTime(t.localtime)),
+        el('td', 'td-s', t.tideheight)
       ])
     )
   })
@@ -83,9 +83,9 @@ function updateFooter(spot, location, sun, tide) {
   let tideLevels = []
 
   tide.forEach(t => {
-    tideTitles.push(div('footer-info-tideTime', formatTideTitle(t.type)))
-    tideTimes.push(div('footer-info-tideTime', formatTideTime(t.time)))
-    tideLevels.push(div('footer-info-tideTime', formatTideLevel(t.value)))
+    tideTitles.push(div('footer-info-tideTime', formatTideTitle(t.tidetype)))
+    tideTimes.push(div('footer-info-tideTime', formatTideTime(t.localtime)))
+    tideLevels.push(div('footer-info-tideTime', formatTideLevel(t.tideheight)))
   })
 
   let info = 
@@ -123,9 +123,8 @@ export async function updateStationCard(spot) {
   let load = new Loader(`root-station-card-yrCoast`);
   let yrId = spotIds[spot].yr.id;
   let location = await getYrLocation(yrId)
-  let tide = await getYrTides(yrId);
-  let sun = await getSunTimes(location.position.lat, location.position.lon);
+  let sun = await getSunTimes(location.lat, location.lon);
 
-  updateCard(spot, location, tide['_embedded'].tides, sun);
-  updateFooter(spot, location, sun, tide['_embedded'].tides)
+  updateCard(spot, location, location.tides, sun)
+  updateFooter(spot, location, sun, location.tides)
 }

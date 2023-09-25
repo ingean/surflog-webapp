@@ -75,15 +75,15 @@ export async function getSunTimes(lat, lon) {
 }
 
 export async function getYrLocation(yrId) {
-  return get(`${forecasts.yrCoast.proxyUrl}?id=${yrId}`) // CORS on Yr endpoint, hence surflog as proxy
+  return get(`forecasts/yr/${yrId}`)
 }
 
 export async function getYrTides(yrId) {
-  return get(`${forecasts.yrCoast.proxyUrl}?id=${yrId}&endpoint=tide`) // CORS on Yr endpoint, hence surflog as proxy
+  return get(`forecasts/yr/${yrId}`)
 }
 
 export async function getYrCoast(yrId) {
-  return get(`${forecasts.yrCoast.proxyUrl}?id=${yrId}&endpoint=/forecast/coast`);
+  return get(`forecasts/yr/${yrId}`)
 }
 
 export function getMetForecast() {

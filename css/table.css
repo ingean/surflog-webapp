@@ -103,6 +103,11 @@ td {
   margin: 8px;
 }
 
+.td-param {
+  padding: 4px;
+}
+
+
 /* Styling for small screens*/
 @media screen and (max-width:799px) { 
   table {

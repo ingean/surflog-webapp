@@ -13,6 +13,7 @@ import { minObj, maxObj } from "../../utils/utilities.js";
 import { tile, checkTile } from "../../components/dashboard/tile.js"
 
 var buoyStats = {}
+var smhibuoyStats = {}
 
 function rating(obj, param) {
   let options = {stats: buoyStats}
@@ -20,7 +21,7 @@ function rating(obj, param) {
 }
 
 function smhiRating(obj, param) {
-  let options = {stats: getSMHIStats()}
+  let options = {stats: smhibuoyStats}
   return valueRating(obj, param, options)
 }
 
@@ -28,7 +29,7 @@ const getLastObs = (obs) => {
   return obs.find(o => o.waveheight)
 }
 
-const getLastSMHIObs = (obs) => {
+export const getLastSMHIObs = (obs) => {
   let lastObs = null
   obs.data.forEach(o => {
     let wh = o.waveheight
@@ -130,8 +131,9 @@ const smhiTile = (obs) => {
     onSelect: tileSelected})
 }
 
-export const updateBuoyDashboard = (stats, ukBuoys, smhiBuoys) => {
+export const updateBuoyDashboard = (stats, smhiStats, ukBuoys, smhiBuoys) => {
   buoyStats = stats
+  smhibuoyStats = smhiStats
   let tiles = ukBuoys.map(o => ukTile(o))
   tiles.push(smhiTile(smhiBuoys))
   let container = document.getElementById('buoy-db-container')

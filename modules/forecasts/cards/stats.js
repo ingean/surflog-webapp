@@ -7,8 +7,8 @@ const cCls = 'td-m';
 const headers = ['min', 'avg - std', 'avg', 'avg + std', 'max', 'std'];
 const statParam = ['min', 'avg', 'max', 'std'];
 
-function tableRow(stats, param) {
-  return el('tr', '', tableCells(stats, param));
+function tableRow(stats, param, station) {
+  return el('tr', '', tableCells(stats, param, station));
 }
 
 function tableHead() {
@@ -26,8 +26,10 @@ function cell(v, param) {
   );
 }
 
-function tableCells(stats, param) {
-  let s = paramStats(param.id, {stats})
+function tableCells(stats, param, station) {
+  let options = {stats}
+  if (station) options.station = station
+  let s = paramStats(param.id, options)
   
   return [
     el('td', 'td-m td-left', param.caption),
@@ -40,9 +42,9 @@ function tableCells(stats, param) {
   ]
 }
 
-function tableBody(stats, params) {
+function tableBody(stats, params, station) {
   let rows = [];
-  params.forEach(param => rows.push(tableRow(stats, param)))
+  params.forEach(param => rows.push(tableRow(stats, param, station)))
   return el('tbody', '', rows)
 }
 

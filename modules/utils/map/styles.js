@@ -37,9 +37,10 @@ const styles = {
 };
 
 const textSymbol = (feature) => {
+  let font = (feature.get('size') === 4) ? 'Bold 10/1 Arial' : 'Bold 14/1 Arial'
   return new Text({
     text: feature.get('name'),
-    font: 'Bold 14/1 Arial',
+    font,
     offsetY: -20,
     fill: new Fill({color: '#000000'}),
     stroke: new Stroke({color: '#ffffff', width: 2})

@@ -23,6 +23,11 @@ import { getSunTimesForPosition } from './settings.js';
 
 export async function startSurfLog(userId) {
   let load = new Loader(`#root-forecast-table-yrCoast`);
+  //let mapLoader = new Loader(`#dmi-map-section`);
+  
+  // Maps
+  initDMIMap()
+  
   initDateInput(); // Set current date
   //initWebcam(); // No linger available
   initDMIImages(); // Add click events for img nav btns and set time
@@ -47,7 +52,4 @@ export async function startSurfLog(userId) {
   getDMIForecast();
   getDMIObservations();
   getBuoyObs()
-
-  // Maps
-  initDMIMap()
 }
