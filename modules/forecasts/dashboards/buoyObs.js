@@ -38,16 +38,6 @@ export const getLastSMHIObs = (obs) => {
   return lastObs
 }
 
-export function ukWH(o) { return o.waveheight}
-export function smhiWH(o) { return o.waveheight }
-export function ukWP(o) { return o.waveperiod}
-export function smhiWP(o) { return o.waveperiod }
-export function ukW(o) { return o.windspeed}
-export function smhiW(o) { return o.windspeed }
-export function ukP(o) { return o.airpressure}
-export function ukAT(o) { return o.airtemp}
-export function smhiWHF(o) { return o.waveheightforecast }
-
 const ukTile = (obs) => {
   let obsData = obs.data.toReversed()
   let chartContainer = div('tile-chart-line')
@@ -62,17 +52,17 @@ const ukTile = (obs) => {
       indicator(
         'Bølgehøyde', 
         formatWH(data), 
-        `Max: ${formatWH(maxObj(obs.data, ukWH))}`, 
+        `Max: ${formatWH(maxObj(obs.data, 'waveheight'))}`, 
         rating(data, 'waveheight'), 'sm'),
       indicator(
         'Periode', 
         formatWP(data), 
-        `Max: ${formatWP(maxObj(obs.data, ukWP))}`,  
+        `Max: ${formatWP(maxObj(obs.data, 'waveperiod'))}`,  
         rating(data, 'waveperiod'), 'sm'),
       indicator(
         'Vind', 
         formatW(data, 'windspeed'), 
-        `Max: ${formatW(maxObj(obs.data, ukW), 'windspeed')}`, 
+        `Max: ${formatW(maxObj(obs.data, 'windspeed'), 'windspeed')}`, 
         rating(data, 'windspeed'), 'sm'),
       indicator('Vinddir', arrow(data.winddir), `${data.winddir} ${direction(data.winddir).short}`, null, 'sm')
     ]),
@@ -80,12 +70,12 @@ const ukTile = (obs) => {
       indicator(
         'Lufttrykk', 
         round(data.airpressure, 0), 
-        `Min: ${round(minObj(obs.data, ukP))}`, 
+        `Min: ${round(minObj(obs.data, 'airpressure'))}`, 
         rating(data, 'airpressure'), 'sm'),
       indicator(
         'Lufttemp', 
         tempSpan('', data.airtemp), 
-        `Min: ${round(minObj(obs.data, ukAT).airtemp)}°`,  
+        `Min: ${round(minObj(obs.data, 'airtemp').airtemp)}°`,  
         null, 'sm'),
       ]),
       div('flex-row center2', chartContainer)
@@ -111,18 +101,18 @@ const smhiTile = (obs) => {
       indicator(
         'Bølgehøyde', 
         formatWH(data), 
-         `Max: ${formatWH(maxObj(obs.data, smhiWH))}`,
+         `Max: ${formatWH(maxObj(obs.data, 'waveheight'))}`,
         smhiRating(data, 'waveheight'), 'sm'),
       indicator(
         'Periode', 
         formatWP(data),
-        `Max: ${formatWP(maxObj(obs.data, smhiWP))}`, 
+        `Max: ${formatWP(maxObj(obs.data, 'waveperiod'))}`, 
         smhiRating(data, 'waveperiod'), 'sm'),
       indicator('Retning', arrow(data.wavedir), `${round(data.wavedir, 0)} ${direction(data.wavedir).short}`, null, 'sm'),
       indicator(
         'Varsel', 
         formatWHF(data), 
-        `Max: ${formatWHF(maxObj(obs.data, smhiWHF))}`, 
+        `Max: ${formatWHF(maxObj(obs.data, 'waveheightforecast'))}`, 
         smhiRating(data, 'waveheight'), 'sm')
     ]),
     div('flex-row center2', chartContainer)],

@@ -1,7 +1,6 @@
 import { el, weatherImg, tempTd, hrsTd } from '../../components/elements.js';
 import { getYrCoast } from '../../utils/api.js';
 import { isDayTime, toLocal } from '../../utils/time.js';
-import { clsValue } from '../format.js';
 import { updateForecastTable } from './table.js';
 import { getStats } from '../../utils/statistics.js';
 import { paramSpan } from '../../config/forecastValues.js';

@@ -1,7 +1,8 @@
 import { arrow } from "../components/icons.js"
 import { span } from "../components/elements.js" 
 import { valueRating } from "../forecasts/format.js"
-import { round } from "../utils/utilities.js"
+import { minObj, maxObj, round } from "../utils/utilities.js"
+import { direction } from "./forecasts.js"
 
 const unitHeight = {
   unit: 'm',
@@ -25,7 +26,7 @@ const unitSpeed = {
 }
 
 const unitPressure = {
-  unit: 'hpa',
+  unit: '',
   precision: 0,
   up: 'høyere',
   down: 'lavere'
@@ -59,20 +60,45 @@ const params = [
   {id: 'currentdir', caption: 'Retning', arrow: 'md'},
   {id: 'airtemp', caption: 'Lufttemp.', unit: unitTemp},
   {id: 'watertemp', caption: 'Vanntemp.', unit: unitTemp},
-  {id: 'airpressure', caption: 'Trykk.', unit: unitPressure}
+  {id: 'airpressure', caption: 'Trykk.', unit: unitPressure, min: true}
 ]
 
-export const getVal = (obj, key) => {
+export const paramCaption = (param) => {
+ let p =  params.find(p => p.id.includes(param))
+ return p.caption
+}
+
+export const paramReference = (param) => {
+  let p =  params.find(p => p.id.includes(param))
+  return p.min ? 'Min' : 'Max'
+ }
+
+export const paramVal = (obj, param) => {
   let prefix = ''
   let suffix = ''
-  let param = params.find(p => p.id.includes(key))
-  if (!param) return obj[key]
-  if (param.arrow) return arrow(obj[key], param.arrow)
-  if (param.secondary) {
+  let options = params.find(p => p.id.includes(param))
+  if (!options) return obj[param]
+  if (options.arrow) return arrow(obj[param], options.arrow)
+  if (options.secondary) {
     prefix = ' (' 
     suffix = ')'
   }
-  return `${prefix}${round(obj[key], param.unit.precision)} ${param.unit.unit}${suffix}`
+  let unit = (options.unit.unit) ? ` ${options.unit.unit}` : ''
+  return `${prefix}${round(obj[param], options.unit.precision)}${unit}${suffix}`
+}
+
+export const paramDir = (value) => {
+  return `${value} ${direction(value).short}`
+}
+
+export const paramMin = (obj, param) => {
+  let min = minObj(obj, param)
+  return paramVal(min, param)
+}
+
+export const paramMax = (obj, param) => {
+  let max = maxObj(obj, param)
+  return paramVal(max, param)
 }
 
 const arrowSpan = (obj, param, options ) => {
@@ -87,7 +113,7 @@ export const paramSpan = (obj, param, options) => {
   
   let cls = options.valueCls || ''
   let rating = valueRating(obj, param, options)
-  let value = getVal(obj, param)
+  let value = paramVal(obj, param)
 
 
   return span(`${cls} txt-rating-${rating}`, value)

@@ -3,10 +3,10 @@ import { arrow } from '../../components/icons.js';
 import { get, queryTimespan } from '../../utils/api.js';
 import { stationsCols, updateForecastTable, addObsToMap } from './table.js';
 import { toLocal } from '../../utils/time.js'
-import { mergeTimeseries, round } from '../../utils/utilities.js';
-import { tile } from '../../components/dashboard/tile.js'
+import { mergeTimeseries, round, maxObj, minObj } from '../../utils/utilities.js';
+import { stationTile, tile } from '../../components/dashboard/tile.js'
 import { indicator } from '../../components/dashboard.js'
-import { getVal } from '../../config/forecastValues.js';
+import { paramVal } from '../../config/forecastValues.js';
 import { direction } from '../../config/forecasts.js';
 import { drawLineChart } from '../../components/charts.js';
 import { chartOption } from "../../config/charts.js"
@@ -38,42 +38,12 @@ export async function getWindObs(start, end) {
 
 const addObsToDash = (obs) => {
   let container = document.getElementById('buoy-tile-group')
-  
-  let chartContainer = div('tile-chart-line')
-  let chartData = obs.data.map(o => {
-    let wh = o.waveheight
-    if (wh) return [o.utctime, wh]
+  let frostTile = stationTile(obs, {
+    id: obs.name,
+    onSelect: tileSelected,
+    chartParam: 'waveheight'
   })
-  chartData = chartData.filter( Boolean )
-
-  drawLineChart(chartContainer, ['Tid', 'Høyde (m)'], chartData, chartOption('mdTile'))
-
-  let data = obs.data.findLast(o => o.waveheight)
-  let frostTile = tile({
-    title: data.name,
-    contents: [div('flex-row', [
-      indicator(
-        'Bølgehøyde', 
-        getVal(data, 'waveheight'), 
-        null,
-        null, 'sm'),
-      indicator(
-        'Periode', 
-        getVal(data, 'waveperiod'), 
-        null, 
-        null, 'sm'),
-      indicator(
-        'Vind', 
-        getVal(data, 'windspeed'), 
-        null, 
-        null, 'sm'),
-      indicator('Retning', arrow(data.winddir), `${round(data.winddir, 0)} ${direction(data.winddir).short}`, null, 'sm'),
-    ]),
-    div('flex-row center2', chartContainer)],
-    footer: `Sist oppdatert ${moment(data.utctime).calendar()}`,
-    id: 'frost',
-    onSelect: tileSelected})
-
+  
   container.insertBefore(frostTile, container.childNodes[6])
 }
 

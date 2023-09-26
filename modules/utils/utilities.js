@@ -92,17 +92,17 @@ export const minMaxValues = (obj) => {
   }
 }
 
-export const maxObj = (arr, getValue) => {
-  arr = arr.filter(o => getValue(o)) // Remove objs without values
+export const maxObj = (arr, key) => {
+  arr = arr.filter(o => o[key]) //
   return arr.reduce((prev, current) => {
-    return (getValue(prev)) > getValue(current) ? prev : current
+    return (prev[key] > current[key]) ? prev : current
   })
 }
 
-export const minObj = (arr, getValue) => {
-  arr = arr.filter(o => getValue(o)) // Remove objs without values
+export const minObj = (arr, key) => {
+  arr = arr.filter(o => o[key]) //
   return arr.reduce((prev, current) => {
-    return (getValue(prev)) < getValue(current) ? prev : current
+    return (prev[key] < current[key]) ? prev : current
   })
 }
 
@@ -132,3 +132,15 @@ export const findLongestTimeserie = (arr, key) => {
   }, { maxLength: -1, maxIndex: 0 })
   return result.maxIndex
 }
+
+export const toChunks = (arr, chunkSize) => {
+  chunkSize = chunkSize || 4
+  const chunks = [];
+
+  for (let i = 0; i < arr.length; i += chunkSize) {
+    const chunk = arr.slice(i, i + chunkSize);
+    chunks.push(chunk);
+  }
+  return chunks
+}
+
