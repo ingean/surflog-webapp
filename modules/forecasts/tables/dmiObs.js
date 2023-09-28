@@ -1,17 +1,17 @@
 import { get, queryTimespan } from '../../utils/api.js';
-import { toLocal } from '../../utils/time.js';
 import { stationsCols, updateForecastTable, addObsToMap } from './table.js';
 import { mergeTimeseries } from '../../utils/utilities.js';
 
 function dmiObsToRow(obs) {
   return stationsCols(obs, {
     wind: 'fetch', 
-    paramNames: ['windspeed', 'winddir']
+    paramNames: ['windspeed', 'winddir'],
+    groupParams: true
   })
 }
 
 function getDMIObsTime(obs) {
-  return toLocal(obs.utctime)
+  return obs.utctime
 }
 
 function updateDMIObsTable(dmiStations) {

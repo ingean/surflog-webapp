@@ -4,12 +4,10 @@ import { div } from './elements.js';
 import { inputSelect } from './formGroup.js';
 import { updateStationCard } from '../forecasts/cards/station.js';
 import { updateDMICard } from '../forecasts/cards/dmiStats.js';
-import { updateSMHICard } from '../forecasts/cards/smhiStats.js';
 import { getYrCoastForecast, updateYrCoastTable } from '../forecasts/tables/yrCoast.js'; 
 import { updateDMITable } from '../forecasts/tables/dmi.js'; 
-import { updateSMHITable } from '../forecasts/tables/smhi.js'; 
-import { updateYrTable } from '../forecasts/tables/yr.js'; 
-import { filterReportListBySpot } from '../reports/views/list.js';
+import { updateMetTable } from '../forecasts/tables/met.js'; 
+
 
 
 function clearInput(e) {
@@ -46,7 +44,7 @@ async function onSpotChanged(e) {
   
   // Reformat tables to reflect selected spot statistics
   updateDMITable(spot)
-  updateYrTable(spot)
+  updateMetTable(spot)
   updateYrCoastTable(spot)
 }
 

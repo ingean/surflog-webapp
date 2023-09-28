@@ -4,22 +4,15 @@ import { initSpotList } from './components/spotInput.js';
 import { createForms } from './components/form.js';
 import { addDeleteReportsEventHandlers } from './reports/delete.js';
 import { getReports } from './reports/read.js';
-import { getWindObs } from './forecasts/tables/windObs.js';
-import { getYrForecast } from './forecasts/tables/yr.js';
-import { getSMHIForecast } from './forecasts/tables/smhi.js';
+import { getFrostObs } from './forecasts/tables/frostObs.js';
+import { getMetForecast } from './forecasts/tables/met.js';
 import { getDMIForecast } from './forecasts/tables/dmi.js';
 import { initDMIImages } from './forecasts/images/dmi.js';   
-import { getUKForecast } from './forecasts/tables/uk.js';
 import { getDMIObservations } from './forecasts/tables/dmiObs.js';
 import { initTwin } from './reports/compare.js';
 import { initReportlist } from './reports/views/list.js';
-import { getBWWaveForecast } from './utils/api.js';
 import { getBuoyObs } from './forecasts/tables/buoyObs.js';
 import { initDMIMap } from './forecasts/map/dmi.js';
-
-import { getSunTimesForPosition } from './settings.js';
-//import { initWebcam } from './html/webcam.js';
-//import { initMSWImages } from './forecasts/images/msw.js';
 
 export async function startSurfLog(userId) {
   let load = new Loader(`#root-forecast-table-yrCoast`);
@@ -28,28 +21,23 @@ export async function startSurfLog(userId) {
   // Maps
   initDMIMap()
   
-  initDateInput(); // Set current date
-  //initWebcam(); // No linger available
-  initDMIImages(); // Add click events for img nav btns and set time
-  //initMSWImages(); // No longer available
-  initTwin();
+  initDateInput() // Set current date
+  initDMIImages() // Add click events for img nav btns and set time
+  initTwin()
   initReportlist()
-  
-  //Settings
-  //await getSettings(userId); //Get settings and statistics
-  
+    
   //Forms
   await createForms(); // Need settings to create forms (list of countries etc.)
   initSpotList(); //Fills spotlist with available spots from db
   
   // Reports
-  addDeleteReportsEventHandlers();
-  getReports();
+  addDeleteReportsEventHandlers()
+  getReports()
 
   // Forecasts
-  getWindObs();
-  getYrForecast();
-  getDMIForecast();
-  getDMIObservations();
+  getDMIForecast()
+  getMetForecast()
   getBuoyObs()
+  getFrostObs()
+  getDMIObservations()
 }

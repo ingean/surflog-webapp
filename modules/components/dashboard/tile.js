@@ -75,11 +75,13 @@ export const stationTile = (obj, options) => {
       footer = (ref === 'Max') ? `Max: ${paramMax(obj.data, param)}` : `Min: ${paramMin(obj.data, param)}`
     }
 
+    let rating = (options.stats) ? valueRating(data, param, {stats: options.stats}) : null
+
     indicators.push(indicator(
       paramCaption(param),
       paramVal(data, param),
       footer,
-      null,
+      rating,
       'sm'
     ))
     lastUpdated = data.utctime
@@ -88,7 +90,8 @@ export const stationTile = (obj, options) => {
   let contents = toChunks(indicators, 4)
   contents = contents.map(c => div('flex-row', c))
   
-  if (options.chartParam) contents.push(stationChart(obj, options.chartParam))
+  let chartParams = options?.chartParams || [params[0]]
+  contents.push(stationChart(obj, chartParams))
 
   return tile({
     title: obj.name,
@@ -99,14 +102,19 @@ export const stationTile = (obj, options) => {
   })
 }
 
-const stationChart = (obs, param) => {
-  let chartContainer = div('tile-chart-line')
-  let chartData = obs.data.filter(o => o[param]).map(o => {
-    let p = o[param]
-    if (p) return [o.utctime, p]
+const stationChart = (obs, params) => {
+  let container = div('tile-chart-line')
+  let chartData = obs.data.filter(o => o[params[0]]).map(o => {
+    let row = [o.utctime]
+    params.forEach(param => row.push(o[param]))
+    return row
   })
-  drawLineChart(chartContainer, ['Tid', paramCaption(param)], chartData, chartOption('mdTile'))
-  return chartContainer
+
+  let headers = params.map(param => paramCaption(param))
+  headers.unshift('Tid')
+
+  drawLineChart(container, headers, chartData, chartOption('mdTile'))
+  return container
 }
 
 const getLastDataPoint = (obj, param) => {

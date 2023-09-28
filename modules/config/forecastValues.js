@@ -47,20 +47,23 @@ const unitTemp = {
 }
 
 const params = [
-  {id: 'waveheight', caption: 'Høyde', unit: unitHeight},
-  {id: 'waveperiod', caption: 'Periode', unit: unitPeriod},
-  {id: 'wavedir', caption: 'Retning', arrow: 'sm'},
-  {id: 'swellheight', caption: 'Høyde', unit: unitHeight},
-  {id: 'swellperiod', caption: 'Periode', unit: unitPeriod},
-  {id: 'swelldir', caption: 'Retning', arrow: 'sm'},
-  {id: 'windspeed', caption: 'Vind', unit: unitSpeed},
-  {id: 'windgust', caption: 'Byge', secondary: true, unit: unitSpeed},
-  {id: 'winddir', caption: 'Retning', arrow: 'md'},
-  {id: 'currentspeed', caption: 'Strøm', unit: unitSpeed},
-  {id: 'currentdir', caption: 'Retning', arrow: 'md'},
-  {id: 'airtemp', caption: 'Lufttemp.', unit: unitTemp},
-  {id: 'watertemp', caption: 'Vanntemp.', unit: unitTemp},
-  {id: 'airpressure', caption: 'Trykk.', unit: unitPressure, min: true}
+  {id: 'utctime', caption: 'Tid', group: 1},
+  {id: 'waveheight', caption: 'Høyde', group: 1, unit: unitHeight},
+  {id: 'waveheightforecast', caption: 'Varsel', group: 1, unit: unitHeight},
+  {id: 'waveheightmax', caption: 'Maxhøyde', group: 1, unit: unitHeight},
+  {id: 'waveperiod', caption: 'Periode', group: 1, unit: unitPeriod},
+  {id: 'wavedir', caption: 'Retning', group: 1, arrow: 'sm'},
+  {id: 'swellheight', caption: 'Høyde', group: 2, unit: unitHeight},
+  {id: 'swellperiod', caption: 'Periode', group: 2, unit: unitPeriod},
+  {id: 'swelldir', caption: 'Retning', group: 2, arrow: 'sm'},
+  {id: 'windspeed', caption: 'Vind', group: 3, unit: unitSpeed},
+  {id: 'windgust', caption: 'Byge', group: 3, secondary: true, unit: unitSpeed},
+  {id: 'winddir', caption: 'Retning', group: 3, arrow: 'md'},
+  {id: 'currentspeed', caption: 'Strøm', group: 4, unit: unitSpeed},
+  {id: 'currentdir', caption: 'Retning', group: 4, arrow: 'md'},
+  {id: 'airtemp', caption: 'Lufttemp.', group: 5, unit: unitTemp},
+  {id: 'watertemp', caption: 'Vanntemp.', group: 5, unit: unitTemp},
+  {id: 'airpressure', caption: 'Trykk.', group: 6, unit: unitPressure, min: true}
 ]
 
 export const paramCaption = (param) => {
@@ -70,7 +73,7 @@ export const paramCaption = (param) => {
 
 export const paramReference = (param) => {
   let p =  params.find(p => p.id.includes(param))
-  return p.min ? 'Min' : 'Max'
+  return p?.min ? 'Min' : 'Max'
  }
 
 export const paramVal = (obj, param) => {
@@ -88,7 +91,7 @@ export const paramVal = (obj, param) => {
 }
 
 export const paramDir = (value) => {
-  return `${value} ${direction(value).short}`
+  return `${round(value)} ${direction(value).short}`
 }
 
 export const paramMin = (obj, param) => {
@@ -105,18 +108,20 @@ const arrowSpan = (obj, param, options ) => {
   let size =  (param.includes('wave') || param.includes('swell')) ? 'sm' : 'md'
   let cls = options.arrowCls || ''
 
-  return span(cls, arrow(obj[param], size))
+  return span(`param-arrow ${cls}`, arrow(obj[param], size))
 }
 
 export const paramSpan = (obj, param, options) => {
-  if (param.includes('dir')) return arrowSpan(obj, param, options)
-  
   let cls = options.valueCls || ''
+  
+  if (param.includes('dir')) return arrowSpan(obj, param, options)
+  if (param.includes('time')) return span(cls, moment(obj[param]).format('HH'))
+  
   let rating = valueRating(obj, param, options)
+  rating = rating ? ` txt-rating-${rating}` : ''
   let value = paramVal(obj, param)
 
-
-  return span(`${cls} txt-rating-${rating}`, value)
+  return span(`${cls}${rating}`, value)
 }
 
 

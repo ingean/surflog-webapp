@@ -51,25 +51,28 @@ export function updateForecastTable(forecast, forecastDate, forecastToRow, table
 }
 
 export const stationsCols = (f, options) => {
-  options.time = toLocal(f.utctime)
-  let cols = [hrsTd(options.time)]
+  let cols = [hrsTd(f.utctime)]
 
   let stationNames = options?.stationNames || Object.keys(f).slice(1)
   stationNames.forEach(stationName => {
-    cols.push(stationCols(f[stationName], options))
+    cols.push(paramsCols(f[stationName], options))
   })
      
-  let scope = isDayTime(options.time, false) ? 'tr-scope' : 'tr-outofscope'
+  let scope = isDayTime(f.utctime, false) ? 'tr-scope' : 'tr-outofscope'
   return tr(`forecast-table-row ${scope}`, cols)
 }
 
-export const stationCols = (station, options) => {
+export const paramsCols = (station, options) => {
+  let groupParams = options?.groupParams || false
+  let s = (groupParams) ? 1 : 0
+  let paramNames = options?.paramNames || Object.keys(station).slice(s)
   let cols = []
-  let paramNames = options?.paramNames || Object.keys(f).slice(1)
+
   paramNames.forEach(paramName => {
     cols.push(paramSpan(station, paramName, options))
   })
-  return td('td-param', cols)
+
+  return groupParams ? td('td-param', cols) : cols.map(param => td('td-param', param))  
 }
 
 export const addObsToMap = (stations) => {

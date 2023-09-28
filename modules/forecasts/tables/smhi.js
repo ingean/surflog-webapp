@@ -1,10 +1,9 @@
-import { el, hrsTd } from '../../components/elements.js';
-import { arrow } from '../../components/icons.js';
+import { hrsTd, tr, td } from '../../components/elements.js';
 import { get } from '../../utils/api.js';
 import { isDayTime } from '../../utils/time.js';
-import { formatValue, formatValue2, clsValue } from '../format.js';
 import { updateForecastTable } from './table.js';
 import { getStats } from '../../utils/statistics.js';
+import { paramSpan } from '../../config/forecastValues.js';
 
 const headers = ['Tid', 'Høyde', 'Periode', 'Varsel'];
 var smhiStats = null
@@ -13,32 +12,20 @@ export async function getSMHIStats() {
   if (!smhiStats) smhiStats = await getStats('smhi')
   return smhiStats
 }
-
-function cls(obj, param, alias) {
+export function smhiForecastToRow(obs) {
+  let emphasis = (isDayTime(obs.utctime)) ? 'tr-scope' : 'tr-outofscope';
   let options = {stats: smhiStats}
-  if (alias) options.alias = alias
-
-  return clsValue(obj, param, options)
-}
-
-export function smhiForecastToRow(forecast) {
-  let f = forecast
-  let emphasis = (isDayTime(forecast.utctime)) ? 'tr-scope' : 'tr-outofscope';
   
-  return (
-    el('tr', `forecast-table-row ${emphasis}`, [
-      hrsTd(forecast.utctime),
-      el('td', '', [
-        el('span', `td-value ${cls(f, 'waveheight')}`, formatValue(f, 'waveheight')),
-        el('span', 'td-secondary-value', formatValue2(f, 'waveheightmax')),
-        el('span', 'td-arrow', arrow(f.wavedir, 'sm'))
-      ]),
-      el('td', '', 
-        el('span', `td-value ${cls(f, 'waveperiod')}`, formatValue(f, 'waveperiod'))),
-      el('td', '', 
-        el('span', `td-value ${cls(f, 'waveheightforecast', 'waveheight')}`, formatValue(f, 'waveheightforecast'))
-    )])
-  )
+  return tr(`forecast-table-row ${emphasis}`, [
+          hrsTd(obs.utctime),
+          td( '', [
+            paramSpan(obs, 'waveheight', options),
+            paramSpan(obs, 'waveheightmax', options),
+            paramSpan(f, 'wavedir', options),
+          ]),
+          td('', paramSpan(obs, 'waveperiod', options)),
+          td('', paramSpan(obs, 'waveheightforecast', options) )
+        ])
 }
 
 export async function updateSMHITable() {
@@ -55,16 +42,4 @@ export var smhiForecast = [];
 export async function getSMHIForecast(start, end) {
   smhiForecast = await get('forecasts/smhi');
   updateSMHITable();
-}
-
-export function setNulls(obs) {
-  obs.data.forEach(d => {
-    if (d.waveheight === 0 && d.waveheightmax === 0 && d.waveperiod === 0 && d.wavedir === 0) {
-      d.waveheight = null;
-      d.waveheightmax = null;
-      d.waveperiod = null;
-      d.wavedir = null;
-    }
-  })
-  return obs
 }

@@ -23,7 +23,7 @@ export function getStatsForParam(statistics, param, score = 4, station = null) {
 }
 
 
-export const paramStats = (param, options) => {
+export const paramStats = (param, options) => { 
   param = (options?.alias) ? options.alias : param
   let stats = options.stats
   let result = {min: 0, avg: 0, max: 0, std:0}
@@ -51,17 +51,17 @@ const buoyStats = () => {
     score: 4,
     count: 1,
     waveheight_min: 1,
-    waveheight_avg: 2,
-    waveheight_max: 4,
+    waveheight_avg: 2.5,
+    waveheight_max: 5,
     waveheight_std: 0.5, 
-    waveperiod_min: 3,
-    waveperiod_avg: 5,
-    waveperiod_max: 10,
+    waveperiod_min: 4,
+    waveperiod_avg: 6,
+    waveperiod_max: 12,
     waveperiod_std: 1, 
     windspeed_min: 5,
-    wavespeed_avg: 12,
-    wavespeed_max: 25,
-    wavespeed_std: 5, 
+    windspeed_avg: 12,
+    windspeed_max: 25,
+    windspeed_std: 5, 
   }
 }
 

@@ -7,6 +7,7 @@ import { paramSpan } from '../../config/forecastValues.js';
 
 const headers = ['Tid', 'Vær', 'Temp', 'Høyde', 'Vind (byge)', 'Strøm', 'Vanntemp.'];
 var stats = {}
+var yrCoastForecast = []
 
 
 const value = (f, param) => {
@@ -52,8 +53,6 @@ export async function updateYrCoastTable(spot = 'Saltstein') {
 function getYrCoastTime(forecast) {
   return toLocal(forecast.utctime)
 }
-
-export var yrCoastForecast = []
 
 export async function getYrCoastForecast(yrId) {
   yrCoastForecast = await getYrCoast(yrId);

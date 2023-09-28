@@ -1,39 +1,32 @@
-import { el, hrsTd, tempTd } from '../../components/elements.js';
-import { arrow } from '../../components/icons.js';
+import { hrsTd, tempTd, tr, td } from '../../components/elements.js';
 import { get } from '../../utils/api.js';
-import { formatValue, clsValue, valueRating } from '../format.js';
+import { valueRating } from '../format.js';
 import { updateForecastTable } from './table.js';
 import { updateBuoyDashboard, getLastSMHIObs } from '../dashboards/buoyObs.js';
-import { smhiForecastToRow, getSMHITime, setNulls, getSMHIStats } from './smhi.js';
+import { smhiForecastToRow, getSMHITime, getSMHIStats } from './smhi.js';
 import { isDayTime, toLocal } from '../../utils/time.js';
 import { getStats } from '../../utils/statistics.js';
 import { vectorLayer } from '../../utils/map/vectorLayer.js';
 import { addLayerToMap } from '../map/dmi.js';
+import { paramSpan } from '../../config/forecastValues.js';
 
 var stats = {}
 
-function cls(obj, param) {
-  let options = {stats}
-  return clsValue(obj, param, options)
-}
-
 function buoyObsToRow(f) {
-  
   let emphasis = (isDayTime(f.utctime, false)) ? 'tr-scope' : 'tr-outofscope';
-  return el('tr', `forecast-table-row ${emphasis}`, [
-    hrsTd(f.utctime),
-    el('td', '', 
-      el('span', `td-value ${cls(f, 'waveheight')}`, formatValue(f, 'waveheight'))),
-    el('td', '', 
-      el('span', `td-value ${cls(f, 'waveperiod')}`, formatValue(f, 'waveperiod'))),
-    el('td', '', [
-      el('span', `td-value ${cls(f, 'windspeed')}`, formatValue(f, 'windspeed', 'wind')),
-      el('span', 'td-arrow', arrow(f.winddir, 'sm'))
-    ]),
-    el('td', '', 
-      el('span', `td-value ${cls(f, 'airpressure')}`, formatValue(f, 'airpressure', 'pressure'))),
-    tempTd(f.airtemp)
-  ])
+  let options = {stats}
+  return tr(`forecast-table-row ${emphasis}`, [
+          hrsTd(f.utctime),
+          td('', paramSpan(f, 'waveheight', options)),
+          td('', paramSpan(f, 'waveperiod', options)),
+          td('', [
+            paramSpan(f, 'windspeed', options),
+            paramSpan(f, 'winddir', options)
+          ]),
+          td('', paramSpan(f, 'airpressure', options)),
+          tempTd(f.airtemp)
+          ]
+        )
 }
 
 export async function updateBuoyObsTable(obs, smhi = true, spot = 'Saltstein') {
@@ -57,8 +50,8 @@ export var smhiBuoys = []
 export async function getBuoyObs() {
   stats = await getStats('buoy')
   let smhiStats = await getSMHIStats()
-  ukBuoys = await get(`observations/buoys`);
-  smhiBuoys = setNulls(await get('forecasts/smhi'))
+  ukBuoys = await get(`observations/buoys`)
+  smhiBuoys = await get('forecasts/smhi')
   addBuoysToMap(ukBuoys, stats)
   addSMHIToMap(smhiBuoys, smhiStats)
   updateBuoyDashboard(stats, smhiStats, ukBuoys, smhiBuoys)

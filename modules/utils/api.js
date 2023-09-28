@@ -97,45 +97,6 @@ export function getMetForecast() {
   return Promise.all(requests);
 }
 
-export async function getUKCoast() {
-  return get(`${urlAPI}proxy/uk`)
-}
-
-export function getDMIObs(start, end) {
-  let time = (start && end) 
-    ? `&datetime=${moment(start).format('YYYY-MM-DDTHH:mm:ssZ')}/${moment(end)}.format('YYYY-MM-DDTHH:mm:ssZ')` 
-    : '&period=latest-day'
-
-  let requests = [];
-  let baseUrl = forecasts.dmiObs.url;
-  let key = forecasts.dmiObs.apiKey;
-  let locations = forecasts.dmiObs.locations;
-  let params = forecasts.dmiObs.params;
-  locations.forEach(l => {
-    params.forEach(p => {
-      requests.push(get(`${baseUrl}?stationId=${l.id}&parameterId=${p.id}${time}&api-key=${key}`));
-    })
-  })
-  return Promise.all(requests);
-}
-
-export function getBWWaveForecast(start, end) {
-  const token = getBWCredentials().token
-  let requests
-
-}
-
-async function getBWCredentials() {
-  let response = await fetch(forecasts.bw.tokenUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: `client_id=${forecasts.bw.clientID}&scope=api&client_secret=${forecasts.bw.clientSecret}&grant_type=client_credentials`
-  })
-  return await response.json()
-}
-
 export function getTwin() {
   let time = moment(getImgTime()).format('YYYY-MM-DDTHH:mm:ss');
   return get(`${urlAPI}forecasts/dmi/${time}/twin?spot=${selectedSpot()}`);

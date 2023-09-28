@@ -107,6 +107,10 @@ td {
   padding: 4px;
 }
 
+.param-arrow {
+  padding-left: 8px;
+}
+
 
 /* Styling for small screens*/
 @media screen and (max-width:799px) { 
