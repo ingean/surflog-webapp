@@ -15,7 +15,7 @@ function metForecastToRow(fc) {
     paramNames: ['waveheight', 'wavedir'],
     groupParams: true
   })
-}
+} 
 
 function getMetTime(fc) {
   return fc.utctime

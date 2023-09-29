@@ -36,6 +36,7 @@ function tideRows(tide) {
 }
 
 function updateCard(spotName, location, tide, sun) {
+  let tideCard = tideTable(tide)
   let card = 
     div('station-card flex-row', [
       div('station-card station-card-names flex-col', [
@@ -52,16 +53,21 @@ function updateCard(spotName, location, tide, sun) {
         div('station-card-sunTime', sun.sunset),
         div('station-card-sunTime', sun.lastLight)
       ]),
-      div('station-card flex-col', 
-        el('table', 'station-card station-card-table', [
-          tideHeaders(['Type', 'Tid', 'Høyde']),
-          tideRows(tide)
-        ])
-      )
+      tideCard
     ]);
       
   document.querySelector('#root-station-card-yrCoast')
   .replaceChildren(card);
+}
+
+const tideTable = (tide) => {
+  if (!tide) return null
+  return  div('station-card flex-col', 
+            el('table', 'station-card station-card-table', [
+              tideHeaders(['Type', 'Tid', 'Høyde']),
+              tideRows(tide)
+            ])
+          )
 }
 
 function formatTideTitle(title) {
@@ -77,16 +83,7 @@ function formatTideLevel(level) {
 }
 
 function updateFooter(spot, location, sun, tide) {
-  tide = sortTides(tide)
-  let tideTitles = []
-  let tideTimes = []
-  let tideLevels = []
-
-  tide.forEach(t => {
-    tideTitles.push(div('footer-info-tideTime', formatTideTitle(t.tidetype)))
-    tideTimes.push(div('footer-info-tideTime', formatTideTime(t.localtime)))
-    tideLevels.push(div('footer-info-tideTime', formatTideLevel(t.tideheight)))
-  })
+  let tidePart = footerTide(tide) 
 
   let info = 
   div('footer-info flex-col center-v', [
@@ -106,15 +103,31 @@ function updateFooter(spot, location, sun, tide) {
         div('footer-info-sunTime', sun.lastLight)
       ])
     ]),
-    div('footer-info flex-row center-h', [
-      div('footer-info flex-col', tideTitles),
-      div('footer-info flex-col', tideTimes),
-      div('footer-info flex-col', tideLevels)
-    ])
+    tidePart
   ]) 
 
   document.getElementById('footer-container-spot')
   .replaceChildren(info);
+}
+
+const footerTide = (tide) => {
+  if (!tide) return null
+
+  tide = sortTides(tide)
+  let tideTitles = []
+  let tideTimes = []
+  let tideLevels = []
+
+  tide.forEach(t => {
+    tideTitles.push(div('footer-info-tideTime', formatTideTitle(t.tidetype)))
+    tideTimes.push(div('footer-info-tideTime', formatTideTime(t.localtime)))
+    tideLevels.push(div('footer-info-tideTime', formatTideLevel(t.tideheight)))
+  })
+  return div('footer-info flex-row center-h', [
+          div('footer-info flex-col', tideTitles),
+          div('footer-info flex-col', tideTimes),
+          div('footer-info flex-col', tideLevels)
+        ])
 }
 
 
