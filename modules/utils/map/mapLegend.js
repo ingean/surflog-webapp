@@ -1,11 +1,11 @@
 import { div, el } from '../../components/elements.js'
 
 const layerScales = {
-  'wave_eu': [20, 12, 10, 8, 6, 5, 4, 3.5, 3, 2.4, 1.9, 1.4, 1, 0.7, 0.5, 0.2, null],
-  'wind_eu': [50, 32, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2, null],
-  'windgust_eu': [50, 32, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2, null],
-  'seatemp_eu': [30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 0, null],
-  'current_eu': [5.0, 4.8, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5, 1.2, 1.0, 0.8, 0.6, 0.4, 0.3, 0.2, 0.1, null]
+  'Bølger': [20, 12, 10, 8, 6, 5, 4, 3.5, 3, 2.4, 1.9, 1.4, 1, 0.7, 0.5, 0.2, null],
+  'Vind': [50, 32, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2, null],
+  'Vindkast': [50, 32, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2, null],
+  'Vanntemp.': [30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2, 0, null],
+  'Strøm': [5.0, 4.8, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5, 1.2, 1.0, 0.8, 0.6, 0.4, 0.3, 0.2, 0.1, null]
 }
 
 export const scaleColors = [
@@ -15,8 +15,13 @@ export const scaleColors = [
   'rgb(158, 242, 233);', 'rgb(220, 250, 247);'
 ]
 
-export const mapLegend = (layerName) => {
+export const setMapLegend = (layerName) => {
   let values = layerScales[layerName]
   let colors = values.map((value, idx) => div({style: `width: 24px; height: 20px; line-height: 40px; background-color: ${scaleColors[idx]}`}, value))
-  return div('map-legend', el('ul', 'map-legend-list', colors))
+  let legend = div({id: 'dmi-map-legend', class: 'map-legend'}, el('ul', 'map-legend-list', colors))
+  
+  let oldLegend = document.getElementById('dmi-map-legend')
+  let map = document.getElementById('dmi-map')
+  if (oldLegend) map.replaceChild(legend, oldLegend)
+  else map.appendChild(legend)
 }

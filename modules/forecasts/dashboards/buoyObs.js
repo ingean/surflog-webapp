@@ -1,4 +1,3 @@
-import { div } from "../../components/elements.js"
 import { updateBuoyObsTable, smhiBuoys, ukBuoys } from "../tables/buoyObs.js";
 import { checkTile, stationTile } from "../../components/dashboard/tile.js"
 
@@ -35,10 +34,15 @@ const smhiTile = (obs) => {
 export const updateBuoyDashboard = (stats, smhiStats, ukBuoys, smhiBuoys) => {
   buoyStats = stats
   smhibuoyStats = smhiStats
-  let tiles = ukBuoys.map(o => ukTile(o))
-  tiles.push(smhiTile(smhiBuoys))
-  let container = document.getElementById('buoy-db-container')
-  container.appendChild(div({id: 'buoy-tile-group', class: 'flex-row center-h'}, tiles))
+
+  let tileGroup = document.getElementById('buoy-tile-group')
+  let firstNode = tileGroup.firstChild
+
+  ukBuoys.forEach(o => {
+    if (firstNode) tileGroup.insertBefore(ukTile(o), firstNode)
+    else tileGroup.appendChild(ukTile(o))
+  })
+  tileGroup.appendChild(smhiTile(smhiBuoys))
 }
 
 const tileSelected = (e) => {

@@ -40,6 +40,8 @@ export const slSubswell = (report, stat = '') => {
   let p2 = (stat) ? `subswellperiod_${stat}` : 'subswellperiod'
   let p3 = (stat) ? `subswelldir_${stat}` : 'subswelldir'
 
+  if(report[p1] === 0 && report[p2] === 0 && report[p3] === 0) return div('report-forecast-msw-subswell', '')
+
   return div('report-forecast-msw-subswell', [
     div('center2 report-forecast-msw-value-small', formatValue(report, p1, 'swellheight')),
     div('center2 report-forecast-msw-value-small', formatValue(report, p2, 'swellperiod')),

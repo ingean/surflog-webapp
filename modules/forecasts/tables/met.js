@@ -12,8 +12,9 @@ var metStations = []
 
 function metForecastToRow(fc) {
   return stationsCols(fc, {
-    paramNames: ['waveheight', 'wavedir'],
-    groupParams: true
+    paramNames: ['waveheight', 'wavedir', 'windspeed', 'winddir'],
+    groupParams: true,
+    stats
   })
 } 
 
@@ -27,7 +28,7 @@ export async function updateMetTable(spot = 'Saltstein') {
   let headers = metStations.map(station => station.name)
   let timeserie = mergeTimeseries(metStations)
 
-  //addMetToMap(metStations, stats)
+  addMetToMap(metStations, stats)
   updateForecastTable(timeserie, getMetTime, metForecastToRow, 'yr', ['Tid', ...headers])
 }
 
@@ -36,16 +37,14 @@ export async function getMetForecast() {
   updateMetTable()
 }
 
-const addYrToMap = (forecast, stats) => {
-  let features = forecast.map((f, idx) => {
-    let wh = f.properties.timeseries[0].data.instant.details
-    let name = forecasts.met.locations[idx].name
-
+const addMetToMap = (metStations, stats) => {
+  let features = metStations.map(f => {
+    
     return {
-      name,
-      lat: f.geometry.coordinates[1], 
-      lon: f.geometry.coordinates[0],
-      rating: valueRating(wh, 'sea_surface_wave_height', {station: name, stats, alias: 'waveheight'})
+      name: f.name,
+      lat: f.lat, 
+      lon: f.lon,
+      rating: valueRating(f.data[0], 'waveheight', {station: f.name, stats})
     }
   })
   let layer = vectorLayer(features)

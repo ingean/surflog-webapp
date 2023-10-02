@@ -55,6 +55,7 @@ export const stationsCols = (f, options) => {
 
   let stationNames = options?.stationNames || Object.keys(f).slice(1)
   stationNames.forEach(stationName => {
+    options.station = stationName
     cols.push(paramsCols(f[stationName], options))
   })
      

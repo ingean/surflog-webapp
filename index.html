@@ -136,10 +136,10 @@
               <a href="#tab-forecast-dmi" data-toggle="tab">DMI</a>
             </li>
             <li class="panel-tab">
-              <a href="#tab-forecast-northsea" data-toggle="tab">Bølgeobservasjoner</a>
+              <a href="#tab-forecast-yr" data-toggle="tab">Met</a>
             </li>
             <li class="panel-tab">
-              <a href="#tab-forecast-yr" data-toggle="tab">Yr</a>
+              <a href="#tab-forecast-northsea" data-toggle="tab">Bølgeobservasjoner</a>
             </li>
             <li class="panel-tab">
               <a href="#tab-forecast-frost" data-toggle="tab">Vindobservasjoner</a>
@@ -283,16 +283,6 @@
               </div>
             </div>
 
-            <!-- Real time buoy dashboard and tables -->
-            <div id="tab-forecast-northsea" class="tab-pane fade">
-              <div class="tab-body flex-col align-content-center">
-                <div id="buoy-map"></div>
-                <div id="buoy-db-container" class="flex-row"></div>
-                <div id="root-forecast-table-buoyObs"></div>
-                <div id="root-forecast-table-buoyObs-historic"></div>
-              </div>
-            </div>
-
             <!-- Yr forecast images and table -->
             <div id="tab-forecast-yr" class="tab-pane fade">
               <div class="tab-body flex-col align-content-center">
@@ -322,6 +312,18 @@
                 </div>
                 <!-- YR Table-->
                 <div id="root-forecast-table-yr"></div>
+              </div>
+            </div>
+
+            <!-- Real time buoy dashboard and tables -->
+            <div id="tab-forecast-northsea" class="tab-pane fade">
+              <div class="tab-body flex-col align-content-center">
+                <div id="buoy-map"></div>
+                <div id="buoy-db-container" class="flex-row">
+                  <div id='buoy-tile-group' class='flex-row center-h'></div>
+                </div>
+                <div id="root-forecast-table-buoyObs"></div>
+                <div id="root-forecast-table-buoyObs-historic"></div>
               </div>
             </div>
 

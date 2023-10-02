@@ -109,6 +109,11 @@ td {
 
 .param-arrow {
   padding-left: 8px;
+  padding-right: 8px;
+}
+
+.param-value {
+  padding-left: 8px;
 }
 
 

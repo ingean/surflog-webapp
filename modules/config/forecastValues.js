@@ -112,7 +112,7 @@ const arrowSpan = (obj, param, options ) => {
 }
 
 export const paramSpan = (obj, param, options) => {
-  let cls = options.valueCls || ''
+  let cls = ` ${options.valueCls}` || ''
   
   if (param.includes('dir')) return arrowSpan(obj, param, options)
   if (param.includes('time')) return span(cls, moment(obj[param]).format('HH'))
@@ -121,7 +121,7 @@ export const paramSpan = (obj, param, options) => {
   rating = rating ? ` txt-rating-${rating}` : ''
   let value = paramVal(obj, param)
 
-  return span(`${cls}${rating}`, value)
+  return span(`param-value${cls}${rating}`, value)
 }
 
 

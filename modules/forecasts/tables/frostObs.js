@@ -45,14 +45,19 @@ export async function getFrostObs(start, end) {
 }
 
 const addFrostObsTile = (obs) => {
-  let container = document.getElementById('buoy-tile-group')
+  let tileGroup = document.getElementById('buoy-tile-group')
+  
   let frostTile = stationTile(obs, {
     id: obs.name,
     onSelect: tileSelected,
     stats: getStats('buoy')
   })
   
-  container.insertBefore(frostTile, container.childNodes[6])
+  if (tileGroup.childNodes.length >=6) {
+    tileGroup.insertBefore(frostTile, tileGroup.childNodes[6])
+  } else {
+    tileGroup.appendChild(frostTile)
+  }
 }
 
 const tileSelected = () => {

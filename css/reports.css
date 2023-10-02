@@ -137,6 +137,7 @@
 .report-forecast-msw-subswell {
   display: flex;
   flex-direction: row;
+  min-width: 120px;
 }
 
 .report-forecast-msw-wind {

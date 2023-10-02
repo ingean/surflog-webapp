@@ -1,26 +1,28 @@
-import { inputSelect } from "../../components/formGroup.js"
+import { div, el } from "../../components/elements.js"
 import { changeLayerVisibility } from "../../forecasts/map/dmi.js"
 
 
 export const layerList = () => {
-  const layers = [
-    {caption: 'Bølger', value: 'wave_eu', default: true},
-    {caption: 'Vind', value: 'wind_eu'},
-    {caption: 'Vindkast', value: 'windgust_eu'},
-    {caption: 'Lufttrykk', value: 'precip_eu'},
-    {caption: 'Vanntemp.', value: 'seatemp_eu'}
-  ]
-  
-  let options = {
-    id: 'dmi-map-layerlist',
-    name: 'layers', 
-    type: 'btn', 
-    caption: 'Kartlag', 
-    domain: layers
-  }
+  let btnGroup = div('btn-group btn-group-sm dmi-layer-list', [
+                  btn('wave_eu', 'Bølger', true),
+                  btn('wind_eu', 'Vind'),
+                  btn('windgust_eu', 'Vindkast'),
+                  btn('airpressure_eu', 'Trykk'),
+                  btn('seatemp_eu', 'Vanntemp')
+                ])
 
-  //let select = inputSelect(options)
-  //select.addEventListener('click', changeLayerVisibility)
+  return btnGroup               
+}
 
-  return inputSelect(options)
+const btn = (id, caption, active = false) => {
+  let status = (active) ? 'Active' : 'notActive'
+  let btn =  el('button', {
+    id: `dmi-map-layer-${id}`,
+    value: caption, 
+    type: 'button', 
+    class: `btn btn-primary btn-sm ${status}`
+  }, caption)
+
+  btn.addEventListener('click', changeLayerVisibility)
+  return btn
 }

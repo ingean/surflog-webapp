@@ -38,6 +38,6 @@ export async function startSurfLog(userId) {
   getDMIForecast()
   getMetForecast()
   getBuoyObs()
-  getFrostObs()
   getDMIObservations()
+  getFrostObs()
 }

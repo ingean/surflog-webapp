@@ -37,6 +37,16 @@ export function toggleActive(el) { //Argument is button to be active
   el.classList.add('active')
 }
 
+export function toggleActiveBtn(activeBtn) { //Argument is button to be active
+  let allBtns = Array.from(activeBtn.parentElement.children); //Buttom group element
+  allBtns.forEach(btn => {
+    btn.classList.remove('Active')
+    btn.classList.add('notActive')
+  })
+  activeBtn.classList.remove('notActive')
+  activeBtn.classList.add('Active')
+}
+
 export function setActiveById(id, activeValue) {
   let btns = document.querySelectorAll(`[data-toggle='${id}']`)
     if (btns) {

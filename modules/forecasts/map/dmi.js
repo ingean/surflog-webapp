@@ -6,14 +6,16 @@ import {defaults as defaultControls} from '../../lib/ol/control.js';
 import { wmsTileLayer, getTimeExtent } from '../../utils/map/wmsLayer.js'
 import { el, div } from '../../components/elements.js'
 import { mapLock } from '../../utils/map/mapLockControl.js'
-import { mapLegend } from '../../utils/map/mapLegend.js'
+import { setMapLegend } from '../../utils/map/mapLegend.js'
 import { layerList } from '../../utils/map/mapLayerList.js';
+import { toggleActiveBtn } from '../../utils/utilities.js';
 
 var map = null
+var layers = []
 
 const addMapElements = () => {
   let section = document.getElementById('dmi-map-section')
-  let layerListBtn = div({id: 'dmi-map-layerlist-container input-group'}, layerList())
+  let layerListBtn = layerList()
   let mapTools = [
       div({id: 'dmi-map', style:'width: 100%; height: 400px; position:relative;'}),
       div({id: 'dmi-map-slider-container', class: 'slidecontainer'}),
@@ -21,8 +23,6 @@ const addMapElements = () => {
       layerListBtn,
     ]
   mapTools.forEach(e => section.appendChild(e))
-
-  layerListBtn.addEventListener('click', changeLayerVisibility )
 }
 
 const setLayerTime = (datetime) => {
@@ -39,7 +39,7 @@ const setLayerTime = (datetime) => {
 const initMapControls = (timeExtent) => {
   addMapElements()
   addTimeSlider(timeExtent)
-  addMapLegend()
+  setMapLegend('Bølger')
 }
 
 const addTimeSlider = (timeExtent) => {
@@ -53,25 +53,22 @@ const addTimeSlider = (timeExtent) => {
   }
 }
 
-const addMapLegend = () => {
-  let container = document.getElementById('dmi-map')
-  container.appendChild(mapLegend('wave_eu'))
-}
-
 export const initDMIMap = async () => {
   let timeExtent = await getTimeExtent()
-  let waveLayer = wmsTileLayer({
-    title: 'Bølgehøyde',
-    visible: true,
-    wmslayers: 'wave_eu',
-    wmstime: timeExtent[0]
-  })
-  let windLayer = wmsTileLayer({
-    title: 'Vind',
-    visible: false,
-    wmslayers: 'wind_eu',
-    wmstime: timeExtent[0]
-  })
+  layers = [
+    wmsTileLayer({
+      title: 'Bølger',
+      visible: true,
+      wmslayers: 'wave_eu',
+      wmstime: timeExtent[0]
+    }),
+    wmsTileLayer({
+      title: 'Vind',
+      visible: false,
+      wmslayers: 'wind_eu',
+      wmstime: timeExtent[0]
+    })
+  ]
 
   initMapControls(timeExtent)
   setLayerTime(timeExtent[0])
@@ -79,7 +76,7 @@ export const initDMIMap = async () => {
   map = new Map({
     target: 'dmi-map',
     controls: defaultControls().extend([new mapLock()]),
-    layers: [waveLayer, windLayer],
+    layers,
     view: new View({
       projection: getProjection("EPSG:3575"),
       center: [-232904, -3591543],
@@ -101,7 +98,14 @@ export const addLayerToMap = (layer) => {
 }
 
 export const changeLayerVisibility = (e) => {
-  let clicked = e.currentTarget.value
-  console.log(clicked)
+  let btn = e.currentTarget
+  toggleActiveBtn(btn)
+
+ layers.forEach(l => {
+  let p = l.getProperties()
+  if (l.getVisible() === true) l.setVisible(false)
+  if (p.title === btn.value) l.setVisible(true)
+ })
+ setMapLegend(btn.value)
 }
 
