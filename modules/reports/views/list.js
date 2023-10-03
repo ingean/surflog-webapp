@@ -182,7 +182,8 @@ function formToQuery(data) {
     }
   }
 
-  return query.substring(1); //Remove first & from query
+  return query
+  //return query.substring(1); //Remove first & from query
 }
 
 export function initReportlist() {

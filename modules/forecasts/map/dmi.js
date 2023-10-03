@@ -67,6 +67,18 @@ export const initDMIMap = async () => {
       visible: false,
       wmslayers: 'wind_eu',
       wmstime: timeExtent[0]
+    }),
+    wmsTileLayer({
+      title: 'Vindkast',
+      visible: false,
+      wmslayers: 'windgust_eu',
+      wmstime: timeExtent[0]
+    }),
+    wmsTileLayer({
+      title: 'Strøm',
+      visible: false,
+      wmslayers: 'current_eu',
+      wmstime: timeExtent[0]
     })
   ]
 

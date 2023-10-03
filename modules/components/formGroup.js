@@ -145,6 +145,6 @@ export function updateLocationDropdown(value) {
   let options = formsOptions.find(item => item.name === value);
   let newPlaceList = inputGroup(options);
   let parent = document.querySelector('#form-report-filter');
-  let oldPlaceList = parent.children[1];
-  parent.replaceChild(newPlaceList, oldPlaceList);
+  let oldPlaceList = parent.children[0].children[1];
+  parent.children[0].replaceChild(newPlaceList, oldPlaceList);
 }

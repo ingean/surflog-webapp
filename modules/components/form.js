@@ -131,7 +131,7 @@ function onBtnGroupClick(e) {
 
 function onLocationTypeChange(value) {
   let parent = document.querySelector('#form-report-filter');
-  let placeDropDown = parent.children[1];
+  let placeDropDown = parent.children[0].children[1];
   
   if (value === 'Alle') {  
     placeDropDown.style.display = 'None';

@@ -7,8 +7,7 @@ export const layerList = () => {
                   btn('wave_eu', 'Bølger', true),
                   btn('wind_eu', 'Vind'),
                   btn('windgust_eu', 'Vindkast'),
-                  btn('airpressure_eu', 'Trykk'),
-                  btn('seatemp_eu', 'Vanntemp')
+                  btn('current_eu', 'Strøm')
                 ])
 
   return btnGroup               
