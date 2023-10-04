@@ -78,17 +78,12 @@ export const paramReference = (param) => {
 
 export const paramVal = (obj, param) => {
   if (!obj[param]) return ''
-  let prefix = ''
-  let suffix = ''
   let options = params.find(p => p.id.includes(param))
   if (!options) return obj[param]
   if (options.arrow) return arrow(obj[param], options.arrow)
-  if (options.secondary) {
-    prefix = ' (' 
-    suffix = ')'
-  }
+ 
   let unit = (options.unit.unit) ? ` ${options.unit.unit}` : ''
-  return `${prefix}${round(obj[param], options.unit.precision)}${unit}${suffix}`
+  return `${round(obj[param], options.unit.precision)}${unit}`
 }
 
 export const paramDir = (value) => {
@@ -113,7 +108,9 @@ const arrowSpan = (obj, param, options ) => {
 }
 
 export const paramSpan = (obj, param, options) => {
-  let cls = ` ${options.valueCls}` || ''
+  let cls =  (options?.valueCls) ? ` ${options.valueCls}` : ''
+  let prefix = ''
+  let suffix = ''
   
   if (param.includes('dir')) return arrowSpan(obj, param, options)
   if (param.includes('time')) return span(cls, moment(obj[param]).format('HH'))
@@ -122,7 +119,14 @@ export const paramSpan = (obj, param, options) => {
   rating = rating ? ` txt-rating-${rating}` : ''
   let value = paramVal(obj, param)
 
-  return span(`param-value${cls}${rating}`, value)
+  let paramOptions = params.find(p => p.id.includes(param))
+  if (paramOptions?.secondary || options?.secondary) {
+    cls = cls + ' param-value-sm hidden-xs'
+    prefix = '('
+    suffix = ')'
+  }
+
+  return span(`param-value${cls}${rating}`, `${prefix}${value}${suffix}`)
 }
 
 

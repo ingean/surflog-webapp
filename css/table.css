@@ -116,6 +116,11 @@ td {
   padding-left: 8px;
 }
 
+.param-value-sm {
+  color: var(--secondary-txt-color);
+  font-size: smaller;
+}
+
 
 /* Styling for small screens*/
 @media screen and (max-width:799px) { 

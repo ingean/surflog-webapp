@@ -1,28 +1,23 @@
-import { el, ratingLabel, hrsTd } from '../../components/elements.js';
+import { ratingLabel, hrsTd, span, td, tr } from '../../components/elements.js';
 import { get, queryTimespan } from '../../utils/api.js';
 import { round } from '../../utils/utilities.js';
 import { isDayTime } from '../../utils/time.js';
-import { formatValue, formatValue2, clsValue } from '../format.js';
 import { scoreForecast } from '../score.js';
 import { updateForecastTable } from './table.js';
 import { getStats } from '../../utils/statistics.js';
+import { paramSpan } from '../../config/forecastValues.js';
 
 const headers = ['Tid', 'Høyde', 'Periode', 'Dønning', 'Periode', 'Vind', 'Score'];
 var stats = {}
-
-function cls(obj, param) {
-  let options = {stats}
-  return clsValue(obj, param, options)
-}
 
 function paramCell(forecast, param) {
   let f1 = forecast.stations['Saltstein']
   let f2 = forecast.stations['Skagerak']
   
   return (
-    el('td', '', [
-      el('span', `td-value ${cls(f1, param)}`, formatValue(f1, param)),
-      el('span', 'td-secondary-value hidden-xs', formatValue2(f2, param))
+    td('', [
+      paramSpan(f1, param, {stats, wind: 'local'}),
+      paramSpan(f2, param, {stats, secondary: true, wind: 'fetch'})
     ])
   )
 }
@@ -34,9 +29,9 @@ function paramScore(forecast, param) {
   let score = (param === 'score') ? ratingLabel(v1, 'sm') : (v1 === 1) ? 'Ja' : 'Nei';
   
   return (
-    el('td', '', [
-      el('span', 'td-value', score),
-      el('span', 'td-secondary-value hidden-xs', ` (${round(v2, 1)})`)
+    td('', [
+      span('param-value', score),
+      span('param-value-sm hidden-xs', ` ${round(v2, 1)*100}%`)
     ])
   )
 }
@@ -46,7 +41,7 @@ function dmiForecastToRow(forecast) {
   let cls = (score > 4) ? `bg-muted-${score}` : '';
   let emphasis = (isDayTime(forecast.localtime)) ? 'tr-scope' : 'tr-outofscope';
   return (
-    el('tr', `forecast-table-row ${cls} ${emphasis}`, [
+    tr(`forecast-table-row ${cls} ${emphasis}`, [
       hrsTd(forecast.localtime),
       paramCell(forecast, 'waveheight'),
       paramCell(forecast, 'waveperiod'),
