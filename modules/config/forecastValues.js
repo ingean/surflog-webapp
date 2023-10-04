@@ -47,23 +47,23 @@ const unitTemp = {
 }
 
 const params = [
-  {id: 'utctime', caption: 'Tid', group: 1},
-  {id: 'waveheight', caption: 'Høyde', group: 1, unit: unitHeight},
-  {id: 'waveheightforecast', caption: 'Varsel', group: 1, unit: unitHeight},
-  {id: 'waveheightmax', caption: 'Maxhøyde', group: 1, unit: unitHeight},
-  {id: 'waveperiod', caption: 'Periode', group: 1, unit: unitPeriod},
-  {id: 'wavedir', caption: 'Retning', group: 1, arrow: 'sm'},
-  {id: 'swellheight', caption: 'Høyde', group: 2, unit: unitHeight},
-  {id: 'swellperiod', caption: 'Periode', group: 2, unit: unitPeriod},
-  {id: 'swelldir', caption: 'Retning', group: 2, arrow: 'sm'},
-  {id: 'windspeed', caption: 'Vind', group: 3, unit: unitSpeed},
-  {id: 'windgust', caption: 'Byge', group: 3, secondary: true, unit: unitSpeed},
-  {id: 'winddir', caption: 'Retning', group: 3, arrow: 'md'},
-  {id: 'currentspeed', caption: 'Strøm', group: 4, unit: unitSpeed},
-  {id: 'currentdir', caption: 'Retning', group: 4, arrow: 'md'},
-  {id: 'airtemp', caption: 'Lufttemp.', group: 5, unit: unitTemp},
-  {id: 'watertemp', caption: 'Vanntemp.', group: 5, unit: unitTemp},
-  {id: 'airpressure', caption: 'Trykk.', group: 6, unit: unitPressure, min: true}
+  {id: 'utctime', caption: 'Tid'},
+  {id: 'waveheight', caption: 'Høyde', unit: unitHeight},
+  {id: 'waveheightforecast', caption: 'Varsel', unit: unitHeight},
+  {id: 'waveheightmax', caption: 'Maxhøyde', secondary: true, unit: unitHeight},
+  {id: 'waveperiod', caption: 'Periode', unit: unitPeriod},
+  {id: 'wavedir', caption: 'Retning', arrow: 'sm'},
+  {id: 'swellheight', caption: 'Høyde', unit: unitHeight},
+  {id: 'swellperiod', caption: 'Periode', unit: unitPeriod},
+  {id: 'swelldir', caption: 'Retning', arrow: 'sm'},
+  {id: 'windspeed', caption: 'Vind', unit: unitSpeed},
+  {id: 'windgust', caption: 'Byge', secondary: true, unit: unitSpeed},
+  {id: 'winddir', caption: 'Retning', arrow: 'md'},
+  {id: 'currentspeed', caption: 'Strøm', unit: unitSpeed},
+  {id: 'currentdir', caption: 'Retning', arrow: 'md'},
+  {id: 'airtemp', caption: 'Lufttemp.', unit: unitTemp},
+  {id: 'watertemp', caption: 'Vanntemp.', unit: unitTemp},
+  {id: 'airpressure', caption: 'Trykk.', unit: unitPressure, min: true}
 ]
 
 export const paramCaption = (param) => {
@@ -77,6 +77,7 @@ export const paramReference = (param) => {
  }
 
 export const paramVal = (obj, param) => {
+  if (!obj[param]) return ''
   let prefix = ''
   let suffix = ''
   let options = params.find(p => p.id.includes(param))

@@ -23,9 +23,13 @@ export function getStatsForParam(statistics, param, score = 4, station = null) {
 }
 
 
-export const paramStats = (param, options) => { 
+export const paramStats = (param, options) => {
+  param = param.includes('forecast') ? 'waveheight' : param  
   param = (options?.alias) ? options.alias : param
+  
   let stats = options.stats
+  if (!stats) return 
+
   let result = {min: 0, avg: 0, max: 0, std:0}
 
   for (let stat in result) {
@@ -69,7 +73,7 @@ export const getStats = async(source, spot) => {
   spot = spot || selectedSpot()
   source = source || 'dmi'
 
-  if (STATS?.[source]?.[spot]) return STATS[source][spot] // If stat is previously fetched return
+  if (STATS?.[source]?.[spot]) return STATS[source][spot]
   if (!STATS?.[source]) STATS[source] = {}
   if (!STATS[source]?.[spot]) STATS[source][spot] = {}
 
@@ -82,9 +86,6 @@ export const getStats = async(source, spot) => {
   stats = statsToUse(stats)
 
   stats.forEach(s => {
-    //if (!STATS?.[source]) STATS[source] = {}
-    //if (!STATS[source]?.[spot]) STATS[source][spot] = {}
-
     if (s.station) {
       STATS[source][spot][s.station] = s
     } else {
@@ -93,3 +94,4 @@ export const getStats = async(source, spot) => {
   })  
   return STATS[source][spot]
 }
+  

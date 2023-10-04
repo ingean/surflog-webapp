@@ -21,10 +21,10 @@ export function smhiForecastToRow(obs) {
           td( '', [
             paramSpan(obs, 'waveheight', options),
             paramSpan(obs, 'waveheightmax', options),
-            paramSpan(f, 'wavedir', options),
+            paramSpan(obs, 'wavedir', options),
           ]),
           td('', paramSpan(obs, 'waveperiod', options)),
-          td('', paramSpan(obs, 'waveheightforecast', options) )
+          td('', paramSpan(obs, 'waveheightforecast', options))
         ])
 }
 
@@ -34,7 +34,7 @@ export async function updateSMHITable() {
 }
 
 export function getSMHITime(forecast) {
-  return forecast.localtime;
+  return forecast.utctime
 }
 
 export var smhiForecast = [];
