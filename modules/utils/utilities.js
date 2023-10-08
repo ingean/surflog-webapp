@@ -154,3 +154,5 @@ export const toChunks = (arr, chunkSize) => {
   return chunks
 }
 
+export const emptyObj = obj => Reflect.ownKeys(obj).length === 0 && obj.constructor === Object
+

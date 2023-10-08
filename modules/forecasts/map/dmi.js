@@ -85,13 +85,16 @@ export const initDMIMap = async () => {
   initMapControls(timeExtent)
   setLayerTime(timeExtent[0])
   
+  let lockCtrl = new mapLock()
+
   map = new Map({
     target: 'dmi-map',
-    controls: defaultControls().extend([new mapLock()]),
+    controls: defaultControls().extend([lockCtrl]),
     layers,
     view: new View({
       projection: getProjection("EPSG:3575"),
-      center: [-232904, -3591543],
+      //center: [-232904, -3591543],
+      center: [-35123, -3507459],
       zoom: 6,
     })
   })
@@ -102,6 +105,8 @@ export const initDMIMap = async () => {
     const hit = map.hasFeatureAtPixel(pixel)
     mapContainer.style.cursor = (hit) ? 'pointer' : ''
   })
+
+  lockCtrl.lockMap()
 }
 
 export const addLayerToMap = (layer) => {

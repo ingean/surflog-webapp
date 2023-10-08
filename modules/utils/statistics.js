@@ -1,5 +1,6 @@
-import { get, getStatistics } from "../utils/api.js"
+import { get } from "../utils/api.js"
 import { selectedSpot } from "../components/spotInput.js"
+import { emptyObj } from "./utilities.js"
 
 var STATS = {}
 
@@ -24,12 +25,12 @@ export function getStatsForParam(statistics, param, score = 4, station = null) {
 
 
 export const paramStats = (param, options) => {
-  param = param.includes('forecast') ? 'waveheight' : param  
-  param = (options?.alias) ? options.alias : param
-  
   let stats = options.stats
   if (!stats) return 
 
+  param = param.includes('forecast') ? 'waveheight' : param  
+  param = (options?.alias) ? options.alias : param
+  
   let result = {min: 0, avg: 0, max: 0, std:0}
 
   for (let stat in result) {
@@ -37,6 +38,7 @@ export const paramStats = (param, options) => {
     result[stat] = (options?.station) ? stats[options.station][key] : stats[key]
   }
   return result
+
 }
 
 const statsToUse = (stats) => {
@@ -73,7 +75,7 @@ export const getStats = async(source, spot) => {
   spot = spot || selectedSpot()
   source = source || 'dmi'
 
-  if (STATS?.[source]?.[spot]) return STATS[source][spot]
+  if (STATS?.[source]?.[spot] && !emptyObj(STATS[source][spot])) return STATS[source][spot]
   if (!STATS?.[source]) STATS[source] = {}
   if (!STATS[source]?.[spot]) STATS[source][spot] = {}
 

@@ -17,10 +17,10 @@ const frostObsToRow = (f) => {
   })
 }
 
-const frostBuoyToRow = (data) => {
+const frostBuoyToRow = async (data) => {
   let cols = paramsCols(data, {
     wind: 'fetch', 
-    stats: getStats('buoy')
+    stats: await getStats('buoy')
   })
   let scope = isDayTime(data.utctime, false) ? 'tr-scope' : 'tr-outofscope'
   return tr(`forecast-table-row ${scope}`, cols)
