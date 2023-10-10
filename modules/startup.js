@@ -5,6 +5,7 @@ import { createForms } from './components/form.js';
 import { addDeleteReportsEventHandlers } from './reports/delete.js';
 import { getReports } from './reports/read.js';
 import { getFrostObs } from './forecasts/tables/frostObs.js';
+import { getOpenMeteoForecast } from './forecasts/tables/openmeteo.js'
 import { getMetForecast } from './forecasts/tables/met.js';
 import { getDMIForecast } from './forecasts/tables/dmi.js';
 import { initDMIImages } from './forecasts/images/dmi.js';   
@@ -36,6 +37,7 @@ export async function startSurfLog(userId) {
 
   // Forecasts
   getDMIForecast()
+  getOpenMeteoForecast()
   getMetForecast()
   getBuoyObs()
   getDMIObservations()

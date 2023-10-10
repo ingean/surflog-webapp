@@ -136,6 +136,9 @@
               <a href="#tab-forecast-dmi" data-toggle="tab">DMI</a>
             </li>
             <li class="panel-tab">
+              <a href="#tab-forecast-openmeteo" data-toggle="tab">Open Meteo</a>
+            </li>
+            <li class="panel-tab">
               <a href="#tab-forecast-yr" data-toggle="tab">Met</a>
             </li>
             <li class="panel-tab">
@@ -283,6 +286,14 @@
               </div>
             </div>
 
+            <!-- Open Meteo table -->
+            <div id="tab-forecast-openmeteo" class="tab-pane fade">
+              <div class="tab-body flex-col align-content-center">
+                <div id="root-forecast-table-openmeteo"></div>
+                <div id="root-forecast-table-openmeteo-historic"></div>
+              </div>
+            </div>
+
             <!-- Yr forecast images and table -->
             <div id="tab-forecast-yr" class="tab-pane fade">
               <div class="tab-body flex-col align-content-center">
@@ -318,7 +329,6 @@
             <!-- Real time buoy dashboard and tables -->
             <div id="tab-forecast-northsea" class="tab-pane fade">
               <div class="tab-body flex-col align-content-center">
-                <div id="buoy-map"></div>
                 <div id="buoy-db-container" class="flex-row">
                   <div id='buoy-tile-group' class='flex-row center-h'></div>
                 </div>
