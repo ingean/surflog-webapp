@@ -16,7 +16,7 @@ export const addStationsToMap = (stations, stats) => {
       lon: s.lon, 
       name: s.name, 
       value: paramVal(s.data[0], 'waveheight'), 
-      dir: s.data[0].wavedir, 
+      rotation: s.data[0].wavedir, 
       rating: valueRating(s.data[0], 'waveheight', {stats})
     }
   })

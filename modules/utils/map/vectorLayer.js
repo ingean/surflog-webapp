@@ -19,6 +19,8 @@ export const vectorLayer = (features, title) => {
   features = features.map(f => new Feature({
     geometry: point(f.lat, f.lon, targetProj),
     name: f.name,
+    value: f?.value || null,
+    rotation: f?.rotation || null,
     size: f?.size || 8,
     rating: f.rating
   }))
