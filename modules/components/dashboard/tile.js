@@ -117,7 +117,7 @@ const stationChart = (obs, params) => {
   return container
 }
 
-const getLastDataPoint = (obj, param) => {
+export const getLastDataPoint = (obj, param) => {
   let last = obj.data[0]
   obj.data.forEach(dp => {
     if (dp[param] && dp.utctime > last.utctime) last = dp

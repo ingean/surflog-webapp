@@ -6,6 +6,7 @@ import { vectorLayer } from '../../utils/map/vectorLayer.js';
 import { addLayerToMap } from '../map/dmi.js';
 import { valueRating } from '../format.js';
 import { mergeTimeseries } from '../../utils/utilities.js';
+import { paramVal } from '../../config/forecastValues.js';
 
 var stats = {}
 var metStations = []
@@ -44,6 +45,8 @@ const addMetToMap = (metStations, stats) => {
       name: f.name,
       lat: f.lat, 
       lon: f.lon,
+      value: paramVal(f.data[0], 'waveheight'),
+      rotation: f.data[0].wavedir,
       rating: valueRating(f.data[0], 'waveheight', {station: f.name, stats})
     }
   })

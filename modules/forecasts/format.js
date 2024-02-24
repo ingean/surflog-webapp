@@ -38,6 +38,7 @@ export function clsValue(obj, param, options) {
 }
 
 export function valueRating(obj, param, options) {
+  if(!obj || !param || !obj?.[param]) return 
   if (param.includes('wind')) {
     return scoreWindValue(obj[param], options.wind)
   } else if (param.includes('pressure')) {

@@ -1,9 +1,10 @@
-import { el, div, tr, td, hrsTd } from '../../components/elements.js';
-import { formatDate } from '../format.js';
-import { paramSpan } from '../../config/forecastValues.js';
-import { toLocal, isDayTime } from '../../utils/time.js';
+import { el, span, div, tr, td, hrsTd } from '../../components/elements.js';
+import { formatDate, valueRating } from '../format.js';
+import { paramSpan, paramVal } from '../../config/forecastValues.js';
+import { isDayTime } from '../../utils/time.js';
 import { vectorLayer } from '../../utils/map/vectorLayer.js';
 import { addLayerToMap } from '../map/dmi.js';
+import { getLastDataPoint } from '../../components/dashboard/tile.js';
 
 function splitForecastPrDay(forecast, getForecastTime) {
   let day = 0;
@@ -53,10 +54,10 @@ export function updateForecastTable(forecast, forecastDate, forecastToRow, table
 export const stationsCols = (f, options) => {
   let cols = [hrsTd(f.utctime)]
 
-  let stationNames = options?.stationNames || Object.keys(f).slice(1)
-  stationNames.forEach(stationName => {
-    options.station = stationName
-    cols.push(paramsCols(f[stationName], options))
+  let stations = options?.stationNames || Object.keys(f).slice(1)
+  stations.forEach(station => {
+    options.station = station
+    cols.push(paramsCols(f[station], options))
   })
      
   let scope = isDayTime(f.utctime, false) ? 'tr-scope' : 'tr-outofscope'
@@ -66,18 +67,31 @@ export const stationsCols = (f, options) => {
 export const paramsCols = (station, options) => {
   let groupParams = options?.groupParams || false
   let s = (groupParams) ? 1 : 0
-  let paramNames = options?.paramNames || Object.keys(station).slice(s)
+  let params = options?.paramNames || Object.keys(station).slice(s)
   let cols = []
 
-  paramNames.forEach(paramName => {
-    cols.push(paramSpan(station, paramName, options))
+  params.forEach(param => {
+    if (station) {
+      cols.push(paramSpan(station, param, options))
+    } else {
+      cols.push(span('td-param', ' - '))
+    }
   })
-
-  return groupParams ? td('td-param', cols) : cols.map(param => td('td-param', param))  
+  return groupParams ? td('td-param', cols) : cols.map(p => td('td-param', p))  
 }
 
 export const addObsToMap = (stations) => {
-  let features = stations.map(s => { return {lat: s.lat, lon: s.lon, name: s.name, size: 4, rating: null}})
+  let features = stations.map(s => { 
+    let lastObs = getLastDataPoint(s, 'windspeed')
+    return {
+      lat: s.lat, 
+      lon: s.lon, 
+      name: s.name, 
+      value: paramVal(lastObs, 'windspeed'),
+      rotation: lastObs.winddir, 
+      rating: valueRating(lastObs, 'windspeed', {wind: 'fetch'})
+    }
+  })
   let layer = vectorLayer(features)
   addLayerToMap(layer)
 }

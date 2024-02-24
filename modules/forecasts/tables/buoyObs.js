@@ -8,7 +8,7 @@ import { isDayTime, toLocal } from '../../utils/time.js';
 import { getStats } from '../../utils/statistics.js';
 import { vectorLayer } from '../../utils/map/vectorLayer.js';
 import { addLayerToMap } from '../map/dmi.js';
-import { paramSpan } from '../../config/forecastValues.js';
+import { paramSpan, paramVal } from '../../config/forecastValues.js';
 
 var stats = {}
 
@@ -59,17 +59,30 @@ export async function getBuoyObs() {
 }
 
 const addBuoysToMap = (ukBuoys, stats) => {
-  let features = ukBuoys.map(b => { return {lat: b.lat, lon: b.lon, name: b.name, rating: valueRating(b.data[0], 'waveheight', {stats})}})
+  let features = ukBuoys.map(b => { 
+    let lastObs = b.data.at(-1)
+    return {
+      lat: b.lat, 
+      lon: b.lon, 
+      name: b.name,
+      value: paramVal(lastObs, 'waveheight'),
+      rotation: lastObs.winddir, 
+      rating: valueRating(lastObs, 'waveheight', {stats})}
+  })
   let layer = vectorLayer(features)
   addLayerToMap(layer)
 }
 
 const addSMHIToMap = (smhiBuoys, stats) => {
+  let lastObs = getLastSMHIObs(smhiBuoys)
+  
   let features = [{ 
     lat: smhiBuoys.lat, 
     lon: smhiBuoys.lon, 
-    name: smhiBuoys.name, 
-    rating: valueRating(getLastSMHIObs(smhiBuoys), 'waveheight', {stats})
+    name: smhiBuoys.name,
+    value: paramVal(lastObs, 'waveheight'),
+    rotation: lastObs.wavedir, 
+    rating: valueRating(lastObs, 'waveheight', {stats})
   }]
   let layer = vectorLayer(features)
   addLayerToMap(layer)

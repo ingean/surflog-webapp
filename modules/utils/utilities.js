@@ -106,14 +106,14 @@ export const maxObj = (arr, key) => {
   arr = arr.filter(o => o[key]) //
   return arr.reduce((prev, current) => {
     return (prev[key] > current[key]) ? prev : current
-  })
+  }, 0)
 }
 
 export const minObj = (arr, key) => {
   arr = arr.filter(o => o[key]) //
   return arr.reduce((prev, current) => {
     return (prev[key] < current[key]) ? prev : current
-  })
+  }, 0)
 }
 
 export const mergeTimeseries = (arr) => {
@@ -124,7 +124,7 @@ export const mergeTimeseries = (arr) => {
     let timestep = {utctime: ts.utctime}
     arr.forEach(station => {
       let data = station.data.find(s => s.utctime === ts.utctime)
-      if (data) timestep[station.name] = data
+      timestep[station.name] = data
     })
     result.push(timestep)
   })

@@ -81,7 +81,7 @@ export const paramReference = (param) => {
  }
 
 export const paramVal = (obj, param) => {
-  if (!obj[param]) return ''
+  if (!obj || !param || !obj?.[param]) return ''
   let options = params.find(p => p.id.includes(param))
   if (!options) return obj[param]
   if (options.arrow) return arrow(obj[param], options.arrow)

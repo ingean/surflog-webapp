@@ -1,6 +1,6 @@
 import { get, queryTimespan } from '../../utils/api.js';
 import { stationsCols, paramsCols, updateForecastTable, addObsToMap } from './table.js';
-import { toLocal, isDayTime } from '../../utils/time.js'
+import { isDayTime } from '../../utils/time.js'
 import { mergeTimeseries } from '../../utils/utilities.js';
 import { tr } from '../../components/elements.js'
 import { stationTile } from '../../components/dashboard/tile.js'
