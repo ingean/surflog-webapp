@@ -40,7 +40,7 @@ function displayYrImgContainers(date) {
 export function imgFooter(source, report) {
   let footer = div('section-footer', span(`time-${source}-historic panel-h4`))
 
-  if (report) {
+  if (report?.score) {
     footer.append(ratingLabel(report.score, 'md', 'align-right'))
     footer.classList.add(`bg-${report.score}`)
   } 
