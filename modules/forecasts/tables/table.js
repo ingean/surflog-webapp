@@ -88,7 +88,7 @@ export const addObsToMap = (stations) => {
       lon: s.lon, 
       name: s.name, 
       value: paramVal(lastObs, 'windspeed'),
-      rotation: lastObs.winddir, 
+      rotation: lastObs?.winddir || null, 
       rating: valueRating(lastObs, 'windspeed', {wind: 'fetch'})
     }
   })

@@ -6,6 +6,7 @@ import { Point } from '../../lib/ol/geom.js'
 import { pointStyle } from './styles.js'
 
 const point = (lat, lon, targetProjection) => {
+  if (!lat || !lon) return null
   return new Point(projectPoint(lat, lon, targetProjection))
 }
 
@@ -24,6 +25,8 @@ export const vectorLayer = (features, title) => {
     size: f?.size || 8,
     rating: f.rating
   }))
+
+  features = features.filter(f => f.geometry != null)
 
   const vectorSource = new VectorSource({
     features: features,

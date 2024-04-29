@@ -60,6 +60,7 @@ const params = [
   {id: 'swellperiod', caption: 'Periode', unit: unitPeriod},
   {id: 'swellperiodmax', caption: 'Periode', unit: unitPeriod},
   {id: 'swelldir', caption: 'Retning', arrow: 'sm'},
+  {id: 'wind', caption: 'Vind', unit: unitSpeed},
   {id: 'windspeed', caption: 'Vind', unit: unitSpeed},
   {id: 'windgust', caption: 'Byge', secondary: true, unit: unitSpeed},
   {id: 'winddir', caption: 'Retning', arrow: 'md'},
@@ -71,18 +72,18 @@ const params = [
 ]
 
 export const paramCaption = (param) => {
- let p =  params.find(p => p.id.includes(param))
+ let p =  params.find(p => p.id === param)
  return p.caption
 }
 
 export const paramReference = (param) => {
-  let p =  params.find(p => p.id.includes(param))
+  let p =  params.find(p => p.id === param)
   return p?.min ? 'Min' : 'Max'
  }
 
 export const paramVal = (obj, param) => {
   if (!obj || !param || !obj?.[param]) return ''
-  let options = params.find(p => p.id.includes(param))
+  let options = params.find(p => p.id === param)
   if (!options) return obj[param]
   if (options.arrow) return arrow(obj[param], options.arrow)
  
