@@ -142,7 +142,8 @@ const size = [
 ];
 
 const boards = [
-  {caption: 'Lost RNF96', default: true, volume: 36.5, length: "5'11", width: 21, thickness: 2.6, fins: 'Twin + trailer', type: 'Groveler', material: 'PU'},
+  {caption: 'Machado Sunday', default: true, volume: 34.7, length: "5'9", width: 20, thickness: "2 5/8", fins: 'Twin', type: 'Groveler', material: 'Epoxy'},
+  {caption: 'Lost RNF96', volume: 36.5, length: "5'11", width: 21, thickness: 2.6, fins: 'Twin + trailer', type: 'Groveler', material: 'PU'},
   {caption: 'Lost Little Wing', volume: 32, length: "6'0", width: 20.13, thickness: 2.53, fins: 'Thruster', type: 'Shortboard', material: 'PU'},
   {caption: 'Machado Seaside', volume: 33.6, length: "5'7", width: "21 5/8" , thickness: 2.5, fins: 'Quad / Twin', type: 'Groveler', material: 'Epoxy'},
   {caption: 'FW Dominator II', volume: 31.5, length: "5'9", width: '20 1/8', thickness: "2 7/16", fins: 'Thruster / Quad', type: 'Groveler', material: 'Epoxy'},
