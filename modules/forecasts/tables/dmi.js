@@ -48,7 +48,7 @@ function dmiForecastToRow(forecast) {
       paramCell(forecast, 'swellheight'),
       paramCell(forecast, 'swellperiod'),
       paramCell(forecast, 'wind'),
-      paramScore(forecast, 'score')
+      //paramScore(forecast, 'score')
     ])
   )
 }
