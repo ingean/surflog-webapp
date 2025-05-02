@@ -37,8 +37,8 @@ function paramScore(forecast, param) {
 }
 
 function dmiForecastToRow(forecast) {
-  let score = scoreForecast(forecast, 'dmi');
-  let cls = (score > 4) ? `bg-muted-${score}` : '';
+  //let score = scoreForecast(forecast, 'dmi');
+  //let cls = (score > 4) ? `bg-muted-${score}` : '';
   let emphasis = (isDayTime(forecast.localtime)) ? 'tr-scope' : 'tr-outofscope';
   return (
     tr(`forecast-table-row ${cls} ${emphasis}`, [
