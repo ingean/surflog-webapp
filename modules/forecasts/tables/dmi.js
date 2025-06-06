@@ -6,13 +6,14 @@ import { scoreForecast } from '../score.js';
 import { updateForecastTable } from './table.js';
 import { getStats } from '../../utils/statistics.js';
 import { paramSpan } from '../../config/forecastValues.js';
+import { mergeTimeseries } from '../../utils/utilities.js';
 
 const headers = ['Tid', 'Høyde', 'Periode', 'Dønning', 'Periode', 'Vind', 'Score'];
 var stats = {}
 
 function paramCell(forecast, param) {
-  let f1 = forecast.stations['Saltstein']
-  let f2 = forecast.stations['Skagerak']
+  let f1 = forecast['Saltstein']
+  let f2 = forecast['Skagerak']
   
   return (
     td('', [
@@ -40,10 +41,10 @@ function dmiForecastToRow(forecast) {
   //let score = scoreForecast(forecast, 'dmi');
   //let cls = (score > 4) ? `bg-muted-${score}` : '';
   let cls = '';
-  let emphasis = (isDayTime(forecast.localtime)) ? 'tr-scope' : 'tr-outofscope';
+  let emphasis = (isDayTime(getDMITime(forecast))) ? 'tr-scope' : 'tr-outofscope';
   return (
     tr(`forecast-table-row ${cls} ${emphasis}`, [
-      hrsTd(forecast.localtime),
+      hrsTd(getDMITime(forecast)),
       paramCell(forecast, 'waveheight'),
       paramCell(forecast, 'waveperiod'),
       paramCell(forecast, 'swellheight'),
@@ -56,11 +57,12 @@ function dmiForecastToRow(forecast) {
 
 export async function updateDMITable() {
   stats = await getStats('dmi')
-  updateForecastTable(dmiForecast, getDMITime, dmiForecastToRow, 'dmi', headers);
+  let timeseries = mergeTimeseries(dmiForecast)
+  updateForecastTable(timeseries, getDMITime, dmiForecastToRow, 'dmi', headers);
 }
 
 function getDMITime(forecast) {
-  return forecast.localtime;
+  return forecast['Saltstein'].utctime;
 }
 
 export var dmiForecast = [];
