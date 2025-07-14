@@ -8,6 +8,7 @@ import { getFrostObs } from './forecasts/tables/frostObs.js';
 import { getOpenMeteoForecast } from './forecasts/tables/openmeteo.js'
 import { getMetForecast } from './forecasts/tables/met.js';
 import { getDMIForecast } from './forecasts/tables/dmi.js';
+import { getDMIAPIForecast } from './forecasts/tables/dmiApi.js';
 import { initDMIImages } from './forecasts/images/dmi.js';   
 import { getDMIObservations } from './forecasts/tables/dmiObs.js';
 import { getBSHObservations } from './forecasts/map/layers.js';
@@ -38,6 +39,7 @@ export async function startSurfLog(userId) {
 
   // Forecasts
   getDMIForecast()
+  getDMIAPIForecast()
   getOpenMeteoForecast()
   getMetForecast()
   getBuoyObs()

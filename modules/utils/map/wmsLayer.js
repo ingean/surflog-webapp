@@ -13,7 +13,11 @@ export const wmsTileLayer = (options) => {
     title: options.title,
     visible: options.visible,
     source: new TileWMS({
-        url: `${urlAPI}forecasts/dmi/maps`,
+        //url: `${urlAPI}forecasts/dmi/maps`,
+        url: 'https://www.dmi.dk/ZoombareKort/map',
+        crossOrigin: 'anonymous',
+        attributions: 'DMI',
+        serverType: 'geoserver',
         params: {
             'LAYERS': options.wmslayers,
             'TILED': true,

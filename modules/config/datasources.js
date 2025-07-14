@@ -64,6 +64,18 @@ export const forecasts = {
       {id: 'wind', caption: 'Vind', unit: unitSpeed, type: 'win.', panel: true}
     ]  
   },
+  dmiApi: {
+    params: [
+      {id: 'waveheight', caption: 'Bølgehøyde', unit: unitHeight}, 
+      {id: 'waveperiod', caption: 'Periode', unit: unitPeriod},
+      {id: 'wavedir', caption: 'Retning', unit: unitDir},
+      {id: 'swellheight', caption: 'Dønning', unit: unitHeight}, 
+      {id: 'swellperiod', caption: 'Periode', unit: unitPeriod},
+      {id: 'swelldir', caption: 'Retning', unit: unitDir},
+      {id: 'windspeed', caption: 'Vind', unit: unitSpeed},
+      {id: 'winddir', caption: 'Retning', unit: unitDir}    
+    ]
+  },
   msw : {
     baseUrl: 'https://charts-s3.msw.ms/archive/',
     prefix: '7-',
