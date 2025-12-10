@@ -12,7 +12,23 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
    
     <!-- OpenLayers stylesheet-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.1.0/ol.css">
+    <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.1.0/ol.css"-->
+
+    <!-- ArcGIS Maps SDK for Javascript -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@arcgis/": "https://js.arcgis.com/4.34/@arcgis/"
+        }
+      }
+    </script>
+    <script type="module" src="https://js.arcgis.com/4.34/map-components/"></script>
+    <link id="jsapi-theme-light" rel="stylesheet" href="https://js.arcgis.com/4.34/@arcgis/core/assets/esri/themes/light/main.css" disabled>
+    <link id="jsapi-theme-dark" rel="stylesheet" href="https://js.arcgis.com/4.34/@arcgis/core/assets/esri/themes/dark/main.css" />
+
+    <!-- ArcGIS Calcite Design System -->
+    <script src="https://js.arcgis.com/calcite-components/3.3.3/calcite.esm.js" type="module"></script>
+    <link rel="stylesheet" href="https://js.arcgis.com/calcite-components/3.3.3/calcite.css" />
 
     <!-- Local stylesheet -->
     <link rel="stylesheet" href="css/lib/simplePagination.css">
@@ -119,7 +135,16 @@
     </nav>
 
     <!-- DMI forecast map -->
-    <div id="dmi-map-section" class="section center-v"></div>
+    <!--div id="dmi-map-section" class="section center-v"></div-->
+
+    <!-- ArcGIS forecast map -->
+    <arcgis-map id="viewDiv" item-id="00f45fdd4230415d9206743eb8d2c7c4">
+      <arcgis-search position="top-right"></arcgis-search>
+      <arcgis-expand slot="top-left" expand-icon="layers" collapse-icon="layers">
+        <arcgis-layer-list></arcgis-layer-list>
+      </arcgis-expand>
+      <arcgis-zoom position="bottom-right"></arcgis-zoom>
+    </arcgis-map>
    
     <!-- Forecast and observation graphs -->
   
@@ -214,6 +239,9 @@
                             </div>
                           </div>
                           <div class="container-relative">
+                            <div id="dmi-waveheight-table"></div>
+                          </div>
+                          <div class="container-relative">
                             <div id="dmi-waveheight-historic"></div>
                           </div>
                         </div>
@@ -246,6 +274,9 @@
                               </div>
                             </div>
                             <div class="container-relative">
+                            <div id="dmi-swellheight-table"></div>
+                          </div>
+                            <div class="container-relative">
                               <div id="dmi-swellheight-historic"></div>
                             </div>
                           </div>
@@ -274,6 +305,9 @@
                                   </button> 
                               </div>
                             </div>
+                            <div class="container-relative">
+                            <div id="dmi-wind-table"></div>
+                          </div>
                             <div class="container-relative">
                               <div id="dmi-wind-historic"></div>
                             </div>
@@ -425,7 +459,7 @@
 
     <!-- Scripts -->
     <!--script src="https://cdn.jsdelivr.net/npm/ol@v8.1.0/dist/ol.js"></script--> <!-- Open Layers -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.9.0/proj4.min.js" integrity="sha512-Y/B11KRfeaNHAonSdwnF0fvpzsA+W27fqfMPmfkxRAwuySCcA7aT9LfJcWz5fi32McMI02jngFYj7LYT1z+VVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.9.0/proj4.min.js" integrity="sha512-Y/B11KRfeaNHAonSdwnF0fvpzsA+W27fqfMPmfkxRAwuySCcA7aT9LfJcWz5fi32McMI02jngFYj7LYT1z+VVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>  
     <script src="https://www.gstatic.com/charts/loader.js"></script>

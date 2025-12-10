@@ -42,13 +42,13 @@ html[data-theme = 'light'] {
 
   /* Surfline rating colors */
   --sl-rating-0:#9e9e9e; /*#eeeeee; */
-  --sl-rating-1:#E1576F;
-  --sl-rating-2:#F19A37;
-  --sl-rating-3:#F7CF4C;
-  --sl-rating-4:#62D37E;
-  --sl-rating-5:#409173;
-  --sl-rating-6:#6452EB;
-  --sl-rating-7:#5C23C0;
+  --sl-rating-1:#F24A6D;
+  --sl-rating-2:#FD9504;
+  --sl-rating-3:#FFCD1F;
+  --sl-rating-4:#0FD674;
+  --sl-rating-5:#059271;
+  --sl-rating-6:#6951F5;
+  --sl-rating-7:#641EC6;
 }
 
 html[data-theme = 'dark'] {

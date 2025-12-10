@@ -1,4 +1,4 @@
-import { el, weatherImg, tempTd, hrsTd } from '../../components/elements.js';
+import { el, span, weatherImg, tempTd, hrsTd } from '../../components/elements.js';
 import { getYrCoast } from '../../utils/api.js';
 import { isDayTime, toLocal } from '../../utils/time.js';
 import { updateForecastTable } from './table.js';
@@ -7,8 +7,6 @@ import { paramSpan } from '../../config/forecastValues.js';
 
 const headers = ['Tid', 'Vær', 'Temp', 'Høyde', 'Vind (byge)', 'Strøm', 'Vanntemp.'];
 var stats = {}
-var yrCoastForecast = []
-
 
 const value = (f, param) => {
   let options = {
@@ -27,15 +25,8 @@ function yrCoastForecastToRow(f) {
       hrsTd(f.utctime),
       el('td', '', weatherImg(f.weathersymbol)),
       tempTd(f.airtemp),
-      el('td', '', [ //Wave height and direction
-        value(f, 'waveheight'),
-        value(f, 'wavedir')
-      ]),
-      el('td', '', [ //Wind speed and direction
-        value(f, 'windspeed'),
-        value(f, 'windgust'),
-        value(f, 'winddir')
-      ]),
+      el('td', '', yrCoastWaveGroup(f)),
+      el('td', '', yrCoastWindGroup(f)),
       el('td', 'hidden-xs', [ //Current speed and direction
         value(f, 'currentspeed'),
         value(f, 'currentdir')
@@ -44,6 +35,24 @@ function yrCoastForecastToRow(f) {
     ])
   )
 }
+
+export var yrCoastForecast = []
+
+export function yrCoastWaveGroup(forecast) {
+  return span('params-group params-group-waves', [
+    value(forecast, 'waveheight'),
+    value(forecast, 'wavedir')
+  ]);
+}
+
+export function yrCoastWindGroup(forecast) {
+  return span('params-group', [
+    value(forecast, 'windspeed'),
+    value(forecast, 'windgust'),
+    value(forecast, 'winddir')
+  ]);
+}
+
 
 export async function updateYrCoastTable(spot = 'Saltstein') {
   stats = await getStats('yr')

@@ -1,4 +1,4 @@
-import { hrsTd, tempTd, tr, td } from '../../components/elements.js';
+import { hrsTd, tempTd, tr, td, span } from '../../components/elements.js';
 import { get } from '../../utils/api.js';
 import { valueRating } from '../format.js';
 import { updateForecastTable } from './table.js';
@@ -7,7 +7,8 @@ import { smhiForecastToRow, getSMHITime, getSMHIStats } from './smhi.js';
 import { isDayTime, toLocal } from '../../utils/time.js';
 import { getStats } from '../../utils/statistics.js';
 import { vectorLayer } from '../../utils/map/vectorLayer.js';
-import { addLayerToMap } from '../map/dmi.js';
+//import { addLayerToMap } from '../map/dmi.js';
+import { addDataToMap } from '../map/arcgis.js';
 import { paramSpan, paramVal } from '../../config/forecastValues.js';
 
 var stats = {}
@@ -17,25 +18,35 @@ function buoyObsToRow(f) {
   let options = {stats}
   return tr(`forecast-table-row ${emphasis}`, [
           hrsTd(f.utctime),
-          td('', paramSpan(f, 'waveheight', options)),
-          td('', paramSpan(f, 'waveperiod', options)),
-          td('', [
-            paramSpan(f, 'windspeed', options),
-            paramSpan(f, 'winddir', options)
-          ]),
+          td('', buoyWaveGroup(f, options)),
+          td('', buoyWindGroup(f, options)),
           td('', paramSpan(f, 'airpressure', options)),
           tempTd(f.airtemp)
           ]
         )
 }
 
+export function buoyWaveGroup(forecast, options) {
+  return span('params-group params-group-waves', [
+    paramSpan(forecast, 'waveheight', options),
+    paramSpan(forecast, 'waveperiod', options)
+  ]);
+}
+
+export function buoyWindGroup(forecast, options) {
+  return span('params-group', [
+    paramSpan(forecast, 'windspeed', options),
+    paramSpan(forecast, 'winddir', options)
+  ]);
+}
+
 export async function updateBuoyObsTable(obs, smhi = true, spot = 'Saltstein') {
   
   if (smhi) {
-    const headers = ['Tid', 'Høyde', 'Periode', 'Varsel']
+    const headers = ['Tid', 'Observasjoner', 'Max observasjon', 'Varsel']
     updateForecastTable(obs.data, getSMHITime, smhiForecastToRow, 'buoyObs', headers);
   } else {
-    const headers = ['Tid', 'Høyde', 'Periode', 'Vind', 'Trykk', 'Lufttemp.']
+    const headers = ['Tid', 'Bølger', 'Vind', 'Trykk', 'Lufttemp.']
     updateForecastTable(obs, getBuoyObsTime, buoyObsToRow, 'buoyObs', headers);
   }
 }
@@ -59,31 +70,32 @@ export async function getBuoyObs() {
 }
 
 const addBuoysToMap = (ukBuoys, stats) => {
-  let features = ukBuoys.map(b => { 
+  let data = ukBuoys.map(b => { 
     let lastObs = b.data.at(-1)
     return {
       lat: b.lat, 
       lon: b.lon, 
       name: b.name,
-      value: paramVal(lastObs, 'waveheight'),
+      value: lastObs.waveheight,
+      caption: paramVal(lastObs, 'waveheight'),
       rotation: lastObs.winddir, 
       rating: valueRating(lastObs, 'waveheight', {stats})}
   })
-  let layer = vectorLayer(features)
-  addLayerToMap(layer)
+  addDataToMap(data, 'wave', 'UK Buoys')
 }
 
 const addSMHIToMap = (smhiBuoys, stats) => {
   let lastObs = getLastSMHIObs(smhiBuoys)
   
-  let features = [{ 
+  let data = [{ 
     lat: smhiBuoys.lat, 
     lon: smhiBuoys.lon, 
     name: smhiBuoys.name,
-    value: paramVal(lastObs, 'waveheight'),
+    value: lastObs.waveheight,
+    caption: paramVal(lastObs, 'waveheight'),
     rotation: lastObs.wavedir, 
     rating: valueRating(lastObs, 'waveheight', {stats})
   }]
-  let layer = vectorLayer(features)
-  addLayerToMap(layer)
+
+  addDataToMap(data, 'wave', 'SMHI Buoys')
 }

@@ -19,8 +19,8 @@ const directions = [
 ];
 
 const windspeeds = [
-  {low: 0, high: 0.2, local: 5, fetch: 0, caption: "Stille"},
-  {low: 0.2, high: 1.5, local: 5, fetch: 0, caption: "Flau vind"},
+  {low: 0, high: 0.2, local: 6, fetch: 0, caption: "Stille"},
+  {low: 0.2, high: 1.5, local: 6, fetch: 0, caption: "Flau vind"},
   {low: 1.5, high: 3.3, local: 5, fetch: 0, caption: "Svak vind"},
   {low: 3.3, high: 5.4, local: 5, fetch: 0, caption: "Lett bris"},
   {low: 5.4, high: 7.9, local: 4, fetch: 0, caption: "Laber bris"},

@@ -6,12 +6,14 @@ import { tr } from '../../components/elements.js'
 import { stationTile } from '../../components/dashboard/tile.js'
 import { getStats } from '../../utils/statistics.js';
 import { paramCaption } from '../../config/forecastValues.js';
+import { add } from '../../lib/ol/coordinate.js';
 
 let frostStations = []
+let kvStations = []
 
 const frostObsToRow = (f) => {
   return stationsCols(f, {
-    wind: 'fetch', 
+    wind: 'local', 
     paramNames: ['windspeed', 'winddir'],
     groupParams: true
   })
@@ -19,16 +21,16 @@ const frostObsToRow = (f) => {
 
 const frostBuoyToRow = async (data) => {
   let cols = paramsCols(data, {
-    wind: 'fetch', 
+    wind: 'local', 
     stats: await getStats('buoy')
   })
   let scope = isDayTime(data.utctime, false) ? 'tr-scope' : 'tr-outofscope'
   return tr(`forecast-table-row ${scope}`, cols)
 }
 
-function updateFrostObsTable(frostStations) {
-  let headers = frostStations.map(station => station.name)
-  let timeserie = mergeTimeseries(frostStations)
+function updateFrostObsTable(windObsStations) {
+  let headers = windObsStations.map(station => station.name)
+  let timeserie = mergeTimeseries(windObsStations)
   updateForecastTable(timeserie, getFrostObsTime, frostObsToRow, 'windObs', ['Tid', ...headers])
 }
 
@@ -39,8 +41,15 @@ function getFrostObsTime(forecast) {
 export async function getFrostObs(start, end) {
   let query = queryTimespan(start, end)
   frostStations = await get(`observations/frost${query}`)
-  addObsToMap(frostStations)
-  updateFrostObsTable(frostStations);
+  kvStations = await get(`observations/kv${query}`)
+  const windObsStations = [
+    ...frostStations.slice(0, 3), // Elements before the index
+    kvStations[0],                           // The new item
+    ...frostStations.slice(3)     // Elements from the index onwards
+  ]
+
+  addObsToMap(windObsStations)
+  updateFrostObsTable(windObsStations);
   addFrostObsTile(frostStations[0])
 }
 

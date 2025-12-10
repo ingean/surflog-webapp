@@ -3,7 +3,8 @@ import { get } from '../../utils/api.js';
 import { updateForecastTable, stationsCols } from './table.js';
 import { getStats } from '../../utils/statistics.js';
 import { vectorLayer } from '../../utils/map/vectorLayer.js';
-import { addLayerToMap } from '../map/dmi.js';
+//import { addLayerToMap } from '../map/dmi.js';
+import { addDataToMap } from '../map/arcgis.js';
 import { valueRating } from '../format.js';
 import { mergeTimeseries } from '../../utils/utilities.js';
 import { paramVal } from '../../config/forecastValues.js';
@@ -39,17 +40,17 @@ export async function getMetForecast() {
 }
 
 const addMetToMap = (metStations, stats) => {
-  let features = metStations.map(f => {
+  let data = metStations.map(f => {
     
     return {
       name: f.name,
       lat: f.lat, 
       lon: f.lon,
-      value: paramVal(f.data[0], 'waveheight'),
+      value: f.data[0].waveheight,
+      caption: paramVal(f.data[0], 'waveheight'),
       rotation: f.data[0].wavedir,
       rating: valueRating(f.data[0], 'waveheight', {station: f.name, stats})
     }
   })
-  let layer = vectorLayer(features)
-  addLayerToMap(layer)
+  addDataToMap(data, 'wave', 'Met Stasjoner')
 }

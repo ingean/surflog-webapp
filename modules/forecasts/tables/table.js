@@ -3,7 +3,8 @@ import { formatDate, valueRating } from '../format.js';
 import { paramSpan, paramVal } from '../../config/forecastValues.js';
 import { isDayTime } from '../../utils/time.js';
 import { vectorLayer } from '../../utils/map/vectorLayer.js';
-import { addLayerToMap } from '../map/dmi.js';
+//import { addLayerToMap } from '../map/dmi.js';
+import { addDataToMap } from '../map/arcgis.js';
 import { getLastDataPoint } from '../../components/dashboard/tile.js';
 
 function splitForecastPrDay(forecast, getForecastTime) {
@@ -81,17 +82,17 @@ export const paramsCols = (station, options) => {
 }
 
 export const addObsToMap = (stations) => {
-  let features = stations.map(s => { 
+  let data = stations.map(s => { 
     let lastObs = getLastDataPoint(s, 'windspeed')
     return {
       lat: s.lat, 
       lon: s.lon, 
       name: s.name, 
-      value: paramVal(lastObs, 'windspeed'),
+      value: lastObs.windspeed,
+      caption: paramVal(lastObs, 'windspeed'),
       rotation: lastObs?.winddir || null, 
-      rating: valueRating(lastObs, 'windspeed', {wind: 'fetch'})
+      rating: valueRating(lastObs, 'windspeed', {wind: 'local'})
     }
   })
-  let layer = vectorLayer(features)
-  addLayerToMap(layer)
+  addDataToMap(data, 'wind', 'Yr Målestasjoner')
 }

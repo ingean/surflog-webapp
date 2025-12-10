@@ -92,11 +92,11 @@ td {
 }
 
 .tr-scope {
-  background-color: var(--surface-color);
+  background-color: var(--surface-color-l1);
 }
 
 .tr-outofscope {
-  background-color: var(--surface-color-l1);
+  background-color: var(--surface-color);
 }
 
 .td-arrow {
@@ -108,17 +108,32 @@ td {
 }
 
 .param-arrow {
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
 .param-value {
-  padding-left: 8px;
+  padding-left: 4px;
 }
 
 .param-value-sm {
   color: var(--secondary-txt-color);
   font-size: smaller;
+}
+
+.param-unit {
+  font-size: smaller;
+}
+
+.params-group {
+  display: inline-block;
+  min-width: 90px;
+  padding: 8px;
+}
+
+.params-group-waves {
+  background-color: var(--bg-color);
+  border-radius: 8px;
 }
 
 

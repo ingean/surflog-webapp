@@ -50,7 +50,7 @@ const params = [
   {id: 'utctime', caption: 'Tid'},
   {id: 'waveheight', caption: 'Høyde', unit: unitHeight},
   {id: 'waveheightforecast', caption: 'Varsel', unit: unitHeight},
-  {id: 'waveheightmax', caption: 'Maxhøyde', secondary: true, unit: unitHeight},
+  {id: 'waveheightmax', caption: 'Maxhøyde', unit: unitHeight},
   {id: 'waveperiod', caption: 'Periode', unit: unitPeriod},
   {id: 'wavedir', caption: 'Retning', arrow: 'sm'},
   {id: 'windwaveheight', caption: 'Høyde', unit: unitHeight},
@@ -82,12 +82,12 @@ export const paramReference = (param) => {
  }
 
 export const paramVal = (obj, param) => {
-  if (!obj || !param || !obj?.[param]) return ''
+  if (!obj || !param || !(param in obj)) return ''
   let options = params.find(p => p.id === param)
   if (!options) return obj[param]
   if (options.arrow) return arrow(obj[param], options.arrow)
  
-  let unit = (options.unit.unit) ? ` ${options.unit.unit}` : ''
+  let unit = (options.unit.unit) ? `${options.unit.unit}` : ''
   return `${round(obj[param], options.unit.precision)}${unit}`
 }
 
@@ -112,26 +112,27 @@ const arrowSpan = (obj, param, options ) => {
   return span(`param-arrow ${cls}`, arrow(obj[param], size))
 }
 
-export const paramSpan = (obj, param, options) => {
-  let cls =  (options?.valueCls) ? ` ${options.valueCls}` : ''
+export const paramSpan = (obj, param, options = {}) => {
+  let cls = options.valueCls ? ` ${options.valueCls}` : ''
   let prefix = ''
   let suffix = ''
-  
-  if (param.includes('dir')) return arrowSpan(obj, param, options)
-  if (param.includes('time')) return span(cls, moment(obj[param]).format('HH'))
-  
-  let rating = valueRating(obj, param, options)
-  rating = rating ? ` txt-rating-${rating}` : ''
-  let value = paramVal(obj, param)
 
-  let paramOptions = params.find(p => p.id.includes(param))
-  if (paramOptions?.secondary || options?.secondary) {
-    cls = cls + ' param-value-sm hidden-xs'
+  if (param.includes('dir')) return arrowSpan(obj, param, options)
+  if (param.includes('time') && obj[param]) return span(cls, moment(obj[param]).format('HH'))
+
+  const rating = valueRating(obj, param, options)
+  const ratingCls = rating ? ` txt-rating-${rating}` : ''
+  const value = paramVal(obj, param)
+
+  const paramOptions = params.find(p => p.id === param)
+  if (paramOptions?.secondary || options.secondary) {
+    //cls += ' param-value-sm hidden-xs'
+    cls += ' param-value-sm'
     prefix = '('
     suffix = ')'
   }
 
-  return span(`param-value${cls}${rating}`, `${prefix}${value}${suffix}`)
+  return span(`param-value${cls}${ratingCls}`, `${prefix}${value}${suffix}`)
 }
 
 

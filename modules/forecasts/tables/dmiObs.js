@@ -4,7 +4,7 @@ import { mergeTimeseries } from '../../utils/utilities.js';
 
 function dmiObsToRow(obs) {
   return stationsCols(obs, {
-    wind: 'fetch', 
+    wind: 'local', 
     paramNames: ['windspeed', 'winddir'],
     groupParams: true
   })

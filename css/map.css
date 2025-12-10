@@ -33,3 +33,10 @@
   font-size: 10px;
   text-shadow: rgba(22, 20, 20, 0.5) -1px -1px 0px, rgba(22, 20, 20, 0.5) 1px -1px 0px, rgba(22, 20, 20, 0.5) -1px 1px 0px, rgba(22, 20, 20, 0.5) 1px 1px 0px;
 }
+
+#viewDiv {
+  padding: 0;
+  margin: 0;
+  height: 400px;
+  width: 100%;
+}

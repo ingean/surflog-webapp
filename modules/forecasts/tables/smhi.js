@@ -1,11 +1,11 @@
-import { hrsTd, tr, td } from '../../components/elements.js';
+import { hrsTd, tr, td, span } from '../../components/elements.js';
 import { get } from '../../utils/api.js';
 import { isDayTime } from '../../utils/time.js';
 import { updateForecastTable } from './table.js';
 import { getStats } from '../../utils/statistics.js';
 import { paramSpan } from '../../config/forecastValues.js';
 
-const headers = ['Tid', 'Høyde', 'Periode', 'Varsel'];
+//const headers = ['Tid', 'Observasjoner', 'Varsel'];
 var smhiStats = null
 
 export async function getSMHIStats() {
@@ -14,18 +14,32 @@ export async function getSMHIStats() {
 }
 export function smhiForecastToRow(obs) {
   let emphasis = (isDayTime(obs.utctime)) ? 'tr-scope' : 'tr-outofscope';
-  let options = {stats: smhiStats}
-  
   return tr(`forecast-table-row ${emphasis}`, [
           hrsTd(obs.utctime),
-          td( '', [
-            paramSpan(obs, 'waveheight', options),
-            paramSpan(obs, 'waveheightmax', options),
-            paramSpan(obs, 'wavedir', options),
-          ]),
-          td('', paramSpan(obs, 'waveperiod', options)),
-          td('', paramSpan(obs, 'waveheightforecast', options))
+          td('', smhiWaveObsGroup(obs)),
+          td('', smhiWaveMaxGroup(obs)),
+          td('', smhiWaveGroup(obs)),
         ])
+}
+
+export function smhiWaveObsGroup(obs) {
+  let options = {stats: smhiStats}
+  return span('params-group params-group-waves', [
+    paramSpan(obs, 'waveheight', options),
+    paramSpan(obs, 'waveperiod', options),
+    paramSpan(obs, 'wavedir', options),
+  ]);
+}
+export function smhiWaveMaxGroup(obs) {
+  return span('params-group', [
+    paramSpan(obs, 'waveheightmax', {stats: smhiStats}),
+  ]);
+}
+
+export function smhiWaveGroup(forecast) {
+  return span('params-group', [
+    paramSpan(forecast, 'waveheightforecast', {stats: smhiStats}),
+  ]);
 }
 
 export async function updateSMHITable() {

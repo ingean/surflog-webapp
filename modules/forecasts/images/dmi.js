@@ -1,11 +1,17 @@
 import { toggleActive } from '../../utils/utilities.js';
 import { toLocal } from '../../utils/time.js';
+import { yrCoastForecast, yrCoastWaveGroup, yrCoastWindGroup } from '../tables/yrCoast.js';
 import { dmiForecast } from '../tables/dmi.js';
+import { dmiApiForecast, dmiWaveGroup, dmiSwellGroup, dmiWindGroup } from '../tables/dmiApi.js';
+import { smhiBuoys } from '../tables/buoyObs.js';
+import { smhiWaveObsGroup, smhiWaveGroup } from '../tables/smhi.js';
 import { ratingLabel } from '../../components/elements.js';
 import { getImgTime, setImgTime } from './forecast.js';
 import { notify } from '../../utils/logger.js';
 import { get } from '../../utils/api.js';
 import { Loader } from '../../utils/logger.js';
+import { div, el, tr, td, hrsTd } from '../../components/elements.js';
+import { toUTC } from '../../utils/time.js';
 
 function currentDMITimeStep(imgId = 'img-dmi-waveheight-live') {
   let src = document.querySelector(`#${imgId}`).src;
@@ -51,7 +57,43 @@ function navDMIImages(dir, interval) {
     updateDMIImgs(ts, ts - interval);
     setImgTime(moment(getImgTime()).subtract(interval, 'hours'))
   }
-  updateDMIScore();
+  //updateDMIScore();
+  updateForecasts()
+}
+
+function renderDmiGroupTable(groupFns, fcs) {
+  // Ensure both arguments are arrays
+  const groupArr = Array.isArray(groupFns) ? groupFns : [groupFns];
+  const fcArr = Array.isArray(fcs) ? fcs : [fcs];
+
+  return div('forecast-table-body',
+    el('table',
+      'table-hover dmi-waveheight-table',
+      tr('', [
+        // Use the first forecast's utctime for the time cell
+        hrsTd(fcArr[0]?.utctime),
+        // Render each group function with its corresponding forecast
+        ...groupArr.map((fn, i) => td('', fn(fcArr[i])))
+      ])
+    )
+  );
+}
+
+const updateForecasts = () => {
+  let time = getImgTime();
+  let dmiFC = dmiApiForecast.data.find(f => moment(f.utctime).isSame(toUTC(time), 'hour'))
+  let yrFC = yrCoastForecast.data.find(f => moment(f.utctime).isSame(toUTC(time), 'hour'))
+  let smhiFC = smhiBuoys.data.find(f => moment(f.utctime).isSame(toUTC(time), 'hour'))
+  
+ 
+  let waveTable = renderDmiGroupTable([dmiWaveGroup, yrCoastWaveGroup, smhiWaveObsGroup, smhiWaveGroup], [dmiFC,yrFC, smhiFC, smhiFC]);
+  let swellTable = renderDmiGroupTable([dmiSwellGroup], [dmiFC]);
+  let windTable = renderDmiGroupTable([dmiWindGroup, yrCoastWindGroup], [dmiFC, yrFC]);
+
+  
+  document.querySelector('#dmi-waveheight-table').replaceChildren(waveTable);
+  document.querySelector('#dmi-swellheight-table').replaceChildren(swellTable);
+  document.querySelector('#dmi-wind-table').replaceChildren(windTable);
 }
 
 function updateDMIScore() {
